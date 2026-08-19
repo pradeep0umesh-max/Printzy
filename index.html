@@ -22,6 +22,8 @@
   --text:#172033;
   --muted:#64748b;
   --border:#dce7f7;
+  --success:#16a34a;
+  --danger:#ef3155;
   --shadow:0 12px 35px rgba(18,100,232,.12);
 }
 
@@ -42,29 +44,35 @@ body.dark{
   --sky:#12243d;
 }
 
-/* PAGE LOADER */
+/* LOADER */
 
 .loader{
   position:fixed;
   inset:0;
-  background:white;
+  background:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
   z-index:9999;
-  animation:loaderOut 1s ease 1.4s forwards;
+  animation:loaderOut 1s ease 1.3s forwards;
 }
 
 .loader-logo{
-  font-size:40px;
+  font-size:42px;
   font-weight:900;
   color:var(--blue);
   animation:logoPulse 1s infinite alternate;
 }
 
 @keyframes logoPulse{
-  from{transform:scale(.9);opacity:.5}
-  to{transform:scale(1.05);opacity:1}
+  from{
+    transform:scale(.9);
+    opacity:.5;
+  }
+  to{
+    transform:scale(1.05);
+    opacity:1;
+  }
 }
 
 @keyframes loaderOut{
@@ -86,7 +94,7 @@ header{
 }
 
 body.dark header{
-  background:rgba(17,28,45,.9);
+  background:rgba(17,28,45,.92);
 }
 
 .nav{
@@ -159,8 +167,8 @@ body.dark header{
   position:absolute;
   top:-4px;
   right:-2px;
-  background:#ef3155;
-  color:white;
+  background:var(--danger);
+  color:#fff;
   width:19px;
   height:19px;
   border-radius:50%;
@@ -229,7 +237,7 @@ body.dark header{
 
 .hero p{
   font-size:18px;
-  max-width:600px;
+  max-width:620px;
   line-height:1.7;
   position:relative;
   z-index:2;
@@ -286,11 +294,15 @@ body.dark header{
 }
 
 @keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-18px)}
+  0%,100%{
+    transform:translateY(0);
+  }
+  50%{
+    transform:translateY(-18px);
+  }
 }
 
-/* CONTAINER */
+/* CONTENT */
 
 .container{
   max-width:1200px;
@@ -423,7 +435,9 @@ body.dark .product-img{
 }
 
 @keyframes heartPop{
-  50%{transform:scale(1.3)}
+  50%{
+    transform:scale(1.3);
+  }
 }
 
 .product-info{
@@ -486,7 +500,9 @@ body.dark .product-img{
 }
 
 @keyframes cartPop{
-  50%{transform:scale(.94)}
+  50%{
+    transform:scale(.94);
+  }
 }
 
 /* MODAL */
@@ -509,13 +525,17 @@ body.dark .product-img{
 }
 
 @keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
 }
 
 .modal-box{
   width:100%;
-  max-width:520px;
+  max-width:540px;
   max-height:90vh;
   overflow:auto;
   padding:25px;
@@ -563,6 +583,12 @@ body.dark .product-img{
   border-radius:10px;
   background:var(--bg);
   color:var(--text);
+  outline:none;
+  font-family:inherit;
+}
+
+.custom-input:focus{
+  border-color:var(--blue);
 }
 
 .total{
@@ -573,7 +599,7 @@ body.dark .product-img{
 }
 
 .cart-item{
-  padding:12px 0;
+  padding:13px 0;
   border-bottom:1px solid var(--border);
   display:flex;
   justify-content:space-between;
@@ -607,21 +633,56 @@ body.dark .product-img{
   cursor:pointer;
 }
 
-.whatsapp{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:12px;
-  background:#20b95a;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-  font-size:15px;
-  transition:.2s;
+.order-success{
+  text-align:center;
+  padding:15px 0;
 }
 
-.whatsapp:hover{
-  transform:translateY(-2px);
+.success-icon{
+  width:75px;
+  height:75px;
+  margin:auto;
+  border-radius:50%;
+  background:#e8f7ee;
+  color:var(--success);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:42px;
+  font-weight:bold;
+  animation:successPop .5s ease;
+}
+
+@keyframes successPop{
+  0%{
+    transform:scale(.3);
+    opacity:0;
+  }
+  70%{
+    transform:scale(1.15);
+  }
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.order-id{
+  background:var(--sky);
+  padding:15px;
+  border-radius:12px;
+  margin:18px 0;
+}
+
+.order-id strong{
+  display:block;
+}
+
+.order-id-number{
+  color:var(--blue);
+  font-size:21px;
+  font-weight:bold;
+  margin-top:6px;
 }
 
 /* FOOTER */
@@ -709,6 +770,10 @@ footer{
     padding:10px;
   }
 
+  .section-title{
+    font-size:25px;
+  }
+
 }
 </style>
 </head>
@@ -716,9 +781,11 @@ footer{
 <body>
 
 <!-- LOADER -->
+
 <div class="loader">
   <div class="loader-logo">Printzy</div>
 </div>
+
 
 <!-- HEADER -->
 
@@ -731,27 +798,52 @@ Print<span>zy</span>
 </div>
 
 <div class="search-box">
+
 <input
 class="search"
 id="search"
 type="search"
-placeholder="Search products..."
+placeholder="Search T-shirts, mugs, frames..."
 oninput="searchProducts()"
 >
+
 <span class="search-icon">🔍</span>
+
 </div>
 
-<button class="icon-btn" onclick="toggleDark()" title="Dark Mode">
+<button
+class="icon-btn"
+onclick="toggleDark()"
+title="Dark Mode">
+
 🌙
+
 </button>
 
-<button class="icon-btn" onclick="openWishlist()" title="Wishlist">
+<button
+class="icon-btn"
+onclick="openWishlist()"
+title="Wishlist">
+
 ❤️
-<span class="count" id="wishCount">0</span>
+
+<span
+class="count"
+id="wishCount">
+
+0
+
+</span>
+
 </button>
 
-<button class="cart-btn" onclick="openCart()">
-🛒 Cart <span id="cartCount">0</span>
+<button
+class="cart-btn"
+onclick="openCart()">
+
+🛒 Cart
+<span id="cartCount">0</span>
+
 </button>
 
 </div>
@@ -769,7 +861,9 @@ oninput="searchProducts()"
 <div class="circle two"></div>
 <div class="circle three"></div>
 
-<h1>Make it yours.</h1>
+<h1>
+Make it yours.
+</h1>
 
 <p>
 Create something special with premium customized
@@ -789,7 +883,7 @@ Shop Now →
 </div>
 
 
-<!-- CONTENT -->
+<!-- MAIN -->
 
 <div class="container">
 
@@ -799,39 +893,62 @@ Explore Categories
 
 <div class="categories">
 
-<button class="category active"
+<button
+class="category active"
 onclick="filterCategory('All',this)">
+
 All
+
 </button>
 
-<button class="category"
+<button
+class="category"
 onclick="filterCategory('Clothing',this)">
+
 👕 Clothing
+
 </button>
 
-<button class="category"
+<button
+class="category"
 onclick="filterCategory('Mugs',this)">
+
 ☕ Mugs
+
 </button>
 
-<button class="category"
+<button
+class="category"
 onclick="filterCategory('Home',this)">
+
 🏠 Home
+
 </button>
 
-<button class="category"
+<button
+class="category"
 onclick="filterCategory('Accessories',this)">
+
 🎁 Accessories
+
 </button>
 
 </div>
 
 
-<h2 class="section-title" id="products">
+<h2
+class="section-title"
+id="products">
+
 Popular Products
+
 </h2>
 
-<div class="products" id="productList"></div>
+<div
+class="products"
+id="productList">
+
+</div>
 
 </div>
 
@@ -840,7 +957,9 @@ Popular Products
 
 <footer>
 
-<h2>Printzy</h2>
+<h2>
+Printzy
+</h2>
 
 <p style="margin-top:8px">
 Customized products made specially for you.
@@ -871,11 +990,19 @@ Contact
 
 <!-- MODAL -->
 
-<div class="modal" id="modal">
+<div
+class="modal"
+id="modal">
 
 <div class="modal-box">
 
-<button class="close" onclick="closeModal()">×</button>
+<button
+class="close"
+onclick="closeModal()">
+
+×
+
+</button>
 
 <div id="modalContent"></div>
 
@@ -885,6 +1012,8 @@ Contact
 
 
 <script>
+
+/* PRODUCTS */
 
 const products=[
 
@@ -939,28 +1068,51 @@ badge:"POPULAR"
 ];
 
 
-let cart=
-JSON.parse(localStorage.getItem("printzyCart"))||[];
+/* DATA */
 
-let wishlist=
-JSON.parse(localStorage.getItem("printzyWishlist"))||[];
+let cart =
+JSON.parse(
+localStorage.getItem("printzyCart")
+) || [];
 
+let wishlist =
+JSON.parse(
+localStorage.getItem("printzyWishlist")
+) || [];
+
+
+/* SHOW PRODUCTS */
 
 function showProducts(list=products){
 
-const box=document.getElementById("productList");
+const box =
+document.getElementById("productList");
 
 box.innerHTML="";
 
 if(list.length===0){
 
 box.innerHTML=`
-<div style="grid-column:1/-1;text-align:center;padding:50px">
-<h2>😔 No products found</h2>
-<p style="margin-top:10px;color:var(--muted)">
+
+<div style="
+grid-column:1/-1;
+text-align:center;
+padding:50px">
+
+<h2>
+😔 No products found
+</h2>
+
+<p style="
+margin-top:10px;
+color:var(--muted)">
+
 Try another search.
+
 </p>
+
 </div>
+
 `;
 
 return;
@@ -970,11 +1122,14 @@ return;
 
 list.forEach((p,index)=>{
 
-const liked=wishlist.includes(p.name);
+const liked =
+wishlist.includes(p.name);
 
-box.innerHTML+=`
+box.innerHTML += `
 
-<div class="product" style="animation-delay:${index*0.07}s">
+<div
+class="product"
+style="animation-delay:${index*0.07}s">
 
 <button
 class="wishlist ${liked?"active":""}"
@@ -996,10 +1151,15 @@ ${p.icon}
 
 <div class="product-info">
 
-<h3>${p.name}</h3>
+<h3>
+${p.name}
+</h3>
 
 <div class="rating">
-★★★★★ <span style="color:var(--muted)">4.8</span>
+★★★★★
+<span style="color:var(--muted)">
+4.8
+</span>
 </div>
 
 <div class="price">
@@ -1033,12 +1193,25 @@ Add to Cart
 }
 
 
+/* CART */
+
 function addCart(name,button){
+
+const existing =
+cart.find(item=>item.name===name);
+
+if(existing){
+
+existing.qty++;
+
+}else{
 
 cart.push({
 name:name,
 qty:1
 });
+
+}
 
 saveCart();
 
@@ -1049,6 +1222,7 @@ button.innerText="✓ Added";
 setTimeout(()=>{
 
 button.classList.remove("added");
+
 button.innerText="Add to Cart";
 
 },900);
@@ -1063,34 +1237,40 @@ localStorage.setItem(
 JSON.stringify(cart)
 );
 
-updateCart();
+updateCounts();
 
 }
 
 
-function updateCart(){
+function updateCounts(){
 
-let total=0;
+let count=0;
 
 cart.forEach(item=>{
-
-total+=item.qty;
-
+count += item.qty;
 });
 
-document.getElementById("cartCount").innerText=total;
+document.getElementById(
+"cartCount"
+).innerText=count;
 
-document.getElementById("wishCount").innerText=
-wishlist.length;
+document.getElementById(
+"wishCount"
+).innerText=wishlist.length;
 
 }
 
+
+/* WISHLIST */
 
 function toggleWishlist(name){
 
 if(wishlist.includes(name)){
 
-wishlist=wishlist.filter(x=>x!==name);
+wishlist =
+wishlist.filter(
+x=>x!==name
+);
 
 }else{
 
@@ -1103,7 +1283,7 @@ localStorage.setItem(
 JSON.stringify(wishlist)
 );
 
-updateCart();
+updateCounts();
 
 showProducts();
 
@@ -1114,13 +1294,20 @@ function openWishlist(){
 
 let html=`
 
-<h2>❤️ My Wishlist</h2>
+<h2>
+❤️ My Wishlist
+</h2>
+
 `;
 
 if(wishlist.length===0){
 
 html+=`
-<p>Your wishlist is empty.</p>
+
+<p>
+Your wishlist is empty.
+</p>
+
 `;
 
 }else{
@@ -1128,9 +1315,12 @@ html+=`
 wishlist.forEach(name=>{
 
 html+=`
+
 <div class="cart-item">
 
-<span>❤️ ${name}</span>
+<span>
+❤️ ${name}
+</span>
 
 <button
 class="remove"
@@ -1141,6 +1331,7 @@ Remove
 </button>
 
 </div>
+
 `;
 
 });
@@ -1154,15 +1345,17 @@ showModal(html);
 
 function removeWishlist(name){
 
-wishlist=
-wishlist.filter(x=>x!==name);
+wishlist =
+wishlist.filter(
+x=>x!==name
+);
 
 localStorage.setItem(
 "printzyWishlist",
 JSON.stringify(wishlist)
 );
 
-updateCart();
+updateCounts();
 
 openWishlist();
 
@@ -1171,17 +1364,26 @@ showProducts();
 }
 
 
+/* CART WINDOW */
+
 function openCart(){
 
 let html=`
 
-<h2>🛒 Shopping Cart</h2>
+<h2>
+🛒 Your Cart
+</h2>
+
 `;
 
 if(cart.length===0){
 
 html+=`
-<p>Your cart is empty.</p>
+
+<p>
+Your cart is empty.
+</p>
+
 `;
 
 }else{
@@ -1190,13 +1392,16 @@ let total=0;
 
 cart.forEach((item,index)=>{
 
-const product=
-products.find(p=>p.name===item.name);
+const product =
+products.find(
+p=>p.name===item.name
+);
 
-const price=
+const price =
 product ? product.price : 0;
 
-total+=price*item.qty;
+total +=
+price * item.qty;
 
 html+=`
 
@@ -1204,24 +1409,38 @@ html+=`
 
 <div>
 
-<strong>${item.name}</strong>
+<strong>
+${item.name}
+</strong>
 
-<div style="color:var(--blue);margin-top:5px">
+<div style="
+color:var(--blue);
+margin-top:5px">
+
 ₹${price}
+
 </div>
 
 </div>
 
 <div class="qty">
 
-<button onclick="changeQty(${index},-1)">
+<button
+onclick="changeQty(${index},-1)">
+
 −
+
 </button>
 
-<span>${item.qty}</span>
+<span>
+${item.qty}
+</span>
 
-<button onclick="changeQty(${index},1)">
+<button
+onclick="changeQty(${index},1)">
+
 +
+
 </button>
 
 <button
@@ -1229,6 +1448,7 @@ class="remove"
 onclick="removeCart(${index})">
 
 ×
+
 </button>
 
 </div>
@@ -1243,14 +1463,16 @@ onclick="removeCart(${index})">
 html+=`
 
 <div class="total">
+
 Total: ₹${total}
+
 </div>
 
 <button
-class="whatsapp"
-onclick="orderWhatsApp()">
+class="add"
+onclick="openOrderForm()">
 
-📲 Order on WhatsApp
+🛍️ Order on Printzy
 
 </button>
 
@@ -1265,7 +1487,7 @@ showModal(html);
 
 function changeQty(index,value){
 
-cart[index].qty+=value;
+cart[index].qty += value;
 
 if(cart[index].qty<=0){
 
@@ -1291,78 +1513,91 @@ openCart();
 }
 
 
-function orderWhatsApp(){
+/* ORDER FORM */
+
+function openOrderForm(){
 
 if(cart.length===0){
 
-alert("Your cart is empty!");
+alert(
+"Your cart is empty."
+);
 
 return;
 
 }
 
-let message=
-"Hello Printzy! I want to order:%0A%0A";
+let total=0;
 
 cart.forEach(item=>{
 
-message+=
-"• "+item.name+
-" x "+item.qty+
-"%0A";
-
-});
-
-message+="%0APlease share the total price and payment details.";
-
-const phone="919999999999";
-
-window.open(
-"https://wa.me/"+phone+
-"?text="+message,
-"_blank"
+const product =
+products.find(
+p=>p.name===item.name
 );
+
+if(product){
+
+total +=
+product.price * item.qty;
 
 }
 
+});
 
-function customizeProduct(name){
 
 showModal(`
 
-<h2>✨ Customize ${name}</h2>
+<h2>
+🛍️ Order on Printzy
+</h2>
 
-<p>
-Personalize your product before ordering.
+<p style="
+color:var(--muted)">
+
+Enter your delivery details below.
+
 </p>
 
 <input
 class="custom-input"
-id="customName"
-placeholder="Enter your name/text"
+id="orderName"
+type="text"
+placeholder="Full Name"
+>
+
+<input
+class="custom-input"
+id="orderPhone"
+type="tel"
+placeholder="Mobile Number"
 >
 
 <textarea
 class="custom-input"
-id="customText"
-rows="4"
-placeholder="Enter customization details">
+id="orderAddress"
+rows="3"
+placeholder="Complete Delivery Address">
 </textarea>
 
-<input
+<textarea
 class="custom-input"
-type="file"
-accept="image/*"
-onchange="previewImage(event)"
->
+id="orderNote"
+rows="3"
+placeholder="Customization / Order Notes">
+</textarea>
 
-<div id="imagePreview"></div>
+<div class="total">
+
+Total: ₹${total}
+
+</div>
 
 <button
 class="add"
-onclick="saveCustomization('${name}')">
+onclick="placePrintzyOrder()">
 
-Add Customized Product
+🚀 Place Order on Printzy
 
 </button>
 
@@ -1371,194 +1606,127 @@ Add Customized Product
 }
 
 
-function previewImage(event){
+/* PLACE ORDER */
 
-const file=event.target.files[0];
+function placePrintzyOrder(){
 
-if(!file)return;
+const name =
+document
+.getElementById("orderName")
+.value
+.trim();
 
-const reader=new FileReader();
+const phone =
+document
+.getElementById("orderPhone")
+.value
+.trim();
 
-reader.onload=function(e){
+const address =
+document
+.getElementById("orderAddress")
+.value
+.trim();
 
-document.getElementById("imagePreview").innerHTML=`
+const note =
+document
+.getElementById("orderNote")
+.value
+.trim();
 
-<img
-src="${e.target.result}"
-style="
-width:100%;
-margin-top:10px;
-border-radius:12px;
-max-height:220px;
-object-fit:contain;
-">
 
-`;
+if(!name ||
+!phone ||
+!address){
+
+alert(
+"Please enter your name, mobile number and address."
+);
+
+return;
+
+}
+
+
+/* PHONE VALIDATION */
+
+const phoneNumber =
+phone.replace(/\D/g,"");
+
+if(phoneNumber.length < 10){
+
+alert(
+"Please enter a valid mobile number."
+);
+
+return;
+
+}
+
+
+/* ORDER ID */
+
+const orderId =
+"PZ" +
+Date.now()
+.toString()
+.slice(-8);
+
+
+/* TOTAL */
+
+let total=0;
+
+cart.forEach(item=>{
+
+const product =
+products.find(
+p=>p.name===item.name
+);
+
+if(product){
+
+total +=
+product.price * item.qty;
+
+}
+
+});
+
+
+/* ORDER OBJECT */
+
+const order={
+
+orderId:orderId,
+
+customer:{
+name:name,
+phone:phone,
+address:address
+},
+
+items:cart,
+
+total:total,
+
+customization:note,
+
+date:
+new Date().toLocaleString(),
+
+status:
+"Order Received"
 
 };
 
-reader.readAsDataURL(file);
 
-}
-
-
-function saveCustomization(name){
-
-const text=
-document.getElementById("customText").value;
-
-alert(
-name+
-" customization saved!"+
-(text ? "\nDetails: "+text : "")
-);
-
-closeModal();
-
-}
-
-
-function filterCategory(category,button){
-
-document
-.querySelectorAll(".category")
-.forEach(b=>b.classList.remove("active"));
-
-button.classList.add("active");
-
-if(category==="All"){
-
-showProducts();
-
-}else{
-
-showProducts(
-products.filter(
-p=>p.category===category
-)
-);
-
-}
-
-}
-
-
-function searchProducts(){
-
-const text=
-document.getElementById("search")
-.value
-.toLowerCase()
-.trim();
-
-showProducts(
-
-products.filter(p=>
-
-p.name
-.toLowerCase()
-.includes(text)
-
-)
-
-);
-
-}
-
-
-function toggleDark(){
-
-document.body.classList.toggle("dark");
+/* SAVE ORDER */
 
 localStorage.setItem(
-"printzyDark",
-document.body.classList.contains("dark")
+"printzyLastOrder",
+JSON.stringify(order)
 );
 
-}
 
-
-function openTerms(){
-
-showModal(`
-
-<h2>Terms & Conditions</h2>
-
-<p>
-By using Printzy, you agree to our terms and conditions.
-</p>
-
-<p>
-Customized products may require additional production
-and delivery time.
-</p>
-
-<p>
-Customers are responsible for providing correct
-customization details.
-</p>
-
-<p>
-Orders cannot be cancelled after production has started.
-</p>
-
-`);
-
-}
-
-
-function openPrivacy(){
-
-showModal(`
-
-<h2>Privacy Policy</h2>
-
-<p>
-Printzy respects your privacy.
-Customer information is used only for order processing,
-delivery and customer support.
-</p>
-
-`);
-
-}
-
-
-function openContact(){
-
-showModal(`
-
-<h2>📞 Contact Printzy</h2>
-
-<p>📧 Email: support@printzy.com</p>
-
-<p>📱 WhatsApp Customer Support</p>
-
-<p>
-For orders, customization and support,
-please contact us.
-</p>
-
-`);
-
-}
-
-
-function showModal(content){
-
-document.getElementById("modalContent").innerHTML=
-content;
-
-document.getElementById("modal").classList.add("show");
-
-}
-
-
-function closeModal(){
-
-document.getElementById("modal").classList.remove("show");
-
-}
-
-
-document.getEl
+/* SAVE ORDER HISTORY 
