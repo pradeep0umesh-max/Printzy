@@ -18,13 +18,13 @@
   --blue2:#0645b5;
   --sky:#eaf3ff;
   --bg:#f6f9ff;
-  --card:#ffffff;
+  --card:#fff;
   --text:#172033;
   --muted:#64748b;
   --border:#dce7f7;
   --success:#16a34a;
   --danger:#ef3155;
-  --shadow:0 12px 35px rgba(18,100,232,.12);
+  --shadow:0 12px 35px rgba(18,100,232,.13);
 }
 
 body{
@@ -54,7 +54,7 @@ body.dark{
   align-items:center;
   justify-content:center;
   z-index:9999;
-  animation:loaderOut 1s ease 1.3s forwards;
+  animation:loaderOut 1s ease 1.2s forwards;
 }
 
 .loader-logo{
@@ -88,13 +88,13 @@ header{
   position:sticky;
   top:0;
   z-index:1000;
-  background:rgba(255,255,255,.9);
+  background:rgba(255,255,255,.92);
   backdrop-filter:blur(15px);
   border-bottom:1px solid var(--border);
 }
 
 body.dark header{
-  background:rgba(17,28,45,.92);
+  background:rgba(17,28,45,.94);
 }
 
 .nav{
@@ -131,7 +131,6 @@ body.dark header{
   background:var(--card);
   color:var(--text);
   font-size:15px;
-  transition:.25s;
 }
 
 .search:focus{
@@ -315,7 +314,7 @@ body.dark header{
   margin:32px 0 18px;
 }
 
-/* CATEGORIES */
+/* CATEGORY */
 
 .categories{
   display:flex;
@@ -460,34 +459,24 @@ body.dark .product-img{
   font-weight:bold;
 }
 
-.customize{
+/* BUTTONS */
+
+.add,
+.customize,
+.details-btn{
   width:100%;
-  margin-top:9px;
   padding:11px;
-  border:1px solid var(--blue);
   border-radius:12px;
-  background:transparent;
-  color:var(--blue);
-  font-weight:bold;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.customize:hover{
-  background:var(--sky);
-}
-
-.add{
-  width:100%;
-  margin-top:10px;
-  padding:12px;
-  border:0;
-  border-radius:12px;
-  background:var(--blue);
-  color:white;
   font-weight:bold;
   cursor:pointer;
   transition:.25s;
+}
+
+.add{
+  margin-top:10px;
+  border:0;
+  background:var(--blue);
+  color:white;
 }
 
 .add:hover{
@@ -495,14 +484,28 @@ body.dark .product-img{
   transform:translateY(-2px);
 }
 
-.add.added{
-  animation:cartPop .45s ease;
+.customize{
+  margin-top:9px;
+  border:1px solid var(--blue);
+  background:transparent;
+  color:var(--blue);
 }
 
-@keyframes cartPop{
-  50%{
-    transform:scale(.94);
-  }
+.customize:hover{
+  background:var(--sky);
+}
+
+.details-btn{
+  margin-top:9px;
+  border:1px solid var(--border);
+  background:var(--sky);
+  color:var(--blue);
+}
+
+.details-btn:hover{
+  background:var(--blue);
+  color:white;
+  transform:translateY(-2px);
 }
 
 /* MODAL */
@@ -535,7 +538,7 @@ body.dark .product-img{
 
 .modal-box{
   width:100%;
-  max-width:540px;
+  max-width:550px;
   max-height:90vh;
   overflow:auto;
   padding:25px;
@@ -575,6 +578,56 @@ body.dark .product-img{
   margin-bottom:12px;
 }
 
+/* PRODUCT DETAILS */
+
+.product-detail{
+  text-align:center;
+}
+
+.detail-icon{
+  width:170px;
+  height:170px;
+  margin:5px auto 20px;
+  border-radius:28px;
+  background:linear-gradient(145deg,#edf5ff,#dcecff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:85px;
+  box-shadow:0 10px 30px rgba(18,100,232,.12);
+}
+
+body.dark .detail-icon{
+  background:#152944;
+}
+
+.detail-price{
+  color:var(--blue);
+  font-size:28px;
+  font-weight:900;
+  margin:12px 0;
+}
+
+.detail-rating{
+  color:#f59e0b;
+  margin:8px 0;
+}
+
+.detail-description{
+  color:var(--muted);
+  line-height:1.7;
+  text-align:left;
+  margin:18px 0;
+}
+
+.detail-feature{
+  text-align:left;
+  padding:11px 0;
+  border-bottom:1px solid var(--border);
+}
+
+/* INPUT */
+
 .custom-input{
   width:100%;
   padding:12px;
@@ -590,6 +643,27 @@ body.dark .product-img{
 .custom-input:focus{
   border-color:var(--blue);
 }
+
+/* CUSTOMIZER */
+
+.upload-box{
+  border:2px dashed var(--border);
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+  margin:10px 0;
+  background:var(--sky);
+}
+
+.preview-image{
+  max-width:100%;
+  max-height:180px;
+  margin-top:12px;
+  border-radius:12px;
+  display:none;
+}
+
+/* CART */
 
 .total{
   font-size:21px;
@@ -632,6 +706,8 @@ body.dark .product-img{
   border-radius:8px;
   cursor:pointer;
 }
+
+/* SUCCESS */
 
 .order-success{
   text-align:center;
@@ -765,7 +841,8 @@ footer{
   }
 
   .customize,
-  .add{
+  .add,
+  .details-btn{
     font-size:12px;
     padding:10px;
   }
@@ -773,7 +850,6 @@ footer{
   .section-title{
     font-size:25px;
   }
-
 }
 </style>
 </head>
@@ -827,13 +903,16 @@ title="Wishlist">
 
 ❤️
 
-<span
-class="count"
-id="wishCount">
+<span class="count" id="wishCount">0</span>
 
-0
+</button>
 
-</span>
+<button
+class="icon-btn"
+onclick="openOrders()"
+title="My Orders">
+
+📦
 
 </button>
 
@@ -896,59 +975,41 @@ Explore Categories
 <button
 class="category active"
 onclick="filterCategory('All',this)">
-
 All
-
 </button>
 
 <button
 class="category"
 onclick="filterCategory('Clothing',this)">
-
 👕 Clothing
-
 </button>
 
 <button
 class="category"
 onclick="filterCategory('Mugs',this)">
-
 ☕ Mugs
-
 </button>
 
 <button
 class="category"
 onclick="filterCategory('Home',this)">
-
 🏠 Home
-
 </button>
 
 <button
 class="category"
 onclick="filterCategory('Accessories',this)">
-
 🎁 Accessories
-
 </button>
 
 </div>
 
 
-<h2
-class="section-title"
-id="products">
-
+<h2 class="section-title" id="products">
 Popular Products
-
 </h2>
 
-<div
-class="products"
-id="productList">
-
-</div>
+<div class="products" id="productList"></div>
 
 </div>
 
@@ -957,9 +1018,7 @@ id="productList">
 
 <footer>
 
-<h2>
-Printzy
-</h2>
+<h2>Printzy</h2>
 
 <p style="margin-top:8px">
 Customized products made specially for you.
@@ -990,18 +1049,14 @@ Contact
 
 <!-- MODAL -->
 
-<div
-class="modal"
-id="modal">
+<div class="modal" id="modal">
 
 <div class="modal-box">
 
 <button
 class="close"
 onclick="closeModal()">
-
 ×
-
 </button>
 
 <div id="modalContent"></div>
@@ -1035,7 +1090,7 @@ badge:"BEST SELLER"
 
 {
 name:"Photo Frame",
-price:399,
+price:199,
 category:"Home",
 icon:"🖼️",
 badge:"NEW"
@@ -1065,28 +1120,35 @@ icon:"🎁",
 badge:"POPULAR"
 }
 
+{
+name:"Sunboard Prints",
+price:599,
+category:"Home Decor",
+icon:"🎇",
+badge:"POPULAR"
+}
 ];
 
 
 /* DATA */
 
 let cart =
-JSON.parse(
-localStorage.getItem("printzyCart")
-) || [];
+JSON.parse(localStorage.getItem("printzyCart")) || [];
 
 let wishlist =
-JSON.parse(
-localStorage.getItem("printzyWishlist")
-) || [];
+JSON.parse(localStorage.getItem("printzyWishlist")) || [];
+
+let orders =
+JSON.parse(localStorage.getItem("printzyOrders")) || [];
+
+let currentCustomization = null;
 
 
-/* SHOW PRODUCTS */
+/* PRODUCTS */
 
 function showProducts(list=products){
 
-const box =
-document.getElementById("productList");
+const box=document.getElementById("productList");
 
 box.innerHTML="";
 
@@ -1099,9 +1161,7 @@ grid-column:1/-1;
 text-align:center;
 padding:50px">
 
-<h2>
-😔 No products found
-</h2>
+<h2>😔 No products found</h2>
 
 <p style="
 margin-top:10px;
@@ -1111,25 +1171,20 @@ Try another search.
 
 </p>
 
-</div>
-
-`;
+</div>`;
 
 return;
-
 }
-
 
 list.forEach((p,index)=>{
 
-const liked =
-wishlist.includes(p.name);
+const liked=wishlist.includes(p.name);
 
-box.innerHTML += `
+box.innerHTML+=`
 
 <div
 class="product"
-style="animation-delay:${index*0.07}s">
+style="animation-delay:${index*.07}s">
 
 <button
 class="wishlist ${liked?"active":""}"
@@ -1151,9 +1206,7 @@ ${p.icon}
 
 <div class="product-info">
 
-<h3>
-${p.name}
-</h3>
+<h3>${p.name}</h3>
 
 <div class="rating">
 ★★★★★
@@ -1167,6 +1220,14 @@ ${p.name}
 </div>
 
 <button
+class="details-btn"
+onclick="viewProduct('${p.name}')">
+
+👀 View Details
+
+</button>
+
+<button
 class="customize"
 onclick="customizeProduct('${p.name}')">
 
@@ -1178,17 +1239,97 @@ onclick="customizeProduct('${p.name}')">
 class="add"
 onclick="addCart('${p.name}',this)">
 
-Add to Cart
+🛒 Add to Cart
 
 </button>
 
 </div>
 
-</div>
-
-`;
+</div>`;
 
 });
+
+}
+
+
+/* PRODUCT DETAILS */
+
+function viewProduct(name){
+
+const product=products.find(p=>p.name===name);
+
+if(!product)return;
+
+showModal(`
+
+<div class="product-detail">
+
+<div class="detail-icon">
+${product.icon}
+</div>
+
+<h2>
+${product.name}
+</h2>
+
+<div class="detail-rating">
+⭐⭐⭐⭐⭐
+<span style="color:var(--muted)">
+4.8 / 5
+</span>
+</div>
+
+<div class="detail-price">
+₹${product.price}
+</div>
+
+<div class="detail-description">
+
+<strong>About this product</strong>
+
+<p>
+Create something special with our premium
+${product.name.toLowerCase()}.
+Customize it with your own text, photo or design.
+</p>
+
+</div>
+
+<div class="detail-feature">
+✅ Premium quality
+</div>
+
+<div class="detail-feature">
+🎨 Customizable design
+</div>
+
+<div class="detail-feature">
+📦 Secure packaging
+</div>
+
+<div class="detail-feature">
+🚚 Delivery available
+</div>
+
+<button
+class="customize"
+onclick="customizeProduct('${product.name}')">
+
+✨ Customize Product
+
+</button>
+
+<button
+class="add"
+onclick="addCart('${product.name}',this)">
+
+🛒 Add to Cart
+
+</button>
+
+</div>
+
+`);
 
 }
 
@@ -1197,8 +1338,7 @@ Add to Cart
 
 function addCart(name,button){
 
-const existing =
-cart.find(item=>item.name===name);
+const existing=cart.find(item=>item.name===name);
 
 if(existing){
 
@@ -1215,17 +1355,17 @@ qty:1
 
 saveCart();
 
-button.classList.add("added");
+if(button){
 
 button.innerText="✓ Added";
 
 setTimeout(()=>{
 
-button.classList.remove("added");
-
-button.innerText="Add to Cart";
+button.innerText="🛒 Add to Cart";
 
 },900);
+
+}
 
 }
 
@@ -1247,16 +1387,12 @@ function updateCounts(){
 let count=0;
 
 cart.forEach(item=>{
-count += item.qty;
+count+=item.qty;
 });
 
-document.getElementById(
-"cartCount"
-).innerText=count;
+document.getElementById("cartCount").innerText=count;
 
-document.getElementById(
-"wishCount"
-).innerText=wishlist.length;
+document.getElementById("wishCount").innerText=wishlist.length;
 
 }
 
@@ -1267,10 +1403,7 @@ function toggleWishlist(name){
 
 if(wishlist.includes(name)){
 
-wishlist =
-wishlist.filter(
-x=>x!==name
-);
+wishlist=wishlist.filter(x=>x!==name);
 
 }else{
 
@@ -1292,23 +1425,11 @@ showProducts();
 
 function openWishlist(){
 
-let html=`
-
-<h2>
-❤️ My Wishlist
-</h2>
-
-`;
+let html=`<h2>❤️ My Wishlist</h2>`;
 
 if(wishlist.length===0){
 
-html+=`
-
-<p>
-Your wishlist is empty.
-</p>
-
-`;
+html+=`<p>Your wishlist is empty.</p>`;
 
 }else{
 
@@ -1318,9 +1439,7 @@ html+=`
 
 <div class="cart-item">
 
-<span>
-❤️ ${name}
-</span>
+<span>❤️ ${name}</span>
 
 <button
 class="remove"
@@ -1330,9 +1449,7 @@ Remove
 
 </button>
 
-</div>
-
-`;
+</div>`;
 
 });
 
@@ -1345,10 +1462,7 @@ showModal(html);
 
 function removeWishlist(name){
 
-wishlist =
-wishlist.filter(
-x=>x!==name
-);
+wishlist=wishlist.filter(x=>x!==name);
 
 localStorage.setItem(
 "printzyWishlist",
@@ -1364,27 +1478,15 @@ showProducts();
 }
 
 
-/* CART WINDOW */
+/* CART */
 
 function openCart(){
 
-let html=`
-
-<h2>
-🛒 Your Cart
-</h2>
-
-`;
+let html=`<h2>🛒 Your Cart</h2>`;
 
 if(cart.length===0){
 
-html+=`
-
-<p>
-Your cart is empty.
-</p>
-
-`;
+html+=`<p>Your cart is empty.</p>`;
 
 }else{
 
@@ -1392,16 +1494,13 @@ let total=0;
 
 cart.forEach((item,index)=>{
 
-const product =
-products.find(
+const product=products.find(
 p=>p.name===item.name
 );
 
-const price =
-product ? product.price : 0;
+const price=product?product.price:0;
 
-total +=
-price * item.qty;
+total+=price*item.qty;
 
 html+=`
 
@@ -1409,9 +1508,7 @@ html+=`
 
 <div>
 
-<strong>
-${item.name}
-</strong>
+<strong>${item.name}</strong>
 
 <div style="
 color:var(--blue);
@@ -1425,22 +1522,14 @@ margin-top:5px">
 
 <div class="qty">
 
-<button
-onclick="changeQty(${index},-1)">
-
+<button onclick="changeQty(${index},-1)">
 −
-
 </button>
 
-<span>
-${item.qty}
-</span>
+<span>${item.qty}</span>
 
-<button
-onclick="changeQty(${index},1)">
-
+<button onclick="changeQty(${index},1)">
 +
-
 </button>
 
 <button
@@ -1453,19 +1542,14 @@ onclick="removeCart(${index})">
 
 </div>
 
-</div>
-
-`;
+</div>`;
 
 });
-
 
 html+=`
 
 <div class="total">
-
 Total: ₹${total}
-
 </div>
 
 <button
@@ -1474,9 +1558,7 @@ onclick="openOrderForm()">
 
 🛍️ Order on Printzy
 
-</button>
-
-`;
+</button>`;
 
 }
 
@@ -1487,246 +1569,6 @@ showModal(html);
 
 function changeQty(index,value){
 
-cart[index].qty += value;
+cart[index].qty+=value;
 
-if(cart[index].qty<=0){
-
-cart.splice(index,1);
-
-}
-
-saveCart();
-
-openCart();
-
-}
-
-
-function removeCart(index){
-
-cart.splice(index,1);
-
-saveCart();
-
-openCart();
-
-}
-
-
-/* ORDER FORM */
-
-function openOrderForm(){
-
-if(cart.length===0){
-
-alert(
-"Your cart is empty."
-);
-
-return;
-
-}
-
-let total=0;
-
-cart.forEach(item=>{
-
-const product =
-products.find(
-p=>p.name===item.name
-);
-
-if(product){
-
-total +=
-product.price * item.qty;
-
-}
-
-});
-
-
-showModal(`
-
-<h2>
-🛍️ Order on Printzy
-</h2>
-
-<p style="
-color:var(--muted)">
-
-Enter your delivery details below.
-
-</p>
-
-<input
-class="custom-input"
-id="orderName"
-type="text"
-placeholder="Full Name"
->
-
-<input
-class="custom-input"
-id="orderPhone"
-type="tel"
-placeholder="Mobile Number"
->
-
-<textarea
-class="custom-input"
-id="orderAddress"
-rows="3"
-placeholder="Complete Delivery Address">
-</textarea>
-
-<textarea
-class="custom-input"
-id="orderNote"
-rows="3"
-placeholder="Customization / Order Notes">
-</textarea>
-
-<div class="total">
-
-Total: ₹${total}
-
-</div>
-
-<button
-class="add"
-onclick="placePrintzyOrder()">
-
-🚀 Place Order on Printzy
-
-</button>
-
-`);
-
-}
-
-
-/* PLACE ORDER */
-
-function placePrintzyOrder(){
-
-const name =
-document
-.getElementById("orderName")
-.value
-.trim();
-
-const phone =
-document
-.getElementById("orderPhone")
-.value
-.trim();
-
-const address =
-document
-.getElementById("orderAddress")
-.value
-.trim();
-
-const note =
-document
-.getElementById("orderNote")
-.value
-.trim();
-
-
-if(!name ||
-!phone ||
-!address){
-
-alert(
-"Please enter your name, mobile number and address."
-);
-
-return;
-
-}
-
-
-/* PHONE VALIDATION */
-
-const phoneNumber =
-phone.replace(/\D/g,"");
-
-if(phoneNumber.length < 10){
-
-alert(
-"Please enter a valid mobile number."
-);
-
-return;
-
-}
-
-
-/* ORDER ID */
-
-const orderId =
-"PZ" +
-Date.now()
-.toString()
-.slice(-8);
-
-
-/* TOTAL */
-
-let total=0;
-
-cart.forEach(item=>{
-
-const product =
-products.find(
-p=>p.name===item.name
-);
-
-if(product){
-
-total +=
-product.price * item.qty;
-
-}
-
-});
-
-
-/* ORDER OBJECT */
-
-const order={
-
-orderId:orderId,
-
-customer:{
-name:name,
-phone:phone,
-address:address
-},
-
-items:cart,
-
-total:total,
-
-customization:note,
-
-date:
-new Date().toLocaleString(),
-
-status:
-"Order Received"
-
-};
-
-
-/* SAVE ORDER */
-
-localStorage.setItem(
-"printzyLastOrder",
-JSON.stringify(order)
-);
-
-
-/* SAVE ORDER HISTORY 
+if(cart[index].
