@@ -18,7 +18,7 @@
   --blue2:#0645b5;
   --sky:#eaf3ff;
   --bg:#f6f9ff;
-  --card:#ffffff;
+  --card:#fff;
   --text:#172033;
   --muted:#64748b;
   --border:#dce7f7;
@@ -64,14 +64,8 @@ body.dark{
 }
 
 @keyframes pulse{
-  from{
-    transform:scale(.9);
-    opacity:.5;
-  }
-  to{
-    transform:scale(1.08);
-    opacity:1;
-  }
+  from{transform:scale(.9);opacity:.5}
+  to{transform:scale(1.08);opacity:1}
 }
 
 @keyframes loaderOut{
@@ -87,7 +81,7 @@ header{
   position:sticky;
   top:0;
   z-index:1000;
-  background:rgba(255,255,255,.92);
+  background:rgba(255,255,255,.9);
   backdrop-filter:blur(15px);
   border-bottom:1px solid var(--border);
 }
@@ -189,7 +183,6 @@ body.dark header{
 .cart-btn:hover{
   background:var(--blue2);
   transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(18,100,232,.3);
 }
 
 /* HERO */
@@ -225,7 +218,6 @@ body.dark header{
 
 .hero h1{
   font-size:54px;
-  line-height:1.1;
   margin-bottom:18px;
   position:relative;
   z-index:2;
@@ -256,7 +248,6 @@ body.dark header{
 
 .shop-btn:hover{
   transform:translateY(-3px) scale(1.03);
-  box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
 .circle{
@@ -278,7 +269,6 @@ body.dark header{
   height:150px;
   right:230px;
   bottom:-70px;
-  animation-delay:1s;
 }
 
 .three{
@@ -286,16 +276,10 @@ body.dark header{
   height:80px;
   right:80px;
   bottom:70px;
-  animation-delay:2s;
 }
 
 @keyframes float{
-  0%,100%{
-    transform:translateY(0);
-  }
-  50%{
-    transform:translateY(-18px);
-  }
+  50%{transform:translateY(-18px)}
 }
 
 /* CONTENT */
@@ -340,7 +324,6 @@ body.dark header{
   background:var(--blue);
   color:white;
   border-color:var(--blue);
-  box-shadow:0 7px 18px rgba(18,100,232,.25);
 }
 
 /* PRODUCTS */
@@ -417,11 +400,6 @@ body.dark .product-img{
   font-size:22px;
   cursor:pointer;
   z-index:3;
-  transition:.2s;
-}
-
-.wishlist:hover{
-  transform:scale(1.12);
 }
 
 .wishlist.active{
@@ -431,9 +409,7 @@ body.dark .product-img{
 }
 
 @keyframes heartPop{
-  50%{
-    transform:scale(1.3);
-  }
+  50%{transform:scale(1.3)}
 }
 
 .product-info{
@@ -482,10 +458,6 @@ body.dark .product-img{
   border:1px solid var(--blue);
   background:transparent;
   color:var(--blue);
-}
-
-.customize:hover{
-  background:var(--sky);
 }
 
 .add{
@@ -656,17 +628,7 @@ body.dark .product-img{
 }
 
 @keyframes successPop{
-  0%{
-    transform:scale(.3);
-    opacity:0;
-  }
-  70%{
-    transform:scale(1.15);
-  }
-  100%{
-    transform:scale(1);
-    opacity:1;
-  }
+  70%{transform:scale(1.15)}
 }
 
 /* FOOTER */
@@ -705,10 +667,6 @@ footer{
   .search-box{
     order:3;
     flex-basis:100%;
-  }
-
-  .cart-btn{
-    padding:11px 13px;
   }
 
   .hero{
@@ -758,7 +716,6 @@ footer{
   .section-title{
     font-size:25px;
   }
-
 }
 </style>
 </head>
@@ -766,16 +723,12 @@ footer{
 <body>
 
 <!-- LOADER -->
-
 <div class="loader">
   <div class="loader-logo">Printzy</div>
 </div>
 
-
 <!-- HEADER -->
-
 <header>
-
 <div class="nav">
 
 <div class="logo">
@@ -783,92 +736,55 @@ Print<span>zy</span>
 </div>
 
 <div class="search-box">
-
 <input
 class="search"
 id="search"
 type="search"
 placeholder="Search T-shirts, mugs, frames..."
 oninput="searchProducts()">
-
 <span class="search-icon">🔍</span>
-
 </div>
 
-<button
-class="icon-btn"
-onclick="toggleDark()"
-title="Dark Mode">
-
+<button class="icon-btn" onclick="toggleDark()">
 🌙
-
 </button>
 
-<button
-class="icon-btn"
-onclick="openWishlist()"
-title="Wishlist">
-
+<button class="icon-btn" onclick="openWishlist()">
 ❤️
-
-<span
-class="count"
-id="wishCount">
-
-0
-
-</span>
-
+<span class="count" id="wishCount">0</span>
 </button>
 
-<button
-class="cart-btn"
-onclick="openCart()">
-
-🛒 Cart
-<span id="cartCount">0</span>
-
+<button class="cart-btn" onclick="openCart()">
+🛒 Cart <span id="cartCount">0</span>
 </button>
 
 </div>
-
 </header>
 
-
 <!-- HERO -->
-
 <div class="hero-wrap">
-
 <section class="hero">
 
 <div class="circle one"></div>
 <div class="circle two"></div>
 <div class="circle three"></div>
 
-<h1>
-Make it yours.
-</h1>
+<h1>Make it yours.</h1>
 
 <p>
 Create something special with premium customized
-T-shirts, mugs, frames, hoodies, caps and personalized gifts.
+T-shirts, mugs, frames, hoodies and personalized gifts.
 </p>
 
-<button
-class="shop-btn"
+<button class="shop-btn"
 onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
-
 Shop Now →
-
 </button>
 
 </section>
-
 </div>
 
-
-<!-- MAIN -->
-
+<!-- CONTENT -->
 <div class="container">
 
 <h2 class="section-title">
@@ -877,73 +793,45 @@ Explore Categories
 
 <div class="categories">
 
-<button
-class="category active"
+<button class="category active"
 onclick="filterCategory('All',this)">
-
 All
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="filterCategory('Clothing',this)">
-
 👕 Clothing
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="filterCategory('Mugs',this)">
-
 ☕ Mugs
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="filterCategory('Home',this)">
-
 🏠 Home
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="filterCategory('Accessories',this)">
-
 🎁 Accessories
-
 </button>
 
 </div>
 
-
-<h2
-class="section-title"
-id="products">
-
+<h2 class="section-title" id="products">
 Popular Products
-
 </h2>
 
-<div
-class="products"
-id="productList">
+<div class="products" id="productList"></div>
 
 </div>
-
-</div>
-
 
 <!-- FOOTER -->
-
 <footer>
 
-<h2>
-Printzy
-</h2>
+<h2>Printzy</h2>
 
 <p style="margin-top:8px">
 Premium customized products made specially for you.
@@ -971,29 +859,18 @@ Contact
 
 </footer>
 
-
 <!-- MODAL -->
-
-<div
-class="modal"
-id="modal">
+<div class="modal" id="modal">
 
 <div class="modal-box">
 
-<button
-class="close"
-onclick="closeModal()">
-
-×
-
-</button>
+<button class="close" onclick="closeModal()">×</button>
 
 <div id="modalContent"></div>
 
 </div>
 
 </div>
-
 
 <script>
 
@@ -1009,8 +886,7 @@ category:"Clothing",
 icon:"👕",
 badge:"POPULAR",
 rating:"4.8",
-description:
-"Premium quality custom printed T-shirt. Add your own name, photo, logo or design.",
+description:"Premium quality custom printed T-shirt. Add your own name, photo, logo or design.",
 features:[
 "Premium cotton fabric",
 "Custom print available",
@@ -1027,8 +903,7 @@ category:"Mugs",
 icon:"☕",
 badge:"BEST SELLER",
 rating:"4.9",
-description:
-"Create a personalized ceramic mug with your favourite photo, name or message.",
+description:"Create a personalized ceramic mug with your favourite photo, name or message.",
 features:[
 "High quality ceramic",
 "Photo & text printing",
@@ -1045,8 +920,7 @@ category:"Home",
 icon:"🖼️",
 badge:"NEW",
 rating:"4.7",
-description:
-"Turn your favourite memories into beautiful personalized photo frames.",
+description:"Turn your favourite memories into beautiful personalized photo frames.",
 features:[
 "Premium frame",
 "Custom photo printing",
@@ -1063,8 +937,7 @@ category:"Clothing",
 icon:"🧥",
 badge:"TRENDING",
 rating:"4.8",
-description:
-"Premium customized hoodie made for your unique style.",
+description:"Premium customized hoodie made for your unique style.",
 features:[
 "Soft comfortable fabric",
 "Custom printing",
@@ -1081,8 +954,7 @@ category:"Accessories",
 icon:"🧢",
 badge:"NEW",
 rating:"4.6",
-description:
-"Personalized cap with your name, logo or favourite design.",
+description:"Personalized cap with your name, logo or favourite design.",
 features:[
 "Premium material",
 "Custom embroidery/print",
@@ -1099,8 +971,7 @@ category:"Accessories",
 icon:"🎁",
 badge:"POPULAR",
 rating:"4.9",
-description:
-"A special personalized gift designed to make your loved ones feel special.",
+description:"A special personalized gift designed to make your loved ones feel special.",
 features:[
 "Customizable design",
 "Premium presentation",
@@ -1111,19 +982,18 @@ features:[
 
 {
 id:7,
-name:"Premium Sunboard",
+name:"Sunboard",
 price:599,
-category:"Home",
-icon:"🖼️",
+category:"Home Decor",
+icon:"🎇",
 badge:"POPULAR",
 rating:"4.9",
-description:
-"Premium personalized sunboard for home decoration, memories and special occasions.",
+description:"A special personalized Home Decor designed to make your loved ones feel special.",
 features:[
-"High quality print",
 "Customizable design",
-"Premium finish",
-"Perfect home decoration"
+"Premium presentation",
+"Perfect for special occasions",
+"Made Special your Home"
 ]
 }
 
@@ -1133,14 +1003,10 @@ features:[
 /* ================= DATA ================= */
 
 let cart =
-JSON.parse(
-localStorage.getItem("printzyCart")
-) || [];
+JSON.parse(localStorage.getItem("printzyCart")) || [];
 
 let wishlist =
-JSON.parse(
-localStorage.getItem("printzyWishlist")
-) || [];
+JSON.parse(localStorage.getItem("printzyWishlist")) || [];
 
 
 /* ================= SHOW PRODUCTS ================= */
@@ -1149,48 +1015,35 @@ function showProducts(list=products){
 
 const box=document.getElementById("productList");
 
-if(!box)return;
-
 box.innerHTML="";
 
 if(list.length===0){
 
 box.innerHTML=`
-
 <div style="
 grid-column:1/-1;
 text-align:center;
 padding:50px">
 
-<h2>
-😔 No products found
-</h2>
+<h2>😔 No products found</h2>
 
-<p style="
-margin-top:10px;
-color:var(--muted)">
-
+<p style="margin-top:10px;color:var(--muted)">
 Try another search.
-
 </p>
 
 </div>
-
 `;
 
 return;
 }
 
-
 list.forEach((p,index)=>{
 
-const liked=
-wishlist.includes(p.name);
+const liked=wishlist.includes(p.name);
 
 box.innerHTML+=`
 
-<div
-class="product"
+<div class="product"
 style="animation-delay:${index*.07}s">
 
 <button
@@ -1213,9 +1066,7 @@ ${p.icon}
 
 <div class="product-info">
 
-<h3>
-${p.name}
-</h3>
+<h3>${p.name}</h3>
 
 <div class="rating">
 ★★★★★
@@ -1267,21 +1118,15 @@ Add to Cart
 
 function showProductDetails(id){
 
-const p=
-products.find(x=>x.id===id);
+const p=products.find(x=>x.id===id);
 
 if(!p)return;
 
 let features="";
 
 p.features.forEach(f=>{
-
-features+=`
-<li>✓ ${f}</li>
-`;
-
+features+=`<li>✓ ${f}</li>`;
 });
-
 
 showModal(`
 
@@ -1313,17 +1158,15 @@ Product Features
 ${features}
 </ul>
 
-<button
-class="customize"
+<button class="customize"
 onclick="customizeProduct('${p.name}')">
 
 ✨ Customize This Product
 
 </button>
 
-<button
-class="add"
-onclick="addCart('${p.name}');closeModal()">
+<button class="add"
+onclick="addCart('${p.name}');closeModal();">
 
 🛒 Add to Cart
 
@@ -1334,77 +1177,13 @@ onclick="addCart('${p.name}');closeModal()">
 }
 
 
-/* ================= SEARCH ================= */
-
-function searchProducts(){
-
-const text=
-document.getElementById("search")
-.value
-.toLowerCase()
-.trim();
-
-showProducts(
-
-products.filter(p=>
-
-p.name
-.toLowerCase()
-.includes(text)
-
-||
-
-p.category
-.toLowerCase()
-.includes(text)
-
-)
-
-);
-
-}
-
-
-/* ================= CATEGORY ================= */
-
-function filterCategory(category,button){
-
-document
-.querySelectorAll(".category")
-.forEach(b=>
-b.classList.remove("active")
-);
-
-button.classList.add("active");
-
-if(category==="All"){
-
-showProducts(products);
-
-}else{
-
-showProducts(
-
-products.filter(
-p=>p.category===category
-)
-
-);
-
-}
-
-}
-
-
 /* ================= CUSTOMIZE ================= */
 
 function customizeProduct(name){
 
 showModal(`
 
-<h2>
-✨ Customize Product
-</h2>
+<h2>✨ Customize Product</h2>
 
 <p style="color:var(--muted)">
 Customize your <strong>${name}</strong>
@@ -1424,7 +1203,7 @@ placeholder="Photo / Design details">
 class="custom-input"
 id="customNote"
 rows="4"
-placeholder="Customization requirements">
+placeholder="Tell us your customization requirements">
 </textarea>
 
 <button
@@ -1442,34 +1221,20 @@ Save Customization
 
 function saveCustomization(name){
 
-const customName=
-document.getElementById("customName").value;
-
-const photo=
-document.getElementById("customPhoto").value;
-
-const note=
-document.getElementById("customNote").value;
-
+const text=
+document.getElementById("customNote").value.trim();
 
 localStorage.setItem(
-
 "printzyCustomization",
-
 JSON.stringify({
-
 product:name,
-name:customName,
-photo:photo,
-note:note
-
+name:document.getElementById("customName").value,
+photo:document.getElementById("customPhoto").value,
+note:text
 })
-
 );
 
-alert(
-"Customization saved successfully!"
-);
+alert("Customization saved!");
 
 closeModal();
 
@@ -1480,24 +1245,15 @@ closeModal();
 
 function addCart(name,button){
 
-const existing=
-cart.find(
-item=>item.name===name
-);
+const existing=cart.find(item=>item.name===name);
 
 if(existing){
-
 existing.qty++;
-
 }else{
-
 cart.push({
-
 name:name,
 qty:1
-
 });
-
 }
 
 saveCart();
@@ -1507,9 +1263,7 @@ if(button){
 button.innerText="✓ Added";
 
 setTimeout(()=>{
-
 button.innerText="Add to Cart";
-
 },900);
 
 }
@@ -1534,20 +1288,143 @@ function updateCounts(){
 let count=0;
 
 cart.forEach(item=>{
-
 count+=item.qty;
-
 });
 
-document.getElementById(
-"cartCount"
-).innerText=count;
+document.getElementById("cartCount").innerText=count;
 
-document.getElementById(
-"wishCount"
-).innerText=wishlist.length;
+document.getElementById("wishCount").innerText=wishlist.length;
 
 }
 
 
-/* ================= WISHLIST ====
+/* ================= WISHLIST ================= */
+
+function toggleWishlist(name){
+
+if(wishlist.includes(name)){
+
+wishlist=wishlist.filter(x=>x!==name);
+
+}else{
+
+wishlist.push(name);
+
+}
+
+localStorage.setItem(
+"printzyWishlist",
+JSON.stringify(wishlist)
+);
+
+updateCounts();
+showProducts();
+
+}
+
+
+function openWishlist(){
+
+let html="<h2>❤️ My Wishlist</h2>";
+
+if(wishlist.length===0){
+
+html+="<p>Your wishlist is empty.</p>";
+
+}else{
+
+wishlist.forEach(name=>{
+
+html+=`
+
+<div class="cart-item">
+
+<span>❤️ ${name}</span>
+
+<button
+class="remove"
+onclick="removeWishlist('${name}')">
+
+Remove
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+showModal(html);
+
+}
+
+
+function removeWishlist(name){
+
+wishlist=wishlist.filter(x=>x!==name);
+
+localStorage.setItem(
+"printzyWishlist",
+JSON.stringify(wishlist)
+);
+
+updateCounts();
+
+openWishlist();
+showProducts();
+
+}
+
+
+/* ================= CART WINDOW ================= */
+
+function openCart(){
+
+let html="<h2>🛒 Your Cart</h2>";
+
+if(cart.length===0){
+
+html+="<p>Your cart is empty.</p>";
+
+showModal(html);
+return;
+
+}
+
+let total=0;
+
+cart.forEach((item,index)=>{
+
+const product=products.find(
+p=>p.name===item.name
+);
+
+const price=product?product.price:0;
+
+total+=price*item.qty;
+
+html+=`
+
+<div class="cart-item">
+
+<div>
+<strong>${item.name}</strong>
+
+<div style="
+color:var(--blue);
+margin-top:5px">
+
+₹${price}
+
+</div>
+
+</div>
+
+<div class="qty">
+
+<button onclick="changeQty(${index},-1)">
+−
+</butt
