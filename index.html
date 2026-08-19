@@ -4,143 +4,306 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Printzy - Custom Printed Products</title>
+<title>Printzy - Premium Custom Products</title>
 
 <style>
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
 }
 
 :root{
   --blue:#1264e8;
-  --blue2:#0b4fc4;
-  --light:#f5f9ff;
-  --text:#172033;
+  --blue2:#0645b5;
+  --sky:#eaf3ff;
+  --bg:#f6f9ff;
   --card:#ffffff;
-  --border:#dce6f5;
+  --text:#172033;
+  --muted:#64748b;
+  --border:#dce7f7;
+  --shadow:0 12px 35px rgba(18,100,232,.12);
 }
 
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:var(--light);
+  background:var(--bg);
   color:var(--text);
-  transition:.3s;
+  overflow-x:hidden;
+  transition:.35s;
 }
 
 body.dark{
-  --light:#0d1422;
-  --text:#f3f6ff;
-  --card:#151e2e;
-  --border:#263650;
+  --bg:#08111f;
+  --card:#111c2d;
+  --text:#f5f8ff;
+  --muted:#aab6ca;
+  --border:#263852;
+  --sky:#12243d;
+}
+
+/* PAGE LOADER */
+
+.loader{
+  position:fixed;
+  inset:0;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  animation:loaderOut 1s ease 1.4s forwards;
+}
+
+.loader-logo{
+  font-size:40px;
+  font-weight:900;
+  color:var(--blue);
+  animation:logoPulse 1s infinite alternate;
+}
+
+@keyframes logoPulse{
+  from{transform:scale(.9);opacity:.5}
+  to{transform:scale(1.05);opacity:1}
+}
+
+@keyframes loaderOut{
+  to{
+    opacity:0;
+    visibility:hidden;
+  }
 }
 
 /* HEADER */
+
 header{
   position:sticky;
   top:0;
-  z-index:100;
-  background:var(--card);
+  z-index:1000;
+  background:rgba(255,255,255,.9);
+  backdrop-filter:blur(15px);
   border-bottom:1px solid var(--border);
-  box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
+
+body.dark header{
+  background:rgba(17,28,45,.9);
 }
 
 .nav{
-  max-width:1150px;
+  max-width:1200px;
   margin:auto;
-  padding:15px 18px;
+  padding:14px 18px;
   display:flex;
   align-items:center;
-  gap:18px;
+  gap:15px;
 }
 
 .logo{
-  font-size:27px;
+  font-size:29px;
   font-weight:900;
   color:var(--blue);
+  letter-spacing:-1px;
+}
+
+.logo span{
+  color:var(--text);
+}
+
+.search-box{
+  flex:1;
+  position:relative;
 }
 
 .search{
-  flex:1;
-  padding:13px 18px;
+  width:100%;
+  padding:13px 45px 13px 18px;
   border:2px solid var(--border);
   border-radius:30px;
   outline:none;
-  background:var(--light);
+  background:var(--card);
   color:var(--text);
   font-size:15px;
+  transition:.25s;
 }
 
 .search:focus{
   border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(18,100,232,.1);
 }
 
-.nav-btn{
-  border:0;
-  background:var(--light);
-  color:var(--text);
-  border-radius:50%;
+.search-icon{
+  position:absolute;
+  right:17px;
+  top:12px;
+}
+
+.icon-btn{
   width:45px;
   height:45px;
-  font-size:20px;
+  border:1px solid var(--border);
+  border-radius:50%;
+  background:var(--card);
+  color:var(--text);
   cursor:pointer;
+  font-size:19px;
+  transition:.25s;
+  position:relative;
+}
+
+.icon-btn:hover{
+  transform:translateY(-3px) scale(1.05);
+  border-color:var(--blue);
+}
+
+.count{
+  position:absolute;
+  top:-4px;
+  right:-2px;
+  background:#ef3155;
+  color:white;
+  width:19px;
+  height:19px;
+  border-radius:50%;
+  font-size:11px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
 }
 
 .cart-btn{
   border:0;
   background:var(--blue);
   color:white;
-  padding:12px 17px;
-  border-radius:25px;
+  padding:13px 18px;
+  border-radius:28px;
   font-weight:bold;
   cursor:pointer;
+  transition:.25s;
+}
+
+.cart-btn:hover{
+  background:var(--blue2);
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(18,100,232,.3);
 }
 
 /* HERO */
-.hero{
-  max-width:1150px;
+
+.hero-wrap{
+  max-width:1200px;
   margin:25px auto;
-  padding:55px 35px;
-  border-radius:28px;
-  background:linear-gradient(135deg,#0865e8,#3b8cff);
+  padding:0 18px;
+}
+
+.hero{
+  min-height:390px;
+  border-radius:30px;
+  padding:65px 50px;
   color:white;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#0755ca,#1684ff);
+  box-shadow:0 20px 45px rgba(18,100,232,.25);
+  animation:heroIn .8s ease;
+}
+
+@keyframes heroIn{
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .hero h1{
-  font-size:48px;
-  margin-bottom:15px;
+  font-size:54px;
+  line-height:1.1;
+  margin-bottom:18px;
+  position:relative;
+  z-index:2;
 }
 
 .hero p{
-  font-size:19px;
-  max-width:650px;
-  line-height:1.6;
+  font-size:18px;
+  max-width:600px;
+  line-height:1.7;
+  position:relative;
+  z-index:2;
 }
 
 .shop-btn{
-  margin-top:25px;
+  margin-top:27px;
   padding:14px 25px;
   border:0;
-  border-radius:25px;
+  border-radius:30px;
   background:white;
   color:var(--blue);
   font-weight:bold;
-  cursor:pointer;
   font-size:16px;
+  cursor:pointer;
+  position:relative;
+  z-index:2;
+  transition:.25s;
 }
 
-/* CONTENT */
+.shop-btn:hover{
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.circle{
+  position:absolute;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+  animation:float 6s ease-in-out infinite;
+}
+
+.circle.one{
+  width:230px;
+  height:230px;
+  right:-50px;
+  top:-60px;
+}
+
+.circle.two{
+  width:150px;
+  height:150px;
+  right:230px;
+  bottom:-70px;
+  animation-delay:1s;
+}
+
+.circle.three{
+  width:80px;
+  height:80px;
+  right:80px;
+  bottom:70px;
+  animation-delay:2s;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-18px)}
+}
+
+/* CONTAINER */
+
 .container{
-  max-width:1150px;
+  max-width:1200px;
   margin:auto;
-  padding:10px 18px 50px;
+  padding:10px 18px 60px;
 }
 
 .section-title{
   font-size:30px;
-  margin:28px 0 18px;
+  margin:32px 0 18px;
 }
+
+/* CATEGORIES */
 
 .categories{
   display:flex;
@@ -152,72 +315,115 @@ header{
 .category{
   white-space:nowrap;
   padding:11px 20px;
-  border-radius:25px;
+  border-radius:30px;
   border:1px solid var(--border);
   background:var(--card);
   color:var(--text);
   cursor:pointer;
+  transition:.25s;
 }
 
-.category.active,
 .category:hover{
+  transform:translateY(-2px);
+  border-color:var(--blue);
+}
+
+.category.active{
   background:var(--blue);
   color:white;
+  border-color:var(--blue);
+  box-shadow:0 7px 18px rgba(18,100,232,.25);
 }
 
 /* PRODUCTS */
+
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+  gap:22px;
 }
 
 .product{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:20px;
+  border-radius:22px;
   overflow:hidden;
   position:relative;
-  transition:.25s;
+  box-shadow:0 5px 18px rgba(0,0,0,.04);
+  animation:cardIn .5s ease both;
+  transition:.3s;
 }
 
 .product:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 30px rgba(18,100,232,.13);
+  transform:translateY(-8px);
+  box-shadow:var(--shadow);
+}
+
+@keyframes cardIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .product-img{
-  height:210px;
-  background:#eef5ff;
+  height:215px;
+  background:linear-gradient(145deg,#edf5ff,#dcecff);
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:85px;
+  font-size:90px;
+  position:relative;
+}
+
+body.dark .product-img{
+  background:#152944;
+}
+
+.badge{
+  position:absolute;
+  top:13px;
+  left:13px;
+  background:var(--blue);
+  color:white;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
 }
 
 .wishlist{
   position:absolute;
-  top:12px;
-  right:12px;
-  width:44px;
-  height:44px;
+  right:13px;
+  top:13px;
+  width:43px;
+  height:43px;
+  border:1px solid #d9e5f6;
   border-radius:50%;
-  border:1px solid #d8e4f7;
   background:white;
   color:#64748b;
   font-size:22px;
   cursor:pointer;
-  box-shadow:0 4px 12px rgba(0,0,0,.12);
+  z-index:3;
   transition:.2s;
 }
 
 .wishlist:hover{
-  transform:scale(1.1);
+  transform:scale(1.12);
 }
 
 .wishlist.active{
-  background:#ffe9ed;
   color:#ef3155;
+  background:#fff0f3;
+  animation:heartPop .35s ease;
+}
+
+@keyframes heartPop{
+  50%{transform:scale(1.3)}
 }
 
 .product-info{
@@ -225,6 +431,12 @@ header{
 }
 
 .product-info h3{
+  margin-bottom:7px;
+}
+
+.rating{
+  color:#f59e0b;
+  font-size:13px;
   margin-bottom:8px;
 }
 
@@ -234,9 +446,26 @@ header{
   font-weight:bold;
 }
 
+.customize{
+  width:100%;
+  margin-top:9px;
+  padding:11px;
+  border:1px solid var(--blue);
+  border-radius:12px;
+  background:transparent;
+  color:var(--blue);
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.customize:hover{
+  background:var(--sky);
+}
+
 .add{
   width:100%;
-  margin-top:14px;
+  margin-top:10px;
   padding:12px;
   border:0;
   border-radius:12px;
@@ -244,46 +473,81 @@ header{
   color:white;
   font-weight:bold;
   cursor:pointer;
+  transition:.25s;
 }
 
 .add:hover{
   background:var(--blue2);
+  transform:translateY(-2px);
+}
+
+.add.added{
+  animation:cartPop .45s ease;
+}
+
+@keyframes cartPop{
+  50%{transform:scale(.94)}
 }
 
 /* MODAL */
+
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.6);
-  z-index:500;
+  z-index:5000;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(5px);
   align-items:center;
   justify-content:center;
   padding:20px;
 }
 
+.modal.show{
+  display:flex;
+  animation:fadeIn .25s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
 .modal-box{
+  width:100%;
+  max-width:520px;
+  max-height:90vh;
+  overflow:auto;
+  padding:25px;
   background:var(--card);
   color:var(--text);
-  width:100%;
-  max-width:500px;
-  border-radius:22px;
-  padding:25px;
-  max-height:85vh;
-  overflow:auto;
+  border-radius:24px;
+  box-shadow:0 25px 70px rgba(0,0,0,.25);
+  animation:modalIn .35s ease;
+}
+
+@keyframes modalIn{
+  from{
+    transform:translateY(30px) scale(.96);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0) scale(1);
+    opacity:1;
+  }
 }
 
 .close{
   float:right;
   border:0;
   background:none;
-  font-size:25px;
-  cursor:pointer;
   color:var(--text);
+  font-size:28px;
+  cursor:pointer;
 }
 
 .modal-box h2{
-  margin-bottom:15px;
+  margin-bottom:18px;
 }
 
 .modal-box p{
@@ -291,28 +555,98 @@ header{
   margin-bottom:12px;
 }
 
-/* FOOTER */
-footer{
-  background:#092d69;
+.custom-input{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.total{
+  font-size:21px;
+  font-weight:bold;
+  margin:18px 0;
+  color:var(--blue);
+}
+
+.cart-item{
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.qty{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.qty button{
+  width:30px;
+  height:30px;
+  border:0;
+  border-radius:8px;
+  background:var(--sky);
+  color:var(--blue);
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.remove{
+  border:0;
+  background:#fff0f3;
+  color:#ef3155;
+  padding:7px 10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.whatsapp{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:12px;
+  background:#20b95a;
   color:white;
-  padding:35px 18px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:15px;
+  transition:.2s;
+}
+
+.whatsapp:hover{
+  transform:translateY(-2px);
+}
+
+/* FOOTER */
+
+footer{
+  background:#082e6d;
+  color:white;
   text-align:center;
-  margin-top:30px;
+  padding:40px 18px;
 }
 
 .footer-links{
-  margin-top:15px;
+  margin-top:18px;
 }
 
 .footer-links button{
-  background:none;
   border:0;
+  background:none;
   color:white;
   margin:5px 10px;
   cursor:pointer;
 }
 
 /* MOBILE */
+
 @media(max-width:700px){
 
   .nav{
@@ -320,30 +654,29 @@ footer{
   }
 
   .logo{
-    font-size:24px;
+    font-size:25px;
   }
 
-  .search{
+  .search-box{
     order:3;
     flex-basis:100%;
   }
 
+  .cart-btn{
+    padding:11px 13px;
+  }
+
   .hero{
-    margin:15px;
-    padding:35px 25px;
+    padding:45px 25px;
+    min-height:360px;
   }
 
   .hero h1{
-    font-size:35px;
+    font-size:38px;
   }
 
   .hero p{
     font-size:16px;
-  }
-
-  .container{
-    padding-left:15px;
-    padding-right:15px;
   }
 
   .products{
@@ -352,8 +685,8 @@ footer{
   }
 
   .product-img{
-    height:145px;
-    font-size:60px;
+    height:150px;
+    font-size:62px;
   }
 
   .product-info{
@@ -369,120 +702,169 @@ footer{
     height:38px;
     font-size:18px;
   }
+
+  .customize,
+  .add{
+    font-size:12px;
+    padding:10px;
+  }
+
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOADER -->
+<div class="loader">
+  <div class="loader-logo">Printzy</div>
+</div>
+
+<!-- HEADER -->
+
 <header>
-  <div class="nav">
 
-    <div class="logo">Printzy</div>
+<div class="nav">
 
-    <input
-      class="search"
-      id="search"
-      type="search"
-      placeholder="Search t-shirts, mugs, frames..."
-      oninput="searchProducts()"
-    >
+<div class="logo">
+Print<span>zy</span>
+</div>
 
-    <button class="nav-btn" onclick="toggleDark()" title="Theme">
-      🌙
-    </button>
+<div class="search-box">
+<input
+class="search"
+id="search"
+type="search"
+placeholder="Search products..."
+oninput="searchProducts()"
+>
+<span class="search-icon">🔍</span>
+</div>
 
-    <button class="nav-btn" onclick="openWishlist()" title="Wishlist">
-      ❤️
-    </button>
+<button class="icon-btn" onclick="toggleDark()" title="Dark Mode">
+🌙
+</button>
 
-    <button class="cart-btn" onclick="openCart()">
-      🛒 Cart (<span id="cartCount">0</span>)
-    </button>
+<button class="icon-btn" onclick="openWishlist()" title="Wishlist">
+❤️
+<span class="count" id="wishCount">0</span>
+</button>
 
-  </div>
+<button class="cart-btn" onclick="openCart()">
+🛒 Cart <span id="cartCount">0</span>
+</button>
+
+</div>
+
 </header>
 
 
+<!-- HERO -->
+
+<div class="hero-wrap">
+
 <section class="hero">
 
-  <h1>Make it yours.</h1>
+<div class="circle one"></div>
+<div class="circle two"></div>
+<div class="circle three"></div>
 
-  <p>
-    Create something special with customized
-    T-shirts, mugs, frames and personalized gifts.
-  </p>
+<h1>Make it yours.</h1>
 
-  <button class="shop-btn" onclick="document.getElementById('products').scrollIntoView()">
-    Shop Now
-  </button>
+<p>
+Create something special with premium customized
+T-shirts, mugs, frames, hoodies and personalized gifts.
+</p>
+
+<button
+class="shop-btn"
+onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+
+Shop Now →
+
+</button>
 
 </section>
-
-
-<div class="container">
-
-  <h2 class="section-title">Categories</h2>
-
-  <div class="categories">
-
-    <button class="category active" onclick="filterCategory('All',this)">
-      All
-    </button>
-
-    <button class="category" onclick="filterCategory('Clothing',this)">
-      👕 Clothing
-    </button>
-
-    <button class="category" onclick="filterCategory('Mugs',this)">
-      ☕ Mugs
-    </button>
-
-    <button class="category" onclick="filterCategory('Home',this)">
-      🏠 Home
-    </button>
-
-    <button class="category" onclick="filterCategory('Accessories',this)">
-      🎁 Accessories
-    </button>
-
-  </div>
-
-
-  <h2 class="section-title" id="products">
-    Popular Products
-  </h2>
-
-  <div class="products" id="productList"></div>
 
 </div>
 
 
+<!-- CONTENT -->
+
+<div class="container">
+
+<h2 class="section-title">
+Explore Categories
+</h2>
+
+<div class="categories">
+
+<button class="category active"
+onclick="filterCategory('All',this)">
+All
+</button>
+
+<button class="category"
+onclick="filterCategory('Clothing',this)">
+👕 Clothing
+</button>
+
+<button class="category"
+onclick="filterCategory('Mugs',this)">
+☕ Mugs
+</button>
+
+<button class="category"
+onclick="filterCategory('Home',this)">
+🏠 Home
+</button>
+
+<button class="category"
+onclick="filterCategory('Accessories',this)">
+🎁 Accessories
+</button>
+
+</div>
+
+
+<h2 class="section-title" id="products">
+Popular Products
+</h2>
+
+<div class="products" id="productList"></div>
+
+</div>
+
+
+<!-- FOOTER -->
+
 <footer>
 
-  <h2>Printzy</h2>
+<h2>Printzy</h2>
 
-  <p>Customized products made for you.</p>
+<p style="margin-top:8px">
+Customized products made specially for you.
+</p>
 
-  <div class="footer-links">
+<div class="footer-links">
 
-    <button onclick="openTerms()">
-      Terms & Conditions
-    </button>
+<button onclick="openTerms()">
+Terms & Conditions
+</button>
 
-    <button onclick="openPrivacy()">
-      Privacy Policy
-    </button>
+<button onclick="openPrivacy()">
+Privacy Policy
+</button>
 
-    <button onclick="openContact()">
-      Contact
-    </button>
+<button onclick="openContact()">
+Contact
+</button>
 
-  </div>
+</div>
 
-  <p style="margin-top:20px">
-    © 2026 Printzy. All rights reserved.
-  </p>
+<p style="margin-top:20px">
+© 2026 Printzy. All rights reserved.
+</p>
 
 </footer>
 
@@ -491,378 +873,692 @@ footer{
 
 <div class="modal" id="modal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <button class="close" onclick="closeModal()">×</button>
+<button class="close" onclick="closeModal()">×</button>
 
-    <div id="modalContent"></div>
+<div id="modalContent"></div>
 
-  </div>
+</div>
 
 </div>
 
 
 <script>
 
-const products = [
+const products=[
 
- {
-  name:"Custom T-Shirt",
-  price:499,
-  category:"Clothing",
-  icon:"👕"
- },
+{
+name:"Custom T-Shirt",
+price:499,
+category:"Clothing",
+icon:"👕",
+badge:"POPULAR"
+},
 
- {
-  name:"Personalized Mug",
-  price:299,
-  category:"Mugs",
-  icon:"☕"
- },
+{
+name:"Personalized Mug",
+price:299,
+category:"Mugs",
+icon:"☕",
+badge:"BEST SELLER"
+},
 
- {
-  name:"Photo Frame",
-  price:399,
-  category:"Home",
-  icon:"🖼️"
- },
+{
+name:"Photo Frame",
+price:399,
+category:"Home",
+icon:"🖼️",
+badge:"NEW"
+},
 
- {
-  name:"Custom Hoodie",
-  price:899,
-  category:"Clothing",
-  icon:"🧥"
- },
+{
+name:"Custom Hoodie",
+price:899,
+category:"Clothing",
+icon:"🧥",
+badge:"TRENDING"
+},
 
- {
-  name:"Custom Cap",
-  price:349,
-  category:"Accessories",
-  icon:"🧢"
- },
+{
+name:"Custom Cap",
+price:349,
+category:"Accessories",
+icon:"🧢",
+badge:"NEW"
+},
 
- {
-  name:"Personalized Gift",
-  price:599,
-  category:"Accessories",
-  icon:"🎁"
- }
+{
+name:"Personalized Gift",
+price:599,
+category:"Accessories",
+icon:"🎁",
+badge:"POPULAR"
+}
 
 ];
 
 
-let cart =
-JSON.parse(localStorage.getItem("printzyCart")) || [];
+let cart=
+JSON.parse(localStorage.getItem("printzyCart"))||[];
 
-let wishlist =
-JSON.parse(localStorage.getItem("printzyWishlist")) || [];
-
+let wishlist=
+JSON.parse(localStorage.getItem("printzyWishlist"))||[];
 
 
 function showProducts(list=products){
 
- const box=document.getElementById("productList");
+const box=document.getElementById("productList");
 
- box.innerHTML="";
+box.innerHTML="";
 
- list.forEach((p,index)=>{
+if(list.length===0){
 
-   const liked=wishlist.includes(p.name);
+box.innerHTML=`
+<div style="grid-column:1/-1;text-align:center;padding:50px">
+<h2>😔 No products found</h2>
+<p style="margin-top:10px;color:var(--muted)">
+Try another search.
+</p>
+</div>
+`;
 
-   box.innerHTML += `
-
-   <div class="product">
-
-     <button
-       class="wishlist ${liked?'active':''}"
-       onclick="toggleWishlist('${p.name}')">
-
-       ${liked ? "♥" : "♡"}
-
-     </button>
-
-     <div class="product-img">
-       ${p.icon}
-     </div>
-
-     <div class="product-info">
-
-       <h3>${p.name}</h3>
-
-       <p class="price">₹${p.price}</p>
-
-       <button
-         class="add"
-         onclick="addCart('${p.name}')">
-
-         Add to Cart
-
-       </button>
-
-     </div>
-
-   </div>
-
-   `;
-
- });
+return;
 
 }
 
 
-function addCart(name){
+list.forEach((p,index)=>{
 
- cart.push(name);
+const liked=wishlist.includes(p.name);
 
- localStorage.setItem(
-   "printzyCart",
-   JSON.stringify(cart)
- );
+box.innerHTML+=`
 
- updateCart();
+<div class="product" style="animation-delay:${index*0.07}s">
 
- alert(name+" added to cart!");
+<button
+class="wishlist ${liked?"active":""}"
+onclick="toggleWishlist('${p.name}')">
+
+${liked?"♥":"♡"}
+
+</button>
+
+<div class="product-img">
+
+<span class="badge">
+${p.badge}
+</span>
+
+${p.icon}
+
+</div>
+
+<div class="product-info">
+
+<h3>${p.name}</h3>
+
+<div class="rating">
+★★★★★ <span style="color:var(--muted)">4.8</span>
+</div>
+
+<div class="price">
+₹${p.price}
+</div>
+
+<button
+class="customize"
+onclick="customizeProduct('${p.name}')">
+
+✨ Customize
+
+</button>
+
+<button
+class="add"
+onclick="addCart('${p.name}',this)">
+
+Add to Cart
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+function addCart(name,button){
+
+cart.push({
+name:name,
+qty:1
+});
+
+saveCart();
+
+button.classList.add("added");
+
+button.innerText="✓ Added";
+
+setTimeout(()=>{
+
+button.classList.remove("added");
+button.innerText="Add to Cart";
+
+},900);
+
+}
+
+
+function saveCart(){
+
+localStorage.setItem(
+"printzyCart",
+JSON.stringify(cart)
+);
+
+updateCart();
 
 }
 
 
 function updateCart(){
 
- document.getElementById("cartCount").innerText =
- cart.length;
+let total=0;
+
+cart.forEach(item=>{
+
+total+=item.qty;
+
+});
+
+document.getElementById("cartCount").innerText=total;
+
+document.getElementById("wishCount").innerText=
+wishlist.length;
 
 }
 
 
 function toggleWishlist(name){
 
- if(wishlist.includes(name)){
+if(wishlist.includes(name)){
 
-   wishlist =
-   wishlist.filter(x=>x!==name);
+wishlist=wishlist.filter(x=>x!==name);
 
- }else{
+}else{
 
-   wishlist.push(name);
+wishlist.push(name);
 
- }
+}
 
- localStorage.setItem(
-   "printzyWishlist",
-   JSON.stringify(wishlist)
- );
+localStorage.setItem(
+"printzyWishlist",
+JSON.stringify(wishlist)
+);
 
- showProducts();
+updateCart();
+
+showProducts();
 
 }
 
 
 function openWishlist(){
 
- let html="<h2>❤️ My Wishlist</h2>";
+let html=`
 
- if(wishlist.length===0){
+<h2>❤️ My Wishlist</h2>
+`;
 
-   html+="<p>Your wishlist is empty.</p>";
+if(wishlist.length===0){
 
- }else{
+html+=`
+<p>Your wishlist is empty.</p>
+`;
 
-   wishlist.forEach(name=>{
-     html+=`<p>❤️ ${name}</p>`;
-   });
+}else{
 
- }
+wishlist.forEach(name=>{
 
- showModal(html);
+html+=`
+<div class="cart-item">
+
+<span>❤️ ${name}</span>
+
+<button
+class="remove"
+onclick="removeWishlist('${name}')">
+
+Remove
+
+</button>
+
+</div>
+`;
+
+});
+
+}
+
+showModal(html);
+
+}
+
+
+function removeWishlist(name){
+
+wishlist=
+wishlist.filter(x=>x!==name);
+
+localStorage.setItem(
+"printzyWishlist",
+JSON.stringify(wishlist)
+);
+
+updateCart();
+
+openWishlist();
+
+showProducts();
 
 }
 
 
 function openCart(){
 
- let html="<h2>🛒 Shopping Cart</h2>";
+let html=`
 
- if(cart.length===0){
+<h2>🛒 Shopping Cart</h2>
+`;
 
-   html+="<p>Your cart is empty.</p>";
+if(cart.length===0){
 
- }else{
+html+=`
+<p>Your cart is empty.</p>
+`;
 
-   cart.forEach((name,i)=>{
+}else{
 
-     html+=`
-       <p>
-         ${i+1}. ${name}
-       </p>
-     `;
+let total=0;
 
-   });
+cart.forEach((item,index)=>{
 
-   html+=`
-     <button
-       class="add"
-       onclick="checkout()">
-       Continue to Checkout
-     </button>
-   `;
+const product=
+products.find(p=>p.name===item.name);
 
- }
+const price=
+product ? product.price : 0;
 
- showModal(html);
+total+=price*item.qty;
+
+html+=`
+
+<div class="cart-item">
+
+<div>
+
+<strong>${item.name}</strong>
+
+<div style="color:var(--blue);margin-top:5px">
+₹${price}
+</div>
+
+</div>
+
+<div class="qty">
+
+<button onclick="changeQty(${index},-1)">
+−
+</button>
+
+<span>${item.qty}</span>
+
+<button onclick="changeQty(${index},1)">
++
+</button>
+
+<button
+class="remove"
+onclick="removeCart(${index})">
+
+×
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+
+html+=`
+
+<div class="total">
+Total: ₹${total}
+</div>
+
+<button
+class="whatsapp"
+onclick="orderWhatsApp()">
+
+📲 Order on WhatsApp
+
+</button>
+
+`;
+
+}
+
+showModal(html);
 
 }
 
 
-function checkout(){
+function changeQty(index,value){
 
- alert(
-  "Checkout system will be connected with your payment/order system."
- );
+cart[index].qty+=value;
+
+if(cart[index].qty<=0){
+
+cart.splice(index,1);
+
+}
+
+saveCart();
+
+openCart();
+
+}
+
+
+function removeCart(index){
+
+cart.splice(index,1);
+
+saveCart();
+
+openCart();
+
+}
+
+
+function orderWhatsApp(){
+
+if(cart.length===0){
+
+alert("Your cart is empty!");
+
+return;
+
+}
+
+let message=
+"Hello Printzy! I want to order:%0A%0A";
+
+cart.forEach(item=>{
+
+message+=
+"• "+item.name+
+" x "+item.qty+
+"%0A";
+
+});
+
+message+="%0APlease share the total price and payment details.";
+
+const phone="919999999999";
+
+window.open(
+"https://wa.me/"+phone+
+"?text="+message,
+"_blank"
+);
+
+}
+
+
+function customizeProduct(name){
+
+showModal(`
+
+<h2>✨ Customize ${name}</h2>
+
+<p>
+Personalize your product before ordering.
+</p>
+
+<input
+class="custom-input"
+id="customName"
+placeholder="Enter your name/text"
+>
+
+<textarea
+class="custom-input"
+id="customText"
+rows="4"
+placeholder="Enter customization details">
+</textarea>
+
+<input
+class="custom-input"
+type="file"
+accept="image/*"
+onchange="previewImage(event)"
+>
+
+<div id="imagePreview"></div>
+
+<button
+class="add"
+onclick="saveCustomization('${name}')">
+
+Add Customized Product
+
+</button>
+
+`);
+
+}
+
+
+function previewImage(event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+document.getElementById("imagePreview").innerHTML=`
+
+<img
+src="${e.target.result}"
+style="
+width:100%;
+margin-top:10px;
+border-radius:12px;
+max-height:220px;
+object-fit:contain;
+">
+
+`;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+function saveCustomization(name){
+
+const text=
+document.getElementById("customText").value;
+
+alert(
+name+
+" customization saved!"+
+(text ? "\nDetails: "+text : "")
+);
+
+closeModal();
 
 }
 
 
 function filterCategory(category,button){
 
- document.querySelectorAll(".category")
- .forEach(b=>b.classList.remove("active"));
+document
+.querySelectorAll(".category")
+.forEach(b=>b.classList.remove("active"));
 
- button.classList.add("active");
+button.classList.add("active");
 
- if(category==="All"){
+if(category==="All"){
 
-   showProducts();
+showProducts();
 
- }else{
+}else{
 
-   showProducts(
-     products.filter(p=>p.category===category)
-   );
+showProducts(
+products.filter(
+p=>p.category===category
+)
+);
 
- }
+}
 
 }
 
 
 function searchProducts(){
 
- const text =
- document.getElementById("search")
- .value.toLowerCase();
+const text=
+document.getElementById("search")
+.value
+.toLowerCase()
+.trim();
 
- showProducts(
-   products.filter(p=>
-     p.name.toLowerCase().includes(text)
-   )
- );
+showProducts(
+
+products.filter(p=>
+
+p.name
+.toLowerCase()
+.includes(text)
+
+)
+
+);
 
 }
 
 
 function toggleDark(){
 
- document.body.classList.toggle("dark");
+document.body.classList.toggle("dark");
 
- localStorage.setItem(
-   "printzyDark",
-   document.body.classList.contains("dark")
- );
+localStorage.setItem(
+"printzyDark",
+document.body.classList.contains("dark")
+);
 
 }
 
 
 function openTerms(){
 
- showModal(`
+showModal(`
 
-   <h2>Terms & Conditions</h2>
+<h2>Terms & Conditions</h2>
 
-   <p>
-   By using Printzy, you agree to our terms and conditions.
-   </p>
+<p>
+By using Printzy, you agree to our terms and conditions.
+</p>
 
-   <p>
-   Customized products may have different production
-   and delivery times.
-   </p>
+<p>
+Customized products may require additional production
+and delivery time.
+</p>
 
-   <p>
-   Customers are responsible for providing correct
-   customization information.
-   </p>
+<p>
+Customers are responsible for providing correct
+customization details.
+</p>
 
-   <p>
-   Orders cannot be cancelled after production has started.
-   </p>
+<p>
+Orders cannot be cancelled after production has started.
+</p>
 
- `);
+`);
 
 }
 
 
 function openPrivacy(){
 
- showModal(`
+showModal(`
 
-   <h2>Privacy Policy</h2>
+<h2>Privacy Policy</h2>
 
-   <p>
-   Printzy respects your privacy.
-   Customer information is used only for order processing,
-   delivery and customer support.
-   </p>
+<p>
+Printzy respects your privacy.
+Customer information is used only for order processing,
+delivery and customer support.
+</p>
 
- `);
+`);
 
 }
 
 
 function openContact(){
 
- showModal(`
+showModal(`
 
-   <h2>Contact Printzy</h2>
+<h2>📞 Contact Printzy</h2>
 
-   <p>📧 Email: support@printzy.com</p>
+<p>📧 Email: support@printzy.com</p>
 
-   <p>📱 Customer Support</p>
+<p>📱 WhatsApp Customer Support</p>
 
-   <p>We will help you with your orders and customization.</p>
+<p>
+For orders, customization and support,
+please contact us.
+</p>
 
- `);
+`);
 
 }
 
 
 function showModal(content){
 
- document.getElementById("modalContent").innerHTML =
- content;
+document.getElementById("modalContent").innerHTML=
+content;
 
- document.getElementById("modal").style.display="flex";
+document.getElementById("modal").classList.add("show");
 
 }
 
 
 function closeModal(){
 
- document.getElementById("modal").style.display="none";
+document.getElementById("modal").classList.remove("show");
 
 }
 
 
-if(localStorage.getItem("printzyDark")==="true"){
-
- document.body.classList.add("dark");
-
-}
-
-
-showProducts();
-
-updateCart();
-
-</script>
-
-</body>
-</html>
+document.getEl
