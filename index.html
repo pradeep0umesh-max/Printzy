@@ -3,682 +3,759 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Printzy - Premium Custom Products</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
 :root{
---blue:#1264e8;
---blue2:#0645b5;
---bg:#f6f9ff;
---card:#fff;
---text:#172033;
---muted:#64748b;
---border:#dce7f7;
---danger:#ef3155;
---success:#16a34a;
---sky:#eaf3ff;
+  --blue:#1264e8;
+  --blue2:#0645b5;
+  --sky:#eaf3ff;
+  --bg:#f6f9ff;
+  --card:#fff;
+  --text:#172033;
+  --muted:#64748b;
+  --border:#dce7f7;
+  --danger:#ef3155;
+  --success:#16a34a;
+  --shadow:0 15px 40px rgba(18,100,232,.13);
 }
 
 body{
-font-family:Arial,Helvetica,sans-serif;
-background:var(--bg);
-color:var(--text);
-overflow-x:hidden;
-transition:.3s;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  transition:.3s;
 }
 
 body.dark{
---bg:#08111f;
---card:#111c2d;
---text:#f5f8ff;
---muted:#aab6ca;
---border:#263852;
---sky:#12243d;
+  --bg:#08111f;
+  --card:#111c2d;
+  --text:#f5f8ff;
+  --muted:#aab6ca;
+  --border:#263852;
+  --sky:#12243d;
 }
 
 /* LOADER */
+
 .loader{
-position:fixed;
-inset:0;
-background:white;
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-animation:loaderOut 1s ease 1.2s forwards;
+  position:fixed;
+  inset:0;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  animation:loaderOut 1s ease 1.2s forwards;
 }
 
 .loader-logo{
-font-size:43px;
-font-weight:900;
-color:var(--blue);
-animation:pulse 1s infinite alternate;
+  color:var(--blue);
+  font-size:44px;
+  font-weight:900;
+  animation:pulse 1s infinite alternate;
 }
 
 @keyframes pulse{
-from{transform:scale(.9);opacity:.5}
-to{transform:scale(1.08);opacity:1}
+  from{transform:scale(.9);opacity:.5}
+  to{transform:scale(1.08);opacity:1}
 }
 
 @keyframes loaderOut{
-to{opacity:0;visibility:hidden}
+  to{
+    opacity:0;
+    visibility:hidden;
+  }
 }
 
 /* HEADER */
+
 header{
-position:sticky;
-top:0;
-z-index:1000;
-background:rgba(255,255,255,.92);
-backdrop-filter:blur(15px);
-border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
 }
 
 body.dark header{
-background:rgba(17,28,45,.94);
+  background:rgba(17,28,45,.94);
 }
 
 .nav{
-max-width:1200px;
-margin:auto;
-padding:14px 18px;
-display:flex;
-align-items:center;
-gap:14px;
+  max-width:1200px;
+  margin:auto;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
 
 .logo{
-font-size:29px;
-font-weight:900;
-color:var(--blue);
+  font-size:29px;
+  font-weight:900;
+  color:var(--blue);
 }
 
-.logo span{color:var(--text)}
+.logo span{
+  color:var(--text);
+}
 
 .search-box{
-flex:1;
-position:relative;
+  flex:1;
+  position:relative;
 }
 
 .search{
-width:100%;
-padding:13px 45px 13px 18px;
-border:2px solid var(--border);
-border-radius:30px;
-background:var(--card);
-color:var(--text);
-outline:none;
-font-size:15px;
+  width:100%;
+  padding:13px 45px 13px 18px;
+  border:2px solid var(--border);
+  border-radius:30px;
+  background:var(--card);
+  color:var(--text);
+  outline:none;
+  font-size:15px;
 }
 
 .search:focus{
-border-color:var(--blue);
-box-shadow:0 0 0 4px rgba(18,100,232,.1);
+  border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(18,100,232,.1);
 }
 
 .search-icon{
-position:absolute;
-right:17px;
-top:12px;
+  position:absolute;
+  right:17px;
+  top:12px;
 }
 
 .icon-btn{
-width:45px;
-height:45px;
-border:1px solid var(--border);
-border-radius:50%;
-background:var(--card);
-color:var(--text);
-cursor:pointer;
-font-size:19px;
-position:relative;
-transition:.25s;
+  width:45px;
+  height:45px;
+  border:1px solid var(--border);
+  border-radius:50%;
+  background:var(--card);
+  color:var(--text);
+  cursor:pointer;
+  font-size:19px;
+  position:relative;
+  transition:.25s;
 }
 
 .icon-btn:hover{
-transform:translateY(-3px) scale(1.05);
-border-color:var(--blue);
+  transform:translateY(-3px) scale(1.05);
+  border-color:var(--blue);
 }
 
 .count{
-position:absolute;
-top:-4px;
-right:-2px;
-width:19px;
-height:19px;
-border-radius:50%;
-background:var(--danger);
-color:white;
-font-size:11px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
+  position:absolute;
+  top:-4px;
+  right:-2px;
+  width:19px;
+  height:19px;
+  border-radius:50%;
+  background:var(--danger);
+  color:#fff;
+  font-size:11px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
 }
 
 .cart-btn{
-border:0;
-background:var(--blue);
-color:white;
-padding:13px 18px;
-border-radius:28px;
-font-weight:bold;
-cursor:pointer;
-transition:.25s;
+  border:0;
+  background:var(--blue);
+  color:white;
+  padding:13px 18px;
+  border-radius:28px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.25s;
 }
 
 .cart-btn:hover{
-background:var(--blue2);
-transform:translateY(-2px);
-box-shadow:0 8px 20px rgba(18,100,232,.3);
+  background:var(--blue2);
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(18,100,232,.3);
 }
 
 /* HERO */
+
 .hero-wrap{
-max-width:1200px;
-margin:25px auto;
-padding:0 18px;
+  max-width:1200px;
+  margin:25px auto;
+  padding:0 18px;
 }
 
 .hero{
-min-height:390px;
-border-radius:30px;
-padding:65px 50px;
-color:white;
-position:relative;
-overflow:hidden;
-background:linear-gradient(135deg,#0755ca,#1684ff);
-box-shadow:0 20px 45px rgba(18,100,232,.25);
-animation:heroIn .8s ease;
+  min-height:390px;
+  border-radius:30px;
+  padding:65px 50px;
+  color:white;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#0755ca,#1684ff);
+  box-shadow:0 20px 45px rgba(18,100,232,.25);
+  animation:heroIn .8s ease;
 }
 
 @keyframes heroIn{
-from{opacity:0;transform:translateY(25px)}
-to{opacity:1;transform:translateY(0)}
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .hero h1{
-font-size:54px;
-margin-bottom:18px;
-position:relative;
-z-index:2;
+  font-size:54px;
+  line-height:1.1;
+  margin-bottom:18px;
+  position:relative;
+  z-index:2;
 }
 
 .hero p{
-font-size:18px;
-max-width:650px;
-line-height:1.7;
-position:relative;
-z-index:2;
+  font-size:18px;
+  max-width:650px;
+  line-height:1.7;
+  position:relative;
+  z-index:2;
 }
 
 .shop-btn{
-margin-top:27px;
-padding:14px 25px;
-border:0;
-border-radius:30px;
-background:white;
-color:var(--blue);
-font-weight:bold;
-font-size:16px;
-cursor:pointer;
-position:relative;
-z-index:2;
-transition:.25s;
+  margin-top:27px;
+  padding:14px 25px;
+  border:0;
+  border-radius:30px;
+  background:white;
+  color:var(--blue);
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+  position:relative;
+  z-index:2;
+  transition:.25s;
 }
 
 .shop-btn:hover{
-transform:translateY(-3px) scale(1.03);
-box-shadow:0 10px 25px rgba(0,0,0,.2);
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
 .circle{
-position:absolute;
-border-radius:50%;
-background:rgba(255,255,255,.12);
-animation:float 6s ease-in-out infinite;
+  position:absolute;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+  animation:float 6s ease-in-out infinite;
 }
 
 .one{
-width:230px;
-height:230px;
-right:-50px;
-top:-60px;
+  width:230px;
+  height:230px;
+  right:-50px;
+  top:-60px;
 }
 
 .two{
-width:150px;
-height:150px;
-right:230px;
-bottom:-70px;
+  width:150px;
+  height:150px;
+  right:230px;
+  bottom:-70px;
+  animation-delay:1s;
 }
 
 .three{
-width:80px;
-height:80px;
-right:80px;
-bottom:70px;
+  width:80px;
+  height:80px;
+  right:80px;
+  bottom:70px;
+  animation-delay:2s;
 }
 
 @keyframes float{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-18px)}
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-18px)}
 }
 
 /* CONTENT */
+
 .container{
-max-width:1200px;
-margin:auto;
-padding:10px 18px 60px;
+  max-width:1200px;
+  margin:auto;
+  padding:10px 18px 60px;
 }
 
 .section-title{
-font-size:30px;
-margin:32px 0 18px;
+  font-size:30px;
+  margin:32px 0 18px;
 }
 
 /* CATEGORIES */
+
 .categories{
-display:flex;
-gap:10px;
-overflow-x:auto;
-padding-bottom:8px;
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding-bottom:8px;
 }
 
 .category{
-white-space:nowrap;
-padding:11px 20px;
-border-radius:30px;
-border:1px solid var(--border);
-background:var(--card);
-color:var(--text);
-cursor:pointer;
-transition:.25s;
+  white-space:nowrap;
+  padding:11px 20px;
+  border-radius:30px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  cursor:pointer;
+  transition:.25s;
 }
 
 .category:hover{
-transform:translateY(-2px);
-border-color:var(--blue);
+  transform:translateY(-2px);
+  border-color:var(--blue);
 }
 
 .category.active{
-background:var(--blue);
-color:white;
-border-color:var(--blue);
-box-shadow:0 7px 18px rgba(18,100,232,.25);
+  background:var(--blue);
+  color:white;
+  border-color:var(--blue);
+  box-shadow:0 7px 18px rgba(18,100,232,.25);
 }
 
 /* PRODUCTS */
+
 .products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:22px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:22px;
 }
 
 .product{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:22px;
-overflow:hidden;
-position:relative;
-box-shadow:0 5px 18px rgba(0,0,0,.04);
-animation:cardIn .5s ease both;
-transition:.3s;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 5px 18px rgba(0,0,0,.04);
+  animation:cardIn .5s ease both;
+  transition:.3s;
 }
 
 .product:hover{
-transform:translateY(-8px);
-box-shadow:0 15px 35px rgba(18,100,232,.15);
+  transform:translateY(-8px);
+  box-shadow:var(--shadow);
 }
 
 @keyframes cardIn{
-from{opacity:0;transform:translateY(20px)}
-to{opacity:1;transform:translateY(0)}
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .product-img{
-height:215px;
-background:linear-gradient(145deg,#edf5ff,#dcecff);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:90px;
-position:relative;
+  height:215px;
+  background:linear-gradient(145deg,#edf5ff,#dcecff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:90px;
+  position:relative;
 }
 
 body.dark .product-img{
-background:#152944;
+  background:#152944;
 }
 
 .badge{
-position:absolute;
-top:13px;
-left:13px;
-background:var(--blue);
-color:white;
-padding:6px 10px;
-border-radius:20px;
-font-size:11px;
-font-weight:bold;
+  position:absolute;
+  top:13px;
+  left:13px;
+  background:var(--blue);
+  color:white;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
 }
 
 .wishlist{
-position:absolute;
-right:13px;
-top:13px;
-width:43px;
-height:43px;
-border:1px solid #d9e5f6;
-border-radius:50%;
-background:white;
-color:#64748b;
-font-size:22px;
-cursor:pointer;
-z-index:3;
-transition:.2s;
+  position:absolute;
+  right:13px;
+  top:13px;
+  width:43px;
+  height:43px;
+  border:1px solid #d9e5f6;
+  border-radius:50%;
+  background:white;
+  color:#64748b;
+  font-size:22px;
+  cursor:pointer;
+  z-index:3;
+  transition:.2s;
 }
 
 .wishlist:hover{
-transform:scale(1.12);
+  transform:scale(1.12);
 }
 
 .wishlist.active{
-color:var(--danger);
-background:#fff0f3;
-animation:heartPop .35s ease;
+  color:var(--danger);
+  background:#fff0f3;
+  animation:heartPop .35s ease;
 }
 
 @keyframes heartPop{
-50%{transform:scale(1.3)}
+  50%{transform:scale(1.3)}
 }
 
 .product-info{
-padding:18px;
+  padding:18px;
 }
 
 .product-info h3{
-margin-bottom:7px;
+  margin-bottom:7px;
 }
 
 .rating{
-color:#f59e0b;
-font-size:13px;
-margin-bottom:8px;
+  color:#f59e0b;
+  font-size:13px;
+  margin-bottom:8px;
 }
 
 .price{
-color:var(--blue);
-font-size:20px;
-font-weight:bold;
+  color:var(--blue);
+  font-size:20px;
+  font-weight:bold;
 }
 
 .details-btn,
 .customize,
-.add{
-width:100%;
-margin-top:10px;
-padding:11px;
-border-radius:12px;
-font-weight:bold;
-cursor:pointer;
-transition:.25s;
+.add,
+.primary-btn{
+  width:100%;
+  margin-top:10px;
+  padding:12px;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.25s;
 }
 
 .details-btn{
-border:1px solid var(--blue);
-background:transparent;
-color:var(--blue);
+  border:1px solid var(--blue);
+  background:transparent;
+  color:var(--blue);
 }
 
-.details-btn:hover,
-.customize:hover{
-background:var(--sky);
+.details-btn:hover{
+  background:var(--sky);
 }
 
 .customize{
-border:1px solid var(--blue);
-background:transparent;
-color:var(--blue);
+  border:1px solid var(--blue);
+  background:transparent;
+  color:var(--blue);
 }
 
-.add{
-border:0;
-background:var(--blue);
-color:white;
+.customize:hover{
+  background:var(--sky);
 }
 
-.add:hover{
-background:var(--blue2);
-transform:translateY(-2px);
+.add,
+.primary-btn{
+  border:0;
+  background:var(--blue);
+  color:white;
+}
+
+.add:hover,
+.primary-btn:hover{
+  background:var(--blue2);
+  transform:translateY(-2px);
 }
 
 /* MODAL */
+
 .modal{
-display:none;
-position:fixed;
-inset:0;
-z-index:5000;
-background:rgba(0,0,0,.65);
-backdrop-filter:blur(5px);
-align-items:center;
-justify-content:center;
-padding:20px;
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(5px);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
 }
 
 .modal.show{
-display:flex;
-animation:fadeIn .25s ease;
-}
-
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
+  display:flex;
 }
 
 .modal-box{
-width:100%;
-max-width:550px;
-max-height:90vh;
-overflow:auto;
-padding:25px;
-background:var(--card);
-color:var(--text);
-border-radius:24px;
-box-shadow:0 25px 70px rgba(0,0,0,.3);
-animation:modalIn .3s ease;
+  width:100%;
+  max-width:560px;
+  max-height:90vh;
+  overflow:auto;
+  padding:25px;
+  background:var(--card);
+  color:var(--text);
+  border-radius:24px;
+  box-shadow:0 25px 70px rgba(0,0,0,.3);
+  animation:modalIn .3s ease;
 }
 
 @keyframes modalIn{
-from{transform:translateY(30px) scale(.95);opacity:0}
-to{transform:translateY(0) scale(1);opacity:1}
+  from{
+    transform:translateY(30px) scale(.95);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0) scale(1);
+    opacity:1;
+  }
 }
 
 .close{
-float:right;
-border:0;
-background:none;
-color:var(--text);
-font-size:28px;
-cursor:pointer;
+  float:right;
+  border:0;
+  background:none;
+  color:var(--text);
+  font-size:28px;
+  cursor:pointer;
 }
 
 .detail-icon{
-height:190px;
-border-radius:18px;
-background:linear-gradient(145deg,#edf5ff,#dcecff);
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:100px;
-margin-bottom:20px;
+  height:190px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#edf5ff,#dcecff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:100px;
+  margin-bottom:20px;
 }
 
 .detail-title{
-font-size:28px;
-margin-bottom:8px;
+  font-size:28px;
+  margin-bottom:8px;
 }
 
 .detail-price{
-color:var(--blue);
-font-size:25px;
-font-weight:bold;
-margin:12px 0;
+  color:var(--blue);
+  font-size:25px;
+  font-weight:bold;
+  margin:12px 0;
 }
 
 .features{
-margin:15px 0;
-padding-left:20px;
-line-height:2;
+  margin:15px 0;
+  padding-left:20px;
+  line-height:2;
 }
 
 .custom-input{
-width:100%;
-padding:12px;
-margin:7px 0;
-border:1px solid var(--border);
-border-radius:10px;
-background:var(--bg);
-color:var(--text);
-outline:none;
-font-family:inherit;
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:var(--bg);
+  color:var(--text);
+  outline:none;
+  font-family:inherit;
 }
 
 .custom-input:focus{
-border-color:var(--blue);
+  border-color:var(--blue);
+}
+
+.file-box{
+  padding:14px;
+  border:2px dashed var(--border);
+  border-radius:12px;
+  margin:8px 0;
+  background:var(--bg);
+}
+
+.file-box input{
+  width:100%;
+  margin-top:8px;
 }
 
 .total{
-color:var(--blue);
-font-size:21px;
-font-weight:bold;
-margin:18px 0;
+  color:var(--blue);
+  font-size:21px;
+  font-weight:bold;
+  margin:18px 0;
 }
 
 .cart-item{
-padding:13px 0;
-border-bottom:1px solid var(--border);
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
+  padding:13px 0;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
 }
 
 .qty{
-display:flex;
-align-items:center;
-gap:7px;
+  display:flex;
+  align-items:center;
+  gap:7px;
 }
 
 .qty button{
-width:30px;
-height:30px;
-border:0;
-border-radius:8px;
-background:var(--sky);
-color:var(--blue);
-cursor:pointer;
-font-weight:bold;
+  width:30px;
+  height:30px;
+  border:0;
+  border-radius:8px;
+  background:var(--sky);
+  color:var(--blue);
+  cursor:pointer;
+  font-weight:bold;
 }
 
 .remove{
-border:0;
-background:#fff0f3;
-color:var(--danger);
-padding:7px 10px;
-border-radius:8px;
-cursor:pointer;
+  border:0;
+  background:#fff0f3;
+  color:var(--danger);
+  padding:7px 10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.order-card{
+  padding:15px;
+  background:var(--sky);
+  border-radius:14px;
+  margin:12px 0;
+}
+
+.status{
+  display:inline-block;
+  padding:6px 11px;
+  border-radius:20px;
+  background:#e8f7ee;
+  color:var(--success);
+  font-size:12px;
+  font-weight:bold;
+  margin-top:7px;
+}
+
+.order-id{
+  color:var(--blue);
+  font-weight:bold;
+  font-size:19px;
 }
 
 /* FOOTER */
+
 footer{
-background:#082e6d;
-color:white;
-text-align:center;
-padding:40px 18px;
+  background:#082e6d;
+  color:white;
+  text-align:center;
+  padding:40px 18px;
 }
 
 .footer-links{
-margin-top:18px;
+  margin-top:18px;
 }
 
 .footer-links button{
-border:0;
-background:none;
-color:white;
-margin:5px 10px;
-cursor:pointer;
+  border:0;
+  background:none;
+  color:white;
+  margin:5px 10px;
+  cursor:pointer;
 }
 
 /* MOBILE */
+
 @media(max-width:700px){
 
-.nav{
-flex-wrap:wrap;
-}
+  .nav{
+    flex-wrap:wrap;
+  }
 
-.logo{
-font-size:25px;
-}
+  .logo{
+    font-size:25px;
+  }
 
-.search-box{
-order:3;
-flex-basis:100%;
-}
+  .search-box{
+    order:3;
+    flex-basis:100%;
+  }
 
-.cart-btn{
-padding:11px 13px;
-}
+  .cart-btn{
+    padding:11px 13px;
+  }
 
-.hero{
-padding:45px 25px;
-min-height:360px;
-}
+  .hero{
+    padding:45px 25px;
+    min-height:360px;
+  }
 
-.hero h1{
-font-size:38px;
-}
+  .hero h1{
+    font-size:38px;
+  }
 
-.hero p{
-font-size:16px;
-}
+  .hero p{
+    font-size:16px;
+  }
 
-.products{
-grid-template-columns:repeat(2,1fr);
-gap:12px;
-}
+  .products{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
 
-.product-img{
-height:150px;
-font-size:62px;
-}
+  .product-img{
+    height:150px;
+    font-size:62px;
+  }
 
-.product-info{
-padding:12px;
-}
+  .product-info{
+    padding:12px;
+  }
 
-.product-info h3{
-font-size:15px;
-}
+  .product-info h3{
+    font-size:15px;
+  }
 
-.wishlist{
-width:38px;
-height:38px;
-font-size:18px;
-}
+  .wishlist{
+    width:38px;
+    height:38px;
+    font-size:18px;
+  }
 
-.details-btn,
-.customize,
-.add{
-font-size:12px;
-padding:10px;
-}
+  .details-btn,
+  .customize,
+  .add{
+    font-size:12px;
+    padding:10px;
+  }
 
-.section-title{
-font-size:25px;
-}
-
+  .section-title{
+    font-size:25px;
+  }
 }
 </style>
 </head>
@@ -686,7 +763,7 @@ font-size:25px;
 <body>
 
 <div class="loader">
-<div class="loader-logo">Printzy</div>
+  <div class="loader-logo">Printzy</div>
 </div>
 
 <header>
@@ -701,16 +778,16 @@ Print<span>zy</span>
 class="search"
 id="search"
 type="search"
-placeholder="Search T-shirts, mugs, frames..."
+placeholder="Search products..."
 oninput="searchProducts()">
 <span class="search-icon">🔍</span>
 </div>
 
-<button class="icon-btn" onclick="toggleDark()">
+<button class="icon-btn" onclick="toggleDark()" title="Dark Mode">
 🌙
 </button>
 
-<button class="icon-btn" onclick="openWishlist()">
+<button class="icon-btn" onclick="openWishlist()" title="Wishlist">
 ❤️
 <span class="count" id="wishCount">0</span>
 </button>
@@ -785,6 +862,12 @@ Popular Products
 
 <div class="products" id="productList"></div>
 
+<h2 class="section-title">
+📦 My Orders
+</h2>
+
+<div id="ordersBox"></div>
+
 </div>
 
 <footer>
@@ -822,6 +905,8 @@ Premium customized products made specially for you.
 </div>
 
 <script>
+
+/* PRODUCTS */
 
 const products=[
 
@@ -918,7 +1003,7 @@ category:"Accessories",
 icon:"🎁",
 badge:"POPULAR",
 rating:"4.9",
-description:"A special personalized gift designed specially for your loved ones.",
+description:"A special personalized gift designed to make your loved ones feel special.",
 features:[
 "Customizable design",
 "Premium presentation",
@@ -933,25 +1018,38 @@ name:"Custom Home Decor",
 price:599,
 category:"Home",
 icon:"🎇",
-badge:"POPULAR",
-rating:"4.9",
-description:"Personalized home decor designed specially for your home.",
+badge:"TRENDING",
+rating:"4.8",
+description:"Beautiful personalized home decor created specially for your space.",
 features:[
 "Customizable design",
 "Premium presentation",
-"Perfect for special occasions",
-"Made specially for your home"
+"Perfect home decoration",
+"Made specially for you"
 ]
 }
 
 ];
 
-let cart=JSON.parse(localStorage.getItem("printzyCart"))||[];
-let wishlist=JSON.parse(localStorage.getItem("printzyWishlist"))||[];
+
+/* STORAGE */
+
+let cart =
+JSON.parse(localStorage.getItem("printzyCart")) || [];
+
+let wishlist =
+JSON.parse(localStorage.getItem("printzyWishlist")) || [];
+
+let orders =
+JSON.parse(localStorage.getItem("printzyOrders")) || [];
+
+
+/* PRODUCTS */
 
 function showProducts(list=products){
 
 const box=document.getElementById("productList");
+
 box.innerHTML="";
 
 if(list.length===0){
@@ -962,7 +1060,9 @@ box.innerHTML=`
 <p style="margin-top:10px;color:var(--muted)">
 Try another search.
 </p>
-</div>`;
+</div>
+`;
+
 return;
 }
 
@@ -972,16 +1072,22 @@ const liked=wishlist.includes(p.name);
 
 box.innerHTML+=`
 
-<div class="product" style="animation-delay:${index*.07}s">
+<div class="product"
+style="animation-delay:${index*.07}s">
 
-<button class="wishlist ${liked?"active":""}"
+<button
+class="wishlist ${liked?"active":""}"
 onclick="toggleWishlist('${p.name}')">
+
 ${liked?"♥":"♡"}
+
 </button>
 
 <div class="product-img">
 
-<span class="badge">${p.badge}</span>
+<span class="badge">
+${p.badge}
+</span>
 
 ${p.icon}
 
@@ -993,35 +1099,56 @@ ${p.icon}
 
 <div class="rating">
 ★★★★★
-<span style="color:var(--muted)">${p.rating}</span>
+<span style="color:var(--muted)">
+${p.rating}
+</span>
 </div>
 
-<div class="price">₹${p.price}</div>
+<div class="price">
+₹${p.price}
+</div>
 
-<button class="details-btn"
+<button
+class="details-btn"
 onclick="showProductDetails(${p.id})">
+
 👁️ View Details
+
 </button>
 
-<button class="customize"
+<button
+class="customize"
 onclick="customizeProduct('${p.name}')">
+
 ✨ Customize
+
 </button>
 
-<button class="add"
+<button
+class="add"
 onclick="addCart('${p.name}',this)">
-Add to Cart
+
+🛒 Add to Cart
+
 </button>
 
 </div>
+
 </div>
+
 `;
+
 });
+
 }
+
+
+/* DETAILS */
 
 function showProductDetails(id){
 
 const p=products.find(x=>x.id===id);
+
 if(!p)return;
 
 let features="";
@@ -1032,15 +1159,21 @@ features+=`<li>✓ ${f}</li>`;
 
 showModal(`
 
-<div class="detail-icon">${p.icon}</div>
+<div class="detail-icon">
+${p.icon}
+</div>
 
-<h2 class="detail-title">${p.name}</h2>
+<h2 class="detail-title">
+${p.name}
+</h2>
 
 <div class="rating">
 ★★★★★ ${p.rating}/5
 </div>
 
-<div class="detail-price">₹${p.price}</div>
+<div class="detail-price">
+₹${p.price}
+</div>
 
 <p style="line-height:1.7">
 ${p.description}
@@ -1060,12 +1193,16 @@ onclick="customizeProduct('${p.name}')">
 </button>
 
 <button class="add"
-onclick="addCart('${p.name}');closeModal()">
+onclick="addCart('${p.name}');closeModal();">
 🛒 Add to Cart
 </button>
 
 `);
+
 }
+
+
+/* CUSTOMIZE */
 
 function customizeProduct(name){
 
@@ -1077,34 +1214,52 @@ showModal(`
 Customize your <strong>${name}</strong>
 </p>
 
-<input class="custom-input"
+<input
+class="custom-input"
 id="customName"
 placeholder="Name / Text">
 
-<input class="custom-input"
-id="customPhoto"
-placeholder="Photo / Design details">
+<div class="file-box">
 
-<textarea class="custom-input"
+<strong>📷 Upload Photo / Design</strong>
+
+<input
+type="file"
+id="customFile"
+accept="image/*">
+
+</div>
+
+<textarea
+class="custom-input"
 id="customNote"
 rows="4"
-placeholder="Customization requirements"></textarea>
+placeholder="Customization requirements">
+</textarea>
 
-<button class="add"
+<button
+class="add"
 onclick="saveCustomization('${name}')">
-Save Customization
+
+💾 Save Customization
+
 </button>
 
 `);
+
 }
 
+
 function saveCustomization(name){
+
+const file=document.getElementById("customFile");
 
 const data={
 product:name,
 name:document.getElementById("customName").value,
-photo:document.getElementById("customPhoto").value,
-note:document.getElementById("customNote").value
+note:document.getElementById("customNote").value,
+photo:file.files.length ? file.files[0].name : "No photo uploaded",
+date:new Date().toLocaleString()
 };
 
 localStorage.setItem(
@@ -1113,8 +1268,13 @@ JSON.stringify(data)
 );
 
 alert("Customization saved successfully!");
+
 closeModal();
+
 }
+
+
+/* CART */
 
 function addCart(name,button){
 
@@ -1123,7 +1283,10 @@ const existing=cart.find(item=>item.name===name);
 if(existing){
 existing.qty++;
 }else{
-cart.push({name:name,qty:1});
+cart.push({
+name:name,
+qty:1
+});
 }
 
 saveCart();
@@ -1133,11 +1296,13 @@ if(button){
 button.innerText="✓ Added";
 
 setTimeout(()=>{
-button.innerText="Add to Cart";
+button.innerText="🛒 Add to Cart";
 },900);
 
 }
+
 }
+
 
 function saveCart(){
 
@@ -1147,7 +1312,9 @@ JSON.stringify(cart)
 );
 
 updateCounts();
+
 }
+
 
 function updateCounts(){
 
@@ -1158,71 +1325,13 @@ count+=item.qty;
 });
 
 document.getElementById("cartCount").innerText=count;
+
 document.getElementById("wishCount").innerText=wishlist.length;
+
 }
 
-function toggleWishlist(name){
 
-if(wishlist.includes(name)){
-wishlist=wishlist.filter(x=>x!==name);
-}else{
-wishlist.push(name);
-}
-
-localStorage.setItem(
-"printzyWishlist",
-JSON.stringify(wishlist)
-);
-
-updateCounts();
-showProducts();
-}
-
-function openWishlist(){
-
-let html="<h2>❤️ My Wishlist</h2>";
-
-if(wishlist.length===0){
-
-html+="<p>Your wishlist is empty.</p>";
-
-}else{
-
-wishlist.forEach(name=>{
-
-html+=`
-
-<div class="cart-item">
-
-<span>❤️ ${name}</span>
-
-<button class="remove"
-onclick="removeWishlist('${name}')">
-Remove
-</button>
-
-</div>
-
-`;
-});
-}
-
-showModal(html);
-}
-
-function removeWishlist(name){
-
-wishlist=wishlist.filter(x=>x!==name);
-
-localStorage.setItem(
-"printzyWishlist",
-JSON.stringify(wishlist)
-);
-
-updateCounts();
-showProducts();
-openWishlist();
-}
+/* CART WINDOW */
 
 function openCart(){
 
@@ -1230,7 +1339,12 @@ let html="<h2>🛒 Your Cart</h2>";
 
 if(cart.length===0){
 
-html+="<p>Your cart is empty.</p>";
+html+=`
+<p style="margin-top:15px">
+Your cart is empty.
+</p>
+`;
+
 showModal(html);
 return;
 }
@@ -1239,11 +1353,9 @@ let total=0;
 
 cart.forEach((item,index)=>{
 
-const product=products.find(
-p=>p.name===item.name
-);
+const p=products.find(x=>x.name===item.name);
 
-const price=product?product.price:0;
+const price=p?p.price:0;
 
 total+=price*item.qty;
 
@@ -1257,15 +1369,20 @@ html+=`
 <div style="color:var(--blue);margin-top:5px">
 ₹${price}
 </div>
+
 </div>
 
 <div class="qty">
 
-<button onclick="changeQty(${index},-1)">−</button>
+<button onclick="changeQty(${index},-1)">
+−
+</button>
 
 <span>${item.qty}</span>
 
-<button onclick="changeQty(${index},1)">+</button>
+<button onclick="changeQty(${index},1)">
++
+</button>
 
 <button class="remove"
 onclick="removeCart(${index})">
@@ -1277,6 +1394,7 @@ onclick="removeCart(${index})">
 </div>
 
 `;
+
 });
 
 html+=`
@@ -1285,95 +1403,5 @@ html+=`
 Total: ₹${total}
 </div>
 
-<button class="add"
-onclick="openOrderForm()">
-🛍️ Order on Printzy
-</button>
-`;
-
-showModal(html);
-}
-
-function changeQty(index,value){
-
-cart[index].qty+=value;
-
-if(cart[index].qty<=0){
-cart.splice(index,1);
-}
-
-saveCart();
-openCart();
-}
-
-function removeCart(index){
-
-cart.splice(index,1);
-
-saveCart();
-openCart();
-}
-
-function openOrderForm(){
-
-if(cart.length===0){
-alert("Your cart is empty.");
-return;
-}
-
-let total=0;
-
-cart.forEach(item=>{
-
-const p=products.find(
-x=>x.name===item.name
-);
-
-if(p)total+=p.price*item.qty;
-
-});
-
-showModal(`
-
-<h2>🛍️ Order on Printzy</h2>
-
-<p style="color:var(--muted)">
-Enter your delivery details.
-</p>
-
-<input class="custom-input"
-id="orderName"
-placeholder="Full Name">
-
-<input class="custom-input"
-id="orderPhone"
-type="tel"
-placeholder="Mobile Number">
-
-<textarea class="custom-input"
-id="orderAddress"
-rows="3"
-placeholder="Complete Delivery Address"></textarea>
-
-<textarea class="custom-input"
-id="orderNote"
-rows="3"
-placeholder="Customization / Order Notes"></textarea>
-
-<div class="total">
-Total: ₹${total}
-</div>
-
-<button class="add"
-onclick="placeOrder()">
-🚀 Place Order on Printzy
-</button>
-
-`);
-}
-
-function placeOrder(){
-
-const name=document.getElementById("orderName").value.trim();
-const phone=document.getElementById("orderPhone").value.trim();
-const address=document.getElementById("ord
+<button
+cl
