@@ -4,28 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Printzy - Premium Custom Products</title>
+<title>Printzy - Custom Products</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 :root{
   --blue:#1264e8;
   --blue2:#0645b5;
   --sky:#eaf3ff;
   --bg:#f6f9ff;
-  --card:#ffffff;
+  --card:#fff;
   --text:#172033;
   --muted:#64748b;
   --border:#dce7f7;
   --danger:#ef3155;
   --success:#16a34a;
-  --warning:#f59e0b;
-  --shadow:0 15px 40px rgba(18,100,232,.14);
 }
 
 body{
@@ -46,16 +40,15 @@ body.dark{
 }
 
 /* LOADER */
-
 .loader{
   position:fixed;
   inset:0;
   background:#fff;
   display:flex;
-  align-items:center;
   justify-content:center;
-  z-index:99999;
-  animation:loaderOut .7s ease 1.3s forwards;
+  align-items:center;
+  z-index:9999;
+  animation:hideLoader .7s ease 1.2s forwards;
 }
 
 .loader-logo{
@@ -66,37 +59,26 @@ body.dark{
 }
 
 @keyframes pulse{
-  from{
-    transform:scale(.9);
-    opacity:.5;
-  }
-  to{
-    transform:scale(1.08);
-    opacity:1;
-  }
+  from{transform:scale(.9);opacity:.5}
+  to{transform:scale(1.08);opacity:1}
 }
 
-@keyframes loaderOut{
-  to{
-    opacity:0;
-    visibility:hidden;
-  }
+@keyframes hideLoader{
+  to{opacity:0;visibility:hidden}
 }
 
 /* HEADER */
-
 header{
   position:sticky;
   top:0;
   z-index:1000;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(16px);
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(15px);
   border-bottom:1px solid var(--border);
-  box-shadow:0 3px 18px rgba(0,0,0,.05);
 }
 
 body.dark header{
-  background:rgba(17,28,45,.94);
+  background:rgba(17,28,45,.95);
 }
 
 .nav{
@@ -105,19 +87,16 @@ body.dark header{
   padding:14px 18px;
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:12px;
 }
 
 .logo{
   font-size:29px;
   font-weight:900;
   color:var(--blue);
-  letter-spacing:-1px;
 }
 
-.logo span{
-  color:var(--text);
-}
+.logo span{color:var(--text)}
 
 .search-box{
   flex:1;
@@ -133,12 +112,10 @@ body.dark header{
   color:var(--text);
   outline:none;
   font-size:15px;
-  transition:.25s;
 }
 
 .search:focus{
   border-color:var(--blue);
-  box-shadow:0 0 0 4px rgba(18,100,232,.1);
 }
 
 .search-icon{
@@ -157,12 +134,6 @@ body.dark header{
   cursor:pointer;
   font-size:19px;
   position:relative;
-  transition:.25s;
-}
-
-.icon-btn:hover{
-  transform:translateY(-3px) scale(1.05);
-  border-color:var(--blue);
 }
 
 .count{
@@ -173,33 +144,25 @@ body.dark header{
   height:19px;
   border-radius:50%;
   background:var(--danger);
-  color:#fff;
+  color:white;
   font-size:11px;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   font-weight:bold;
 }
 
 .cart-btn{
   border:0;
   background:var(--blue);
-  color:#fff;
+  color:white;
   padding:13px 18px;
   border-radius:28px;
   font-weight:bold;
   cursor:pointer;
-  transition:.25s;
-}
-
-.cart-btn:hover{
-  background:var(--blue2);
-  transform:translateY(-2px);
-  box-shadow:0 8px 22px rgba(18,100,232,.3);
 }
 
 /* HERO */
-
 .hero-wrap{
   max-width:1200px;
   margin:25px auto;
@@ -207,31 +170,18 @@ body.dark header{
 }
 
 .hero{
-  min-height:400px;
+  min-height:390px;
   border-radius:30px;
   padding:65px 50px;
-  color:#fff;
+  color:white;
   position:relative;
   overflow:hidden;
   background:linear-gradient(135deg,#0755ca,#1684ff);
   box-shadow:0 20px 45px rgba(18,100,232,.25);
-  animation:heroIn .8s ease;
-}
-
-@keyframes heroIn{
-  from{
-    opacity:0;
-    transform:translateY(25px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
 }
 
 .hero h1{
   font-size:54px;
-  line-height:1.1;
   margin-bottom:18px;
   position:relative;
   z-index:2;
@@ -250,26 +200,17 @@ body.dark header{
   padding:14px 25px;
   border:0;
   border-radius:30px;
-  background:#fff;
+  background:white;
   color:var(--blue);
   font-weight:bold;
   font-size:16px;
   cursor:pointer;
-  position:relative;
-  z-index:2;
-  transition:.25s;
-}
-
-.shop-btn:hover{
-  transform:translateY(-3px) scale(1.03);
-  box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
 .circle{
   position:absolute;
   border-radius:50%;
   background:rgba(255,255,255,.12);
-  animation:float 6s ease-in-out infinite;
 }
 
 .one{
@@ -284,7 +225,6 @@ body.dark header{
   height:150px;
   right:230px;
   bottom:-70px;
-  animation-delay:1s;
 }
 
 .three{
@@ -292,20 +232,9 @@ body.dark header{
   height:80px;
   right:80px;
   bottom:70px;
-  animation-delay:2s;
-}
-
-@keyframes float{
-  0%,100%{
-    transform:translateY(0);
-  }
-  50%{
-    transform:translateY(-18px);
-  }
 }
 
 /* CONTENT */
-
 .container{
   max-width:1200px;
   margin:auto;
@@ -318,7 +247,6 @@ body.dark header{
 }
 
 /* CATEGORIES */
-
 .categories{
   display:flex;
   gap:10px;
@@ -334,23 +262,14 @@ body.dark header{
   background:var(--card);
   color:var(--text);
   cursor:pointer;
-  transition:.25s;
-}
-
-.category:hover{
-  transform:translateY(-2px);
-  border-color:var(--blue);
 }
 
 .category.active{
   background:var(--blue);
-  color:#fff;
-  border-color:var(--blue);
-  box-shadow:0 7px 18px rgba(18,100,232,.25);
+  color:white;
 }
 
 /* PRODUCTS */
-
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -363,25 +282,13 @@ body.dark header{
   border-radius:22px;
   overflow:hidden;
   position:relative;
-  box-shadow:0 5px 18px rgba(0,0,0,.04);
-  animation:cardIn .5s ease both;
-  transition:.3s;
+  box-shadow:0 5px 18px rgba(0,0,0,.05);
+  transition:.25s;
 }
 
 .product:hover{
-  transform:translateY(-8px);
-  box-shadow:var(--shadow);
-}
-
-@keyframes cardIn{
-  from{
-    opacity:0;
-    transform:translateY(20px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  transform:translateY(-7px);
+  box-shadow:0 15px 35px rgba(18,100,232,.15);
 }
 
 .product-img{
@@ -403,7 +310,7 @@ body.dark .product-img{
   top:13px;
   left:13px;
   background:var(--blue);
-  color:#fff;
+  color:white;
   padding:6px 10px;
   border-radius:20px;
   font-size:11px;
@@ -418,28 +325,16 @@ body.dark .product-img{
   height:43px;
   border:1px solid #d9e5f6;
   border-radius:50%;
-  background:#fff;
+  background:white;
   color:#64748b;
-  font-size:22px;
+  font-size:23px;
   cursor:pointer;
   z-index:3;
-  transition:.2s;
-}
-
-.wishlist:hover{
-  transform:scale(1.12);
 }
 
 .wishlist.active{
   color:var(--danger);
   background:#fff0f3;
-  animation:heartPop .35s ease;
-}
-
-@keyframes heartPop{
-  50%{
-    transform:scale(1.3);
-  }
 }
 
 .product-info{
@@ -471,57 +366,38 @@ body.dark .product-img{
   border-radius:12px;
   font-weight:bold;
   cursor:pointer;
-  transition:.25s;
 }
 
-.details-btn{
-  border:1px solid var(--blue);
-  background:transparent;
-  color:var(--blue);
-}
-
-.details-btn:hover{
-  background:var(--sky);
-}
-
+.details-btn,
 .customize{
   border:1px solid var(--blue);
   background:transparent;
   color:var(--blue);
 }
 
-.customize:hover{
-  background:var(--sky);
-}
-
 .add{
   border:0;
   background:var(--blue);
-  color:#fff;
+  color:white;
 }
 
 .add:hover{
   background:var(--blue2);
-  transform:translateY(-2px);
 }
 
 /* MODAL */
-
 .modal{
   display:none;
   position:fixed;
   inset:0;
   z-index:5000;
   background:rgba(0,0,0,.65);
-  backdrop-filter:blur(5px);
   align-items:center;
   justify-content:center;
   padding:20px;
 }
 
-.modal.show{
-  display:flex;
-}
+.modal.show{display:flex}
 
 .modal-box{
   width:100%;
@@ -532,19 +408,6 @@ body.dark .product-img{
   background:var(--card);
   color:var(--text);
   border-radius:24px;
-  box-shadow:0 25px 70px rgba(0,0,0,.3);
-  animation:modalIn .3s ease;
-}
-
-@keyframes modalIn{
-  from{
-    transform:translateY(30px) scale(.95);
-    opacity:0;
-  }
-  to{
-    transform:translateY(0) scale(1);
-    opacity:1;
-  }
 }
 
 .close{
@@ -552,7 +415,7 @@ body.dark .product-img{
   border:0;
   background:none;
   color:var(--text);
-  font-size:28px;
+  font-size:30px;
   cursor:pointer;
 }
 
@@ -565,10 +428,6 @@ body.dark .product-img{
   align-items:center;
   font-size:100px;
   margin-bottom:20px;
-}
-
-body.dark .detail-icon{
-  background:#152944;
 }
 
 .detail-title{
@@ -598,22 +457,10 @@ body.dark .detail-icon{
   background:var(--bg);
   color:var(--text);
   outline:none;
-  font-family:inherit;
-}
-
-.custom-input:focus{
-  border-color:var(--blue);
-}
-
-.total{
-  color:var(--blue);
-  font-size:21px;
-  font-weight:bold;
-  margin:18px 0;
 }
 
 .cart-item{
-  padding:13px 0;
+  padding:14px 0;
   border-bottom:1px solid var(--border);
   display:flex;
   justify-content:space-between;
@@ -647,6 +494,13 @@ body.dark .detail-icon{
   cursor:pointer;
 }
 
+.total{
+  color:var(--blue);
+  font-size:21px;
+  font-weight:bold;
+  margin:18px 0;
+}
+
 .success{
   text-align:center;
 }
@@ -662,22 +516,6 @@ body.dark .detail-icon{
   align-items:center;
   justify-content:center;
   font-size:42px;
-  font-weight:bold;
-  animation:successPop .5s ease;
-}
-
-@keyframes successPop{
-  0%{
-    transform:scale(.3);
-    opacity:0;
-  }
-  70%{
-    transform:scale(1.15);
-  }
-  100%{
-    transform:scale(1);
-    opacity:1;
-  }
 }
 
 .order-box{
@@ -691,14 +529,12 @@ body.dark .detail-icon{
   color:var(--blue);
   font-size:22px;
   font-weight:bold;
-  margin-top:5px;
 }
 
 /* FOOTER */
-
 footer{
   background:#082e6d;
-  color:#fff;
+  color:white;
   text-align:center;
   padding:40px 18px;
 }
@@ -710,22 +546,37 @@ footer{
 .footer-links button{
   border:0;
   background:none;
-  color:#fff;
+  color:white;
   margin:5px 10px;
   cursor:pointer;
 }
 
-/* MOBILE */
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:#172033;
+  color:white;
+  padding:13px 20px;
+  border-radius:30px;
+  z-index:10000;
+  transition:.3s;
+  opacity:0;
+}
 
+.toast.show{
+  transform:translateX(-50%) translateY(0);
+  opacity:1;
+}
+
+/* MOBILE */
 @media(max-width:700px){
 
-  .nav{
-    flex-wrap:wrap;
-  }
+  .nav{flex-wrap:wrap}
 
-  .logo{
-    font-size:25px;
-  }
+  .logo{font-size:25px}
 
   .search-box{
     order:3;
@@ -790,16 +641,12 @@ footer{
 <body>
 
 <!-- LOADER -->
-
 <div class="loader">
   <div class="loader-logo">Printzy</div>
 </div>
 
-
 <!-- HEADER -->
-
 <header>
-
 <div class="nav">
 
 <div class="logo">
@@ -807,71 +654,40 @@ Print<span>zy</span>
 </div>
 
 <div class="search-box">
-
 <input
 class="search"
 id="search"
 type="search"
 placeholder="Search T-shirts, mugs, frames..."
 oninput="searchProducts()">
-
 <span class="search-icon">🔍</span>
-
 </div>
 
-<button
-class="icon-btn"
-onclick="toggleDark()"
-title="Dark Mode">
-
+<button class="icon-btn" onclick="toggleDark()" title="Dark Mode">
 🌙
-
 </button>
 
-<button
-class="icon-btn"
-onclick="openWishlist()"
-title="Wishlist">
-
+<button class="icon-btn" onclick="openWishlist()" title="Wishlist">
 ❤️
-
-<span
-class="count"
-id="wishCount">
-
-0
-
-</span>
-
+<span class="count" id="wishCount">0</span>
 </button>
 
-<button
-class="cart-btn"
-onclick="openCart()">
-
-🛒 Cart
-<span id="cartCount">0</span>
-
+<button class="cart-btn" onclick="openCart()">
+🛒 Cart <span id="cartCount">0</span>
 </button>
 
 </div>
-
 </header>
 
-
 <!-- HERO -->
-
 <div class="hero-wrap">
-
 <section class="hero">
 
 <div class="circle one"></div>
 <div class="circle two"></div>
 <div class="circle three"></div>
 
-<h1>
-Make it yours.
-</h1>
+<h1>Make it yours.</h1>
 
 <p>
 Create something special with premium customized
@@ -881,18 +697,13 @@ T-shirts, mugs, frames, hoodies, caps and personalized gifts.
 <button
 class="shop-btn"
 onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
-
 Shop Now →
-
 </button>
 
 </section>
-
 </div>
 
-
 <!-- MAIN -->
-
 <div class="container">
 
 <h2 class="section-title">
@@ -901,73 +712,45 @@ Explore Categories
 
 <div class="categories">
 
-<button
-class="category active"
+<button class="category active"
 onclick="filterCategory('All',this)">
-
 All
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="filterCategory('Clothing',this)">
-
 👕 Clothing
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="filterCategory('Mugs',this)">
-
 ☕ Mugs
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="filterCategory('Home',this)">
-
 🏠 Home
-
 </button>
 
-<button
-class="category"
+<button class="category"
 onclick="filterCategory('Accessories',this)">
-
 🎁 Accessories
-
 </button>
 
 </div>
 
-
-<h2
-class="section-title"
-id="products">
-
+<h2 class="section-title" id="products">
 Popular Products
-
 </h2>
 
-<div
-class="products"
-id="productList">
+<div class="products" id="productList"></div>
 
 </div>
-
-</div>
-
 
 <!-- FOOTER -->
-
 <footer>
 
-<h2>
-Printzy
-</h2>
+<h2>Printzy</h2>
 
 <p style="margin-top:8px">
 Premium customized products made specially for you.
@@ -975,21 +758,10 @@ Premium customized products made specially for you.
 
 <div class="footer-links">
 
-<button onclick="openTerms()">
-Terms & Conditions
-</button>
-
-<button onclick="openPrivacy()">
-Privacy Policy
-</button>
-
-<button onclick="openContact()">
-Contact
-</button>
-
-<button onclick="openOrderHistory()">
-Order History
-</button>
+<button onclick="openTerms()">Terms & Conditions</button>
+<button onclick="openPrivacy()">Privacy Policy</button>
+<button onclick="openContact()">Contact</button>
+<button onclick="openOrderHistory()">Order History</button>
 
 </div>
 
@@ -999,29 +771,20 @@ Order History
 
 </footer>
 
-
 <!-- MODAL -->
-
-<div
-class="modal"
-id="modal">
+<div class="modal" id="modal">
 
 <div class="modal-box">
 
-<button
-class="close"
-onclick="closeModal()">
-
-×
-
-</button>
+<button class="close" onclick="closeModal()">×</button>
 
 <div id="modalContent"></div>
 
 </div>
-
 </div>
 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
 
 <script>
 
@@ -1146,6 +909,40 @@ features:[
 "Perfect for home decoration",
 "Made specially for you"
 ]
+},
+
+{
+id:8,
+name:"Custom Keychain",
+price:199,
+category:"Accessories",
+icon:"🔑",
+badge:"NEW",
+rating:"4.7",
+description:"Personalized keychain with your name, photo or special message.",
+features:[
+"Lightweight",
+"Custom design",
+"Durable material",
+"Great gift option"
+]
+},
+
+{
+id:9,
+name:"Custom Phone Case",
+price:449,
+category:"Accessories",
+icon:"📱",
+badge:"TRENDING",
+rating:"4.8",
+description:"Protect your phone with a stylish personalized phone case.",
+features:[
+"Custom photo printing",
+"Protective case",
+"Premium finish",
+"Multiple phone models"
+]
 }
 
 ];
@@ -1153,17 +950,13 @@ features:[
 
 /* ================= DATA ================= */
 
-let cart=
-JSON.parse(localStorage.getItem("printzyCart")) || [];
-
-let wishlist=
-JSON.parse(localStorage.getItem("printzyWishlist")) || [];
-
-let orders=
-JSON.parse(localStorage.getItem("printzyOrders")) || [];
+let cart=JSON.parse(localStorage.getItem("printzyCart")) || [];
+let wishlist=JSON.parse(localStorage.getItem("printzyWishlist")) || [];
+let orders=JSON.parse(localStorage.getItem("printzyOrders")) || [];
+let selectedCategory="All";
 
 
-/* ================= SHOW PRODUCTS ================= */
+/* ================= PRODUCTS ================= */
 
 function showProducts(list=products){
 
@@ -1174,46 +967,31 @@ box.innerHTML="";
 if(list.length===0){
 
 box.innerHTML=`
-
-<div style="
-grid-column:1/-1;
-text-align:center;
-padding:50px">
-
-<h2>
-😔 No products found
-</h2>
-
+<div style="grid-column:1/-1;text-align:center;padding:50px">
+<h2>😔 No products found</h2>
 <p style="margin-top:10px;color:var(--muted)">
 Try another search.
 </p>
-
-</div>
-
-`;
+</div>`;
 
 return;
 }
 
-
 list.forEach((p,index)=>{
 
-const liked=wishlist.includes(p.name);
+const liked=wishlist.includes(p.id);
 
 box.innerHTML+=`
 
-<div
-class="product"
-style="animation-delay:${index*.07}s">
+<div class="product">
 
 <button
 class="wishlist ${liked?"active":""}"
-onclick="toggleWishlist('${p.name}')">
+onclick="toggleWishlist(${p.id})">
 
 ${liked?"♥":"♡"}
 
 </button>
-
 
 <div class="product-img">
 
@@ -1225,12 +1003,9 @@ ${p.icon}
 
 </div>
 
-
 <div class="product-info">
 
-<h3>
-${p.name}
-</h3>
+<h3>${p.name}</h3>
 
 <div class="rating">
 ★★★★★
@@ -1243,7 +1018,6 @@ ${p.rating}
 ₹${p.price}
 </div>
 
-
 <button
 class="details-btn"
 onclick="showProductDetails(${p.id})">
@@ -1252,28 +1026,24 @@ onclick="showProductDetails(${p.id})">
 
 </button>
 
-
 <button
 class="customize"
-onclick="customizeProduct('${p.name}')">
+onclick="customizeProduct(${p.id})">
 
 ✨ Customize
 
 </button>
 
-
 <button
 class="add"
-onclick="addCart('${p.name}',this)">
+onclick="addCart(${p.id},this)">
 
-Add to Cart
+🛒 Add to Cart
 
 </button>
 
 </div>
-
 </div>
-
 `;
 
 });
@@ -1281,7 +1051,7 @@ Add to Cart
 }
 
 
-/* ================= PRODUCT DETAILS ================= */
+/* ================= DETAILS ================= */
 
 function showProductDetails(id){
 
@@ -1292,13 +1062,8 @@ if(!p)return;
 let features="";
 
 p.features.forEach(f=>{
-
-features+=`
-<li>✓ ${f}</li>
-`;
-
+features+=`<li>✓ ${f}</li>`;
 });
-
 
 showModal(`
 
@@ -1332,7 +1097,7 @@ ${features}
 
 <button
 class="customize"
-onclick="customizeProduct('${p.name}')">
+onclick="customizeProduct(${p.id})">
 
 ✨ Customize This Product
 
@@ -1340,7 +1105,7 @@ onclick="customizeProduct('${p.name}')">
 
 <button
 class="add"
-onclick="addCart('${p.name}');closeModal()">
+onclick="addCart(${p.id});closeModal()">
 
 🛒 Add to Cart
 
@@ -1353,16 +1118,18 @@ onclick="addCart('${p.name}');closeModal()">
 
 /* ================= CUSTOMIZE ================= */
 
-function customizeProduct(name){
+function customizeProduct(id){
+
+const p=products.find(x=>x.id===id);
+
+if(!p)return;
 
 showModal(`
 
-<h2>
-✨ Customize Product
-</h2>
+<h2>✨ Customize Product</h2>
 
-<p style="color:var(--muted)">
-Customize your <strong>${name}</strong>
+<p style="color:var(--muted);margin:10px 0">
+Customize your <strong>${p.name}</strong>
 </p>
 
 <input
@@ -1372,19 +1139,18 @@ placeholder="Name / Text">
 
 <input
 class="custom-input"
-id="customPhoto"
+id="customDesign"
 placeholder="Photo / Design details">
 
 <textarea
 class="custom-input"
 id="customNote"
 rows="4"
-placeholder="Tell us your customization requirements">
-</textarea>
+placeholder="Customization requirements"></textarea>
 
 <button
 class="add"
-onclick="saveCustomization('${name}')">
+onclick="saveCustomization(${id})">
 
 💾 Save Customization
 
@@ -1394,31 +1160,24 @@ onclick="saveCustomization('${name}')">
 
 }
 
+function saveCustomization(id){
 
-function saveCustomization(name){
+const p=products.find(x=>x.id===id);
 
-const note=
-document.getElementById("customNote").value.trim();
+const data={
+product:p.name,
+name:document.getElementById("customName").value,
+design:document.getElementById("customDesign").value,
+note:document.getElementById("customNote").value,
+date:new Date().toLocaleString()
+};
 
 localStorage.setItem(
 "printzyCustomization",
-JSON.stringify({
-
-product:name,
-
-name:
-document.getElementById("customName").value,
-
-photo:
-document.getElementById("customPhoto").value,
-
-note:note
-
-})
+JSON.stringify(data)
 );
 
-alert("Customization saved successfully!");
-
+showToast("Customization saved ✓");
 closeModal();
 
 }
@@ -1426,22 +1185,17 @@ closeModal();
 
 /* ================= CART ================= */
 
-function addCart(name,button){
+function addCart(id,button){
 
-const existing=
-cart.find(item=>item.name===name);
+const existing=cart.find(item=>item.id===id);
 
 if(existing){
-
 existing.qty++;
-
 }else{
-
 cart.push({
-name:name,
+id:id,
 qty:1
 });
-
 }
 
 saveCart();
@@ -1451,15 +1205,14 @@ if(button){
 button.innerText="✓ Added";
 
 setTimeout(()=>{
-
-button.innerText="Add to Cart";
-
+button.innerText="🛒 Add to Cart";
 },900);
 
 }
 
-}
+showToast("Product added to cart ✓");
 
+}
 
 function saveCart(){
 
@@ -1472,7 +1225,6 @@ updateCounts();
 
 }
 
-
 function updateCounts(){
 
 let count=0;
@@ -1481,28 +1233,638 @@ cart.forEach(item=>{
 count+=item.qty;
 });
 
-document.getElementById(
-"cartCount"
-).innerText=count;
+document.getElementById("cartCount").innerText=count;
+document.getElementById("wishCount").innerText=wishlist.length;
 
-document.getElementById(
-"wishCount"
-).innerText=wishlist.length;
+}
+
+
+/* ================= CART WINDOW ================= */
+
+function openCart(){
+
+let html="<h2>🛒 Your Cart</h2>";
+
+if(cart.length===0){
+
+html+=`
+<p style="margin-top:20px;color:var(--muted)">
+Your cart is empty.
+</p>`;
+
+showModal(html);
+return;
+}
+
+let total=0;
+
+cart.forEach((item,index)=>{
+
+const p=products.find(x=>x.id===item.id);
+
+if(!p)return;
+
+total+=p.price*item.qty;
+
+html+=`
+
+<div class="cart-item">
+
+<div>
+<strong>${p.icon} ${p.name}</strong>
+
+<div style="color:var(--blue);margin-top:5px">
+₹${p.price}
+</div>
+</div>
+
+<div>
+
+<div class="qty">
+
+<button onclick="changeQty(${index},-1)">
+−
+</button>
+
+<strong>${item.qty}</strong>
+
+<button onclick="changeQty(${index},1)">
++
+</button>
+
+</div>
+
+<button
+class="remove"
+style="margin-top:7px"
+onclick="removeCart(${index})">
+
+Remove
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+html+=`
+
+<div class="total">
+Total: ₹${total}
+</div>
+
+<button
+class="add"
+onclick="checkout()">
+
+💳 Proceed to Checkout
+
+</button>
+
+<button
+class="customize"
+onclick="closeModal()">
+
+Continue Shopping
+
+</button>
+
+`;
+
+showModal(html);
+
+}
+
+function changeQty(index,amount){
+
+if(!cart[index])return;
+
+cart[index].qty+=amount;
+
+if(cart[index].qty<=0){
+cart.splice(index,1);
+}
+
+saveCart();
+openCart();
+
+}
+
+function removeCart(index){
+
+cart.splice(index,1);
+
+saveCart();
+openCart();
+
+showToast("Product removed");
+
+}
+
+
+/* ================= CHECKOUT ================= */
+
+function checkout(){
+
+if(cart.length===0){
+showToast("Cart is empty");
+return;
+}
+
+let total=0;
+
+cart.forEach(item=>{
+
+const p=products.find(x=>x.id===item.id);
+
+if(p){
+total+=p.price*item.qty;
+}
+
+});
+
+showModal(`
+
+<h2>📦 Checkout</h2>
+
+<p style="color:var(--muted);margin:10px 0 15px">
+Enter your delivery details.
+</p>
+
+<input
+class="custom-input"
+id="customerName"
+placeholder="Full Name">
+
+<input
+class="custom-input"
+id="customerPhone"
+placeholder="Mobile Number"
+type="tel">
+
+<textarea
+class="custom-input"
+id="customerAddress"
+rows="4"
+placeholder="Full Delivery Address"></textarea>
+
+<p class="total">
+Total: ₹${total}
+</p>
+
+<button
+class="add"
+onclick="placeOrder()">
+
+✅ Place Order
+
+</button>
+
+`);
+
+}
+
+
+/* ================= PLACE ORDER ================= */
+
+function placeOrder(){
+
+const name=document.getElementById("customerName").value.trim();
+const phone=document.getElementById("customerPhone").value.trim();
+const address=document.getElementById("customerAddress").value.trim();
+
+if(!name || !phone || !address){
+
+showToast("Please fill all details");
+
+return;
+}
+
+let total=0;
+
+cart.forEach(item=>{
+
+const p=products.find(x=>x.id===item.id);
+
+if(p){
+total+=p.price*item.qty;
+}
+
+});
+
+const orderId=
+"PZ"+Date.now().toString().slice(-8);
+
+const order={
+id:orderId,
+name:name,
+phone:phone,
+address:address,
+items:[...cart],
+total:total,
+date:new Date().toLocaleString(),
+status:"Order Placed"
+};
+
+orders.unshift(order);
+
+localStorage.setItem(
+"printzyOrders",
+JSON.stringify(orders)
+);
+
+cart=[];
+
+saveCart();
+
+showModal(`
+
+<div class="success">
+
+<div class="success-icon">
+✓
+</div>
+
+<h2 style="margin-top:18px">
+Order Placed Successfully!
+</h2>
+
+<div class="order-box">
+
+<p>Your Order Number</p>
+
+<div class="order-number">
+${orderId}
+</div>
+
+</div>
+
+<p style="color:var(--muted)">
+Thank you for shopping with Printzy.
+</p>
+
+<button
+class="add"
+onclick="closeModal()">
+
+Continue Shopping
+
+</button>
+
+</div>
+
+`);
 
 }
 
 
 /* ================= WISHLIST ================= */
 
-function toggleWishlist(name){
+function toggleWishlist(id){
 
-if(wishlist.includes(name)){
+if(wishlist.includes(id)){
 
-wishlist=
-wishlist.filter(x=>x!==name);
+wishlist=wishlist.filter(x=>x!==id);
+
+showToast("Removed from wishlist");
 
 }else{
 
-wishlist.push(name);
+wishlist.push(id);
+
+showToast("Added to wishlist ❤️");
 
 }
+
+localStorage.setItem(
+"printzyWishlist",
+JSON.stringify(wishlist)
+);
+
+updateCounts();
+
+applyFilters();
+
+}
+
+function openWishlist(){
+
+let html="<h2>❤️ My Wishlist</h2>";
+
+if(wishlist.length===0){
+
+html+=`
+<p style="margin-top:20px;color:var(--muted)">
+Your wishlist is empty.
+</p>`;
+
+}else{
+
+wishlist.forEach(id=>{
+
+const p=products.find(x=>x.id===id);
+
+if(!p)return;
+
+html+=`
+
+<div class="cart-item">
+
+<div>
+<strong>${p.icon} ${p.name}</strong>
+
+<div style="color:var(--blue);margin-top:5px">
+₹${p.price}
+</div>
+</div>
+
+<button
+class="remove"
+onclick="removeWishlist(${id})">
+
+Remove
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+showModal(html);
+
+}
+
+function removeWishlist(id){
+
+wishlist=wishlist.filter(x=>x!==id);
+
+localStorage.setItem(
+"printzyWishlist",
+JSON.stringify(wishlist)
+);
+
+updateCounts();
+openWishlist();
+applyFilters();
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchProducts(){
+
+applyFilters();
+
+}
+
+function applyFilters(){
+
+const query=
+document.getElementById("search").value
+.toLowerCase()
+.trim();
+
+let list=products.filter(p=>{
+
+const categoryMatch=
+selectedCategory==="All" ||
+p.category===selectedCategory;
+
+const searchMatch=
+p.name.toLowerCase().includes(query) ||
+p.description.toLowerCase().includes(query) ||
+p.category.toLowerCase().includes(query);
+
+return categoryMatch && searchMatch;
+
+});
+
+showProducts(list);
+
+}
+
+
+/* ================= CATEGORY ================= */
+
+function filterCategory(category,button){
+
+selectedCategory=category;
+
+document.querySelectorAll(".category")
+.forEach(btn=>{
+btn.classList.remove("active");
+});
+
+button.classList.add("active");
+
+applyFilters();
+
+}
+
+
+/* ================= DARK MODE ================= */
+
+function toggleDark(){
+
+document.body.classList.toggle("dark");
+
+localStorage.setItem(
+"printzyDark",
+document.body.classList.contains("dark")
+);
+
+}
+
+
+/* ================= ORDER HISTORY ================= */
+
+function openOrderHistory(){
+
+let html="<h2>📦 Order History</h2>";
+
+if(orders.length===0){
+
+html+=`
+<p style="margin-top:20px;color:var(--muted)">
+No orders yet.
+</p>`;
+
+showModal(html);
+return;
+}
+
+orders.forEach(order=>{
+
+html+=`
+
+<div class="order-box">
+
+<strong>Order #${order.id}</strong>
+
+<p style="margin-top:7px">
+Date: ${order.date}
+</p>
+
+<p style="margin-top:5px">
+Status: <strong>${order.status}</strong>
+</p>
+
+<p style="margin-top:5px;color:var(--blue);font-weight:bold">
+Total: ₹${order.total}
+</p>
+
+</div>
+
+`;
+
+});
+
+showModal(html);
+
+}
+
+
+/* ================= FOOTER PAGES ================= */
+
+function openTerms(){
+
+showModal(`
+
+<h2>📜 Terms & Conditions</h2>
+
+<p style="line-height:1.8;margin-top:15px">
+
+Printzy provides customized products for personal use.
+Product designs and customization details are entered by
+the customer.
+
+Orders cannot be modified after production has started.
+
+Delivery time may vary depending on location and product
+availability.
+
+By placing an order, you agree to these terms.
+
+</p>
+
+`);
+
+}
+
+function openPrivacy(){
+
+showModal(`
+
+<h2>🔒 Privacy Policy</h2>
+
+<p style="line-height:1.8;margin-top:15px">
+
+Printzy stores basic order information locally in your
+browser for this demo website.
+
+We do not collect payment information through this
+demo checkout system.
+
+Do not enter sensitive personal information.
+
+</p>
+
+`);
+
+}
+
+function openContact(){
+
+showModal(`
+
+<h2>📞 Contact Printzy</h2>
+
+<p style="margin-top:15px;line-height:1.8">
+
+Need help with your order?
+
+<br><br>
+
+📧 Email: support@printzy.example
+
+<br>
+
+📱 Phone: +91 XXXXX XXXXX
+
+</p>
+
+`);
+
+}
+
+
+/* ================= MODAL ================= */
+
+function showModal(content){
+
+document.getElementById("modalContent").innerHTML=content;
+
+document.getElementById("modal").classList.add("show");
+
+}
+
+function closeModal(){
+
+document.getElementById("modal").classList.remove("show");
+
+}
+
+document.getElementById("modal").addEventListener("click",function(e){
+
+if(e.target===this){
+closeModal();
+}
+
+});
+
+
+/* ================= TOAST ================= */
+
+let toastTimer;
+
+function showToast(message){
+
+const toast=document.getElementById("toast");
+
+toast.innerText=message;
+
+toast.classList.add("show");
+
+clearTimeout(toastTimer);
+
+toastTimer=setTimeout(()=>{
+
+toast.classList.remove("show");
+
+},1800);
+
+}
+
+
+/* ================= INITIALIZE ================= */
+
+if(localStorage.getItem("printzyDark")==="true"){
+document.body.classList.add("dark");
+}
+
+updateCounts();
+showProducts();
+
+</script>
+
+</body>
+</html>
