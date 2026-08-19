@@ -28,7 +28,6 @@ font-family:Arial,Helvetica,sans-serif;
 background:var(--bg);
 color:var(--text);
 overflow-x:hidden;
-transition:.3s;
 }
 
 body.dark{
@@ -112,7 +111,6 @@ color:var(--text);
 
 .search:focus{
 border-color:var(--blue);
-box-shadow:0 0 0 4px rgba(18,100,232,.1);
 }
 
 .search-icon{
@@ -140,7 +138,7 @@ width:19px;
 height:19px;
 border-radius:50%;
 background:var(--danger);
-color:white;
+color:#fff;
 font-size:11px;
 display:flex;
 align-items:center;
@@ -151,7 +149,7 @@ font-weight:bold;
 .cart-btn{
 border:0;
 background:var(--blue);
-color:white;
+color:#fff;
 padding:13px 18px;
 border-radius:28px;
 font-weight:bold;
@@ -207,26 +205,9 @@ border-radius:50%;
 background:rgba(255,255,255,.12);
 }
 
-.one{
-width:240px;
-height:240px;
-right:-60px;
-top:-70px;
-}
-
-.two{
-width:150px;
-height:150px;
-right:220px;
-bottom:-70px;
-}
-
-.three{
-width:80px;
-height:80px;
-right:80px;
-bottom:70px;
-}
+.one{width:240px;height:240px;right:-60px;top:-70px}
+.two{width:150px;height:150px;right:220px;bottom:-70px}
+.three{width:80px;height:80px;right:80px;bottom:70px}
 
 .container{
 max-width:1200px;
@@ -278,8 +259,7 @@ transition:.25s;
 }
 
 .product:hover{
-transform:translateY(-6px);
-box-shadow:0 15px 35px rgba(18,100,232,.15);
+transform:translateY(-5px);
 }
 
 .product-img{
@@ -316,7 +296,7 @@ width:43px;
 height:43px;
 border:1px solid #d9e5f6;
 border-radius:50%;
-background:white;
+background:#fff;
 color:#64748b;
 font-size:23px;
 z-index:3;
@@ -394,7 +374,7 @@ display:flex;
 
 .modal-box{
 width:100%;
-max-width:620px;
+max-width:650px;
 max-height:92vh;
 overflow:auto;
 padding:25px;
@@ -514,11 +494,6 @@ margin-right:8px;
 accent-color:var(--blue);
 }
 
-.payment-option.selected{
-border-color:var(--blue);
-background:var(--sky);
-}
-
 .status{
 display:inline-block;
 padding:6px 10px;
@@ -557,7 +532,8 @@ background:#fff0f3;
 color:var(--danger);
 }
 
-.order-card{
+.order-card,
+.admin-box{
 border:1px solid var(--border);
 border-radius:15px;
 padding:15px;
@@ -577,13 +553,6 @@ margin-bottom:10px;
 color:var(--blue);
 font-weight:bold;
 font-size:18px;
-}
-
-.admin-box{
-border:1px solid var(--border);
-border-radius:14px;
-padding:15px;
-margin:12px 0;
 }
 
 .empty{
@@ -607,6 +576,61 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-size:40px;
+}
+
+.owner-login{
+text-align:center;
+}
+
+.owner-icon{
+font-size:60px;
+margin-bottom:10px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin:15px 0;
+}
+
+.stat{
+padding:16px;
+border-radius:14px;
+background:var(--sky);
+text-align:center;
+}
+
+.stat-number{
+font-size:25px;
+font-weight:bold;
+color:var(--blue);
+margin-top:5px;
+}
+
+.admin-actions{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:10px;
+}
+
+.small-btn{
+border:0;
+padding:9px 12px;
+border-radius:9px;
+background:var(--sky);
+color:var(--blue);
+font-weight:bold;
+}
+
+.small-danger{
+border:0;
+padding:9px 12px;
+border-radius:9px;
+background:#fff0f3;
+color:var(--danger);
+font-weight:bold;
 }
 
 footer{
@@ -693,6 +717,10 @@ align-items:flex-start;
 flex-direction:column;
 }
 
+.stats{
+grid-template-columns:1fr;
+}
+
 }
 </style>
 </head>
@@ -718,29 +746,15 @@ oninput="searchProducts()">
 <span class="search-icon">🔍</span>
 </div>
 
-<button
-class="icon-btn"
-onclick="toggleDark()"
-title="Dark Mode">
-🌙
-</button>
+<button class="icon-btn" onclick="toggleDark()">🌙</button>
 
-<button
-class="icon-btn"
-onclick="openWishlist()"
-title="Wishlist">
-
+<button class="icon-btn" onclick="openWishlist()">
 ❤️
 <span class="count" id="wishCount">0</span>
-
 </button>
 
-<button
-class="cart-btn"
-onclick="openCart()">
-
+<button class="cart-btn" onclick="openCart()">
 🛒 Cart <span id="cartCount">0</span>
-
 </button>
 
 </div>
@@ -761,12 +775,9 @@ Create something special with premium customized
 T-shirts, mugs, frames, hoodies, caps and personalized gifts.
 </p>
 
-<button
-class="shop-btn"
+<button class="shop-btn"
 onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
-
 Shop Now →
-
 </button>
 
 </section>
@@ -774,54 +785,32 @@ Shop Now →
 
 <div class="container">
 
-<h2 class="section-title">
-Explore Categories
-</h2>
+<h2 class="section-title">Explore Categories</h2>
 
 <div class="categories">
 
-<button
-class="category active"
-onclick="filterCategory('All',this)">
-All
-</button>
+<button class="category active"
+onclick="filterCategory('All',this)">All</button>
 
-<button
-class="category"
-onclick="filterCategory('Clothing',this)">
-👕 Clothing
-</button>
+<button class="category"
+onclick="filterCategory('Clothing',this)">👕 Clothing</button>
 
-<button
-class="category"
-onclick="filterCategory('Mugs',this)">
-☕ Mugs
-</button>
+<button class="category"
+onclick="filterCategory('Mugs',this)">☕ Mugs</button>
 
-<button
-class="category"
-onclick="filterCategory('Home',this)">
-🏠 Home
-</button>
+<button class="category"
+onclick="filterCategory('Home',this)">🏠 Home</button>
 
-<button
-class="category"
-onclick="filterCategory('Accessories',this)">
-🎁 Accessories
-</button>
+<button class="category"
+onclick="filterCategory('Accessories',this)">🎁 Accessories</button>
 
 </div>
 
-<h2
-class="section-title"
-id="products">
+<h2 class="section-title" id="products">
 Popular Products
 </h2>
 
-<div
-class="products"
-id="productList">
-</div>
+<div class="products" id="productList"></div>
 
 </div>
 
@@ -835,24 +824,16 @@ Premium customized products made specially for you.
 
 <div class="footer-links">
 
-<button onclick="openTerms()">
-Terms & Conditions
-</button>
+<button onclick="openTerms()">Terms & Conditions</button>
 
-<button onclick="openPrivacy()">
-Privacy Policy
-</button>
+<button onclick="openPrivacy()">Privacy Policy</button>
 
-<button onclick="openContact()">
-Contact
-</button>
+<button onclick="openContact()">Contact</button>
 
-<button onclick="openOrderHistory()">
-Order History
-</button>
+<button onclick="openOrderHistory()">Order History</button>
 
-<button onclick="openOrderManagement()">
-⚙️ Order Management
+<button onclick="ownerLogin()">
+🔐 Owner
 </button>
 
 </div>
@@ -867,22 +848,31 @@ Order History
 
 <div class="modal-box">
 
-<button
-class="close"
-onclick="closeModal()">×</button>
+<button class="close" onclick="closeModal()">×</button>
 
 <div id="modalContent"></div>
 
 </div>
+
 </div>
 
 
 <script>
 
 /* =====================================================
-   PRINTZY COMPLETE JAVASCRIPT
-   PAYMENT METHOD: CASH ON DELIVERY ONLY
+   PRINTZY JAVASCRIPT
+   COD ONLY + OWNER PANEL
 ===================================================== */
+
+
+/* ================= OWNER SETTINGS ================= */
+
+/*
+   OWNER PASSWORD
+   Is password ko apne according change kar sakte ho.
+*/
+
+const OWNER_PASSWORD="PRINTZY2026";
 
 
 /* ================= PRODUCTS ================= */
@@ -1048,26 +1038,22 @@ document.getElementById("modal").classList.add("show");
 
 }
 
-
 function closeModal(){
 
 document.getElementById("modal").classList.remove("show");
 
 }
 
-
 document.getElementById("modal").addEventListener("click",function(e){
 
 if(e.target===this){
-
 closeModal();
-
 }
 
 });
 
 
-/* ================= PRODUCT DISPLAY ================= */
+/* ================= PRODUCTS ================= */
 
 function showProducts(list=products){
 
@@ -1078,25 +1064,14 @@ box.innerHTML="";
 if(!list.length){
 
 box.innerHTML=`
-
-<div
-class="empty"
-style="grid-column:1/-1">
-
+<div class="empty" style="grid-column:1/-1">
 <h2>😔 No products found</h2>
-
-<p style="margin-top:8px">
-Try another search.
-</p>
-
+<p style="margin-top:8px">Try another search.</p>
 </div>
-
 `;
 
 return;
-
 }
-
 
 list.forEach(p=>{
 
@@ -1109,16 +1084,12 @@ box.innerHTML+=`
 <button
 class="wishlist ${liked?"active":""}"
 onclick="toggleWishlist(${p.id})">
-
 ${liked?"♥":"♡"}
-
 </button>
 
 <div class="product-img">
 
-<span class="badge">
-${p.badge}
-</span>
+<span class="badge">${p.badge}</span>
 
 ${p.icon}
 
@@ -1126,52 +1097,37 @@ ${p.icon}
 
 <div class="product-info">
 
-<h3>
-${p.name}
-</h3>
+<h3>${p.name}</h3>
 
 <div class="rating">
-
 ★★★★★
-
 <span style="color:var(--muted)">
 ${p.rating}
 </span>
-
 </div>
 
-<div class="price">
-₹${p.price}
-</div>
+<div class="price">₹${p.price}</div>
 
 <button
 class="details-btn"
 onclick="showProductDetails(${p.id})">
-
 👁️ View Details
-
 </button>
 
 <button
 class="customize"
 onclick="customizeProduct(${p.id})">
-
 ✨ Customize
-
 </button>
 
 <button
 class="add"
 onclick="addCart(${p.id},this)">
-
 Add to Cart
-
 </button>
 
 </div>
-
 </div>
-
 `;
 
 });
@@ -1179,7 +1135,7 @@ Add to Cart
 }
 
 
-/* ================= PRODUCT DETAILS ================= */
+/* ================= DETAILS ================= */
 
 function showProductDetails(id){
 
@@ -1193,48 +1149,30 @@ const features=p.features
 
 showModal(`
 
-<div class="detail-icon">
-${p.icon}
-</div>
+<div class="detail-icon">${p.icon}</div>
 
-<h2 class="detail-title">
-${p.name}
-</h2>
+<h2 class="detail-title">${p.name}</h2>
 
-<div class="rating">
-★★★★★ ${p.rating}/5
-</div>
+<div class="rating">★★★★★ ${p.rating}/5</div>
 
-<div class="detail-price">
-₹${p.price}
-</div>
+<div class="detail-price">₹${p.price}</div>
 
-<p style="line-height:1.7">
-${p.description}
-</p>
+<p style="line-height:1.7">${p.description}</p>
 
-<h3 style="margin-top:18px">
-Product Features
-</h3>
+<h3 style="margin-top:18px">Product Features</h3>
 
-<ul class="features">
-${features}
-</ul>
+<ul class="features">${features}</ul>
 
 <button
 class="customize"
 onclick="customizeProduct(${p.id})">
-
 ✨ Customize This Product
-
 </button>
 
 <button
 class="primary"
 onclick="addCart(${p.id});closeModal()">
-
 🛒 Add to Cart
-
 </button>
 
 `);
@@ -1252,9 +1190,7 @@ if(!p)return;
 
 showModal(`
 
-<h2>
-✨ Customize Product
-</h2>
+<h2>✨ Customize Product</h2>
 
 <p style="margin:8px 0;color:var(--muted)">
 Product: <strong>${p.name}</strong>
@@ -1274,10 +1210,7 @@ placeholder="Photo / Design details">
 class="custom-input"
 id="customSize">
 
-<option value="">
-Select Size (if applicable)
-</option>
-
+<option value="">Select Size</option>
 <option>S</option>
 <option>M</option>
 <option>L</option>
@@ -1290,14 +1223,12 @@ Select Size (if applicable)
 class="custom-input"
 id="customNote"
 rows="4"
-placeholder="Tell us your customization requirements"></textarea>
+placeholder="Customization requirements"></textarea>
 
 <button
 class="primary"
 onclick="saveCustomization(${p.id})">
-
 💾 Save & Add to Cart
-
 </button>
 
 `);
@@ -1314,7 +1245,6 @@ if(!p)return;
 const data={
 
 productId:p.id,
-
 product:p.name,
 
 name:document.getElementById("customName").value.trim(),
@@ -1373,9 +1303,7 @@ const old=button.innerText;
 button.innerText="✓ Added";
 
 setTimeout(()=>{
-
 button.innerText=old;
-
 },900);
 
 }
@@ -1408,7 +1336,7 @@ document.getElementById("wishCount").innerText=wishlist.length;
 }
 
 
-/* ================= CART WINDOW ================= */
+/* ================= CART ================= */
 
 function openCart(){
 
@@ -1417,21 +1345,15 @@ let html="<h2>🛒 Your Cart</h2>";
 if(!cart.length){
 
 showModal(`
-
 <div class="empty">
-
 <h2>🛒 Cart is empty</h2>
-
 <p style="margin-top:8px">
 Add some products to continue.
 </p>
-
 </div>
-
 `);
 
 return;
-
 }
 
 let total=0;
@@ -1449,65 +1371,23 @@ html+=`
 <div class="cart-item">
 
 <div>
-
-<strong>
-${p.icon} ${p.name}
-</strong>
+<strong>${p.icon} ${p.name}</strong>
 
 <div style="color:var(--blue);margin-top:5px">
 ₹${p.price} × ${item.qty}
 </div>
-
 </div>
 
 <div>
 
 <div class="qty">
 
-<button
-onclick="changeQty(${index},-1)">
-−
-</button>
+<button onclick="changeQty(${index},-1)">−</button>
 
 <b>${item.qty}</b>
 
-<button
-onclick="changeQty(${index},1)">
-+
-</button>
+<button onclick="changeQty(${index},1)">+</button>
 
 </div>
 
-<button
-class="remove"
-style="margin-top:6px"
-onclick="removeCart(${index})">
-
-Remove
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-html+=`
-
-<div class="total">
-Total: ₹${total}
-</div>
-
-<div class="info-box">
-💵 <strong>Payment Method: Cash on Delivery</strong>
-<br>
-<small>Pay when your order is delivered.</small>
-</div>
-
-<button
-class="primary"
-onclick="checkout()">
-
+<
