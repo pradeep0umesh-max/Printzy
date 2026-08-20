@@ -1,109 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ffffff">
-<title>Printzy – Custom Printed Products</title>
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f7f7f8;color:#171717}
-header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #eee}
-.top{max-width:1100px;margin:auto;padding:14px 18px;display:flex;align-items:center;gap:14px}
-.logo{font-size:25px;font-weight:800;letter-spacing:-1px}.logo span{font-weight:400}
-.search{flex:1;max-width:520px;padding:12px 16px;border:1px solid #ddd;border-radius:25px;font-size:15px;outline:none}
-.cart{border:0;background:#111;color:#fff;border-radius:22px;padding:11px 16px;font-weight:700}
-.hero{max-width:1100px;margin:22px auto;padding:34px 24px;border-radius:22px;background:#111;color:#fff}
-.hero h1{font-size:clamp(30px,6vw,54px);margin:0 0 10px;line-height:1}.hero p{color:#ddd;font-size:17px;max-width:620px;line-height:1.5}
-.btn{border:0;border-radius:24px;padding:13px 20px;font-weight:700;cursor:pointer;background:#fff;color:#111}
-.wrap{max-width:1100px;margin:auto;padding:0 18px 40px}
-h2{margin:28px 0 14px}.cats{display:flex;gap:10px;overflow:auto;padding-bottom:4px}
-.cat{white-space:nowrap;border:1px solid #ddd;background:#fff;border-radius:20px;padding:10px 16px;cursor:pointer}.cat.active{background:#111;color:#fff}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
-.card{background:#fff;border:1px solid #eee;border-radius:16px;overflow:hidden}.pic{height:190px;background:#eee;display:flex;align-items:center;justify-content:center;font-size:65px}
-.info{padding:14px}.name{font-weight:700}.price{margin:7px 0 12px;font-weight:800}.add{width:100%;padding:10px;border:0;border-radius:10px;background:#111;color:#fff;font-weight:700}
-.empty{padding:30px;text-align:center;background:#fff;border-radius:16px}
-footer{background:#111;color:#ddd;padding:30px 18px;text-align:center;margin-top:20px}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:20;align-items:flex-end;justify-content:center}
-.sheet{background:#fff;width:min(620px,100%);padding:22px;border-radius:22px 22px 0 0;max-height:85vh;overflow:auto}
-.close{float:right;border:0;background:#eee;border-radius:50%;width:34px;height:34px}
-.cartrow{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #eee}
-.qty button{border:1px solid #ddd;background:#fff;border-radius:6px;margin:0 3px}
-.total{font-size:20px;font-weight:800;margin:18px 0}
-</style>
-</head>
-<body>
-<header><div class="top">
-  <div class="logo">Print<span>zy</span></div>
-  <input id="search" class="search" placeholder="Search t-shirts, mugs, frames..." />
-  <button class="cart" onclick="openCart()">Cart (<span id="count">0</span>)</button>
-</div></header>
-
-<section class="hero">
-  <h1>Make it yours.</h1>
-  <p>Discover customizable products and turn your photos, names and ideas into something special.</p>
-  <button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop now</button>
-</section>
-
-<main class="wrap">
-  <h2>Categories</h2>
-  <div class="cats" id="cats"></div>
-  <h2 id="products">Popular products</h2>
-  <div class="grid" id="grid"></div>
-</main>
-
-<footer>© 2026 Printzy · Custom products made for you</footer>
-
-<div class="modal" id="modal" onclick="if(event.target===this)closeCart()">
- <div class="sheet">
-  <button class="close" onclick="closeCart()">×</button>
-  <h2>Your Cart</h2>
-  <div id="cartItems"></div>
-  <div class="total">Total: ₹<span id="total">0</span></div>
-  <button class="add" onclick="checkout()">Proceed to Checkout</button>
- </div>
-</div>
-
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Printzy</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f7f7f8;color:#171717}header{position:sticky;top:0;background:#fff;border-bottom:1px solid #ddd;z-index:5}.top{max-width:1100px;margin:auto;padding:14px;display:flex;gap:12px;align-items:center}.logo{font-size:26px;font-weight:800}.search{flex:1;padding:12px;border:1px solid #ddd;border-radius:24px}.cartBtn,.add{background:#111;color:#fff;border:0;border-radius:10px;padding:12px;font-weight:bold}.cartBtn{border-radius:24px}.container{max-width:1100px;margin:auto;padding:20px}.hero{background:#111;color:#fff;border-radius:22px;padding:38px 22px;margin-bottom:30px}.hero h1{font-size:42px;margin:0 0 12px}.hero button{padding:13px 22px;border:0;border-radius:24px}.categories{display:flex;gap:10px;overflow:auto;margin-bottom:25px}.categories button{white-space:nowrap;padding:10px 16px;border:1px solid #ddd;background:#fff;border-radius:20px}.categories .active{background:#111;color:#fff}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}.card{background:#fff;border:1px solid #eee;border-radius:16px;overflow:hidden}.pic{height:190px;background:#eee;display:flex;align-items:center;justify-content:center;font-size:70px}.info{padding:14px}.price{font-weight:800;font-size:20px;margin:10px 0}.add{width:100%}.modal{display:none;position:fixed;inset:0;background:#0009;z-index:20;align-items:center;justify-content:center;padding:15px}.box{background:#fff;border-radius:18px;padding:20px;width:100%;max-width:500px;max-height:90vh;overflow:auto}.close{float:right;border:0;border-radius:50%;width:34px;height:34px}.item{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #ddd}input,textarea,select{width:100%;padding:12px;margin:7px 0 12px;border:1px solid #ddd;border-radius:8px}.order{width:100%;padding:14px;border:0;border-radius:10px;background:#25d366;color:#fff;font-weight:bold}
+</style></head><body>
+<header><div class="top"><div class="logo">Printzy</div><input id="search" class="search" placeholder="Search products..." oninput="render()"><button class="cartBtn" onclick="openCart()">Cart (<span id="count">0</span>)</button></div></header>
+<main class="container"><section class="hero"><h1>Make it yours.</h1><p>Custom printed products made for you.</p><button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button></section>
+<h2>Categories</h2><div class="categories" id="cats"></div><h2 id="products">Popular Products</h2><div class="grid" id="grid"></div></main>
+<div class="modal" id="modal"><div class="box"><button class="close" onclick="closeCart()">×</button><h2>Your Cart</h2><div id="items"></div><h3>Total: ₹<span id="total">0</span></h3><h3>Order Details</h3><input id="name" placeholder="Your Name"><input id="email" type="email" placeholder="Email Address"><input id="pin" placeholder="Pincode"><textarea id="address" placeholder="Full Delivery Address"></textarea><select id="payment"><option>Cash on Delivery</option><option>UPI / Online Payment</option></select><button class="order" onclick="order()">Place Order on WhatsApp</button></div></div>
 <script>
-const products=[
- {id:1,name:"Custom T-Shirt",cat:"Clothing",price:499,emoji:"👕"},
- {id:2,name:"Photo Mug",cat:"Mugs",price:299,emoji:"☕"},
- {id:3,name:"Custom Hoodie",cat:"Clothing",price:899,emoji:"🧥"},
- {id:4,name:"Photo Frame",cat:"Home",price:599,emoji:"🖼️"},
- {id:5,name:"Phone Case",cat:"Accessories",price:399,emoji:"📱"},
- {id:6,name:"Custom Cap",cat:"Accessories",price:349,emoji:"🧢"},
- {id:7,name:"Photo Cushion",cat:"Home",price:549,emoji:"🛋️"},
- {id:8,name:"Custom Poster",cat:"Posters",price:249,emoji:"🎨"}
-];
-let cart=JSON.parse(localStorage.getItem("printzyCart")||"[]"), filter="All";
-
-function renderCats(){
- const cats=["All",...new Set(products.map(p=>p.cat))];
- document.getElementById("cats").innerHTML=cats.map(c=>`<button class="cat ${c===filter?"active":""}" onclick="filterCat('${c}')">${c}</button>`).join("");
-}
-function render(){
- const q=document.getElementById("search").value.toLowerCase();
- const list=products.filter(p=>(filter==="All"||p.cat===filter)&&p.name.toLowerCase().includes(q));
- document.getElementById("grid").innerHTML=list.length?list.map(p=>`
- <div class="card"><div class="pic">${p.emoji}</div><div class="info">
- <div class="name">${p.name}</div><div class="price">₹${p.price}</div>
- <button class="add" onclick="add(${p.id})">Add to cart</button></div></div>`).join(""):`<div class="empty">No products found.</div>`;
- document.getElementById("count").textContent=cart.reduce((a,x)=>a+x.qty,0);
-}
-function filterCat(c){filter=c;renderCats();render()}
-function add(id){let x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});save();render()}
-function save(){localStorage.setItem("printzyCart",JSON.stringify(cart));render()}
-function openCart(){
- document.getElementById("modal").style.display="flex";
- const box=document.getElementById("cartItems");
- if(!cart.length){box.innerHTML="<p>Your cart is empty.</p>";document.getElementById("total").textContent=0;return}
- box.innerHTML=cart.map(i=>{let p=products.find(x=>x.id===i.id);return `<div class="cartrow"><div>${p.emoji} <b>${p.name}</b><br>₹${p.price} × ${i.qty}</div><div class="qty"><button onclick="change(${p.id},-1)">−</button>${i.qty}<button onclick="change(${p.id},1)">+</button></div></div>`}).join("");
- document.getElementById("total").textContent=cart.reduce((a,i)=>a+products.find(p=>p.id===i.id).price*i.qty,0);
-}
-function change(id,d){let x=cart.find(i=>i.id===id);if(x){x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id)}save();openCart()}
-function closeCart(){document.getElementById("modal").style.display="none"}
-function checkout(){alert("Checkout is ready for the next step. Payment and order backend can be connected next.");}
-document.getElementById("search").addEventListener("input",render);
-renderCats();render();
-</script>
-</body>
-</html>
+const products=[["Custom T-Shirt",499,"Clothing","👕"],["Custom Coffee Mug",299,"Mugs","☕"],["Photo Frame",399,"Home","🖼️"],["Custom Hoodie",899,"Clothing","🧥"],["Custom Keychain",199,"Accessories","🔑"],["Custom Cushion",449,"Home","🛋️"],["Custom Cap",349,"Accessories","🧢"],["Couple T-Shirt",799,"Clothing","👕"]];
+let cart=[],cat="All";
+function render(){let q=document.getElementById("search").value.toLowerCase();let cats=["All",...new Set(products.map(p=>p[2]))];document.getElementById("cats").innerHTML=cats.map(c=>`<button class="${c==cat?"active":""}" onclick="setCat('${c}')">${c}</button>`).join("");let list=products.filter(p=>(cat=="All"||p[2]==cat)&&p[0].toLowerCase().includes(q));document.getElementById("grid").innerHTML=list.map((p,i)=>`<div class="card"><div class="pic">${p[3]}</div><div class="info"><b>${p[0]}</b><div>${p[2]}</div><div class="price">₹${p[1]}</div><button class="add" onclick="add(${products.indexOf(p)})">Add to Cart</button></div></div>`).join("");document.getElementById("count").textContent=cart.reduce((a,x)=>a+x.q,0)}
+function setCat(c){cat=c;render()} function add(i){let x=cart.find(x=>x.i==i);x?x.q++:cart.push({i,q:1});render();alert("Added to cart!")} function openCart(){document.getElementById("modal").style.display="flex";showCart()} function closeCart(){document.getElementById("modal").style.display="none"}
+function showCart(){let t=0;document.getElementById("items").innerHTML=cart.length?cart.map(x=>{let p=products[x.i];t+=p[1]*x.q;return `<div class="item"><span>${p[3]} ${p[0]} × ${x.q}</span><span><button onclick="qty(${x.i},-1)">−</button><button onclick="qty(${x.i},1)">+</button></span></div>`}).join(""):"<p>Cart is empty.</p>";document.getElementById("total").textContent=t}
+function qty(i,d){let x=cart.find(x=>x.i==i);if(x){x.q+=d;if(x.q<1)cart=cart.filter(y=>y.i!=i)}render();showCart()}
+function order(){if(!cart.length)return alert("Cart is empty!");let name=document.getElementById("name").value.trim(),email=document.getElementById("email").value.trim(),pin=document.getElementById("pin").value.trim(),address=document.getElementById("address").value.trim(),payment=document.getElementById("payment").value;if(!name||!email||!pin||!address)return alert("Please fill Name, Email, Pincode and Address.");let n=+(localStorage.getItem("printzyNo")||1000)+1;localStorage.setItem("printzyNo",n);let id="PRZ-"+n,total=0,msg=`*New Printzy Order*%0AOrder ID: ${id}%0AName: ${name}%0AEmail: ${email}%0APincode: ${pin}%0AAddress: ${address}%0APayment: ${payment}%0A%0A*Products:*%0A`;cart.forEach(x=>{let p=products[x.i],a=p[1]*x.q;total+=a;msg+=`${p[0]} x ${x.q} = ₹${a}%0A`});msg+=`%0A*Total: ₹${total}*`;let whatsappNumber="919999999999";window.open(`https://wa.me/${whatsappNumber}?text=${msg}`,"_blank")}
+render();
+</script></body></html>
