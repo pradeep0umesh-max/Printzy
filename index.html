@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,11 +10,20 @@
 
 <style>
 
+/* =========================
+   RESET
+========================= */
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
+
+
+/* =========================
+   VARIABLES
+========================= */
 
 :root{
   --blue:#1264e8;
@@ -22,7 +32,14 @@
   --text:#172033;
   --card:#ffffff;
   --border:#dce6f5;
+  --muted:#64748b;
+  --danger:#ef3155;
 }
+
+
+/* =========================
+   BODY
+========================= */
 
 body{
   font-family:Arial,Helvetica,sans-serif;
@@ -36,9 +53,13 @@ body.dark{
   --text:#f3f6ff;
   --card:#151e2e;
   --border:#263650;
+  --muted:#aab5c7;
 }
 
-/* HEADER */
+
+/* =========================
+   HEADER
+========================= */
 
 header{
   position:sticky;
@@ -55,13 +76,14 @@ header{
   padding:15px 18px;
   display:flex;
   align-items:center;
-  gap:18px;
+  gap:12px;
 }
 
 .logo{
-  font-size:27px;
+  font-size:28px;
   font-weight:900;
   color:var(--blue);
+  white-space:nowrap;
 }
 
 .search{
@@ -88,6 +110,7 @@ header{
   height:45px;
   font-size:20px;
   cursor:pointer;
+  flex-shrink:0;
 }
 
 .cart-btn{
@@ -98,9 +121,17 @@ header{
   border-radius:25px;
   font-weight:bold;
   cursor:pointer;
+  white-space:nowrap;
 }
 
-/* HERO */
+.cart-btn:hover{
+  background:var(--blue2);
+}
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
   max-width:1150px;
@@ -109,6 +140,7 @@ header{
   border-radius:28px;
   background:linear-gradient(135deg,#0865e8,#3b8cff);
   color:white;
+  box-shadow:0 15px 40px rgba(18,100,232,.18);
 }
 
 .hero h1{
@@ -134,7 +166,14 @@ header{
   font-size:16px;
 }
 
-/* CONTENT */
+.shop-btn:hover{
+  transform:translateY(-2px);
+}
+
+
+/* =========================
+   CONTENT
+========================= */
 
 .container{
   max-width:1150px;
@@ -146,6 +185,11 @@ header{
   font-size:30px;
   margin:28px 0 18px;
 }
+
+
+/* =========================
+   CATEGORIES
+========================= */
 
 .categories{
   display:flex;
@@ -170,7 +214,10 @@ header{
   color:white;
 }
 
-/* PRODUCTS */
+
+/* =========================
+   PRODUCTS
+========================= */
 
 .products{
   display:grid;
@@ -258,7 +305,10 @@ header{
   background:var(--blue2);
 }
 
-/* MODAL */
+
+/* =========================
+   MODAL
+========================= */
 
 .modal{
   display:none;
@@ -301,7 +351,7 @@ header{
 .close{
   position:absolute;
   right:18px;
-  top:15px;
+  top:12px;
   border:0;
   background:none;
   font-size:30px;
@@ -319,7 +369,10 @@ header{
   margin-bottom:12px;
 }
 
-/* PRODUCT DETAILS */
+
+/* =========================
+   PRODUCT DETAILS
+========================= */
 
 .product-details{
   display:grid;
@@ -339,10 +392,6 @@ header{
   font-size:120px;
 }
 
-.detail-info{
-  padding-top:5px;
-}
-
 .detail-info h2{
   font-size:28px;
   margin-bottom:10px;
@@ -358,7 +407,7 @@ header{
 
 .detail-description{
   line-height:1.7;
-  color:#64748b;
+  color:var(--muted);
   margin-bottom:18px;
 }
 
@@ -438,7 +487,10 @@ header{
   color:white;
 }
 
-/* CART */
+
+/* =========================
+   CART
+========================= */
 
 .cart-item{
   display:flex;
@@ -465,7 +517,120 @@ header{
   color:var(--blue);
 }
 
-/* FOOTER */
+
+/* =========================
+   LOGIN / SIGNUP
+========================= */
+
+.auth-box{
+  background:var(--card);
+  color:var(--text);
+  width:100%;
+  max-width:420px;
+  border-radius:24px;
+  padding:30px;
+  position:relative;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  animation:modalOpen .25s ease;
+}
+
+.auth-box h2{
+  text-align:center;
+  font-size:27px;
+  margin-bottom:8px;
+}
+
+.auth-subtitle{
+  text-align:center;
+  color:var(--muted);
+  margin-bottom:22px;
+  line-height:1.5;
+}
+
+.auth-icon{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:#eaf3ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  margin:0 auto 15px;
+}
+
+.auth-input{
+  width:100%;
+  padding:14px 15px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--light);
+  color:var(--text);
+  outline:none;
+  font-size:15px;
+  margin-bottom:12px;
+}
+
+.auth-input:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(18,100,232,.10);
+}
+
+.password-box{
+  position:relative;
+}
+
+.password-box .auth-input{
+  padding-right:50px;
+}
+
+.password-box button{
+  position:absolute;
+  right:8px;
+  top:4px;
+  width:40px;
+  height:40px;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  font-size:17px;
+}
+
+.auth-submit{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:var(--blue);
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:5px;
+}
+
+.auth-submit:hover{
+  background:var(--blue2);
+}
+
+.auth-switch{
+  text-align:center;
+  margin-top:18px;
+  color:var(--muted);
+}
+
+.auth-switch button{
+  border:0;
+  background:none;
+  color:var(--blue);
+  font-weight:bold;
+  cursor:pointer;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
   background:#092d69;
@@ -487,7 +652,10 @@ footer{
   cursor:pointer;
 }
 
-/* MOBILE */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px){
 
@@ -560,9 +728,11 @@ footer{
     font-size:23px;
   }
 
-}
+  .auth-box{
+    padding:25px 20px;
+  }
 
-/* VERY SMALL MOBILE */
+}
 
 @media(max-width:400px){
 
@@ -583,13 +753,16 @@ footer{
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- HEADER -->
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -599,6 +772,7 @@ footer{
       Printzy
     </div>
 
+
     <input
       class="search"
       id="search"
@@ -607,24 +781,46 @@ footer{
       oninput="searchProducts()"
     >
 
+
     <button
       class="nav-btn"
       onclick="toggleDark()"
       title="Theme">
+
       🌙
+
     </button>
+
 
     <button
       class="nav-btn"
       onclick="openWishlist()"
       title="Wishlist">
+
       ❤️
+
     </button>
+
 
     <button
       class="cart-btn"
       onclick="openCart()">
-      🛒 Cart (<span id="cartCount">0</span>)
+
+      🛒 Cart
+      (<span id="cartCount">0</span>)
+
+    </button>
+
+
+    <button
+      class="cart-btn"
+      onclick="openAuth()">
+
+      👤
+      <span id="accountText">
+        Login
+      </span>
+
     </button>
 
   </div>
@@ -632,7 +828,9 @@ footer{
 </header>
 
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
@@ -656,9 +854,12 @@ footer{
 </section>
 
 
-<!-- CONTENT -->
+<!-- =========================
+     MAIN CONTENT
+========================= -->
 
 <div class="container">
+
 
   <h2 class="section-title">
     Categories
@@ -667,35 +868,51 @@ footer{
 
   <div class="categories">
 
+
     <button
       class="category active"
       onclick="filterCategory('All',this)">
+
       All
+
     </button>
+
 
     <button
       class="category"
       onclick="filterCategory('Clothing',this)">
+
       👕 Clothing
+
     </button>
+
 
     <button
       class="category"
       onclick="filterCategory('Mugs',this)">
+
       ☕ Mugs
+
     </button>
+
 
     <button
       class="category"
       onclick="filterCategory('Home',this)">
+
       🏠 Home
+
     </button>
+
 
     <button
       class="category"
       onclick="filterCategory('Accessories',this)">
+
       🎁 Accessories
+
     </button>
+
 
   </div>
 
@@ -712,12 +929,16 @@ footer{
   <div
     class="products"
     id="productList">
+
   </div>
+
 
 </div>
 
 
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
@@ -728,6 +949,7 @@ footer{
   <p>
     Customized products made for you.
   </p>
+
 
   <div class="footer-links">
 
@@ -745,6 +967,7 @@ footer{
 
   </div>
 
+
   <p style="margin-top:20px">
     © 2026 Printzy. All rights reserved.
   </p>
@@ -752,7 +975,9 @@ footer{
 </footer>
 
 
-<!-- MODAL -->
+<!-- =========================
+     GENERAL MODAL
+========================= -->
 
 <div
   class="modal"
@@ -766,10 +991,260 @@ footer{
     <button
       class="close"
       onclick="closeModal()">
+
       ×
+
     </button>
 
+
     <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     LOGIN / SIGNUP MODAL
+========================= -->
+
+<div
+  class="modal"
+  id="authModal"
+  onclick="closeAuthOutside(event)">
+
+  <div
+    class="auth-box"
+    onclick="event.stopPropagation()">
+
+
+    <button
+      class="close"
+      onclick="closeAuth()">
+
+      ×
+
+    </button>
+
+
+    <!-- LOGIN -->
+
+    <div id="loginForm">
+
+
+      <div class="auth-icon">
+        👤
+      </div>
+
+
+      <h2>
+        Welcome Back
+      </h2>
+
+
+      <p class="auth-subtitle">
+        Login to your Printzy account
+      </p>
+
+
+      <input
+        type="email"
+        id="loginEmail"
+        class="auth-input"
+        placeholder="Email address"
+      >
+
+
+      <div class="password-box">
+
+        <input
+          type="password"
+          id="loginPassword"
+          class="auth-input"
+          placeholder="Password"
+        >
+
+
+        <button
+          type="button"
+          onclick="togglePassword('loginPassword',this)">
+
+          👁️
+
+        </button>
+
+      </div>
+
+
+      <button
+        class="auth-submit"
+        onclick="loginUser()">
+
+        Login
+
+      </button>
+
+
+      <p class="auth-switch">
+
+        Don't have an account?
+
+        <button onclick="showSignup()">
+          Sign Up
+        </button>
+
+      </p>
+
+
+    </div>
+
+
+    <!-- SIGNUP -->
+
+    <div
+      id="signupForm"
+      style="display:none;">
+
+
+      <div class="auth-icon">
+        ✨
+      </div>
+
+
+      <h2>
+        Create Account
+      </h2>
+
+
+      <p class="auth-subtitle">
+        Join Printzy today
+      </p>
+
+
+      <input
+        type="text"
+        id="signupName"
+        class="auth-input"
+        placeholder="Full name"
+      >
+
+
+      <input
+        type="email"
+        id="signupEmail"
+        class="auth-input"
+        placeholder="Email address"
+      >
+
+
+      <input
+        type="tel"
+        id="signupMobile"
+        class="auth-input"
+        placeholder="Mobile number"
+        maxlength="10"
+      >
+
+
+      <div class="password-box">
+
+        <input
+          type="password"
+          id="signupPassword"
+          class="auth-input"
+          placeholder="Create password"
+        >
+
+
+        <button
+          type="button"
+          onclick="togglePassword('signupPassword',this)">
+
+          👁️
+
+        </button>
+
+      </div>
+
+
+      <div class="password-box">
+
+        <input
+          type="password"
+          id="signupConfirm"
+          class="auth-input"
+          placeholder="Confirm password"
+        >
+
+
+        <button
+          type="button"
+          onclick="togglePassword('signupConfirm',this)">
+
+          👁️
+
+        </button>
+
+      </div>
+
+
+      <button
+        class="auth-submit"
+        onclick="signupUser()">
+
+        Create Account
+
+      </button>
+
+
+      <p class="auth-switch">
+
+        Already have an account?
+
+        <button onclick="showLogin()">
+          Login
+        </button>
+
+      </p>
+
+
+    </div>
+
+
+    <!-- ACCOUNT -->
+
+    <div
+      id="accountPanel"
+      style="display:none;">
+
+
+      <div class="auth-icon">
+        👋
+      </div>
+
+
+      <h2 id="accountName">
+        Hello!
+      </h2>
+
+
+      <p
+        id="accountEmail"
+        class="auth-subtitle">
+      </p>
+
+
+      <button
+        class="auth-submit"
+        onclick="logoutUser()">
+
+        Logout
+
+      </button>
+
+
+    </div>
+
 
   </div>
 
@@ -779,7 +1254,9 @@ footer{
 <script>
 
 
-/* PRODUCTS */
+/* =========================
+   PRODUCTS
+========================= */
 
 const products = [
 
@@ -840,36 +1317,57 @@ const products = [
 ];
 
 
-/* CART */
+/* =========================
+   CART
+========================= */
 
 let cart =
 JSON.parse(localStorage.getItem("printzyCart")) || [];
 
 
-/* WISHLIST */
+/* =========================
+   WISHLIST
+========================= */
 
 let wishlist =
 JSON.parse(localStorage.getItem("printzyWishlist")) || [];
 
 
-/* SELECTED QUANTITY */
+/* =========================
+   AUTH
+========================= */
+
+let printzyUsers =
+JSON.parse(
+  localStorage.getItem("printzyUsers")
+) || [];
+
+
+let printzyCurrentUser =
+JSON.parse(
+  localStorage.getItem("printzyCurrentUser")
+) || null;
+
 
 let selectedQuantity = 1;
 
 
-/* SHOW PRODUCTS */
+/* =========================
+   SHOW PRODUCTS
+========================= */
 
 function showProducts(list=products){
 
   const box =
     document.getElementById("productList");
 
-  box.innerHTML = "";
+  box.innerHTML="";
 
 
-  if(list.length === 0){
+  if(list.length===0){
 
-    box.innerHTML = `
+    box.innerHTML=`
+
       <div style="
         grid-column:1/-1;
         text-align:center;
@@ -885,13 +1383,14 @@ function showProducts(list=products){
         </p>
 
       </div>
+
     `;
 
     return;
   }
 
 
-  list.forEach((p)=>{
+  list.forEach(p=>{
 
     const liked =
       wishlist.includes(p.name);
@@ -900,6 +1399,7 @@ function showProducts(list=products){
     box.innerHTML += `
 
       <div class="product">
+
 
         <button
           class="wishlist ${liked?'active':''}"
@@ -921,643 +1421,17 @@ function showProducts(list=products){
 
         <div class="product-info">
 
+
           <h3>
             ${p.name}
           </h3>
+
 
           <p class="price">
             ₹${p.price}
           </p>
 
+
           <button
             class="add"
-            onclick="openProductDetails('${p.name}')">
-
-            View Details
-
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-  });
-
-}
-
-
-/* PRODUCT DETAILS */
-
-function openProductDetails(name){
-
-  const product =
-    products.find(p => p.name === name);
-
-
-  if(!product) return;
-
-
-  selectedQuantity = 1;
-
-
-  const html = `
-
-    <div class="product-details">
-
-
-      <div class="detail-image">
-
-        ${product.icon}
-
-      </div>
-
-
-      <div class="detail-info">
-
-        <h2>
-          ${product.name}
-        </h2>
-
-
-        <div class="detail-price">
-
-          ₹${product.price}
-
-        </div>
-
-
-        <p class="detail-description">
-
-          ${product.description}
-
-        </p>
-
-
-        <label>
-          Size
-        </label>
-
-
-        <select
-          class="detail-select"
-          id="productSize">
-
-          <option value="">
-            Select Size
-          </option>
-
-          <option>
-            Small
-          </option>
-
-          <option>
-            Medium
-          </option>
-
-          <option>
-            Large
-          </option>
-
-          <option>
-            XL
-          </option>
-
-          <option>
-            XXL
-          </option>
-
-        </select>
-
-
-        <label>
-          Color
-        </label>
-
-
-        <select
-          class="detail-select"
-          id="productColor">
-
-          <option value="">
-            Select Color
-          </option>
-
-          <option>
-            White
-          </option>
-
-          <option>
-            Black
-          </option>
-
-          <option>
-            Blue
-          </option>
-
-          <option>
-            Red
-          </option>
-
-        </select>
-
-
-        <label>
-          Quantity
-        </label>
-
-
-        <div class="quantity-box">
-
-          <button
-            onclick="changeQuantity(-1)">
-            −
-          </button>
-
-
-          <span id="quantity">
-            1
-          </span>
-
-
-          <button
-            onclick="changeQuantity(1)">
-            +
-          </button>
-
-        </div>
-
-
-        <button
-          class="detail-add"
-          onclick="addProductToCart('${product.name}')">
-
-          🛒 Add to Cart
-
-        </button>
-
-
-        <button
-          class="buy-now"
-          onclick="buyNow('${product.name}')">
-
-          ⚡ Buy Now
-
-        </button>
-
-
-      </div>
-
-    </div>
-
-  `;
-
-
-  showModal(html);
-
-}
-
-
-/* QUANTITY */
-
-function changeQuantity(value){
-
-  selectedQuantity += value;
-
-
-  if(selectedQuantity < 1){
-
-    selectedQuantity = 1;
-
-  }
-
-
-  if(selectedQuantity > 20){
-
-    selectedQuantity = 20;
-
-  }
-
-
-  const quantity =
-    document.getElementById("quantity");
-
-
-  if(quantity){
-
-    quantity.innerText =
-      selectedQuantity;
-
-  }
-
-}
-
-
-/* ADD PRODUCT TO CART */
-
-function addProductToCart(name){
-
-  const size =
-    document.getElementById("productSize");
-
-
-  const color =
-    document.getElementById("productColor");
-
-
-  if(size && size.value === ""){
-
-    alert("Please select a size.");
-
-    return;
-
-  }
-
-
-  if(color && color.value === ""){
-
-    alert("Please select a color.");
-
-    return;
-
-  }
-
-
-  for(
-    let i=0;
-    i<selectedQuantity;
-    i++
-  ){
-
-    cart.push(name);
-
-  }
-
-
-  localStorage.setItem(
-    "printzyCart",
-    JSON.stringify(cart)
-  );
-
-
-  updateCart();
-
-
-  closeModal();
-
-
-  alert(
-    selectedQuantity +
-    " × " +
-    name +
-    " added to cart!"
-  );
-
-}
-
-
-/* BUY NOW */
-
-function buyNow(name){
-
-  const size =
-    document.getElementById("productSize");
-
-
-  const color =
-    document.getElementById("productColor");
-
-
-  if(size && size.value === ""){
-
-    alert("Please select a size.");
-
-    return;
-
-  }
-
-
-  if(color && color.value === ""){
-
-    alert("Please select a color.");
-
-    return;
-
-  }
-
-
-  closeModal();
-
-
-  showModal(`
-
-    <h2>
-      ⚡ Buy Now
-    </h2>
-
-    <p>
-      Product:
-      <strong>${name}</strong>
-    </p>
-
-    <p>
-      Quantity:
-      <strong>${selectedQuantity}</strong>
-    </p>
-
-    <p style="margin-top:20px">
-      Checkout system will be connected here.
-    </p>
-
-    <button
-      class="detail-add"
-      onclick="alert('Checkout coming soon!')">
-
-      Continue
-
-    </button>
-
-  `);
-
-}
-
-
-/* ADD CART OLD FUNCTION */
-
-function addCart(name){
-
-  cart.push(name);
-
-
-  localStorage.setItem(
-    "printzyCart",
-    JSON.stringify(cart)
-  );
-
-
-  updateCart();
-
-
-  alert(
-    name +
-    " added to cart!"
-  );
-
-}
-
-
-/* UPDATE CART COUNT */
-
-function updateCart(){
-
-  document.getElementById("cartCount").innerText =
-    cart.length;
-
-}
-
-
-/* WISHLIST */
-
-function toggleWishlist(name){
-
-  if(wishlist.includes(name)){
-
-    wishlist =
-      wishlist.filter(
-        x => x !== name
-      );
-
-  }
-
-  else{
-
-    wishlist.push(name);
-
-  }
-
-
-  localStorage.setItem(
-    "printzyWishlist",
-    JSON.stringify(wishlist)
-  );
-
-
-  showProducts();
-
-}
-
-
-/* OPEN WISHLIST */
-
-function openWishlist(){
-
-  let html =
-    "<h2>❤️ My Wishlist</h2>";
-
-
-  if(wishlist.length === 0){
-
-    html += `
-      <p>
-        Your wishlist is empty.
-      </p>
-    `;
-
-  }
-
-  else{
-
-    wishlist.forEach(name=>{
-
-      const product =
-        products.find(
-          p => p.name === name
-        );
-
-
-      html += `
-
-        <div class="cart-item">
-
-          <span>
-            ❤️ ${name}
-          </span>
-
-          <button
-            class="remove-cart"
-            onclick="removeWishlist('${name}')">
-
-            Remove
-
-          </button>
-
-        </div>
-
-      `;
-
-    });
-
-  }
-
-
-  showModal(html);
-
-}
-
-
-/* REMOVE WISHLIST */
-
-function removeWishlist(name){
-
-  wishlist =
-    wishlist.filter(
-      x => x !== name
-    );
-
-
-  localStorage.setItem(
-    "printzyWishlist",
-    JSON.stringify(wishlist)
-  );
-
-
-  openWishlist();
-
-  showProducts();
-
-}
-
-
-/* OPEN CART */
-
-function openCart(){
-
-  let html =
-    "<h2>🛒 Shopping Cart</h2>";
-
-
-  if(cart.length === 0){
-
-    html += `
-
-      <p>
-        Your cart is empty.
-      </p>
-
-    `;
-
-  }
-
-  else{
-
-    let total = 0;
-
-
-    cart.forEach((name,i)=>{
-
-      const product =
-        products.find(
-          p => p.name === name
-        );
-
-
-      if(product){
-
-        total += product.price;
-
-      }
-
-
-      html += `
-
-        <div class="cart-item">
-
-          <span>
-            ${i+1}. ${name}
-          </span>
-
-          <button
-            class="remove-cart"
-            onclick="removeCartItem(${i})">
-
-            Remove
-
-          </button>
-
-        </div>
-
-      `;
-
-    });
-
-
-    html += `
-
-      <div class="cart-total">
-
-        Total:
-        ₹${total}
-
-      </div>
-
-
-      <button
-        class="add"
-        onclick="checkout()">
-
-        Continue to Checkout
-
-      </button>
-
-    `;
-
-  }
-
-
-  showModal(html);
-
-}
-
-
-/* REMOVE CART ITEM */
-
-function removeCartItem(index){
-
-  cart.splice(index,1);
-
-
-  localStorage.setItem(
-    "printzyCart",
-    JSON.stringify(cart)
-  );
-
-
-  updateCart();
-
-
-  openCart();
-
-}
-
-
-/* CHECKOUT */
-
-function checkout(){
-
-  if(cart.length === 0){
-
-    alert("Your cart is empty.");
-
-    return;
-
-  }
-
-
-  showModal(`
-
-    <h2>
-      🛍️ Checkout
-    </h2>
-
-  
+         
