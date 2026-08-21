@@ -1,1437 +1,798 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Printzy - Custom Printed Products</title>
-
-<style>
-
-/* =========================
-   RESET
-========================= */
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-
-/* =========================
-   VARIABLES
-========================= */
-
-:root{
-  --blue:#1264e8;
-  --blue2:#0b4fc4;
-  --light:#f5f9ff;
-  --text:#172033;
-  --card:#ffffff;
-  --border:#dce6f5;
-  --muted:#64748b;
-  --danger:#ef3155;
-}
-
-
-/* =========================
-   BODY
-========================= */
-
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--light);
-  color:var(--text);
-  transition:.3s;
-}
-
-body.dark{
-  --light:#0d1422;
-  --text:#f3f6ff;
-  --card:#151e2e;
-  --border:#263650;
-  --muted:#aab5c7;
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:var(--card);
-  border-bottom:1px solid var(--border);
-  box-shadow:0 3px 15px rgba(0,0,0,.06);
-}
-
-.nav{
-  max-width:1150px;
-  margin:auto;
-  padding:15px 18px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.logo{
-  font-size:28px;
-  font-weight:900;
-  color:var(--blue);
-  white-space:nowrap;
-}
-
-.search{
-  flex:1;
-  padding:13px 18px;
-  border:2px solid var(--border);
-  border-radius:30px;
-  outline:none;
-  background:var(--light);
-  color:var(--text);
-  font-size:15px;
-}
-
-.search:focus{
-  border-color:var(--blue);
-}
-
-.nav-btn{
-  border:0;
-  background:var(--light);
-  color:var(--text);
-  border-radius:50%;
-  width:45px;
-  height:45px;
-  font-size:20px;
-  cursor:pointer;
-  flex-shrink:0;
-}
-
-.cart-btn{
-  border:0;
-  background:var(--blue);
-  color:white;
-  padding:12px 17px;
-  border-radius:25px;
-  font-weight:bold;
-  cursor:pointer;
-  white-space:nowrap;
-}
-
-.cart-btn:hover{
-  background:var(--blue2);
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-  max-width:1150px;
-  margin:25px auto;
-  padding:55px 35px;
-  border-radius:28px;
-  background:linear-gradient(135deg,#0865e8,#3b8cff);
-  color:white;
-  box-shadow:0 15px 40px rgba(18,100,232,.18);
-}
-
-.hero h1{
-  font-size:48px;
-  margin-bottom:15px;
-}
-
-.hero p{
-  font-size:19px;
-  max-width:650px;
-  line-height:1.6;
-}
-
-.shop-btn{
-  margin-top:25px;
-  padding:14px 25px;
-  border:0;
-  border-radius:25px;
-  background:white;
-  color:var(--blue);
-  font-weight:bold;
-  cursor:pointer;
-  font-size:16px;
-}
-
-.shop-btn:hover{
-  transform:translateY(-2px);
-}
-
-
-/* =========================
-   CONTENT
-========================= */
-
-.container{
-  max-width:1150px;
-  margin:auto;
-  padding:10px 18px 50px;
-}
-
-.section-title{
-  font-size:30px;
-  margin:28px 0 18px;
-}
-
-
-/* =========================
-   CATEGORIES
-========================= */
-
-.categories{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  padding-bottom:8px;
-}
-
-.category{
-  white-space:nowrap;
-  padding:11px 20px;
-  border-radius:25px;
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--text);
-  cursor:pointer;
-}
-
-.category.active,
-.category:hover{
-  background:var(--blue);
-  color:white;
-}
-
-
-/* =========================
-   PRODUCTS
-========================= */
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-}
-
-.product{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  overflow:hidden;
-  position:relative;
-  transition:.25s;
-}
-
-.product:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 30px rgba(18,100,232,.13);
-}
-
-.product-img{
-  height:210px;
-  background:#eef5ff;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:85px;
-  cursor:pointer;
-}
-
-.wishlist{
-  position:absolute;
-  top:12px;
-  right:12px;
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  border:1px solid #d8e4f7;
-  background:white;
-  color:#64748b;
-  font-size:22px;
-  cursor:pointer;
-  box-shadow:0 4px 12px rgba(0,0,0,.12);
-  transition:.2s;
-  z-index:2;
-}
-
-.wishlist:hover{
-  transform:scale(1.1);
-}
-
-.wishlist.active{
-  background:#ffe9ed;
-  color:#ef3155;
-}
-
-.product-info{
-  padding:18px;
-}
-
-.product-info h3{
-  margin-bottom:8px;
-}
-
-.price{
-  color:var(--blue);
-  font-size:20px;
-  font-weight:bold;
-}
-
-.add{
-  width:100%;
-  margin-top:14px;
-  padding:12px;
-  border:0;
-  border-radius:12px;
-  background:var(--blue);
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.add:hover{
-  background:var(--blue2);
-}
-
-
-/* =========================
-   MODAL
-========================= */
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.65);
-  z-index:500;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.modal-box{
-  background:var(--card);
-  color:var(--text);
-  width:100%;
-  max-width:650px;
-  border-radius:22px;
-  padding:25px;
-  max-height:90vh;
-  overflow:auto;
-  position:relative;
-  animation:modalOpen .25s ease;
-}
-
-@keyframes modalOpen{
-
-  from{
-    opacity:0;
-    transform:scale(.9);
-  }
-
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
-
-}
-
-.close{
-  position:absolute;
-  right:18px;
-  top:12px;
-  border:0;
-  background:none;
-  font-size:30px;
-  cursor:pointer;
-  color:var(--text);
-  z-index:5;
-}
-
-.modal-box h2{
-  margin-bottom:15px;
-}
-
-.modal-box p{
-  line-height:1.7;
-  margin-bottom:12px;
-}
-
-
-/* =========================
-   PRODUCT DETAILS
-========================= */
-
-.product-details{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:25px;
-  align-items:start;
-  padding-top:15px;
-}
-
-.detail-image{
-  height:320px;
-  border-radius:18px;
-  background:#eef5ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:120px;
-}
-
-.detail-info h2{
-  font-size:28px;
-  margin-bottom:10px;
-  padding-right:30px;
-}
-
-.detail-price{
-  color:var(--blue);
-  font-size:27px;
-  font-weight:800;
-  margin:12px 0;
-}
-
-.detail-description{
-  line-height:1.7;
-  color:var(--muted);
-  margin-bottom:18px;
-}
-
-.detail-info label{
-  display:block;
-  font-weight:bold;
-  margin:15px 0 7px;
-}
-
-.detail-select{
-  width:100%;
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:var(--light);
-  color:var(--text);
-  outline:none;
-  font-size:15px;
-}
-
-.quantity-box{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin:10px 0 18px;
-}
-
-.quantity-box button{
-  width:38px;
-  height:38px;
-  border:0;
-  border-radius:9px;
-  background:var(--blue);
-  color:white;
-  font-size:20px;
-  cursor:pointer;
-}
-
-.quantity-box span{
-  min-width:30px;
-  text-align:center;
-  font-size:18px;
-  font-weight:bold;
-}
-
-.detail-add{
-  width:100%;
-  padding:14px;
-  border:0;
-  border-radius:12px;
-  background:var(--blue);
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.detail-add:hover{
-  background:var(--blue2);
-}
-
-.buy-now{
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  border:2px solid var(--blue);
-  border-radius:12px;
-  background:transparent;
-  color:var(--blue);
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.buy-now:hover{
-  background:var(--blue);
-  color:white;
-}
-
-
-/* =========================
-   CART
-========================= */
-
-.cart-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding:12px 0;
-  border-bottom:1px solid var(--border);
-}
-
-.remove-cart{
-  border:0;
-  background:#ffe9ed;
-  color:#ef3155;
-  padding:7px 10px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-.cart-total{
-  font-size:20px;
-  font-weight:bold;
-  margin-top:18px;
-  color:var(--blue);
-}
-
-
-/* =========================
-   LOGIN / SIGNUP
-========================= */
-
-.auth-box{
-  background:var(--card);
-  color:var(--text);
-  width:100%;
-  max-width:420px;
-  border-radius:24px;
-  padding:30px;
-  position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
-  animation:modalOpen .25s ease;
-}
-
-.auth-box h2{
-  text-align:center;
-  font-size:27px;
-  margin-bottom:8px;
-}
-
-.auth-subtitle{
-  text-align:center;
-  color:var(--muted);
-  margin-bottom:22px;
-  line-height:1.5;
-}
-
-.auth-icon{
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  background:#eaf3ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  margin:0 auto 15px;
-}
-
-.auth-input{
-  width:100%;
-  padding:14px 15px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:var(--light);
-  color:var(--text);
-  outline:none;
-  font-size:15px;
-  margin-bottom:12px;
-}
-
-.auth-input:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(18,100,232,.10);
-}
-
-.password-box{
-  position:relative;
-}
-
-.password-box .auth-input{
-  padding-right:50px;
-}
-
-.password-box button{
-  position:absolute;
-  right:8px;
-  top:4px;
-  width:40px;
-  height:40px;
-  border:0;
-  background:transparent;
-  cursor:pointer;
-  font-size:17px;
-}
-
-.auth-submit{
-  width:100%;
-  padding:14px;
-  border:0;
-  border-radius:12px;
-  background:var(--blue);
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-  margin-top:5px;
-}
-
-.auth-submit:hover{
-  background:var(--blue2);
-}
-
-.auth-switch{
-  text-align:center;
-  margin-top:18px;
-  color:var(--muted);
-}
-
-.auth-switch button{
-  border:0;
-  background:none;
-  color:var(--blue);
-  font-weight:bold;
-  cursor:pointer;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-  background:#092d69;
-  color:white;
-  padding:35px 18px;
-  text-align:center;
-  margin-top:30px;
-}
-
-.footer-links{
-  margin-top:15px;
-}
-
-.footer-links button{
-  background:none;
-  border:0;
-  color:white;
-  margin:5px 10px;
-  cursor:pointer;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px){
-
-  .nav{
-    flex-wrap:wrap;
-  }
-
-  .logo{
-    font-size:24px;
-  }
-
-  .search{
-    order:3;
-    flex-basis:100%;
-  }
-
-  .hero{
-    margin:15px;
-    padding:35px 25px;
-  }
-
-  .hero h1{
-    font-size:35px;
-  }
-
-  .hero p{
-    font-size:16px;
-  }
-
-  .container{
-    padding-left:15px;
-    padding-right:15px;
-  }
-
-  .products{
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-  }
-
-  .product-img{
-    height:145px;
-    font-size:60px;
-  }
-
-  .product-info{
-    padding:12px;
-  }
-
-  .product-info h3{
-    font-size:15px;
-  }
-
-  .wishlist{
-    width:38px;
-    height:38px;
-    font-size:18px;
-  }
-
-  .product-details{
-    grid-template-columns:1fr;
-    gap:15px;
-  }
-
-  .detail-image{
-    height:210px;
-    font-size:85px;
-  }
-
-  .detail-info h2{
-    font-size:23px;
-  }
-
-  .auth-box{
-    padding:25px 20px;
-  }
-
-}
-
-@media(max-width:400px){
-
-  .products{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .cart-btn{
-    padding:10px 12px;
-    font-size:13px;
-  }
-
-  .nav-btn{
-    width:40px;
-    height:40px;
-  }
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<header>
-
-  <div class="nav">
-
-    <div class="logo">
-      Printzy
-    </div>
-
-
-    <input
-      class="search"
-      id="search"
-      type="search"
-      placeholder="Search t-shirts, mugs, frames..."
-      oninput="searchProducts()"
-    >
-
-
-    <button
-      class="nav-btn"
-      onclick="toggleDark()"
-      title="Theme">
-
-      🌙
-
-    </button>
-
-
-    <button
-      class="nav-btn"
-      onclick="openWishlist()"
-      title="Wishlist">
-
-      ❤️
-
-    </button>
-
-
-    <button
-      class="cart-btn"
-      onclick="openCart()">
-
-      🛒 Cart
-      (<span id="cartCount">0</span>)
-
-    </button>
-
-
-    <button
-      class="cart-btn"
-      onclick="openAuth()">
-
-      👤
-      <span id="accountText">
-        Login
-      </span>
-
-    </button>
-
-  </div>
-
-</header>
-
-
-<!-- =========================
-     HERO
-========================= -->
-
-<section class="hero">
-
-  <h1>
-    Make it yours.
-  </h1>
-
-  <p>
-    Create something special with customized
-    T-shirts, mugs, frames and personalized gifts.
-  </p>
-
-  <button
-    class="shop-btn"
-    onclick="document.getElementById('products').scrollIntoView()">
-
-    Shop Now
-
-  </button>
-
-</section>
-
-
-<!-- =========================
-     MAIN CONTENT
-========================= -->
-
-<div class="container">
-
-
-  <h2 class="section-title">
-    Categories
-  </h2>
-
-
-  <div class="categories">
-
-
-    <button
-      class="category active"
-      onclick="filterCategory('All',this)">
-
-      All
-
-    </button>
-
-
-    <button
-      class="category"
-      onclick="filterCategory('Clothing',this)">
-
-      👕 Clothing
-
-    </button>
-
-
-    <button
-      class="category"
-      onclick="filterCategory('Mugs',this)">
-
-      ☕ Mugs
-
-    </button>
-
-
-    <button
-      class="category"
-      onclick="filterCategory('Home',this)">
-
-      🏠 Home
-
-    </button>
-
-
-    <button
-      class="category"
-      onclick="filterCategory('Accessories',this)">
-
-      🎁 Accessories
-
-    </button>
-
-
-  </div>
-
-
-  <h2
-    class="section-title"
-    id="products">
-
-    Popular Products
-
-  </h2>
-
-
-  <div
-    class="products"
-    id="productList">
-
-  </div>
-
-
-</div>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-  <h2>
-    Printzy
-  </h2>
-
-  <p>
-    Customized products made for you.
-  </p>
-
-
-  <div class="footer-links">
-
-    <button onclick="openTerms()">
-      Terms & Conditions
-    </button>
-
-    <button onclick="openPrivacy()">
-      Privacy Policy
-    </button>
-
-    <button onclick="openContact()">
-      Contact
-    </button>
-
-  </div>
-
-
-  <p style="margin-top:20px">
-    © 2026 Printzy. All rights reserved.
-  </p>
-
-</footer>
-
-
-<!-- =========================
-     GENERAL MODAL
-========================= -->
-
-<div
-  class="modal"
-  id="modal"
-  onclick="outsideModal(event)">
-
-  <div
-    class="modal-box"
-    onclick="event.stopPropagation()">
-
-    <button
-      class="close"
-      onclick="closeModal()">
-
-      ×
-
-    </button>
-
-
-    <div id="modalContent"></div>
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     LOGIN / SIGNUP MODAL
-========================= -->
-
-<div
-  class="modal"
-  id="authModal"
-  onclick="closeAuthOutside(event)">
-
-  <div
-    class="auth-box"
-    onclick="event.stopPropagation()">
-
-
-    <button
-      class="close"
-      onclick="closeAuth()">
-
-      ×
-
-    </button>
-
-
-    <!-- LOGIN -->
-
-    <div id="loginForm">
-
-
-      <div class="auth-icon">
-        👤
-      </div>
-
-
-      <h2>
-        Welcome Back
-      </h2>
-
-
-      <p class="auth-subtitle">
-        Login to your Printzy account
-      </p>
-
-
-      <input
-        type="email"
-        id="loginEmail"
-        class="auth-input"
-        placeholder="Email address"
-      >
-
-
-      <div class="password-box">
-
-        <input
-          type="password"
-          id="loginPassword"
-          class="auth-input"
-          placeholder="Password"
-        >
-
-
-        <button
-          type="button"
-          onclick="togglePassword('loginPassword',this)">
-
-          👁️
-
-        </button>
-
-      </div>
-
-
-      <button
-        class="auth-submit"
-        onclick="loginUser()">
-
-        Login
-
-      </button>
-
-
-      <p class="auth-switch">
-
-        Don't have an account?
-
-        <button onclick="showSignup()">
-          Sign Up
-        </button>
-
-      </p>
-
-
-    </div>
-
-
-    <!-- SIGNUP -->
-
-    <div
-      id="signupForm"
-      style="display:none;">
-
-
-      <div class="auth-icon">
-        ✨
-      </div>
-
-
-      <h2>
-        Create Account
-      </h2>
-
-
-      <p class="auth-subtitle">
-        Join Printzy today
-      </p>
-
-
-      <input
-        type="text"
-        id="signupName"
-        class="auth-input"
-        placeholder="Full name"
-      >
-
-
-      <input
-        type="email"
-        id="signupEmail"
-        class="auth-input"
-        placeholder="Email address"
-      >
-
-
-      <input
-        type="tel"
-        id="signupMobile"
-        class="auth-input"
-        placeholder="Mobile number"
-        maxlength="10"
-      >
-
-
-      <div class="password-box">
-
-        <input
-          type="password"
-          id="signupPassword"
-          class="auth-input"
-          placeholder="Create password"
-        >
-
-
-        <button
-          type="button"
-          onclick="togglePassword('signupPassword',this)">
-
-          👁️
-
-        </button>
-
-      </div>
-
-
-      <div class="password-box">
-
-        <input
-          type="password"
-          id="signupConfirm"
-          class="auth-input"
-          placeholder="Confirm password"
-        >
-
-
-        <button
-          type="button"
-          onclick="togglePassword('signupConfirm',this)">
-
-          👁️
-
-        </button>
-
-      </div>
-
-
-      <button
-        class="auth-submit"
-        onclick="signupUser()">
-
-        Create Account
-
-      </button>
-
-
-      <p class="auth-switch">
-
-        Already have an account?
-
-        <button onclick="showLogin()">
-          Login
-        </button>
-
-      </p>
-
-
-    </div>
-
-
-    <!-- ACCOUNT -->
-
-    <div
-      id="accountPanel"
-      style="display:none;">
-
-
-      <div class="auth-icon">
-        👋
-      </div>
-
-
-      <h2 id="accountName">
-        Hello!
-      </h2>
-
-
-      <p
-        id="accountEmail"
-        class="auth-subtitle">
-      </p>
-
-
-      <button
-        class="auth-submit"
-        onclick="logoutUser()">
-
-        Logout
-
-      </button>
-
-
-    </div>
-
-
-  </div>
-
-</div>
-
-
-<script>
-
-
-/* =========================
-   PRODUCTS
-========================= */
-
-const products = [
-
-  {
-    name:"Custom T-Shirt",
-    price:499,
-    category:"Clothing",
-    icon:"👕",
-    description:
-      "Create your own personalized T-shirt with your favorite design, photo or text."
-  },
-
-  {
-    name:"Personalized Mug",
-    price:299,
-    category:"Mugs",
-    icon:"☕",
-    description:
-      "Make your special moments memorable with a customized personalized mug."
-  },
-
-  {
-    name:"Photo Frame",
-    price:249,
-    category:"Home",
-    icon:"🖼️",
-    description:
-      "Turn your favorite memories into beautiful personalized photo frames."
-  },
-
-  {
-    name:"Custom Hoodie",
-    price:899,
-    category:"Clothing",
-    icon:"🧥",
-    description:
-      "Premium custom hoodie designed especially for you."
-  },
-
-  {
-    name:"Custom Cap",
-    price:349,
-    category:"Accessories",
-    icon:"🧢",
-    description:
-      "Design your own stylish personalized cap with custom text or artwork."
-  },
-
-  {
-    name:"Personalized Gift",
-    price:599,
-    category:"Accessories",
-    icon:"🎁",
-    description:
-      "A personalized gift made specially for birthdays, anniversaries and special occasions."
-  }
-
-];
-
-
-/* =========================
-   CART
-========================= */
-
-let cart =
-JSON.parse(localStorage.getItem("printzyCart")) || [];
-
-
-/* =========================
-   WISHLIST
-========================= */
-
-let wishlist =
-JSON.parse(localStorage.getItem("printzyWishlist")) || [];
-
-
-/* =========================
-   AUTH
-========================= */
-
-let printzyUsers =
-JSON.parse(
-  localStorage.getItem("printzyUsers")
-) || [];
-
-
-let printzyCurrentUser =
-JSON.parse(
-  localStorage.getItem("printzyCurrentUser")
-) || null;
-
-
-let selectedQuantity = 1;
-
-
-/* =========================
-   SHOW PRODUCTS
-========================= */
-
-function showProducts(list=products){
-
-  const box =
-    document.getElementById("productList");
-
-  box.innerHTML="";
-
-
-  if(list.length===0){
-
-    box.innerHTML=`
-
-      <div style="
-        grid-column:1/-1;
-        text-align:center;
-        padding:50px 20px;
-      ">
-
-        <h2>
-          😕 No products found
-        </h2>
-
-        <p style="margin-top:10px">
-          Try searching for another product.
-        </p>
-
-      </div>
-
-    `;
-
-    return;
-  }
-
-
-  list.forEach(p=>{
-
-    const liked =
-      wishlist.includes(p.name);
-
-
-    box.innerHTML += `
-
-      <div class="product">
-
-
-        <button
-          class="wishlist ${liked?'active':''}"
-          onclick="toggleWishlist('${p.name}')">
-
-          ${liked ? "♥" : "♡"}
-
-        </button>
-
-
-        <div
-          class="product-img"
-          onclick="openProductDetails('${p.name}')">
-
-          ${p.icon}
-
-        </div>
-
-
-        <div class="product-info">
-
-
-          <h3>
-            ${p.name}
-          </h3>
-
-
-          <p class="price">
-            ₹${p.price}
-          </p>
-
-
-          <button
-            class="add"
-         
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Printzy - Custom Printed Products</title>  <style>  
+*{  
+  box-sizing:border-box;  
+  margin:0;  
+  padding:0;  
+}  
+  
+:root{  
+  --blue:#1264e8;  
+  --blue2:#0b4fc4;  
+  --light:#f5f9ff;  
+  --text:#172033;  
+  --card:#ffffff;  
+  --border:#dce6f5;  
+}  
+  
+body{  
+  font-family:Arial,Helvetica,sans-serif;  
+  background:var(--light);  
+  color:var(--text);  
+  transition:.3s;  
+}  
+  
+body.dark{  
+  --light:#0d1422;  
+  --text:#f3f6ff;  
+  --card:#151e2e;  
+  --border:#263650;  
+}  
+  
+/* HEADER */  
+header{  
+  position:sticky;  
+  top:0;  
+  z-index:100;  
+  background:var(--card);  
+  border-bottom:1px solid var(--border);  
+  box-shadow:0 3px 15px rgba(0,0,0,.06);  
+}  
+  
+.nav{  
+  max-width:1150px;  
+  margin:auto;  
+  padding:15px 18px;  
+  display:flex;  
+  align-items:center;  
+  gap:18px;  
+}  
+  
+.logo{  
+  font-size:27px;  
+  font-weight:900;  
+  color:var(--blue);  
+}  
+  
+.search{  
+  flex:1;  
+  padding:13px 18px;  
+  border:2px solid var(--border);  
+  border-radius:30px;  
+  outline:none;  
+  background:var(--light);  
+  color:var(--text);  
+  font-size:15px;  
+}  
+  
+.search:focus{  
+  border-color:var(--blue);  
+}  
+  
+.nav-btn{  
+  border:0;  
+  background:var(--light);  
+  color:var(--text);  
+  border-radius:50%;  
+  width:45px;  
+  height:45px;  
+  font-size:20px;  
+  cursor:pointer;  
+}  
+  
+.cart-btn{  
+  border:0;  
+  background:var(--blue);  
+  color:white;  
+  padding:12px 17px;  
+  border-radius:25px;  
+  font-weight:bold;  
+  cursor:pointer;  
+}  
+  
+/* HERO */  
+.hero{  
+  max-width:1150px;  
+  margin:25px auto;  
+  padding:55px 35px;  
+  border-radius:28px;  
+  background:linear-gradient(135deg,#0865e8,#3b8cff);  
+  color:white;  
+}  
+  
+.hero h1{  
+  font-size:48px;  
+  margin-bottom:15px;  
+}  
+  
+.hero p{  
+  font-size:19px;  
+  max-width:650px;  
+  line-height:1.6;  
+}  
+  
+.shop-btn{  
+  margin-top:25px;  
+  padding:14px 25px;  
+  border:0;  
+  border-radius:25px;  
+  background:white;  
+  color:var(--blue);  
+  font-weight:bold;  
+  cursor:pointer;  
+  font-size:16px;  
+}  
+  
+/* CONTENT */  
+.container{  
+  max-width:1150px;  
+  margin:auto;  
+  padding:10px 18px 50px;  
+}  
+  
+.section-title{  
+  font-size:30px;  
+  margin:28px 0 18px;  
+}  
+  
+.categories{  
+  display:flex;  
+  gap:10px;  
+  overflow-x:auto;  
+  padding-bottom:8px;  
+}  
+  
+.category{  
+  white-space:nowrap;  
+  padding:11px 20px;  
+  border-radius:25px;  
+  border:1px solid var(--border);  
+  background:var(--card);  
+  color:var(--text);  
+  cursor:pointer;  
+}  
+  
+.category.active,  
+.category:hover{  
+  background:var(--blue);  
+  color:white;  
+}  
+  
+/* PRODUCTS */  
+.products{  
+  display:grid;  
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));  
+  gap:20px;  
+}  
+  
+.product{  
+  background:var(--card);  
+  border:1px solid var(--border);  
+  border-radius:20px;  
+  overflow:hidden;  
+  position:relative;  
+  transition:.25s;  
+}  
+  
+.product:hover{  
+  transform:translateY(-5px);  
+  box-shadow:0 12px 30px rgba(18,100,232,.13);  
+}  
+  
+.product-img{  
+  height:210px;  
+  background:#eef5ff;  
+  display:flex;  
+  justify-content:center;  
+  align-items:center;  
+  font-size:85px;  
+}  
+  
+.wishlist{  
+  position:absolute;  
+  top:12px;  
+  right:12px;  
+  width:44px;  
+  height:44px;  
+  border-radius:50%;  
+  border:1px solid #d8e4f7;  
+  background:white;  
+  color:#64748b;  
+  font-size:22px;  
+  cursor:pointer;  
+  box-shadow:0 4px 12px rgba(0,0,0,.12);  
+  transition:.2s;  
+}  
+  
+.wishlist:hover{  
+  transform:scale(1.1);  
+}  
+  
+.wishlist.active{  
+  background:#ffe9ed;  
+  color:#ef3155;  
+}  
+  
+.product-info{  
+  padding:18px;  
+}  
+  
+.product-info h3{  
+  margin-bottom:8px;  
+}  
+  
+.price{  
+  color:var(--blue);  
+  font-size:20px;  
+  font-weight:bold;  
+}  
+  
+.add{  
+  width:100%;  
+  margin-top:14px;  
+  padding:12px;  
+  border:0;  
+  border-radius:12px;  
+  background:var(--blue);  
+  color:white;  
+  font-weight:bold;  
+  cursor:pointer;  
+}  
+  
+.add:hover{  
+  background:var(--blue2);  
+}  
+  
+/* MODAL */  
+.modal{  
+  display:none;  
+  position:fixed;  
+  inset:0;  
+  background:rgba(0,0,0,.6);  
+  z-index:500;  
+  align-items:center;  
+  justify-content:center;  
+  padding:20px;  
+}  
+  
+.modal-box{  
+  background:var(--card);  
+  color:var(--text);  
+  width:100%;  
+  max-width:500px;  
+  border-radius:22px;  
+  padding:25px;  
+  max-height:85vh;  
+  overflow:auto;  
+}  
+  
+.close{  
+  float:right;  
+  border:0;  
+  background:none;  
+  font-size:25px;  
+  cursor:pointer;  
+  color:var(--text);  
+}  
+  
+.modal-box h2{  
+  margin-bottom:15px;  
+}  
+  
+.modal-box p{  
+  line-height:1.7;  
+  margin-bottom:12px;  
+}  
+  
+/* FOOTER */  
+footer{  
+  background:#092d69;  
+  color:white;  
+  padding:35px 18px;  
+  text-align:center;  
+  margin-top:30px;  
+}  
+  
+.footer-links{  
+  margin-top:15px;  
+}  
+  
+.footer-links button{  
+  background:none;  
+  border:0;  
+  color:white;  
+  margin:5px 10px;  
+  cursor:pointer;  
+}  
+  
+/* MOBILE */  
+@media(max-width:700px){  
+  
+  .nav{  
+    flex-wrap:wrap;  
+  }  
+  
+  .logo{  
+    font-size:24px;  
+  }  
+  
+  .search{  
+    order:3;  
+    flex-basis:100%;  
+  }  
+  
+  .hero{  
+    margin:15px;  
+    padding:35px 25px;  
+  }  
+  
+  .hero h1{  
+    font-size:35px;  
+  }  
+  
+  .hero p{  
+    font-size:16px;  
+  }  
+  
+  .container{  
+    padding-left:15px;  
+    padding-right:15px;  
+  }  
+  
+  .products{  
+    grid-template-columns:repeat(2,1fr);  
+    gap:12px;  
+  }  
+  
+  .product-img{  
+    height:145px;  
+    font-size:60px;  
+  }  
+  
+  .product-info{  
+    padding:12px;  
+  }  
+  
+  .product-info h3{  
+    font-size:15px;  
+  }  
+  
+  .wishlist{  
+    width:38px;  
+    height:38px;  
+    font-size:18px;  
+  }  
+}  
+</style>  </head>  <body>  <header>  
+  <div class="nav">  <div class="logo">Printzy</div>  
+
+<input  
+  class="search"  
+  id="search"  
+  type="search"  
+  placeholder="Search t-shirts, mugs, frames..."  
+  oninput="searchProducts()"  
+>  
+
+<button class="nav-btn" onclick="toggleDark()" title="Theme">  
+  🌙  
+</button>  
+
+<button class="nav-btn" onclick="openWishlist()" title="Wishlist">  
+  ❤️  
+</button>  
+
+<button class="cart-btn" onclick="openCart()">  
+  🛒 Cart (<span id="cartCount">0</span>)  
+</button>
+
+  </div>  
+</header>  <section class="hero">    <h1>Make it yours.</h1>    <p>  
+    Create something special with customized  
+    T-shirts, mugs, frames and personalized gifts.  
+  </p>    <button class="shop-btn" onclick="document.getElementById('products').scrollIntoView()">  
+    Shop Now  
+  </button>  </section>  <div class="container">    <h2 class="section-title">Categories</h2>    <div class="categories">  <button class="category active" onclick="filterCategory('All',this)">  
+  All  
+</button>  
+
+<button class="category" onclick="filterCategory('Clothing',this)">  
+  👕 Clothing  
+</button>  
+
+<button class="category" onclick="filterCategory('Mugs',this)">  
+  ☕ Mugs  
+</button>  
+
+<button class="category" onclick="filterCategory('Home',this)">  
+  🏠 Home  
+</button>  
+
+<button class="category" onclick="filterCategory('Accessories',this)">  
+  🎁 Accessories  
+</button>
+
+  </div>    <h2 class="section-title" id="products">  
+    Popular Products  
+  </h2>    <div class="products" id="productList"></div>  </div>  <footer>    <h2>Printzy</h2>    <p>Customized products made for you.</p>    <div class="footer-links">  <button onclick="openTerms()">  
+  Terms & Conditions  
+</button>  
+
+<button onclick="openPrivacy()">  
+  Privacy Policy  
+</button>  
+
+<button onclick="openContact()">  
+  Contact  
+</button>
+
+  </div>    <p style="margin-top:20px">  
+    © 2026 Printzy. All rights reserved.  
+  </p>  </footer>  <!-- MODAL -->  <div class="modal" id="modal">    <div class="modal-box">  <button class="close" onclick="closeModal()">×</button>  
+
+<div id="modalContent"></div>
+
+  </div>  </div>  <script>  
+  
+const products = [  
+  
+ {  
+  name:"Custom T-Shirt",  
+  price:499,  
+  category:"Clothing",  
+  icon:"👕"  
+ },  
+  
+ {  
+  name:"Personalized Mug",  
+  price:299,  
+  category:"Mugs",  
+  icon:"☕"  
+ },  
+  
+ {  
+  name:"Photo Frame",  
+  price:249,  
+  category:"Home",  
+  icon:"🖼️"  
+ },  
+  
+ {  
+  name:"Custom Hoodie",  
+  price:899,  
+  category:"Clothing",  
+  icon:"🧥"  
+ },  
+  
+ {  
+  name:"Custom Cap",  
+  price:349,  
+  category:"Accessories",  
+  icon:"🧢"  
+ },  
+  
+ {  
+  name:"Personalized Gift",  
+  price:599,  
+  category:"Accessories",  
+  icon:"🎁"  
+ }  
+  
+];  
+  
+  
+let cart =  
+JSON.parse(localStorage.getItem("printzyCart")) || [];  
+  
+let wishlist =  
+JSON.parse(localStorage.getItem("printzyWishlist")) || [];  
+  
+  
+  
+function showProducts(list=products){  
+  
+ const box=document.getElementById("productList");  
+  
+ box.innerHTML="";  
+  
+ list.forEach((p,index)=>{  
+  
+   const liked=wishlist.includes(p.name);  
+  
+   box.innerHTML += `  
+  
+   <div class="product">  
+  
+     <button  
+       class="wishlist ${liked?'active':''}"  
+       onclick="toggleWishlist('${p.name}')">  
+  
+       ${liked ? "♥" : "♡"}  
+  
+     </button>  
+  
+     <div class="product-img">  
+       ${p.icon}  
+     </div>  
+  
+     <div class="product-info">  
+  
+       <h3>${p.name}</h3>  
+  
+       <p class="price">₹${p.price}</p>  
+  
+       <button  
+         class="add"  
+         onclick="addCart('${p.name}')">  
+  
+         Add to Cart  
+  
+       </button>  
+  
+     </div>  
+  
+   </div>  
+  
+   `;  
+  
+ });  
+  
+}  
+  
+  
+function addCart(name){  
+  
+ cart.push(name);  
+  
+ localStorage.setItem(  
+   "printzyCart",  
+   JSON.stringify(cart)  
+ );  
+  
+ updateCart();  
+  
+ alert(name+" added to cart!");  
+  
+}  
+  
+  
+function updateCart(){  
+  
+ document.getElementById("cartCount").innerText =  
+ cart.length;  
+  
+}  
+  
+  
+function toggleWishlist(name){  
+  
+ if(wishlist.includes(name)){  
+  
+   wishlist =  
+   wishlist.filter(x=>x!==name);  
+  
+ }else{  
+  
+   wishlist.push(name);  
+  
+ }  
+  
+ localStorage.setItem(  
+   "printzyWishlist",  
+   JSON.stringify(wishlist)  
+ );  
+  
+ showProducts();  
+  
+}  
+  
+  
+function openWishlist(){  
+  
+ let html="<h2>❤️ My Wishlist</h2>";  
+  
+ if(wishlist.length===0){  
+  
+   html+="<p>Your wishlist is empty.</p>";  
+  
+ }else{  
+  
+   wishlist.forEach(name=>{  
+     html+=`<p>❤️ ${name}</p>`;  
+   });  
+  
+ }  
+  
+ showModal(html);  
+  
+}  
+  
+  
+function openCart(){  
+  
+ let html="<h2>🛒 Shopping Cart</h2>";  
+  
+ if(cart.length===0){  
+  
+   html+="<p>Your cart is empty.</p>";  
+  
+ }else{  
+  
+   cart.forEach((name,i)=>{  
+  
+     html+=`  
+       <p>  
+         ${i+1}. ${name}  
+       </p>  
+     `;  
+  
+   });  
+  
+   html+=`  
+     <button  
+       class="add"  
+       onclick="checkout()">  
+       Continue to Checkout  
+     </button>  
+   `;  
+  
+ }  
+  
+ showModal(html);  
+  
+}  
+  
+  
+function checkout(){  
+  
+ alert(  
+  "Checkout system will be connected with your payment/order system."  
+ );  
+  
+}  
+  
+  
+function filterCategory(category,button){  
+  
+ document.querySelectorAll(".category")  
+ .forEach(b=>b.classList.remove("active"));  
+  
+ button.classList.add("active");  
+  
+ if(category==="All"){  
+  
+   showProducts();  
+  
+ }else{  
+  
+   showProducts(  
+     products.filter(p=>p.category===category)  
+   );  
+  
+ }  
+  
+}  
+  
+  
+function searchProducts(){  
+  
+ const text =  
+ document.getElementById("search")  
+ .value.toLowerCase();  
+  
+ showProducts(  
+   products.filter(p=>  
+     p.name.toLowerCase().includes(text)  
+   )  
+ );  
+  
+}  
+  
+  
+function toggleDark(){  
+  
+ document.body.classList.toggle("dark");  
+  
+ localStorage.setItem(  
+   "printzyDark",  
+   document.body.classList.contains("dark")  
+ );  
+  
+}  
+  
+  
+function openTerms(){  
+  
+ showModal(`  
+  
+   <h2>Terms & Conditions</h2>  
+  
+   <p>  
+   By using Printzy, you agree to our terms and conditions.  
+   </p>  
+  
+   <p>  
+   Customized products may have different production  
+   and delivery times.  
+   </p>  
+  
+   <p>  
+   Customers are responsible for providing correct  
+   customization information.  
+   </p>  
+  
+   <p>  
+   Orders cannot be cancelled after production has started.  
+   </p>  
+  
+ `);  
+  
+}  
+  
+  
+function openPrivacy(){  
+  
+ showModal(`  
+  
+   <h2>Privacy Policy</h2>  
+  
+   <p>  
+   Printzy respects your privacy.  
+   Customer information is used only for order processing,  
+   delivery and customer support.  
+   </p>  
+  
+ `);  
+  
+}  
+  
+  
+function openContact(){  
+  
+ showModal(`  
+  
+   <h2>Contact Printzy</h2>  
+  
+   <p>📧 Email: support@printzy.com</p>  
+  
+   <p>📱 Customer Support</p>  
+  
+   <p>We will help you with your orders and customization.</p>  
+  
+ `);  
+  
+}  
+  
+  
+function showModal(content){  
+  
+ document.getElementById("modalContent").innerHTML =  
+ content;  
+  
+ document.getElementById("modal").style.display="flex";  
+  
+}  
+  
+  
+function closeModal(){  
+  
+ document.getElementById("modal").style.display="none";  
+  
+}  
+  
+  
+if(localStorage.getItem("printzyDark")==="true"){  
+  
+ document.body.classList.add("dark");  
+  
+}  
+  
+  
+showProducts();  
+  
+updateCart();  
+  
+</script>  </body>  
+</html>
