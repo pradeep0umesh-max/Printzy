@@ -46,7 +46,6 @@ body.dark{
   --muted:#aab5c7;
 }
 
-
 /* =========================
    HEADER
 ========================= */
@@ -118,7 +117,6 @@ header{
   background:var(--blue2);
 }
 
-
 /* =========================
    HERO
 ========================= */
@@ -155,7 +153,6 @@ header{
   font-size:16px;
 }
 
-
 /* =========================
    CONTENT
 ========================= */
@@ -170,7 +167,6 @@ header{
   font-size:30px;
   margin:28px 0 18px;
 }
-
 
 /* =========================
    CATEGORIES
@@ -198,7 +194,6 @@ header{
   background:var(--blue);
   color:white;
 }
-
 
 /* =========================
    PRODUCTS
@@ -297,6 +292,39 @@ header{
   background:var(--blue2);
 }
 
+/* =========================
+   FRAME PRICE BOX
+========================= */
+
+.frame-categories{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-top:15px;
+}
+
+.frame-category{
+  border:1px solid var(--border);
+  background:var(--light);
+  border-radius:15px;
+  padding:15px;
+}
+
+.frame-category h3{
+  color:var(--blue);
+  margin-bottom:10px;
+}
+
+.frame-price{
+  display:block;
+  padding:10px;
+  margin-top:7px;
+  border-radius:10px;
+  background:var(--card);
+  border:1px solid var(--border);
+  color:var(--text);
+  font-size:14px;
+}
 
 /* =========================
    MODAL
@@ -317,7 +345,7 @@ header{
   background:var(--card);
   color:var(--text);
   width:100%;
-  max-width:650px;
+  max-width:700px;
   border-radius:22px;
   padding:25px;
   max-height:90vh;
@@ -344,7 +372,6 @@ header{
   line-height:1.7;
   margin-bottom:12px;
 }
-
 
 /* =========================
    PRODUCT DETAILS
@@ -434,7 +461,6 @@ header{
   cursor:pointer;
 }
 
-
 /* =========================
    CART
 ========================= */
@@ -463,7 +489,6 @@ header{
   font-weight:bold;
   margin:20px 0;
 }
-
 
 /* =========================
    LOGIN / SIGNUP
@@ -562,7 +587,6 @@ header{
   cursor:pointer;
 }
 
-
 /* =========================
    FOOTER
 ========================= */
@@ -586,7 +610,6 @@ footer{
   margin:5px 10px;
   cursor:pointer;
 }
-
 
 /* =========================
    MOBILE
@@ -666,14 +689,16 @@ footer{
     font-size:24px;
   }
 
+  .frame-categories{
+    grid-template-columns:1fr;
+  }
+
 }
 
 </style>
 </head>
 
-
 <body>
-
 
 <!-- =========================
      HEADER
@@ -688,7 +713,6 @@ onclick="window.scrollTo({top:0,behavior:'smooth'})">
 Printzy
 </div>
 
-
 <input
 class="search"
 id="search"
@@ -697,50 +721,37 @@ placeholder="Search t-shirts, mugs, frames..."
 oninput="searchProducts()"
 >
 
-
 <button
 class="nav-btn"
 onclick="toggleDark()"
 title="Theme">
-
 🌙
-
 </button>
-
 
 <button
 class="nav-btn"
 onclick="openWishlist()"
 title="Wishlist">
-
 ❤️
-
 </button>
-
 
 <button
 class="cart-btn"
 onclick="openCart()">
-
 🛒 Cart
 (<span id="cartCount">0</span>)
-
 </button>
-
 
 <button
 class="cart-btn"
 onclick="openAuth()">
-
 👤
 <span id="loginText">Login</span>
-
 </button>
 
 </div>
 
 </header>
-
 
 <!-- =========================
      HERO
@@ -760,13 +771,10 @@ T-shirts, mugs, frames and personalized gifts.
 <button
 class="shop-btn"
 onclick="document.getElementById('products').scrollIntoView()">
-
 Shop Now
-
 </button>
 
 </section>
-
 
 <!-- =========================
      CONTENT
@@ -778,64 +786,45 @@ Shop Now
 Categories
 </h2>
 
-
 <div class="categories">
 
 <button
 class="category active"
 onclick="filterCategory('All',this)">
-
 All
-
 </button>
-
 
 <button
 class="category"
 onclick="filterCategory('Clothing',this)">
-
 👕 Clothing
-
 </button>
-
 
 <button
 class="category"
 onclick="filterCategory('Mugs',this)">
-
 ☕ Mugs
-
 </button>
-
 
 <button
 class="category"
 onclick="filterCategory('Home',this)">
-
 🏠 Home
-
 </button>
-
 
 <button
 class="category"
 onclick="filterCategory('Accessories',this)">
-
 🎁 Accessories
-
 </button>
 
 </div>
 
-
 <h2
 class="section-title"
 id="products">
-
 Popular Products
-
 </h2>
-
 
 <div
 class="products"
@@ -843,7 +832,6 @@ id="productList">
 </div>
 
 </div>
-
 
 <!-- =========================
      FOOTER
@@ -858,7 +846,6 @@ Printzy
 <p>
 Customized products made for you.
 </p>
-
 
 <div class="footer-links">
 
@@ -876,13 +863,11 @@ Contact
 
 </div>
 
-
 <p style="margin-top:20px">
 © 2026 Printzy. All rights reserved.
 </p>
 
 </footer>
-
 
 <!-- =========================
      GENERAL MODAL
@@ -900,9 +885,7 @@ onclick="event.stopPropagation()">
 <button
 class="close"
 onclick="closeModal()">
-
 ×
-
 </button>
 
 <div id="modalContent"></div>
@@ -910,7 +893,6 @@ onclick="closeModal()">
 </div>
 
 </div>
-
 
 <!-- =========================
      LOGIN / SIGNUP MODAL
@@ -928,11 +910,8 @@ onclick="event.stopPropagation()">
 <button
 class="close"
 onclick="closeAuth()">
-
 ×
-
 </button>
-
 
 <!-- LOGIN -->
 
@@ -950,14 +929,12 @@ Welcome Back
 Login to your Printzy account
 </p>
 
-
 <input
 class="auth-input"
 id="loginEmail"
 type="email"
 placeholder="Email address"
 >
-
 
 <div class="password-wrap">
 
@@ -975,15 +952,11 @@ onclick="showPassword('loginPassword',this)">
 
 </div>
 
-
 <button
 class="auth-submit"
 onclick="loginUser()">
-
 Login
-
 </button>
-
 
 <p class="auth-switch">
 
@@ -996,7 +969,6 @@ Sign Up
 </p>
 
 </div>
-
 
 <!-- SIGNUP -->
 
@@ -1016,14 +988,12 @@ Create Account
 Join Printzy today
 </p>
 
-
 <input
 class="auth-input"
 id="signupName"
 type="text"
 placeholder="Full name"
 >
-
 
 <input
 class="auth-input"
@@ -1032,7 +1002,6 @@ type="email"
 placeholder="Email address"
 >
 
-
 <input
 class="auth-input"
 id="signupMobile"
@@ -1040,7 +1009,6 @@ type="tel"
 maxlength="10"
 placeholder="Mobile number"
 >
-
 
 <div class="password-wrap">
 
@@ -1058,7 +1026,6 @@ onclick="showPassword('signupPassword',this)">
 
 </div>
 
-
 <div class="password-wrap">
 
 <input
@@ -1075,15 +1042,11 @@ onclick="showPassword('signupConfirm',this)">
 
 </div>
 
-
 <button
 class="auth-submit"
 onclick="signupUser()">
-
 Create Account
-
 </button>
-
 
 <p class="auth-switch">
 
@@ -1096,7 +1059,6 @@ Login
 </p>
 
 </div>
-
 
 <!-- ACCOUNT -->
 
@@ -1117,13 +1079,10 @@ class="auth-subtitle"
 id="accountEmail">
 </p>
 
-
 <button
 class="auth-submit"
 onclick="logoutUser()">
-
 Logout
-
 </button>
 
 </div>
@@ -1132,9 +1091,7 @@ Logout
 
 </div>
 
-
 <script>
-
 
 /* =========================
    PRODUCTS
@@ -1160,13 +1117,18 @@ description:"A personalized mug made specially with your favorite photo or messa
 sizes:false
 },
 
+/* =========================
+   PHOTO FRAME
+========================= */
+
 {
 name:"Photo Frame",
-price:249,
+price:149,
 category:"Home",
 icon:"🖼️",
-description:"Turn your favorite memory into a beautiful personalized photo frame.",
-sizes:false
+description:"Choose your frame size and type from our available Photo Frame categories.",
+sizes:false,
+frame:true
 },
 
 {
@@ -1194,6 +1156,59 @@ category:"Accessories",
 icon:"🎁",
 description:"A special personalized gift for birthdays, anniversaries and special occasions.",
 sizes:false
+}
+
+];
+
+
+/* =========================
+   PHOTO FRAME OPTIONS
+========================= */
+
+const frameOptions=[
+
+{
+category:"1st Category - 8×12",
+options:[
+{
+label:"8×12 - General Print",
+price:149
+},
+{
+label:"8×12 - Your Photo",
+price:199
+},
+{
+label:"8×12 - Frame Only - ₹99 (per frame)",
+price:99
+},
+{
+label:"8×12 - Frame Only - ₹449 (5 frame)",
+price:449
+}
+]
+},
+
+{
+category:"2nd Category - 12×18",
+options:[
+{
+label:"12×18 - General Print",
+price:399
+},
+{
+label:"12×18 - Your Photo",
+price:499
+},
+{
+label:"12×18 - Frame Only - ₹299 (per frame)",
+price:299
+},
+{
+label:"12×18 - Frame Only - ₹1449 (5 frame)",
+price:1449
+}
+]
 }
 
 ];
@@ -1229,7 +1244,6 @@ document.getElementById("productList");
 
 box.innerHTML="";
 
-
 if(list.length===0){
 
 box.innerHTML=`
@@ -1256,7 +1270,6 @@ return;
 
 }
 
-
 list.forEach(p=>{
 
 const liked=
@@ -1274,7 +1287,6 @@ ${liked?"♥":"♡"}
 
 </button>
 
-
 <div
 class="product-img"
 onclick="openProduct('${p.name}')">
@@ -1283,7 +1295,6 @@ ${p.icon}
 
 </div>
 
-
 <div class="product-info">
 
 <h3>
@@ -1291,13 +1302,18 @@ ${p.name}
 </h3>
 
 <p class="price">
-₹${p.price}
+
+${
+p.frame
+? "From ₹149"
+: "₹"+p.price
+}
+
 </p>
 
 <p class="product-description">
 ${p.description}
 </p>
-
 
 <button
 class="add"
@@ -1331,12 +1347,70 @@ if(!p)return;
 
 detailQuantity=1;
 
+let extraHTML="";
 
-let sizeHTML="";
+/* FRAME OPTIONS */
 
-if(p.sizes){
+if(p.frame){
 
-sizeHTML=`
+extraHTML=`
+
+<label class="detail-label">
+Select Frame Category & Type
+</label>
+
+<div class="frame-categories">
+
+${frameOptions.map((cat,catIndex)=>`
+
+<div class="frame-category">
+
+<h3>
+${cat.category}
+</h3>
+
+${cat.options.map((option,index)=>`
+
+<label class="frame-price">
+
+<input
+type="radio"
+name="frameOption"
+value="${option.price}"
+data-label="${option.label}"
+${catIndex===0&&index===0?"checked":""}
+onchange="updateFramePrice(${option.price})"
+>
+
+ ${option.label}
+
+</label>
+
+`).join("")}
+
+</div>
+
+`).join("")}
+
+</div>
+
+<div
+class="detail-price"
+id="frameSelectedPrice">
+
+₹149
+
+</div>
+
+`;
+
+}
+
+/* CLOTHING SIZE */
+
+else if(p.sizes){
+
+extraHTML=`
 
 <label class="detail-label">
 Select Size
@@ -1371,31 +1445,33 @@ const html=`
 ${p.icon}
 </div>
 
-
 <div class="detail-info">
 
 <h2>
 ${p.name}
 </h2>
 
-
+${
+p.frame
+?
+""
+:
+`
 <div class="detail-price">
 ₹${p.price}
 </div>
-
+`
+}
 
 <p class="detail-description">
 ${p.description}
 </p>
 
-
-${sizeHTML}
-
+${extraHTML}
 
 <label class="detail-label">
 Quantity
 </label>
-
 
 <div class="quantity">
 
@@ -1415,7 +1491,6 @@ onclick="changeQuantity(1)">
 
 </div>
 
-
 <button
 class="add"
 onclick="addDetailedCart('${p.name}')">
@@ -1423,7 +1498,6 @@ onclick="addDetailedCart('${p.name}')">
 🛒 Add to Cart
 
 </button>
-
 
 <button
 class="buy-now"
@@ -1440,6 +1514,52 @@ onclick="buyNow('${p.name}')">
 `;
 
 showModal(html);
+
+}
+
+
+/* =========================
+   FRAME PRICE
+========================= */
+
+function updateFramePrice(price){
+
+const box=
+document.getElementById("frameSelectedPrice");
+
+if(box){
+
+box.innerText=
+"₹"+price;
+
+}
+
+}
+
+
+/* =========================
+   GET SELECTED FRAME
+========================= */
+
+function getSelectedFrame(){
+
+const selected=
+document.querySelector(
+'input[name="frameOption"]:checked'
+);
+
+if(!selected){
+
+return null;
+
+}
+
+return {
+
+label:selected.dataset.label,
+price:Number(selected.value)
+
+};
 
 }
 
@@ -1468,13 +1588,43 @@ q.innerText=detailQuantity;
 
 
 /* =========================
-   ADD DETAILED CART
+   ADD TO CART
 ========================= */
 
 function addDetailedCart(name){
 
 const p=
 products.find(x=>x.name===name);
+
+let itemPrice=p.price;
+let itemName=name;
+
+/* FRAME */
+
+if(p.frame){
+
+const selected=
+getSelectedFrame();
+
+if(!selected){
+
+alert(
+"Please select a frame option."
+);
+
+return;
+
+}
+
+itemPrice=
+selected.price;
+
+itemName=
+name+" - "+selected.label;
+
+}
+
+/* SIZE PRODUCTS */
 
 if(p.sizes){
 
@@ -1483,11 +1633,16 @@ document.getElementById("productSize").value;
 
 if(!size){
 
-alert("Please select a size.");
+alert(
+"Please select a size."
+);
 
 return;
 
 }
+
+itemName=
+name+" - "+size;
 
 }
 
@@ -1498,10 +1653,14 @@ i<detailQuantity;
 i++
 ){
 
-cart.push(name);
+cart.push({
+
+name:itemName,
+price:itemPrice
+
+});
 
 }
-
 
 localStorage.setItem(
 "printzyCart",
@@ -1515,7 +1674,7 @@ closeModal();
 alert(
 detailQuantity+
 " × "+
-name+
+itemName+
 " added to cart!"
 );
 
@@ -1531,6 +1690,36 @@ function buyNow(name){
 const p=
 products.find(x=>x.name===name);
 
+let itemPrice=p.price;
+let itemName=name;
+
+/* FRAME */
+
+if(p.frame){
+
+const selected=
+getSelectedFrame();
+
+if(!selected){
+
+alert(
+"Please select a frame option."
+);
+
+return;
+
+}
+
+itemPrice=
+selected.price;
+
+itemName=
+name+" - "+selected.label;
+
+}
+
+/* SIZE */
+
 if(p.sizes){
 
 const size=
@@ -1538,11 +1727,16 @@ document.getElementById("productSize").value;
 
 if(!size){
 
-alert("Please select a size.");
+alert(
+"Please select a size."
+);
 
 return;
 
 }
+
+itemName=
+name+" - "+size;
 
 }
 
@@ -1556,12 +1750,22 @@ showModal(`
 
 <p>
 Product:
-<strong>${name}</strong>
+<strong>${itemName}</strong>
+</p>
+
+<p>
+Price:
+<strong>₹${itemPrice}</strong>
 </p>
 
 <p>
 Quantity:
 <strong>${detailQuantity}</strong>
+</p>
+
+<p>
+Total:
+<strong>₹${itemPrice*detailQuantity}</strong>
 </p>
 
 <button
@@ -1594,7 +1798,6 @@ function openCart(){
 let html=
 "<h2>🛒 Shopping Cart</h2>";
 
-
 if(cart.length===0){
 
 html+=`
@@ -1611,23 +1814,43 @@ else{
 
 let total=0;
 
+cart.forEach((item,index)=>{
 
-cart.forEach((name,index)=>{
+/* OLD CART SUPPORT */
 
-const p=
-products.find(x=>x.name===name);
+let itemName=
+typeof item==="string"
+?item
+:item.name;
 
-if(p)
-total+=p.price;
+let itemPrice=
+typeof item==="string"
+?
+(
+products.find(x=>x.name===item)?.price||0
+)
+:
+item.price;
 
+total+=itemPrice;
 
 html+=`
 
 <div class="cart-item">
 
-<span>
-${index+1}. ${name}
+<div>
+
+<strong>
+${index+1}. ${itemName}
+</strong>
+
+<br>
+
+<span style="color:var(--blue);">
+₹${itemPrice}
 </span>
+
+</div>
 
 <button
 class="remove-btn"
@@ -1643,13 +1866,11 @@ Remove
 
 });
 
-
 html+=`
 
 <div class="cart-total">
 Total: ₹${total}
 </div>
-
 
 <button
 class="add"
@@ -1663,7 +1884,6 @@ Continue to Checkout
 
 }
 
-
 showModal(html);
 
 }
@@ -1671,4 +1891,759 @@ showModal(html);
 
 function removeCart(index){
 
-cart.splice(in
+cart.splice(index,1);
+
+localStorage.setItem(
+"printzyCart",
+JSON.stringify(cart)
+);
+
+updateCart();
+
+openCart();
+
+}
+
+
+function checkout(){
+
+if(cart.length===0){
+
+alert("Your cart is empty.");
+
+return;
+
+}
+
+showModal(`
+
+<h2>
+🛍️ Checkout
+</h2>
+
+<p>
+Your order is ready for checkout.
+</p>
+
+<p>
+Payment and delivery system can be
+connected here.
+</p>
+
+<button
+class="add"
+onclick="alert('Payment gateway will be connected here.')">
+
+Continue to Payment
+
+</button>
+
+`);
+
+}
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+function toggleWishlist(name){
+
+if(wishlist.includes(name)){
+
+wishlist=
+wishlist.filter(
+x=>x!==name
+);
+
+}else{
+
+wishlist.push(name);
+
+}
+
+localStorage.setItem(
+"printzyWishlist",
+JSON.stringify(wishlist)
+);
+
+showProducts();
+
+}
+
+
+function openWishlist(){
+
+let html=
+"<h2>❤️ My Wishlist</h2>";
+
+if(wishlist.length===0){
+
+html+=`
+<p>
+Your wishlist is empty.
+</p>
+`;
+
+}else{
+
+wishlist.forEach(name=>{
+
+html+=`
+
+<div class="cart-item">
+
+<span>
+❤️ ${name}
+</span>
+
+<button
+class="remove-btn"
+onclick="removeWishlist('${name}')">
+
+Remove
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+showModal(html);
+
+}
+
+
+function removeWishlist(name){
+
+wishlist=
+wishlist.filter(
+x=>x!==name
+);
+
+localStorage.setItem(
+"printzyWishlist",
+JSON.stringify(wishlist)
+);
+
+showProducts();
+
+openWishlist();
+
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+function filterCategory(
+category,
+button
+){
+
+document
+.querySelectorAll(".category")
+.forEach(
+b=>b.classList.remove("active")
+);
+
+button.classList.add("active");
+
+if(category==="All"){
+
+showProducts();
+
+}else{
+
+showProducts(
+products.filter(
+p=>p.category===category
+)
+);
+
+}
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchProducts(){
+
+const text=
+document.getElementById("search")
+.value
+.toLowerCase();
+
+showProducts(
+
+products.filter(p=>
+
+p.name
+.toLowerCase()
+.includes(text)
+
+)
+
+);
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function toggleDark(){
+
+document.body.classList.toggle("dark");
+
+localStorage.setItem(
+"printzyDark",
+document.body.classList.contains("dark")
+);
+
+}
+
+
+/* =========================
+   GENERAL MODAL
+========================= */
+
+function showModal(content){
+
+document.getElementById("modalContent")
+.innerHTML=content;
+
+document.getElementById("modal")
+.style.display="flex";
+
+}
+
+
+function closeModal(){
+
+document.getElementById("modal")
+.style.display="none";
+
+}
+
+
+function outsideModal(e){
+
+if(e.target.id==="modal")
+closeModal();
+
+}
+
+
+/* =========================
+   TERMS
+========================= */
+
+function openTerms(){
+
+showModal(`
+
+<h2>
+Terms & Conditions
+</h2>
+
+<p>
+By using Printzy, you agree to our
+terms and conditions.
+</p>
+
+<p>
+Customized products may have different
+production and delivery times.
+</p>
+
+<p>
+Customers are responsible for providing
+correct customization information.
+</p>
+
+<p>
+Orders cannot be cancelled after
+production has started.
+</p>
+
+`);
+
+}
+
+
+/* =========================
+   PRIVACY
+========================= */
+
+function openPrivacy(){
+
+showModal(`
+
+<h2>
+Privacy Policy
+</h2>
+
+<p>
+Printzy respects your privacy.
+Customer information is used for
+order processing, delivery and
+customer support.
+</p>
+
+`);
+
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+function openContact(){
+
+showModal(`
+
+<h2>
+Contact Printzy
+</h2>
+
+<p>
+📧 Email: support@printzy.com
+</p>
+
+<p>
+📱 Customer Support
+</p>
+
+<p>
+We will help you with your orders
+and customization.
+</p>
+
+`);
+
+}
+
+
+/* =========================
+   AUTH MODAL
+========================= */
+
+function openAuth(){
+
+document.getElementById("authModal")
+.style.display="flex";
+
+if(currentUser){
+
+showAccount();
+
+}else{
+
+showLogin();
+
+}
+
+}
+
+
+function closeAuth(){
+
+document.getElementById("authModal")
+.style.display="none";
+
+}
+
+
+function authOutside(e){
+
+if(e.target.id==="authModal")
+closeAuth();
+
+}
+
+
+/* =========================
+   LOGIN FORM
+========================= */
+
+function showLogin(){
+
+document.getElementById("loginForm")
+.style.display="block";
+
+document.getElementById("signupForm")
+.style.display="none";
+
+document.getElementById("accountForm")
+.style.display="none";
+
+}
+
+
+/* =========================
+   SIGNUP FORM
+========================= */
+
+function showSignup(){
+
+document.getElementById("loginForm")
+.style.display="none";
+
+document.getElementById("signupForm")
+.style.display="block";
+
+document.getElementById("accountForm")
+.style.display="none";
+
+}
+
+
+/* =========================
+   SIGNUP
+========================= */
+
+function signupUser(){
+
+const name=
+document.getElementById("signupName")
+.value.trim();
+
+const email=
+document.getElementById("signupEmail")
+.value.trim()
+.toLowerCase();
+
+const mobile=
+document.getElementById("signupMobile")
+.value.trim();
+
+const password=
+document.getElementById("signupPassword")
+.value;
+
+const confirm=
+document.getElementById("signupConfirm")
+.value;
+
+if(
+!name||
+!email||
+!mobile||
+!password||
+!confirm
+){
+
+alert(
+"Please fill all fields."
+);
+
+return;
+
+}
+
+if(!/^\S+@\S+\.\S+$/.test(email)){
+
+alert(
+"Please enter a valid email."
+);
+
+return;
+
+}
+
+if(!/^[0-9]{10}$/.test(mobile)){
+
+alert(
+"Please enter valid 10 digit mobile number."
+);
+
+return;
+
+}
+
+if(password.length<6){
+
+alert(
+"Password must contain at least 6 characters."
+);
+
+return;
+
+}
+
+if(password!==confirm){
+
+alert(
+"Passwords do not match."
+);
+
+return;
+
+}
+
+const exists=
+users.find(
+u=>u.email===email
+);
+
+if(exists){
+
+alert(
+"This email is already registered."
+);
+
+return;
+
+}
+
+const user={
+name:name,
+email:email,
+mobile:mobile,
+password:password
+};
+
+users.push(user);
+
+localStorage.setItem(
+"printzyUsers",
+JSON.stringify(users)
+);
+
+currentUser=user;
+
+localStorage.setItem(
+"printzyCurrentUser",
+JSON.stringify(currentUser)
+);
+
+updateLoginButton();
+
+alert(
+"🎉 Account created successfully!"
+);
+
+showAccount();
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function loginUser(){
+
+const email=
+document.getElementById("loginEmail")
+.value.trim()
+.toLowerCase();
+
+const password=
+document.getElementById("loginPassword")
+.value;
+
+if(!email||!password){
+
+alert(
+"Please enter email and password."
+);
+
+return;
+
+}
+
+const user=
+users.find(
+u=>
+u.email===email&&
+u.password===password
+);
+
+if(!user){
+
+alert(
+"❌ Incorrect email or password."
+);
+
+return;
+
+}
+
+currentUser=user;
+
+localStorage.setItem(
+"printzyCurrentUser",
+JSON.stringify(currentUser)
+);
+
+updateLoginButton();
+
+alert(
+"👋 Welcome back, "+
+user.name+"!"
+);
+
+showAccount();
+
+}
+
+
+/* =========================
+   ACCOUNT
+========================= */
+
+function showAccount(){
+
+document.getElementById("loginForm")
+.style.display="none";
+
+document.getElementById("signupForm")
+.style.display="none";
+
+document.getElementById("accountForm")
+.style.display="block";
+
+document.getElementById("accountName")
+.innerText=
+"Hello, "+currentUser.name+"!";
+
+document.getElementById("accountEmail")
+.innerText=
+currentUser.email;
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutUser(){
+
+currentUser=null;
+
+localStorage.removeItem(
+"printzyCurrentUser"
+);
+
+updateLoginButton();
+
+closeAuth();
+
+alert(
+"You have been logged out."
+);
+
+}
+
+
+/* =========================
+   LOGIN BUTTON TEXT
+========================= */
+
+function updateLoginButton(){
+
+const text=
+document.getElementById("loginText");
+
+if(currentUser){
+
+text.innerText=
+currentUser.name
+.split(" ")[0];
+
+}else{
+
+text.innerText="Login";
+
+}
+
+}
+
+
+/* =========================
+   PASSWORD SHOW
+========================= */
+
+function showPassword(id,button){
+
+const input=
+document.getElementById(id);
+
+if(input.type==="password"){
+
+input.type="text";
+
+button.innerText="🙈";
+
+}else{
+
+input.type="password";
+
+button.innerText="👁️";
+
+}
+
+}
+
+
+/* =========================
+   ESC CLOSE
+========================= */
+
+document.addEventListener(
+"keydown",
+function(e){
+
+if(e.key==="Escape"){
+
+closeModal();
+
+closeAuth();
+
+}
+
+}
+);
+
+
+/* =========================
+   LOAD SETTINGS
+========================= */
+
+if(
+localStorage.getItem("printzyDark")
+==="true"
+){
+
+document.body.classList.add("dark");
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+showProducts();
+
+updateCart();
+
+updateLoginButton();
+
+</script>
+
+</body>
+</html>
