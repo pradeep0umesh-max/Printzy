@@ -2,592 +2,603 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Printzy - Custom Printed Products</title>
 
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 :root{
-  --blue:#1264e8;
-  --blue2:#0b4fc4;
-  --light:#f5f9ff;
-  --text:#172033;
-  --card:#ffffff;
-  --border:#dce6f5;
-  --muted:#64748b;
-  --green:#16a34a;
-  --red:#ef3155;
+--blue:#1264e8;
+--blue2:#0b4fc4;
+--light:#f5f9ff;
+--text:#172033;
+--card:#fff;
+--border:#dce6f5;
+--muted:#64748b;
+--red:#ef3155;
+--green:#16a34a;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--light);
-  color:var(--text);
-  transition:.3s;
+font-family:Arial,Helvetica,sans-serif;
+background:var(--light);
+color:var(--text);
+transition:.3s;
 }
 
 body.dark{
-  --light:#0d1422;
-  --text:#f3f6ff;
-  --card:#151e2e;
-  --border:#263650;
-  --muted:#aab5c7;
+--light:#0d1422;
+--text:#f3f6ff;
+--card:#151e2e;
+--border:#263650;
+--muted:#aab5c7;
 }
 
-/* HEADER */
+button{
+font-family:inherit;
+}
 
 header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:var(--card);
-  border-bottom:1px solid var(--border);
-  box-shadow:0 3px 15px rgba(0,0,0,.06);
+position:sticky;
+top:0;
+z-index:100;
+background:var(--card);
+border-bottom:1px solid var(--border);
+box-shadow:0 3px 15px rgba(0,0,0,.06);
 }
 
 .nav{
-  max-width:1150px;
-  margin:auto;
-  padding:15px 18px;
-  display:flex;
-  align-items:center;
-  gap:18px;
+max-width:1150px;
+margin:auto;
+padding:15px 18px;
+display:flex;
+align-items:center;
+gap:18px;
 }
 
 .logo{
-  font-size:27px;
-  font-weight:900;
-  color:var(--blue);
-  cursor:pointer;
+font-size:27px;
+font-weight:900;
+color:var(--blue);
+cursor:pointer;
 }
 
 .search{
-  flex:1;
-  padding:13px 18px;
-  border:2px solid var(--border);
-  border-radius:30px;
-  outline:none;
-  background:var(--light);
-  color:var(--text);
-  font-size:15px;
+flex:1;
+padding:13px 18px;
+border:2px solid var(--border);
+border-radius:30px;
+outline:none;
+background:var(--light);
+color:var(--text);
+font-size:15px;
 }
 
 .search:focus{
-  border-color:var(--blue);
+border-color:var(--blue);
 }
 
 .nav-btn{
-  border:0;
-  background:var(--light);
-  color:var(--text);
-  border-radius:50%;
-  width:45px;
-  height:45px;
-  font-size:20px;
-  cursor:pointer;
+border:0;
+background:var(--light);
+color:var(--text);
+border-radius:50%;
+width:45px;
+height:45px;
+font-size:20px;
+cursor:pointer;
 }
 
 .cart-btn{
-  border:0;
-  background:var(--blue);
-  color:white;
-  padding:12px 17px;
-  border-radius:25px;
-  font-weight:bold;
-  cursor:pointer;
-  white-space:nowrap;
+border:0;
+background:var(--blue);
+color:white;
+padding:12px 17px;
+border-radius:25px;
+font-weight:bold;
+cursor:pointer;
+white-space:nowrap;
 }
 
-/* HERO */
-
 .hero{
-  max-width:1150px;
-  margin:25px auto;
-  padding:55px 35px;
-  border-radius:28px;
-  background:linear-gradient(135deg,#0865e8,#3b8cff);
-  color:white;
+max-width:1150px;
+margin:25px auto;
+padding:55px 35px;
+border-radius:28px;
+background:linear-gradient(135deg,#0865e8,#3b8cff);
+color:white;
 }
 
 .hero h1{
-  font-size:48px;
-  margin-bottom:15px;
+font-size:48px;
+margin-bottom:15px;
 }
 
 .hero p{
-  font-size:19px;
-  max-width:650px;
-  line-height:1.6;
+font-size:19px;
+max-width:650px;
+line-height:1.6;
 }
 
 .shop-btn{
-  margin-top:25px;
-  padding:14px 25px;
-  border:0;
-  border-radius:25px;
-  background:white;
-  color:var(--blue);
-  font-weight:bold;
-  cursor:pointer;
+margin-top:25px;
+padding:14px 25px;
+border:0;
+border-radius:25px;
+background:white;
+color:var(--blue);
+font-weight:bold;
+cursor:pointer;
 }
 
-/* CONTENT */
-
 .container{
-  max-width:1150px;
-  margin:auto;
-  padding:10px 18px 50px;
+max-width:1150px;
+margin:auto;
+padding:10px 18px 50px;
 }
 
 .section-title{
-  font-size:30px;
-  margin:28px 0 18px;
+font-size:30px;
+margin:28px 0 18px;
 }
 
-/* CATEGORIES */
-
 .categories{
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  padding-bottom:8px;
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding-bottom:8px;
 }
 
 .category{
-  white-space:nowrap;
-  padding:11px 20px;
-  border-radius:25px;
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--text);
-  cursor:pointer;
+white-space:nowrap;
+padding:11px 20px;
+border-radius:25px;
+border:1px solid var(--border);
+background:var(--card);
+color:var(--text);
+cursor:pointer;
 }
 
 .category.active,
 .category:hover{
-  background:var(--blue);
-  color:white;
+background:var(--blue);
+color:white;
 }
 
-/* PRODUCTS */
-
 .products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
 
 .product{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  overflow:hidden;
-  position:relative;
-  transition:.25s;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:20px;
+overflow:hidden;
+position:relative;
+transition:.25s;
 }
 
 .product:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 30px rgba(18,100,232,.13);
+transform:translateY(-5px);
+box-shadow:0 12px 30px rgba(18,100,232,.13);
 }
 
 .product-img{
-  height:210px;
-  background:#eef5ff;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:85px;
-  cursor:pointer;
+height:210px;
+background:#eef5ff;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:85px;
+cursor:pointer;
 }
 
 .wishlist{
-  position:absolute;
-  top:12px;
-  right:12px;
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  border:1px solid #d8e4f7;
-  background:white;
-  color:#64748b;
-  font-size:22px;
-  cursor:pointer;
-  box-shadow:0 4px 12px rgba(0,0,0,.12);
-  z-index:2;
+position:absolute;
+top:12px;
+right:12px;
+width:44px;
+height:44px;
+border-radius:50%;
+border:1px solid #d8e4f7;
+background:white;
+color:#64748b;
+font-size:22px;
+cursor:pointer;
+box-shadow:0 4px 12px rgba(0,0,0,.12);
+z-index:2;
 }
 
 .wishlist.active{
-  background:#ffe9ed;
-  color:#ef3155;
+background:#ffe9ed;
+color:#ef3155;
 }
 
 .product-info{
-  padding:18px;
+padding:18px;
 }
 
 .product-info h3{
-  margin-bottom:8px;
+margin-bottom:8px;
 }
 
 .price{
-  color:var(--blue);
-  font-size:20px;
-  font-weight:bold;
+color:var(--blue);
+font-size:20px;
+font-weight:bold;
 }
 
 .product-description{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.5;
-  margin-top:7px;
+color:var(--muted);
+font-size:14px;
+line-height:1.5;
+margin-top:7px;
 }
 
 .add{
-  width:100%;
-  margin-top:14px;
-  padding:12px;
-  border:0;
-  border-radius:12px;
-  background:var(--blue);
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
+width:100%;
+margin-top:14px;
+padding:12px;
+border:0;
+border-radius:12px;
+background:var(--blue);
+color:white;
+font-weight:bold;
+cursor:pointer;
 }
 
-/* MODAL */
+.add:hover,
+.auth-submit:hover,
+.cart-btn:hover{
+background:var(--blue2);
+}
 
 .modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.65);
-  z-index:500;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+z-index:500;
+align-items:center;
+justify-content:center;
+padding:15px;
 }
 
 .modal-box{
-  background:var(--card);
-  color:var(--text);
-  width:100%;
-  max-width:700px;
-  border-radius:22px;
-  padding:25px;
-  max-height:92vh;
-  overflow:auto;
-  position:relative;
+background:var(--card);
+color:var(--text);
+width:100%;
+max-width:700px;
+border-radius:22px;
+padding:25px;
+max-height:92vh;
+overflow:auto;
+position:relative;
 }
 
 .close{
-  position:absolute;
-  right:15px;
-  top:10px;
-  border:0;
-  background:none;
-  font-size:30px;
-  cursor:pointer;
-  color:var(--text);
+position:absolute;
+right:15px;
+top:10px;
+border:0;
+background:none;
+font-size:30px;
+cursor:pointer;
+color:var(--text);
 }
 
-/* FRAME PAGE */
-
 .frame-page h2{
-  font-size:28px;
-  margin-bottom:8px;
-  color:var(--blue);
+font-size:28px;
+margin-bottom:8px;
+color:var(--blue);
 }
 
 .frame-subtitle{
-  color:var(--muted);
-  margin-bottom:20px;
+color:var(--muted);
+margin-bottom:20px;
 }
 
 .frame-category{
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:18px;
-  margin-bottom:18px;
-  background:var(--light);
+border:1px solid var(--border);
+border-radius:18px;
+padding:18px;
+margin-bottom:18px;
+background:var(--light);
 }
 
 .frame-category h3{
-  font-size:21px;
-  margin-bottom:14px;
+font-size:21px;
+margin-bottom:14px;
 }
 
 .frame-options{
-  display:grid;
-  gap:10px;
+display:grid;
+gap:10px;
 }
 
 .frame-option{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:14px;
-  background:var(--card);
-  border:2px solid var(--border);
-  border-radius:13px;
-  cursor:pointer;
-  transition:.2s;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+padding:14px;
+background:var(--card);
+border:2px solid var(--border);
+border-radius:13px;
+cursor:pointer;
+transition:.2s;
 }
 
 .frame-option:hover{
-  border-color:var(--blue);
+border-color:var(--blue);
 }
 
 .frame-option.selected{
-  border-color:var(--blue);
-  background:#eaf3ff;
+border-color:var(--blue);
+background:#eaf3ff;
 }
 
 .frame-option strong{
-  color:var(--blue);
+color:var(--blue);
 }
 
 .upload-box{
-  margin-top:18px;
-  padding:18px;
-  border:2px dashed var(--blue);
-  border-radius:15px;
-  text-align:center;
-  background:#eaf3ff;
+margin-top:18px;
+padding:18px;
+border:2px dashed var(--blue);
+border-radius:15px;
+text-align:center;
+background:#eaf3ff;
 }
 
 .upload-box input{
-  margin-top:12px;
-  width:100%;
+margin-top:12px;
+width:100%;
 }
 
 .photo-preview{
-  margin-top:15px;
-  display:none;
+margin-top:15px;
+display:none;
 }
 
 .photo-preview img{
-  width:160px;
-  height:160px;
-  object-fit:cover;
-  border-radius:14px;
-  border:3px solid var(--blue);
+width:160px;
+height:160px;
+object-fit:cover;
+border-radius:14px;
+border:3px solid var(--blue);
 }
 
-/* CART */
-
 .cart-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding:13px 0;
-  border-bottom:1px solid var(--border);
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+padding:13px 0;
+border-bottom:1px solid var(--border);
 }
 
 .remove-btn{
-  border:0;
-  background:#ffe9ed;
-  color:var(--red);
-  padding:7px 10px;
-  border-radius:8px;
-  cursor:pointer;
+border:0;
+background:#ffe9ed;
+color:var(--red);
+padding:7px 10px;
+border-radius:8px;
+cursor:pointer;
 }
 
 .cart-total{
-  font-size:21px;
-  color:var(--blue);
-  font-weight:bold;
-  margin:20px 0;
+font-size:21px;
+color:var(--blue);
+font-weight:bold;
+margin:20px 0;
 }
 
 /* AUTH */
 
 .auth-box{
-  background:var(--card);
-  color:var(--text);
-  width:100%;
-  max-width:430px;
-  border-radius:22px;
-  padding:30px;
-  position:relative;
+background:var(--card);
+color:var(--text);
+width:100%;
+max-width:430px;
+border-radius:22px;
+padding:30px;
+position:relative;
 }
 
 .auth-icon{
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  background:#eaf3ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  margin:0 auto 15px;
+width:65px;
+height:65px;
+border-radius:50%;
+background:#eaf3ff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+margin:0 auto 15px;
 }
 
 .auth-box h2{
-  text-align:center;
-  margin-bottom:8px;
+text-align:center;
+margin-bottom:8px;
 }
 
 .auth-subtitle{
-  text-align:center;
-  color:var(--muted);
-  margin-bottom:20px;
+text-align:center;
+color:var(--muted);
+margin-bottom:20px;
 }
 
 .auth-input{
-  width:100%;
-  padding:13px 15px;
-  margin-bottom:12px;
-  border:1px solid var(--border);
-  border-radius:11px;
-  outline:none;
-  background:var(--light);
-  color:var(--text);
+width:100%;
+padding:13px 15px;
+margin-bottom:12px;
+border:1px solid var(--border);
+border-radius:11px;
+outline:none;
+background:var(--light);
+color:var(--text);
 }
 
 .password-wrap{
-  position:relative;
+position:relative;
 }
 
 .password-wrap .auth-input{
-  padding-right:50px;
+padding-right:50px;
 }
 
 .password-wrap button{
-  position:absolute;
-  right:5px;
-  top:1px;
-  height:42px;
-  width:42px;
-  border:0;
-  background:transparent;
-  cursor:pointer;
+position:absolute;
+right:5px;
+top:1px;
+height:42px;
+width:42px;
+border:0;
+background:transparent;
+cursor:pointer;
 }
 
 .auth-submit{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:11px;
-  background:var(--blue);
-  color:white;
-  font-weight:bold;
-  font-size:16px;
-  cursor:pointer;
+width:100%;
+padding:13px;
+border:0;
+border-radius:11px;
+background:var(--blue);
+color:white;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
 }
 
 .auth-switch{
-  text-align:center;
-  margin-top:17px;
-  color:var(--muted);
+text-align:center;
+margin-top:17px;
+color:var(--muted);
 }
 
 .auth-switch button{
-  border:0;
-  background:none;
-  color:var(--blue);
-  font-weight:bold;
-  cursor:pointer;
+border:0;
+background:none;
+color:var(--blue);
+font-weight:bold;
+cursor:pointer;
 }
 
-/* FOOTER */
+.info-box{
+margin-top:12px;
+padding:12px;
+border-radius:10px;
+font-size:14px;
+line-height:1.5;
+}
+
+.info-blue{
+background:#eaf3ff;
+color:#1264e8;
+}
+
+.info-green{
+background:#eaf8ef;
+color:#16803c;
+}
 
 footer{
-  background:#092d69;
-  color:white;
-  padding:35px 18px;
-  text-align:center;
-  margin-top:30px;
+background:#092d69;
+color:white;
+padding:35px 18px;
+text-align:center;
+margin-top:30px;
 }
 
 .footer-links{
-  margin-top:15px;
+margin-top:15px;
 }
 
 .footer-links button{
-  background:none;
-  border:0;
-  color:white;
-  margin:5px 10px;
-  cursor:pointer;
+background:none;
+border:0;
+color:white;
+margin:5px 10px;
+cursor:pointer;
 }
-
-/* MOBILE */
 
 @media(max-width:700px){
 
-  .nav{
-    flex-wrap:wrap;
-  }
+.nav{
+flex-wrap:wrap;
+}
 
-  .logo{
-    font-size:24px;
-  }
+.logo{
+font-size:24px;
+}
 
-  .search{
-    order:3;
-    flex-basis:100%;
-  }
+.search{
+order:3;
+flex-basis:100%;
+}
 
-  .hero{
-    margin:15px;
-    padding:35px 25px;
-  }
+.hero{
+margin:15px;
+padding:35px 25px;
+}
 
-  .hero h1{
-    font-size:35px;
-  }
+.hero h1{
+font-size:35px;
+}
 
-  .hero p{
-    font-size:16px;
-  }
+.hero p{
+font-size:16px;
+}
 
-  .container{
-    padding-left:15px;
-    padding-right:15px;
-  }
+.container{
+padding-left:15px;
+padding-right:15px;
+}
 
-  .products{
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-  }
+.products{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
 
-  .product-img{
-    height:145px;
-    font-size:60px;
-  }
+.product-img{
+height:145px;
+font-size:60px;
+}
 
-  .product-info{
-    padding:12px;
-  }
+.product-info{
+padding:12px;
+}
 
-  .product-info h3{
-    font-size:15px;
-  }
+.product-info h3{
+font-size:15px;
+}
 
-  .product-description{
-    font-size:12px;
-  }
+.product-description{
+font-size:12px;
+}
 
-  .wishlist{
-    width:38px;
-    height:38px;
-    font-size:18px;
-  }
+.wishlist{
+width:38px;
+height:38px;
+font-size:18px;
+}
 
-  .frame-option{
-    flex-direction:column;
-    align-items:flex-start;
-  }
+.frame-option{
+flex-direction:column;
+align-items:flex-start;
+}
 
 }
 </style>
@@ -596,7 +607,6 @@ footer{
 <body>
 
 <header>
-
 <div class="nav">
 
 <div class="logo"
@@ -609,18 +619,13 @@ class="search"
 id="search"
 type="search"
 placeholder="Search t-shirts, mugs, frames..."
-oninput="searchProducts()"
->
+oninput="searchProducts()">
 
 <button class="nav-btn"
-onclick="toggleDark()">
-🌙
-</button>
+onclick="toggleDark()">🌙</button>
 
 <button class="nav-btn"
-onclick="openWishlist()">
-❤️
-</button>
+onclick="openWishlist()">❤️</button>
 
 <button class="cart-btn"
 onclick="openCart()">
@@ -653,9 +658,7 @@ Shop Now
 
 <div class="container">
 
-<h2 class="section-title">
-Categories
-</h2>
+<h2 class="section-title">Categories</h2>
 
 <div class="categories">
 
@@ -702,17 +705,9 @@ Popular Products
 
 <div class="footer-links">
 
-<button onclick="openTerms()">
-Terms & Conditions
-</button>
-
-<button onclick="openPrivacy()">
-Privacy Policy
-</button>
-
-<button onclick="openContact()">
-Contact
-</button>
+<button onclick="openTerms()">Terms & Conditions</button>
+<button onclick="openPrivacy()">Privacy Policy</button>
+<button onclick="openContact()">Contact</button>
 
 </div>
 
@@ -721,6 +716,7 @@ Contact
 </p>
 
 </footer>
+
 
 <!-- GENERAL MODAL -->
 
@@ -732,14 +728,13 @@ onclick="outsideModal(event)">
 onclick="event.stopPropagation()">
 
 <button class="close"
-onclick="closeModal()">
-×
-</button>
+onclick="closeModal()">×</button>
 
 <div id="modalContent"></div>
 
 </div>
 </div>
+
 
 <!-- AUTH MODAL -->
 
@@ -751,9 +746,10 @@ onclick="authOutside(event)">
 onclick="event.stopPropagation()">
 
 <button class="close"
-onclick="closeAuth()">
-×
-</button>
+onclick="closeAuth()">×</button>
+
+
+<!-- LOGIN -->
 
 <div id="loginForm">
 
@@ -795,7 +791,16 @@ Don't have an account?
 <button onclick="showSignup()">Sign Up</button>
 </p>
 
+<p class="auth-switch">
+<button onclick="resetPassword()">
+Forgot Password?
+</button>
+</p>
+
 </div>
+
+
+<!-- SIGNUP -->
 
 <div id="signupForm" style="display:none;">
 
@@ -807,17 +812,20 @@ Don't have an account?
 Join Printzy today
 </p>
 
-<input class="auth-input"
+<input
+class="auth-input"
 id="signupName"
 type="text"
 placeholder="Full name">
 
-<input class="auth-input"
+<input
+class="auth-input"
 id="signupEmail"
 type="email"
 placeholder="Email address">
 
-<input class="auth-input"
+<input
+class="auth-input"
 id="signupMobile"
 type="tel"
 maxlength="10"
@@ -856,12 +864,20 @@ onclick="signupUser()">
 Create Account
 </button>
 
+<div class="info-box info-blue">
+📧 After signup, check your email and click the
+verification link.
+</div>
+
 <p class="auth-switch">
 Already have an account?
 <button onclick="showLogin()">Login</button>
 </p>
 
 </div>
+
+
+<!-- ACCOUNT -->
 
 <div id="accountForm"
 style="display:none;text-align:center;">
@@ -873,8 +889,13 @@ style="display:none;text-align:center;">
 <p class="auth-subtitle"
 id="accountEmail"></p>
 
+<div class="info-box info-green">
+✅ Your Printzy account is active.
+</div>
+
 <button class="auth-submit"
-onclick="logoutUser()">
+onclick="logoutUser()"
+style="margin-top:15px">
 Logout
 </button>
 
@@ -883,11 +904,34 @@ Logout
 </div>
 </div>
 
+
 <script>
 
-/* =========================
-PRODUCTS
-========================= */
+/* =====================================================
+   SUPABASE CONFIGURATION
+===================================================== */
+
+const SUPABASE_URL =
+"https://yxssyblhziyfbqxzjgxr.supabase.co";
+
+/*
+   IMPORTANT:
+   Paste your Supabase PUBLISHABLE KEY below.
+*/
+
+const SUPABASE_KEY =
+"sb_publishable_RhoD2kI568-a7ddA8iGhdA_dwJo_m_p";
+
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+/* =====================================================
+   PRODUCTS
+===================================================== */
 
 const products=[
 
@@ -896,7 +940,8 @@ name:"Custom T-Shirt",
 price:499,
 category:"Clothing",
 icon:"👕",
-description:"Create your own personalized T-shirt with your favorite photo, text or design."
+description:
+"Create your own personalized T-shirt with your favorite photo, text or design."
 },
 
 {
@@ -904,7 +949,8 @@ name:"Personalized Mug",
 price:299,
 category:"Mugs",
 icon:"☕",
-description:"A personalized mug made specially with your favorite photo or message."
+description:
+"A personalized mug made specially with your favorite photo or message."
 },
 
 {
@@ -912,7 +958,8 @@ name:"Photo Frame",
 price:149,
 category:"Home",
 icon:"🖼️",
-description:"Choose your frame size, print type and upload your photo."
+description:
+"Choose your frame size, print type and upload your photo."
 },
 
 {
@@ -920,7 +967,8 @@ name:"Custom Hoodie",
 price:899,
 category:"Clothing",
 icon:"🧥",
-description:"Premium custom hoodie with your own design, photo or text."
+description:
+"Premium custom hoodie with your own design, photo or text."
 },
 
 {
@@ -928,7 +976,8 @@ name:"Custom Cap",
 price:349,
 category:"Accessories",
 icon:"🧢",
-description:"Create a stylish personalized cap with your own custom design."
+description:
+"Create a stylish personalized cap with your own custom design."
 },
 
 {
@@ -936,62 +985,79 @@ name:"Personalized Gift",
 price:599,
 category:"Accessories",
 icon:"🎁",
-description:"A special personalized gift for birthdays, anniversaries and special occasions."
+description:
+"A special personalized gift for birthdays, anniversaries and special occasions."
 }
 
 ];
 
-/* FRAME OPTIONS */
+
+/* =====================================================
+   FRAME OPTIONS
+===================================================== */
 
 const frameOptions={
 
 "8x12":[
+
 {
 type:"General Print",
 price:149
 },
+
 {
 type:"Your Photo",
 price:199,
 upload:true
 },
+
 {
 type:"Frame only",
 price:99,
 note:"per frame"
 },
+
 {
 type:"Frame only",
 price:449,
 note:"5 frame"
 }
+
 ],
 
 "12x18":[
+
 {
 type:"General Print",
 price:399
 },
+
 {
 type:"Your Photo",
 price:499,
 upload:true
 },
+
 {
 type:"Frame only",
 price:299,
 note:"per frame"
 },
+
 {
 type:"Frame only",
 price:1449,
 note:"5 frame"
 }
+
 ]
 
 };
 
-/* STORAGE */
+
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
 
 let cart=
 JSON.parse(localStorage.getItem("printzyCart"))||[];
@@ -999,16 +1065,15 @@ JSON.parse(localStorage.getItem("printzyCart"))||[];
 let wishlist=
 JSON.parse(localStorage.getItem("printzyWishlist"))||[];
 
-let users=
-JSON.parse(localStorage.getItem("printzyUsers"))||[];
-
-let currentUser=
-JSON.parse(localStorage.getItem("printzyCurrentUser"))||null;
+let currentUser=null;
 
 let selectedFrame=null;
 let uploadedPhoto="";
 
-/* PRODUCTS */
+
+/* =====================================================
+   PRODUCTS
+===================================================== */
 
 function showProducts(list=products){
 
@@ -1019,11 +1084,19 @@ box.innerHTML="";
 if(list.length===0){
 
 box.innerHTML=`
-<div style="grid-column:1/-1;text-align:center;padding:50px">
+
+<div style="
+grid-column:1/-1;
+text-align:center;
+padding:50px">
+
 <h2>😕 Product Not Found</h2>
-<p style="margin-top:10px">Try another search.</p>
-</div>
-`;
+
+<p style="margin-top:10px">
+Try another search.
+</p>
+
+</div>`;
 
 return;
 }
@@ -1057,7 +1130,15 @@ ${p.icon}
 <h3>${p.name}</h3>
 
 <p class="price">
-${p.name==="Photo Frame" ? "Starting ₹99" : "₹"+p.price}
+
+${
+p.name==="Photo Frame"
+?
+"Starting ₹99"
+:
+"₹"+p.price
+}
+
 </p>
 
 <p class="product-description">
@@ -1066,21 +1147,25 @@ ${p.description}
 
 <button class="add"
 onclick="openProduct('${p.name}')">
+
 View Product Details
+
 </button>
 
 </div>
 
 </div>
+
 `;
 
 });
 
 }
 
-/* =========================
-OPEN PRODUCT
-========================= */
+
+/* =====================================================
+   PRODUCT DETAILS
+===================================================== */
 
 function openProduct(name){
 
@@ -1089,7 +1174,6 @@ if(name==="Photo Frame"){
 openFramePage();
 
 return;
-
 }
 
 const p=products.find(x=>x.name===name);
@@ -1100,30 +1184,42 @@ showModal(`
 
 <h2>${p.name}</h2>
 
-<div style="text-align:center;font-size:100px;padding:20px">
+<div style="
+text-align:center;
+font-size:100px;
+padding:20px">
+
 ${p.icon}
+
 </div>
 
 <h3 style="color:var(--blue)">
 ₹${p.price}
 </h3>
 
-<p style="margin-top:10px;color:var(--muted)">
+<p style="
+margin-top:10px;
+color:var(--muted)">
+
 ${p.description}
+
 </p>
 
 <button class="add"
 onclick="simpleAdd('${p.name}')">
+
 🛒 Add to Cart
+
 </button>
 
 `);
 
 }
 
-/* =========================
-FRAME PAGE
-========================= */
+
+/* =====================================================
+   FRAME PAGE
+===================================================== */
 
 function openFramePage(){
 
@@ -1169,16 +1265,13 @@ ${createFrameOptions("12x18")}
 <div id="frameActionArea"
 style="display:none">
 
-<label class="detail-label">
-Quantity
-</label>
+<strong>Quantity</strong>
 
 <div style="
 display:flex;
 align-items:center;
 gap:15px;
-margin:10px 0 15px;
-">
+margin:10px 0 15px">
 
 <button
 onclick="changeFrameQuantity(-1)"
@@ -1189,7 +1282,7 @@ border:0;
 border-radius:10px;
 background:var(--blue);
 color:white;
-font-size:20px;">
+font-size:20px">
 −
 </button>
 
@@ -1204,7 +1297,7 @@ border:0;
 border-radius:10px;
 background:var(--blue);
 color:white;
-font-size:20px;">
+font-size:20px">
 +
 </button>
 
@@ -1212,16 +1305,21 @@ font-size:20px;">
 
 <button class="add"
 onclick="addFrameToCart()">
+
 🛒 Add to Cart
+
 </button>
 
-<button class="add"
+<button
+class="add"
 style="
 background:transparent;
 color:var(--blue);
-border:2px solid var(--blue);"
+border:2px solid var(--blue)"
 onclick="buyFrameNow()">
+
 ⚡ Buy Now
+
 </button>
 
 </div>
@@ -1232,7 +1330,6 @@ onclick="buyFrameNow()">
 
 }
 
-/* FRAME OPTIONS HTML */
 
 function createFrameOptions(size){
 
@@ -1249,8 +1346,13 @@ onclick="selectFrame('${size}',${index},this)">
 <br>
 
 <span>
+
 ${option.type}
-${option.note ? " ("+option.note+")" : ""}
+
+${option.note ?
+" ("+option.note+")":
+""}
+
 </span>
 
 </div>
@@ -1265,7 +1367,6 @@ ${option.note ? " ("+option.note+")" : ""}
 
 }
 
-/* SELECT FRAME */
 
 function selectFrame(size,index,element){
 
@@ -1278,15 +1379,18 @@ element.classList.add("selected");
 const option=frameOptions[size][index];
 
 selectedFrame={
+
 size:size,
 type:option.type,
 price:option.price,
 note:option.note||"",
 upload:option.upload||false,
 quantity:1
+
 };
 
-document.getElementById("frameQuantity").innerText="1";
+document.getElementById("frameQuantity")
+.innerText="1";
 
 if(option.upload){
 
@@ -1306,7 +1410,8 @@ id="framePhoto"
 accept="image/*"
 onchange="previewFramePhoto(event)">
 
-<div class="photo-preview"
+<div
+class="photo-preview"
 id="photoPreview">
 
 <img id="previewImage">
@@ -1320,14 +1425,18 @@ id="photoPreview">
 }else{
 
 document.getElementById("frameUploadArea").innerHTML=`
+
 <div style="
 margin:15px 0;
 padding:14px;
 border-radius:12px;
 background:#eaf3ff;
-color:#1264e8;">
+color:#1264e8">
+
 ℹ️ Photo upload is not required for this option.
+
 </div>
+
 `;
 
 }
@@ -1337,7 +1446,6 @@ document.getElementById("frameActionArea")
 
 }
 
-/* PHOTO PREVIEW */
 
 function previewFramePhoto(event){
 
@@ -1371,7 +1479,6 @@ reader.readAsDataURL(file);
 
 }
 
-/* FRAME QUANTITY */
 
 function changeFrameQuantity(value){
 
@@ -1386,11 +1493,11 @@ if(selectedFrame.quantity>20)
 selectedFrame.quantity=20;
 
 document.getElementById("frameQuantity")
-.innerText=selectedFrame.quantity;
+.innerText=
+selectedFrame.quantity;
 
 }
 
-/* ADD FRAME CART */
 
 function addFrameToCart(){
 
@@ -1402,7 +1509,7 @@ return;
 
 }
 
-if(selectedFrame.upload && !uploadedPhoto){
+if(selectedFrame.upload&&!uploadedPhoto){
 
 alert("Please upload your photo.");
 
@@ -1411,14 +1518,24 @@ return;
 }
 
 const item={
+
 id:Date.now(),
+
 name:"Photo Frame",
+
 size:selectedFrame.size,
+
 type:selectedFrame.type,
+
 price:selectedFrame.price,
+
 quantity:selectedFrame.quantity,
-photo:selectedFrame.upload ? uploadedPhoto : null,
+
+photo:selectedFrame.upload?
+uploadedPhoto:null,
+
 note:selectedFrame.note
+
 };
 
 cart.push(item);
@@ -1431,7 +1548,6 @@ alert("🖼️ Frame added to cart successfully!");
 
 }
 
-/* BUY FRAME */
 
 function buyFrameNow(){
 
@@ -1443,7 +1559,7 @@ return;
 
 }
 
-if(selectedFrame.upload && !uploadedPhoto){
+if(selectedFrame.upload&&!uploadedPhoto){
 
 alert("Please upload your photo.");
 
@@ -1479,15 +1595,20 @@ Total: ₹${total}
 </p>
 
 <button class="add"
-onclick="alert('Checkout system is ready to connect.')">
+onclick="checkout()">
+
 Continue to Checkout
+
 </button>
 
 `);
 
 }
 
-/* SIMPLE CART */
+
+/* =====================================================
+   CART
+===================================================== */
 
 function simpleAdd(name){
 
@@ -1496,10 +1617,15 @@ const p=products.find(x=>x.name===name);
 if(!p)return;
 
 cart.push({
+
 id:Date.now(),
+
 name:p.name,
+
 price:p.price,
+
 quantity:1
+
 });
 
 saveCart();
@@ -1510,7 +1636,6 @@ alert("🛒 Added to cart!");
 
 }
 
-/* SAVE CART */
 
 function saveCart(){
 
@@ -1523,7 +1648,6 @@ updateCart();
 
 }
 
-/* CART COUNT */
 
 function updateCart(){
 
@@ -1531,10 +1655,6 @@ let count=0;
 
 cart.forEach(item=>{
 
-if(typeof item==="string")
-count++;
-
-else
 count+=item.quantity||1;
 
 });
@@ -1544,7 +1664,6 @@ document.getElementById("cartCount")
 
 }
 
-/* CART */
 
 function openCart(){
 
@@ -1555,49 +1674,19 @@ if(cart.length===0){
 html+=`
 <p style="margin-top:15px">
 Your cart is empty.
-</p>
-`;
+</p>`;
 
 showModal(html);
 
 return;
-
 }
 
 let total=0;
 
 cart.forEach((item,index)=>{
 
-if(typeof item==="string"){
-
-const p=products.find(x=>x.name===item);
-
-if(!p)return;
-
-total+=p.price;
-
-html+=`
-
-<div class="cart-item">
-
-<div>
-<strong>${p.name}</strong>
-<br>
-₹${p.price}
-</div>
-
-<button class="remove-btn"
-onclick="removeCart(${index})">
-Remove
-</button>
-
-</div>
-`;
-
-}else{
-
 const itemTotal=
-item.price*item.quantity;
+item.price*(item.quantity||1);
 
 total+=itemTotal;
 
@@ -1607,15 +1696,22 @@ html+=`
 
 <div>
 
-<strong>🖼️ ${item.name}</strong>
+<strong>
+${item.name==="Photo Frame"?"🖼️ ":""}
+${item.name}
+</strong>
 
 <br>
 
-${item.size} • ${item.type}
+${
+item.size?
+item.size+" • "+item.type:
+""
+}
 
 <br>
 
-₹${item.price} × ${item.quantity}
+₹${item.price} × ${item.quantity||1}
 
 <br>
 
@@ -1625,16 +1721,17 @@ ${item.size} • ${item.type}
 
 </div>
 
-<button class="remove-btn"
+<button
+class="remove-btn"
 onclick="removeCart(${index})">
+
 Remove
+
 </button>
 
 </div>
 
 `;
-
-}
 
 });
 
@@ -1646,7 +1743,9 @@ Total: ₹${total}
 
 <button class="add"
 onclick="checkout()">
+
 Continue to Checkout
+
 </button>
 
 `;
@@ -1655,7 +1754,6 @@ showModal(html);
 
 }
 
-/* REMOVE CART */
 
 function removeCart(index){
 
@@ -1667,7 +1765,6 @@ openCart();
 
 }
 
-/* CHECKOUT */
 
 function checkout(){
 
@@ -1679,30 +1776,57 @@ return;
 
 }
 
+if(!currentUser){
+
+closeModal();
+
+openAuth();
+
+alert("Please login before checkout.");
+
+return;
+
+}
+
 showModal(`
 
 <h2>🛍️ Checkout</h2>
 
 <p style="margin-top:15px">
+
+Welcome,
+<strong>${getUserName()}</strong>
+
+</p>
+
+<p style="margin-top:10px">
+
 Your order is ready for checkout.
+
 </p>
 
 <button class="add"
 onclick="alert('Payment gateway will be connected here.')">
+
 Continue to Payment
+
 </button>
 
 `);
 
 }
 
-/* WISHLIST */
+
+/* =====================================================
+   WISHLIST
+===================================================== */
 
 function toggleWishlist(name){
 
 if(wishlist.includes(name)){
 
-wishlist=wishlist.filter(x=>x!==name);
+wishlist=
+wishlist.filter(x=>x!==name);
 
 }else{
 
@@ -1719,6 +1843,7 @@ showProducts();
 
 }
 
+
 function openWishlist(){
 
 let html="<h2>❤️ My Wishlist</h2>";
@@ -1728,8 +1853,7 @@ if(wishlist.length===0){
 html+=`
 <p style="margin-top:15px">
 Your wishlist is empty.
-</p>
-`;
+</p>`;
 
 }else{
 
@@ -1739,11 +1863,16 @@ html+=`
 
 <div class="cart-item">
 
-<span>❤️ ${name}</span>
+<span>
+❤️ ${name}
+</span>
 
-<button class="remove-btn"
+<button
+class="remove-btn"
 onclick="removeWishlist('${name}')">
+
 Remove
+
 </button>
 
 </div>
@@ -1758,9 +1887,11 @@ showModal(html);
 
 }
 
+
 function removeWishlist(name){
 
-wishlist=wishlist.filter(x=>x!==name);
+wishlist=
+wishlist.filter(x=>x!==name);
 
 localStorage.setItem(
 "printzyWishlist",
@@ -1773,7 +1904,10 @@ openWishlist();
 
 }
 
-/* CATEGORY */
+
+/* =====================================================
+   CATEGORY
+===================================================== */
 
 function filterCategory(category,button){
 
@@ -1799,7 +1933,10 @@ p=>p.category===category
 
 }
 
-/* SEARCH */
+
+/* =====================================================
+   SEARCH
+===================================================== */
 
 function searchProducts(){
 
@@ -1809,14 +1946,21 @@ document.getElementById("search")
 .toLowerCase();
 
 showProducts(
+
 products.filter(p=>
-p.name.toLowerCase().includes(text)
+p.name.toLowerCase().includes(text)||
+p.description.toLowerCase().includes(text)||
+p.category.toLowerCase().includes(text)
 )
+
 );
 
 }
 
-/* DARK MODE */
+
+/* =====================================================
+   DARK MODE
+===================================================== */
 
 function toggleDark(){
 
@@ -1829,7 +1973,10 @@ document.body.classList.contains("dark")
 
 }
 
-/* MODAL */
+
+/* =====================================================
+   MODAL
+===================================================== */
 
 function showModal(content){
 
@@ -1841,12 +1988,14 @@ document.getElementById("modal")
 
 }
 
+
 function closeModal(){
 
 document.getElementById("modal")
 .style.display="none";
 
 }
+
 
 function outsideModal(e){
 
@@ -1855,7 +2004,10 @@ closeModal();
 
 }
 
-/* TERMS */
+
+/* =====================================================
+   TERMS / PRIVACY / CONTACT
+===================================================== */
 
 function openTerms(){
 
@@ -1863,25 +2015,31 @@ showModal(`
 
 <h2>Terms & Conditions</h2>
 
-<p>
-By using Printzy, you agree to our terms and conditions.
+<p style="margin-top:15px">
+
+By using Printzy, you agree to our
+terms and conditions.
+
 </p>
 
-<p>
-Customized products may have different production
-and delivery times.
+<p style="margin-top:12px">
+
+Customized products may have different
+production and delivery times.
+
 </p>
 
-<p>
-Customers are responsible for providing correct
-customization information.
+<p style="margin-top:12px">
+
+Customers are responsible for providing
+correct customization information.
+
 </p>
 
 `);
 
 }
 
-/* PRIVACY */
 
 function openPrivacy(){
 
@@ -1889,16 +2047,18 @@ showModal(`
 
 <h2>Privacy Policy</h2>
 
-<p>
-Printzy respects your privacy. Customer information
-is used for order processing, delivery and support.
+<p style="margin-top:15px">
+
+Printzy respects your privacy.
+Customer information is used for
+account, order processing and support.
+
 </p>
 
 `);
 
 }
 
-/* CONTACT */
 
 function openContact(){
 
@@ -1906,27 +2066,40 @@ showModal(`
 
 <h2>Contact Printzy</h2>
 
-<p>📧 Email: support@printzy.com</p>
+<p style="margin-top:15px">
+📧 Email: support@printzy.com
+</p>
 
-<p>📱 Customer Support</p>
+<p style="margin-top:10px">
+📱 Customer Support
+</p>
 
 `);
 
 }
 
-/* AUTH */
+
+/* =====================================================
+   AUTH MODAL
+===================================================== */
 
 function openAuth(){
 
 document.getElementById("authModal")
 .style.display="flex";
 
-if(currentUser)
+if(currentUser){
+
 showAccount();
-else
+
+}else{
+
 showLogin();
 
 }
+
+}
+
 
 function closeAuth(){
 
@@ -1935,12 +2108,14 @@ document.getElementById("authModal")
 
 }
 
+
 function authOutside(e){
 
 if(e.target.id==="authModal")
 closeAuth();
 
 }
+
 
 function showLogin(){
 
@@ -1955,6 +2130,7 @@ document.getElementById("accountForm")
 
 }
 
+
 function showSignup(){
 
 document.getElementById("loginForm")
@@ -1968,9 +2144,12 @@ document.getElementById("accountForm")
 
 }
 
-/* SIGNUP */
 
-function signupUser(){
+/* =====================================================
+   SUPABASE SIGNUP
+===================================================== */
+
+async function signupUser(){
 
 const name=
 document.getElementById("signupName")
@@ -1993,6 +2172,7 @@ const confirm=
 document.getElementById("signupConfirm")
 .value;
 
+
 if(!name||!email||!mobile||!password||!confirm){
 
 alert("Please fill all fields.");
@@ -2000,6 +2180,7 @@ alert("Please fill all fields.");
 return;
 
 }
+
 
 if(!/^\S+@\S+\.\S+$/.test(email)){
 
@@ -2009,6 +2190,7 @@ return;
 
 }
 
+
 if(!/^[0-9]{10}$/.test(mobile)){
 
 alert("Please enter valid 10 digit mobile number.");
@@ -2016,6 +2198,7 @@ alert("Please enter valid 10 digit mobile number.");
 return;
 
 }
+
 
 if(password.length<6){
 
@@ -2025,6 +2208,7 @@ return;
 
 }
 
+
 if(password!==confirm){
 
 alert("Passwords do not match.");
@@ -2033,46 +2217,86 @@ return;
 
 }
 
-if(users.find(u=>u.email===email)){
 
-alert("This email is already registered.");
+try{
+
+const {data,error}=
+
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+
+data:{
+
+full_name:name,
+
+mobile:mobile
+
+},
+
+emailRedirectTo:
+window.location.origin+
+window.location.pathname
+
+}
+
+});
+
+
+if(error){
+
+alert("❌ "+error.message);
 
 return;
 
 }
 
-const user={
-name,
-email,
-mobile,
-password
-};
 
-users.push(user);
+/*
+Email confirmation enabled होने पर
+session तुरंत नहीं मिलेगा.
+*/
 
-localStorage.setItem(
-"printzyUsers",
-JSON.stringify(users)
-);
+if(data.session){
 
-currentUser=user;
-
-localStorage.setItem(
-"printzyCurrentUser",
-JSON.stringify(currentUser)
-);
+currentUser=data.user;
 
 updateLoginButton();
 
+showAccount();
+
 alert("🎉 Account created successfully!");
 
-showAccount();
+}else{
+
+alert(
+"🎉 Account created!\n\n"+
+"📧 Please check your email and click "+
+"the verification link before login."
+);
+
+showLogin();
 
 }
 
-/* LOGIN */
+}catch(error){
 
-function loginUser(){
+alert("❌ Signup failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   SUPABASE LOGIN
+===================================================== */
+
+async function loginUser(){
 
 const email=
 document.getElementById("loginEmail")
@@ -2083,37 +2307,167 @@ const password=
 document.getElementById("loginPassword")
 .value;
 
-const user=users.find(
-u=>u.email===email &&
-u.password===password
-);
 
-if(!user){
+if(!email||!password){
 
-alert("❌ Incorrect email or password.");
+alert("Please enter email and password.");
 
 return;
 
 }
 
-currentUser=user;
 
-localStorage.setItem(
-"printzyCurrentUser",
-JSON.stringify(currentUser)
-);
+try{
 
-updateLoginButton();
+const {data,error}=
 
-alert("👋 Welcome back, "+user.name+"!");
+await supabaseClient.auth.signInWithPassword({
 
-showAccount();
+email:email,
+
+password:password
+
+});
+
+
+if(error){
+
+alert("❌ "+error.message);
+
+return;
 
 }
 
-/* ACCOUNT */
+
+currentUser=data.user;
+
+updateLoginButton();
+
+showAccount();
+
+alert(
+"👋 Welcome back, "+
+getUserName()+"!"
+);
+
+}catch(error){
+
+alert("❌ Login failed: "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   PASSWORD RESET
+===================================================== */
+
+async function resetPassword(){
+
+const email=
+prompt(
+"Enter your registered email address:"
+);
+
+if(!email)return;
+
+try{
+
+const {error}=
+
+await supabaseClient.auth.resetPasswordForEmail(
+email.trim().toLowerCase(),
+{
+
+redirectTo:
+window.location.origin+
+window.location.pathname
+
+}
+);
+
+if(error){
+
+alert("❌ "+error.message);
+
+return;
+
+}
+
+alert(
+"📧 Password reset link has been sent to your email."
+);
+
+}catch(error){
+
+alert("❌ "+error.message);
+
+}
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+async function logoutUser(){
+
+try{
+
+const {error}=
+await supabaseClient.auth.signOut();
+
+if(error){
+
+alert("❌ "+error.message);
+
+return;
+
+}
+
+currentUser=null;
+
+updateLoginButton();
+
+closeAuth();
+
+alert("You have been logged out.");
+
+}catch(error){
+
+alert("❌ Logout failed.");
+
+}
+
+}
+
+
+/* =====================================================
+   ACCOUNT
+===================================================== */
+
+function getUserName(){
+
+if(!currentUser)return "User";
+
+return currentUser.user_metadata?.full_name ||
+currentUser.email?.split("@")[0] ||
+"User";
+
+}
+
 
 function showAccount(){
+
+if(!currentUser){
+
+showLogin();
+
+return;
+
+}
 
 document.getElementById("loginForm")
 .style.display="none";
@@ -2126,7 +2480,7 @@ document.getElementById("accountForm")
 
 document.getElementById("accountName")
 .innerText=
-"Hello, "+currentUser.name+"!";
+"Hello, "+getUserName()+"!";
 
 document.getElementById("accountEmail")
 .innerText=
@@ -2134,25 +2488,10 @@ currentUser.email;
 
 }
 
-/* LOGOUT */
 
-function logoutUser(){
-
-currentUser=null;
-
-localStorage.removeItem(
-"printzyCurrentUser"
-);
-
-updateLoginButton();
-
-closeAuth();
-
-alert("You have been logged out.");
-
-}
-
-/* LOGIN BUTTON */
+/* =====================================================
+   LOGIN BUTTON
+===================================================== */
 
 function updateLoginButton(){
 
@@ -2161,8 +2500,10 @@ document.getElementById("loginText");
 
 if(currentUser){
 
+const name=getUserName();
+
 text.innerText=
-currentUser.name.split(" ")[0];
+name.split(" ")[0];
 
 }else{
 
@@ -2172,7 +2513,10 @@ text.innerText="Login";
 
 }
 
-/* PASSWORD */
+
+/* =====================================================
+   PASSWORD SHOW/HIDE
+===================================================== */
 
 function showPassword(id,button){
 
@@ -2182,18 +2526,86 @@ document.getElementById(id);
 if(input.type==="password"){
 
 input.type="text";
+
 button.innerText="🙈";
 
 }else{
 
 input.type="password";
+
 button.innerText="👁️";
 
 }
 
 }
 
-/* ESC */
+
+/* =====================================================
+   SUPABASE SESSION
+===================================================== */
+
+async function loadUser(){
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.getSession();
+
+if(error){
+
+console.log(error);
+
+return;
+
+}
+
+if(data.session){
+
+currentUser=data.session.user;
+
+}else{
+
+currentUser=null;
+
+}
+
+updateLoginButton();
+
+}catch(error){
+
+console.log("Session error:",error);
+
+}
+
+}
+
+
+/* =====================================================
+   AUTH STATE CHANGE
+===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+(event,session)=>{
+
+if(session){
+
+currentUser=session.user;
+
+}else{
+
+currentUser=null;
+
+}
+
+updateLoginButton();
+
+}
+);
+
+
+/* =====================================================
+   ESC
+===================================================== */
 
 document.addEventListener(
 "keydown",
@@ -2208,7 +2620,10 @@ closeAuth();
 
 });
 
-/* LOAD DARK */
+
+/* =====================================================
+   DARK MODE LOAD
+===================================================== */
 
 if(
 localStorage.getItem("printzyDark")
@@ -2219,11 +2634,16 @@ document.body.classList.add("dark");
 
 }
 
-/* START */
+
+/* =====================================================
+   START APP
+===================================================== */
 
 showProducts();
+
 updateCart();
-updateLoginButton();
+
+loadUser();
 
 </script>
 
