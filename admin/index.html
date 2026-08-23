@@ -1,1 +1,400 @@
-admin/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Printzy Admin Dashboard</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f8ff;
+    color:#172033;
+}
+
+/* HEADER */
+.header{
+    height:65px;
+    background:#1264e8;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:800;
+}
+
+.admin-name{
+    font-size:14px;
+}
+
+/* LAYOUT */
+.layout{
+    display:flex;
+    min-height:calc(100vh - 65px);
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:240px;
+    background:white;
+    border-right:1px solid #dce6f5;
+    padding:20px 12px;
+}
+
+.sidebar h3{
+    color:#1264e8;
+    margin:0 10px 18px;
+}
+
+.menu{
+    display:block;
+    width:100%;
+    padding:13px 14px;
+    margin-bottom:6px;
+    border:0;
+    background:white;
+    text-align:left;
+    border-radius:10px;
+    font-size:15px;
+    cursor:pointer;
+    color:#172033;
+}
+
+.menu:hover,
+.menu.active{
+    background:#eaf3ff;
+    color:#1264e8;
+}
+
+/* CONTENT */
+.content{
+    flex:1;
+    padding:25px;
+}
+
+.title{
+    font-size:27px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.subtitle{
+    color:#667085;
+    margin-bottom:25px;
+}
+
+/* CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.card{
+    background:white;
+    border:1px solid #dce6f5;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 5px 18px rgba(18,100,232,.06);
+}
+
+.card-title{
+    color:#667085;
+    font-size:14px;
+}
+
+.card-value{
+    font-size:28px;
+    font-weight:800;
+    margin-top:10px;
+    color:#1264e8;
+}
+
+/* TABLE */
+.panel{
+    background:white;
+    border:1px solid #dce6f5;
+    border-radius:16px;
+    padding:20px;
+    overflow-x:auto;
+}
+
+.panel h2{
+    font-size:19px;
+    margin-bottom:18px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+}
+
+th,td{
+    padding:13px;
+    text-align:left;
+    border-bottom:1px solid #edf1f7;
+    font-size:14px;
+}
+
+th{
+    background:#f6f9ff;
+}
+
+.status{
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    background:#eaf3ff;
+    color:#1264e8;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+    .sidebar{
+        width:70px;
+        padding:15px 8px;
+    }
+
+    .sidebar h3{
+        font-size:0;
+    }
+
+    .sidebar h3::after{
+        content:"P";
+        font-size:24px;
+    }
+
+    .menu{
+        text-align:center;
+        font-size:0;
+    }
+
+    .menu::first-letter{
+        font-size:20px;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:550px){
+
+    .content{
+        padding:15px;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .card-value{
+        font-size:23px;
+    }
+
+    .title{
+        font-size:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        Printzy Admin
+    </div>
+
+    <div class="admin-name">
+        👤 Admin
+    </div>
+
+</header>
+
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h3>ADMIN PANEL</h3>
+
+        <button class="menu active">
+            🏠 Dashboard
+        </button>
+
+        <button class="menu"
+        onclick="location.href='products.html'">
+            🛍️ Products
+        </button>
+
+        <button class="menu"
+        onclick="location.href='orders.html'">
+            📦 Orders
+        </button>
+
+        <button class="menu">
+            👥 Customers
+        </button>
+
+        <button class="menu">
+            ⭐ Reviews
+        </button>
+
+        <button class="menu">
+            🎟️ Coupons
+        </button>
+
+        <button class="menu">
+            ⚙️ Settings
+        </button>
+
+        <button class="menu"
+        onclick="location.href='../index.html'">
+            🏪 View Store
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="content">
+
+        <h1 class="title">
+            Dashboard
+        </h1>
+
+        <p class="subtitle">
+            Welcome to your Printzy Admin Panel
+        </p>
+
+
+        <!-- STATISTICS -->
+
+        <section class="cards">
+
+            <div class="card">
+                <div class="card-title">
+                    Total Orders
+                </div>
+
+                <div class="card-value">
+                    0
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-title">
+                    Total Products
+                </div>
+
+                <div class="card-value">
+                    0
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-title">
+                    Customers
+                </div>
+
+                <div class="card-value">
+                    0
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-title">
+                    Total Sales
+                </div>
+
+                <div class="card-value">
+                    ₹0
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- RECENT ORDERS -->
+
+        <section class="panel">
+
+            <h2>
+                Recent Orders
+            </h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>#PR001</td>
+                        <td>Demo Customer</td>
+                        <td>Photo Frame</td>
+                        <td>₹1,449</td>
+                        <td>
+                            <span class="status">
+                                Demo
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="5">
+                            No real orders yet.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
