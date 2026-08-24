@@ -1,1 +1,886 @@
-admin/products.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Printzy - Manage Products</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f8ff;
+    color:#172033;
+}
+
+.header{
+    height:65px;
+    background:#1264e8;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:800;
+}
+
+.back{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:25px 18px;
+}
+
+.title{
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:6px;
+}
+
+.subtitle{
+    color:#667085;
+    margin-bottom:25px;
+}
+
+/* FORM */
+
+.form-box{
+    background:white;
+    border:1px solid #dce6f5;
+    border-radius:18px;
+    padding:22px;
+    margin-bottom:25px;
+    box-shadow:0 5px 20px rgba(18,100,232,.06);
+}
+
+.form-title{
+    font-size:20px;
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-size:14px;
+    font-weight:700;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #cfd9e8;
+    border-radius:10px;
+    outline:none;
+    font-size:14px;
+    background:white;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#1264e8;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.image-preview{
+    width:110px;
+    height:110px;
+    border:2px dashed #cfd9e8;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    margin-top:5px;
+    color:#8a94a6;
+    font-size:12px;
+    text-align:center;
+}
+
+.image-preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:12px 20px;
+    cursor:pointer;
+    font-weight:700;
+    font-size:14px;
+}
+
+.btn-primary{
+    background:#1264e8;
+    color:white;
+}
+
+.btn-secondary{
+    background:#eaf3ff;
+    color:#1264e8;
+}
+
+/* PRODUCTS */
+
+.products-box{
+    background:white;
+    border:1px solid #dce6f5;
+    border-radius:18px;
+    padding:22px;
+}
+
+.products-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.products-header h2{
+    font-size:20px;
+}
+
+.product-count{
+    color:#667085;
+    font-size:14px;
+}
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.product-card{
+    border:1px solid #e1e7f0;
+    border-radius:15px;
+    overflow:hidden;
+    background:white;
+}
+
+.product-image{
+    height:190px;
+    background:#f5f8ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#8993a5;
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.product-info{
+    padding:15px;
+}
+
+.product-name{
+    font-size:17px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.category{
+    font-size:12px;
+    color:#667085;
+    margin-bottom:10px;
+}
+
+.price{
+    color:#1264e8;
+    font-size:19px;
+    font-weight:800;
+}
+
+.stock{
+    font-size:13px;
+    margin-top:7px;
+    color:#667085;
+}
+
+.card-actions{
+    display:flex;
+    gap:8px;
+    margin-top:14px;
+}
+
+.small-btn{
+    flex:1;
+    border:0;
+    padding:9px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.edit-btn{
+    background:#eaf3ff;
+    color:#1264e8;
+}
+
+.delete-btn{
+    background:#fff0f0;
+    color:#d92d20;
+}
+
+.empty{
+    text-align:center;
+    padding:35px 10px;
+    color:#667085;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .product-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:500px){
+
+    .container{
+        padding:18px 12px;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+
+    .title{
+        font-size:23px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        Printzy Admin
+    </div>
+
+    <a class="back" href="index.html">
+        ← Dashboard
+    </a>
+
+</header>
+
+
+<main class="container">
+
+    <h1 class="title">
+        Manage Products
+    </h1>
+
+    <p class="subtitle">
+        Add and manage your Printzy products
+    </p>
+
+
+    <!-- ADD PRODUCT -->
+
+    <section class="form-box">
+
+        <h2 class="form-title">
+            ➕ Add New Product
+        </h2>
+
+        <form id="productForm">
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Product Name</label>
+
+                    <input
+                        type="text"
+                        id="productName"
+                        placeholder="Example: Custom T-Shirt"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label>Category</label>
+
+                    <select id="category" required>
+
+                        <option value="">
+                            Select Category
+                        </option>
+
+                        <option>
+                            T-Shirt
+                        </option>
+
+                        <option>
+                            Mug
+                        </option>
+
+                        <option>
+                            Photo Frame
+                        </option>
+
+                        <option>
+                            Hoodie
+                        </option>
+
+                        <option>
+                            Cap
+                        </option>
+
+                        <option>
+                            Personalized Gift
+                        </option>
+
+                        <option>
+                            Other
+                        </option>
+
+                    </select>
+                </div>
+
+
+                <div class="field">
+
+                    <label>Price (₹)</label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        placeholder="499"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Discount (%)</label>
+
+                    <input
+                        type="number"
+                        id="discount"
+                        placeholder="10"
+                        min="0"
+                        max="100"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Stock</label>
+
+                    <input
+                        type="number"
+                        id="stock"
+                        placeholder="50"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Product Image</label>
+
+                    <input
+                        type="file"
+                        id="image"
+                        accept="image/*"
+                    >
+
+                    <div class="image-preview" id="imagePreview">
+                        Image Preview
+                    </div>
+
+                </div>
+
+
+                <div class="field full">
+
+                    <label>Product Description</label>
+
+                    <textarea
+                        id="description"
+                        placeholder="Write product details..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Save Product
+                </button>
+
+                <button
+                    type="reset"
+                    class="btn btn-secondary"
+                    id="resetBtn"
+                >
+                    Clear
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- PRODUCT LIST -->
+
+    <section class="products-box">
+
+        <div class="products-header">
+
+            <h2>
+                🛍️ Products
+            </h2>
+
+            <span
+                class="product-count"
+                id="productCount"
+            >
+                0 Products
+            </span>
+
+        </div>
+
+
+        <div
+            class="product-grid"
+            id="productGrid"
+        ></div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+let products = JSON.parse(
+    localStorage.getItem("printzy_products") || "[]"
+);
+
+const form = document.getElementById("productForm");
+const imageInput = document.getElementById("image");
+const imagePreview = document.getElementById("imagePreview");
+const productGrid = document.getElementById("productGrid");
+const productCount = document.getElementById("productCount");
+
+let selectedImage = "";
+
+
+/* IMAGE PREVIEW */
+
+imageInput.addEventListener("change", function(){
+
+    const file = this.files[0];
+
+    if(!file){
+        selectedImage = "";
+        imagePreview.innerHTML = "Image Preview";
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        selectedImage = e.target.result;
+
+        imagePreview.innerHTML =
+            `<img src="${selectedImage}" alt="Product">`;
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+
+/* SAVE PRODUCT */
+
+form.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const name =
+        document.getElementById("productName").value.trim();
+
+    const category =
+        document.getElementById("category").value;
+
+    const price =
+        Number(document.getElementById("price").value);
+
+    const discount =
+        Number(document.getElementById("discount").value || 0);
+
+    const stock =
+        Number(document.getElementById("stock").value);
+
+    const description =
+        document.getElementById("description").value.trim();
+
+
+    const finalPrice =
+        Math.round(
+            price - (price * discount / 100)
+        );
+
+
+    const product = {
+
+        id: Date.now(),
+
+        name: name,
+
+        category: category,
+
+        price: price,
+
+        discount: discount,
+
+        finalPrice: finalPrice,
+
+        stock: stock,
+
+        description: description,
+
+        image: selectedImage
+
+    };
+
+
+    products.push(product);
+
+    localStorage.setItem(
+        "printzy_products",
+        JSON.stringify(products)
+    );
+
+
+    alert("Product saved successfully!");
+
+
+    form.reset();
+
+    selectedImage = "";
+
+    imagePreview.innerHTML =
+        "Image Preview";
+
+    renderProducts();
+
+});
+
+
+/* SHOW PRODUCTS */
+
+function renderProducts(){
+
+    productGrid.innerHTML = "";
+
+    productCount.textContent =
+        `${products.length} Product${products.length !== 1 ? "s" : ""}`;
+
+
+    if(products.length === 0){
+
+        productGrid.innerHTML = `
+            <div class="empty">
+                अभी कोई product नहीं है।
+            </div>
+        `;
+
+        return;
+    }
+
+
+    products.forEach(function(product){
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "product-card";
+
+
+        const imageHTML =
+            product.image
+            ?
+            `<img src="${product.image}" alt="${escapeHTML(product.name)}">`
+            :
+            `No Image`;
+
+
+        card.innerHTML = `
+
+            <div class="product-image">
+                ${imageHTML}
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    ${escapeHTML(product.name)}
+                </div>
+
+                <div class="category">
+                    ${escapeHTML(product.category)}
+                </div>
+
+                <div class="price">
+                    ₹${product.finalPrice}
+                </div>
+
+                ${
+                    product.discount > 0
+                    ?
+                    `<div class="stock">
+                        Original: ₹${product.price}
+                        • ${product.discount}% OFF
+                    </div>`
+                    :
+                    ""
+                }
+
+                <div class="stock">
+                    Stock: ${product.stock}
+                </div>
+
+                <div class="card-actions">
+
+                    <button
+                        class="small-btn edit-btn"
+                        onclick="editProduct(${product.id})"
+                    >
+                        Edit
+                    </button>
+
+                    <button
+                        class="small-btn delete-btn"
+                        onclick="deleteProduct(${product.id})"
+                    >
+                        Delete
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+
+        productGrid.appendChild(card);
+
+    });
+
+}
+
+
+/* DELETE */
+
+function deleteProduct(id){
+
+    if(!confirm("Delete this product?")){
+        return;
+    }
+
+    products =
+        products.filter(
+            product => product.id !== id
+        );
+
+    localStorage.setItem(
+        "printzy_products",
+        JSON.stringify(products)
+    );
+
+    renderProducts();
+
+}
+
+
+/* EDIT */
+
+function editProduct(id){
+
+    const product =
+        products.find(
+            item => item.id === id
+        );
+
+    if(!product){
+        return;
+    }
+
+
+    document.getElementById("productName").value =
+        product.name;
+
+    document.getElementById("category").value =
+        product.category;
+
+    document.getElementById("price").value =
+        product.price;
+
+    document.getElementById("discount").value =
+        product.discount;
+
+    document.getElementById("stock").value =
+        product.stock;
+
+    document.getElementById("description").value =
+        product.description;
+
+
+    if(product.image){
+
+        selectedImage =
+            product.image;
+
+        imagePreview.innerHTML =
+            `<img src="${product.image}" alt="Product">`;
+
+    }
+
+
+    products =
+        products.filter(
+            item => item.id !== id
+        );
+
+
+    localStorage.setItem(
+        "printzy_products",
+        JSON.stringify(products)
+    );
+
+
+    renderProducts();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* SECURITY */
+
+function escapeHTML(text){
+
+    return String(text)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* RESET */
+
+document.getElementById("resetBtn")
+.addEventListener("click",function(){
+
+    selectedImage = "";
+
+    imagePreview.innerHTML =
+        "Image Preview";
+
+});
+
+
+/* INITIAL */
+
+renderProducts();
+
+</script>
+
+</body>
+</html>
