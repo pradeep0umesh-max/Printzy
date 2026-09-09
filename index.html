@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
 <title>Printzy - Custom Printed Products</title>
 
 <!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
 
 <style>
+
 *{
 box-sizing:border-box;
 margin:0;
@@ -19,6 +24,7 @@ padding:0;
 :root{
 --blue:#1264e8;
 --blue2:#0b4fc4;
+--pink:#ef1768;
 --light:#f5f9ff;
 --text:#172033;
 --card:#fff;
@@ -43,8 +49,12 @@ body.dark{
 --muted:#aab5c7;
 }
 
-button{
+button,input{
 font-family:inherit;
+}
+
+button{
+cursor:pointer;
 }
 
 header{
@@ -59,10 +69,10 @@ box-shadow:0 3px 15px rgba(0,0,0,.06);
 .nav{
 max-width:1150px;
 margin:auto;
-padding:15px 18px;
+padding:14px 18px;
 display:flex;
 align-items:center;
-gap:18px;
+gap:12px;
 }
 
 .logo{
@@ -70,6 +80,7 @@ font-size:27px;
 font-weight:900;
 color:var(--blue);
 cursor:pointer;
+white-space:nowrap;
 }
 
 .search{
@@ -95,7 +106,6 @@ border-radius:50%;
 width:45px;
 height:45px;
 font-size:20px;
-cursor:pointer;
 }
 
 .cart-btn{
@@ -105,7 +115,6 @@ color:white;
 padding:12px 17px;
 border-radius:25px;
 font-weight:bold;
-cursor:pointer;
 white-space:nowrap;
 }
 
@@ -137,7 +146,6 @@ border-radius:25px;
 background:white;
 color:var(--blue);
 font-weight:bold;
-cursor:pointer;
 }
 
 .container{
@@ -165,7 +173,6 @@ border-radius:25px;
 border:1px solid var(--border);
 background:var(--card);
 color:var(--text);
-cursor:pointer;
 }
 
 .category.active,
@@ -190,7 +197,7 @@ transition:.25s;
 }
 
 .product:hover{
-transform:translateY(-5px);
+transform:translateY(-4px);
 box-shadow:0 12px 30px rgba(18,100,232,.13);
 }
 
@@ -201,7 +208,6 @@ display:flex;
 justify-content:center;
 align-items:center;
 font-size:85px;
-cursor:pointer;
 }
 
 .wishlist{
@@ -215,8 +221,6 @@ border:1px solid #d8e4f7;
 background:white;
 color:#64748b;
 font-size:22px;
-cursor:pointer;
-box-shadow:0 4px 12px rgba(0,0,0,.12);
 z-index:2;
 }
 
@@ -255,7 +259,6 @@ border-radius:12px;
 background:var(--blue);
 color:white;
 font-weight:bold;
-cursor:pointer;
 }
 
 .add:hover,
@@ -294,19 +297,7 @@ top:10px;
 border:0;
 background:none;
 font-size:30px;
-cursor:pointer;
 color:var(--text);
-}
-
-.frame-page h2{
-font-size:28px;
-margin-bottom:8px;
-color:var(--blue);
-}
-
-.frame-subtitle{
-color:var(--muted);
-margin-bottom:20px;
 }
 
 .frame-category{
@@ -336,12 +327,6 @@ padding:14px;
 background:var(--card);
 border:2px solid var(--border);
 border-radius:13px;
-cursor:pointer;
-transition:.2s;
-}
-
-.frame-option:hover{
-border-color:var(--blue);
 }
 
 .frame-option.selected{
@@ -395,7 +380,6 @@ background:#ffe9ed;
 color:var(--red);
 padding:7px 10px;
 border-radius:8px;
-cursor:pointer;
 }
 
 .cart-total{
@@ -404,8 +388,6 @@ color:var(--blue);
 font-weight:bold;
 margin:20px 0;
 }
-
-/* AUTH */
 
 .auth-box{
 background:var(--card);
@@ -467,7 +449,6 @@ height:42px;
 width:42px;
 border:0;
 background:transparent;
-cursor:pointer;
 }
 
 .auth-submit{
@@ -479,7 +460,6 @@ background:var(--blue);
 color:white;
 font-weight:bold;
 font-size:16px;
-cursor:pointer;
 }
 
 .auth-switch{
@@ -493,7 +473,6 @@ border:0;
 background:none;
 color:var(--blue);
 font-weight:bold;
-cursor:pointer;
 }
 
 .info-box{
@@ -531,7 +510,12 @@ background:none;
 border:0;
 color:white;
 margin:5px 10px;
-cursor:pointer;
+}
+
+.empty{
+text-align:center;
+padding:45px;
+grid-column:1/-1;
 }
 
 @media(max-width:700px){
@@ -601,12 +585,14 @@ align-items:flex-start;
 }
 
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
+
 <div class="nav">
 
 <div class="logo"
@@ -638,7 +624,9 @@ onclick="openAuth()">
 </button>
 
 </div>
+
 </header>
+
 
 <section class="hero">
 
@@ -650,15 +638,18 @@ T-shirts, mugs, frames and personalized gifts.
 </p>
 
 <button class="shop-btn"
-onclick="document.getElementById('products').scrollIntoView()">
-Shop Now
+onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+Shop Now →
 </button>
 
 </section>
 
+
 <div class="container">
 
-<h2 class="section-title">Categories</h2>
+<h2 class="section-title">
+Categories
+</h2>
 
 <div class="categories">
 
@@ -689,13 +680,18 @@ onclick="filterCategory('Accessories',this)">
 
 </div>
 
-<h2 class="section-title" id="products">
+
+<h2 class="section-title"
+id="products">
 Popular Products
 </h2>
 
-<div class="products" id="productList"></div>
+<div class="products"
+id="productList">
+</div>
 
 </div>
+
 
 <footer>
 
@@ -705,9 +701,17 @@ Popular Products
 
 <div class="footer-links">
 
-<button onclick="openTerms()">Terms & Conditions</button>
-<button onclick="openPrivacy()">Privacy Policy</button>
-<button onclick="openContact()">Contact</button>
+<button onclick="openTerms()">
+Terms & Conditions
+</button>
+
+<button onclick="openPrivacy()">
+Privacy Policy
+</button>
+
+<button onclick="openContact()">
+Contact
+</button>
 
 </div>
 
@@ -733,6 +737,7 @@ onclick="closeModal()">×</button>
 <div id="modalContent"></div>
 
 </div>
+
 </div>
 
 
@@ -753,9 +758,13 @@ onclick="closeAuth()">×</button>
 
 <div id="loginForm">
 
-<div class="auth-icon">👤</div>
+<div class="auth-icon">
+👤
+</div>
 
-<h2>Welcome Back</h2>
+<h2>
+Welcome Back
+</h2>
 
 <p class="auth-subtitle">
 Login to your Printzy account
@@ -775,20 +784,24 @@ id="loginPassword"
 type="password"
 placeholder="Password">
 
-<button onclick="showPassword('loginPassword',this)">
+<button
+onclick="showPassword('loginPassword',this)">
 👁️
 </button>
 
 </div>
 
-<button class="auth-submit"
+<button
+class="auth-submit"
 onclick="loginUser()">
 Login
 </button>
 
 <p class="auth-switch">
 Don't have an account?
-<button onclick="showSignup()">Sign Up</button>
+<button onclick="showSignup()">
+Sign Up
+</button>
 </p>
 
 <p class="auth-switch">
@@ -802,11 +815,16 @@ Forgot Password?
 
 <!-- SIGNUP -->
 
-<div id="signupForm" style="display:none;">
+<div id="signupForm"
+style="display:none;">
 
-<div class="auth-icon">✨</div>
+<div class="auth-icon">
+✨
+</div>
 
-<h2>Create Account</h2>
+<h2>
+Create Account
+</h2>
 
 <p class="auth-subtitle">
 Join Printzy today
@@ -839,7 +857,8 @@ id="signupPassword"
 type="password"
 placeholder="Create password">
 
-<button onclick="showPassword('signupPassword',this)">
+<button
+onclick="showPassword('signupPassword',this)">
 👁️
 </button>
 
@@ -853,25 +872,28 @@ id="signupConfirm"
 type="password"
 placeholder="Confirm password">
 
-<button onclick="showPassword('signupConfirm',this)">
+<button
+onclick="showPassword('signupConfirm',this)">
 👁️
 </button>
 
 </div>
 
-<button class="auth-submit"
+<button
+class="auth-submit"
 onclick="signupUser()">
 Create Account
 </button>
 
 <div class="info-box info-blue">
-📧 After signup, check your email and click the
-verification link.
+📧 After signup, check your email and click the verification link.
 </div>
 
 <p class="auth-switch">
 Already have an account?
-<button onclick="showLogin()">Login</button>
+<button onclick="showLogin()">
+Login
+</button>
 </p>
 
 </div>
@@ -882,18 +904,24 @@ Already have an account?
 <div id="accountForm"
 style="display:none;text-align:center;">
 
-<div class="auth-icon">👋</div>
+<div class="auth-icon">
+👋
+</div>
 
-<h2 id="accountName">Hello!</h2>
+<h2 id="accountName">
+Hello!
+</h2>
 
 <p class="auth-subtitle"
-id="accountEmail"></p>
+id="accountEmail">
+</p>
 
 <div class="info-box info-green">
 ✅ Your Printzy account is active.
 </div>
 
-<button class="auth-submit"
+<button
+class="auth-submit"
 onclick="logoutUser()"
 style="margin-top:15px">
 Logout
@@ -902,35 +930,14 @@ Logout
 </div>
 
 </div>
+
 </div>
 
 
 <script>
 
 /* =====================================================
-   SUPABASE CONFIGURATION
-===================================================== */
-
-const SUPABASE_URL =
-"https://yxssyblhziyfbqxzjgxr.supabase.co";
-
-/*
-   IMPORTANT:
-   Paste your Supabase PUBLISHABLE KEY below.
-*/
-
-const SUPABASE_KEY =
-"sb_publishable_RhoD2kI568-a7ddA8iGhdA_dwJo_m_p";
-
-const supabaseClient =
-supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
-
-
-/* =====================================================
-   PRODUCTS
+   PRINTZY PRODUCTS
 ===================================================== */
 
 const products=[
@@ -1060,24 +1067,62 @@ note:"5 frame"
 ===================================================== */
 
 let cart=
-JSON.parse(localStorage.getItem("printzyCart"))||[];
+JSON.parse(localStorage.getItem("printzyCart")) || [];
 
 let wishlist=
-JSON.parse(localStorage.getItem("printzyWishlist"))||[];
+JSON.parse(localStorage.getItem("printzyWishlist")) || [];
 
 let currentUser=null;
 
 let selectedFrame=null;
+
 let uploadedPhoto="";
 
 
 /* =====================================================
-   PRODUCTS
+   SAVE CART
+===================================================== */
+
+function saveCart(){
+
+localStorage.setItem(
+"printzyCart",
+JSON.stringify(cart)
+);
+
+updateCartCount();
+
+}
+
+
+/* =====================================================
+   CART COUNT
+===================================================== */
+
+function updateCartCount(){
+
+const count=cart.reduce(
+(total,item)=>total+(item.quantity||1),0
+);
+
+const el=document.getElementById("cartCount");
+
+if(el){
+el.innerText=count;
+}
+
+}
+
+
+/* =====================================================
+   SHOW PRODUCTS
 ===================================================== */
 
 function showProducts(list=products){
 
 const box=document.getElementById("productList");
+
+if(!box)return;
 
 box.innerHTML="";
 
@@ -1085,10 +1130,7 @@ if(list.length===0){
 
 box.innerHTML=`
 
-<div style="
-grid-column:1/-1;
-text-align:center;
-padding:50px">
+<div class="empty">
 
 <h2>😕 Product Not Found</h2>
 
@@ -1096,9 +1138,12 @@ padding:50px">
 Try another search.
 </p>
 
-</div>`;
+</div>
+
+`;
 
 return;
+
 }
 
 list.forEach(p=>{
@@ -1127,7 +1172,9 @@ ${p.icon}
 
 <div class="product-info">
 
-<h3>${p.name}</h3>
+<h3>
+${p.name}
+</h3>
 
 <p class="price">
 
@@ -1145,7 +1192,8 @@ p.name==="Photo Frame"
 ${p.description}
 </p>
 
-<button class="add"
+<button
+class="add"
 onclick="openProduct('${p.name}')">
 
 View Product Details
@@ -1164,6 +1212,59 @@ View Product Details
 
 
 /* =====================================================
+   SEARCH
+===================================================== */
+
+function searchProducts(){
+
+const query=
+document.getElementById("search").value
+.toLowerCase()
+.trim();
+
+const result=products.filter(p=>
+
+p.name.toLowerCase().includes(query) ||
+
+p.category.toLowerCase().includes(query) ||
+
+p.description.toLowerCase().includes(query)
+
+);
+
+showProducts(result);
+
+}
+
+
+/* =====================================================
+   CATEGORY
+===================================================== */
+
+function filterCategory(category,button){
+
+document
+.querySelectorAll(".category")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+
+if(category==="All"){
+
+showProducts(products);
+
+}else{
+
+showProducts(
+products.filter(p=>p.category===category)
+);
+
+}
+
+}
+
+
+/* =====================================================
    PRODUCT DETAILS
 ===================================================== */
 
@@ -1174,6 +1275,7 @@ if(name==="Photo Frame"){
 openFramePage();
 
 return;
+
 }
 
 const p=products.find(x=>x.name===name);
@@ -1182,15 +1284,15 @@ if(!p)return;
 
 showModal(`
 
-<h2>${p.name}</h2>
+<h2>
+${p.name}
+</h2>
 
 <div style="
 text-align:center;
 font-size:100px;
 padding:20px">
-
 ${p.icon}
-
 </div>
 
 <h3 style="color:var(--blue)">
@@ -1200,19 +1302,56 @@ ${p.icon}
 <p style="
 margin-top:10px;
 color:var(--muted)">
-
 ${p.description}
-
 </p>
 
-<button class="add"
+<button
+class="add"
 onclick="simpleAdd('${p.name}')">
-
 🛒 Add to Cart
-
 </button>
 
 `);
+
+}
+
+
+/* =====================================================
+   SIMPLE ADD
+===================================================== */
+
+function simpleAdd(name){
+
+const existing=cart.find(
+item=>item.name===name
+);
+
+if(existing){
+
+existing.quantity=(existing.quantity||1)+1;
+
+}else{
+
+const p=products.find(x=>x.name===name);
+
+if(!p)return;
+
+cart.push({
+
+name:p.name,
+price:p.price,
+quantity:1,
+icon:p.icon
+
+});
+
+}
+
+saveCart();
+
+closeModal();
+
+alert("✅ Product added to cart!");
 
 }
 
@@ -1224,21 +1363,28 @@ onclick="simpleAdd('${p.name}')">
 function openFramePage(){
 
 selectedFrame=null;
+
 uploadedPhoto="";
 
 showModal(`
 
-<div class="frame-page">
+<div>
 
-<h2>🖼️ Photo Frame</h2>
+<h2 style="color:var(--blue)">
+🖼️ Photo Frame
+</h2>
 
-<p class="frame-subtitle">
+<p style="
+color:var(--muted);
+margin:8px 0 20px">
 Choose your frame size and customization option.
 </p>
 
 <div class="frame-category">
 
-<h3>1st Category — 8×12</h3>
+<h3>
+1st Category — 8×12
+</h3>
 
 <div class="frame-options">
 
@@ -1250,7 +1396,9 @@ ${createFrameOptions("8x12")}
 
 <div class="frame-category">
 
-<h3>2nd Category — 12×18</h3>
+<h3>
+2nd Category — 12×18
+</h3>
 
 <div class="frame-options">
 
@@ -1260,12 +1408,15 @@ ${createFrameOptions("12x18")}
 
 </div>
 
-<div id="frameUploadArea"></div>
+<div id="frameUploadArea">
+</div>
 
 <div id="frameActionArea"
 style="display:none">
 
-<strong>Quantity</strong>
+<strong>
+Quantity
+</strong>
 
 <div style="
 display:flex;
@@ -1286,7 +1437,9 @@ font-size:20px">
 −
 </button>
 
-<strong id="frameQuantity">1</strong>
+<strong id="frameQuantity">
+1
+</strong>
 
 <button
 onclick="changeFrameQuantity(1)"
@@ -1303,11 +1456,10 @@ font-size:20px">
 
 </div>
 
-<button class="add"
+<button
+class="add"
 onclick="addFrameToCart()">
-
 🛒 Add to Cart
-
 </button>
 
 <button
@@ -1317,9 +1469,7 @@ background:transparent;
 color:var(--blue);
 border:2px solid var(--blue)"
 onclick="buyFrameNow()">
-
 ⚡ Buy Now
-
 </button>
 
 </div>
@@ -1331,9 +1481,14 @@ onclick="buyFrameNow()">
 }
 
 
+/* =====================================================
+   FRAME OPTIONS
+===================================================== */
+
 function createFrameOptions(size){
 
-return frameOptions[size].map((option,index)=>`
+return frameOptions[size]
+.map((option,index)=>`
 
 <div
 class="frame-option"
@@ -1341,7 +1496,9 @@ onclick="selectFrame('${size}',${index},this)">
 
 <div>
 
-<strong>${size}</strong>
+<strong>
+${size}
+</strong>
 
 <br>
 
@@ -1349,8 +1506,10 @@ onclick="selectFrame('${size}',${index},this)">
 
 ${option.type}
 
-${option.note ?
-" ("+option.note+")":
+${option.note
+?
+" ("+option.note+")"
+:
 ""}
 
 </span>
@@ -1363,16 +1522,23 @@ ${option.note ?
 
 </div>
 
-`).join("");
+`)
+.join("");
 
 }
 
+
+/* =====================================================
+   SELECT FRAME
+===================================================== */
 
 function selectFrame(size,index,element){
 
 document
 .querySelectorAll(".frame-option")
-.forEach(x=>x.classList.remove("selected"));
+.forEach(x=>
+x.classList.remove("selected")
+);
 
 element.classList.add("selected");
 
@@ -1383,1269 +1549,4 @@ selectedFrame={
 size:size,
 type:option.type,
 price:option.price,
-note:option.note||"",
-upload:option.upload||false,
-quantity:1
-
-};
-
-document.getElementById("frameQuantity")
-.innerText="1";
-
-if(option.upload){
-
-document.getElementById("frameUploadArea").innerHTML=`
-
-<div class="upload-box">
-
-<h3>📤 Upload Your Photo</h3>
-
-<p style="margin-top:7px">
-Upload the photo you want to print.
-</p>
-
-<input
-type="file"
-id="framePhoto"
-accept="image/*"
-onchange="previewFramePhoto(event)">
-
-<div
-class="photo-preview"
-id="photoPreview">
-
-<img id="previewImage">
-
-</div>
-
-</div>
-
-`;
-
-}else{
-
-document.getElementById("frameUploadArea").innerHTML=`
-
-<div style="
-margin:15px 0;
-padding:14px;
-border-radius:12px;
-background:#eaf3ff;
-color:#1264e8">
-
-ℹ️ Photo upload is not required for this option.
-
-</div>
-
-`;
-
-}
-
-document.getElementById("frameActionArea")
-.style.display="block";
-
-}
-
-
-function previewFramePhoto(event){
-
-const file=event.target.files[0];
-
-if(!file)return;
-
-if(!file.type.startsWith("image/")){
-
-alert("Please select an image file.");
-
-return;
-
-}
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-uploadedPhoto=e.target.result;
-
-document.getElementById("previewImage")
-.src=e.target.result;
-
-document.getElementById("photoPreview")
-.style.display="block";
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-
-function changeFrameQuantity(value){
-
-if(!selectedFrame)return;
-
-selectedFrame.quantity+=value;
-
-if(selectedFrame.quantity<1)
-selectedFrame.quantity=1;
-
-if(selectedFrame.quantity>20)
-selectedFrame.quantity=20;
-
-document.getElementById("frameQuantity")
-.innerText=
-selectedFrame.quantity;
-
-}
-
-
-function addFrameToCart(){
-
-if(!selectedFrame){
-
-alert("Please select a frame option.");
-
-return;
-
-}
-
-if(selectedFrame.upload&&!uploadedPhoto){
-
-alert("Please upload your photo.");
-
-return;
-
-}
-
-const item={
-
-id:Date.now(),
-
-name:"Photo Frame",
-
-size:selectedFrame.size,
-
-type:selectedFrame.type,
-
-price:selectedFrame.price,
-
-quantity:selectedFrame.quantity,
-
-photo:selectedFrame.upload?
-uploadedPhoto:null,
-
-note:selectedFrame.note
-
-};
-
-cart.push(item);
-
-saveCart();
-
-closeModal();
-
-alert("🖼️ Frame added to cart successfully!");
-
-}
-
-
-function buyFrameNow(){
-
-if(!selectedFrame){
-
-alert("Please select a frame option.");
-
-return;
-
-}
-
-if(selectedFrame.upload&&!uploadedPhoto){
-
-alert("Please upload your photo.");
-
-return;
-
-}
-
-const total=
-selectedFrame.price*
-selectedFrame.quantity;
-
-showModal(`
-
-<h2>⚡ Buy Frame Now</h2>
-
-<p>
-<strong>Size:</strong>
-${selectedFrame.size}
-</p>
-
-<p>
-<strong>Option:</strong>
-${selectedFrame.type}
-</p>
-
-<p>
-<strong>Quantity:</strong>
-${selectedFrame.quantity}
-</p>
-
-<p class="cart-total">
-Total: ₹${total}
-</p>
-
-<button class="add"
-onclick="checkout()">
-
-Continue to Checkout
-
-</button>
-
-`);
-
-}
-
-
-/* =====================================================
-   CART
-===================================================== */
-
-function simpleAdd(name){
-
-const p=products.find(x=>x.name===name);
-
-if(!p)return;
-
-cart.push({
-
-id:Date.now(),
-
-name:p.name,
-
-price:p.price,
-
-quantity:1
-
-});
-
-saveCart();
-
-closeModal();
-
-alert("🛒 Added to cart!");
-
-}
-
-
-function saveCart(){
-
-localStorage.setItem(
-"printzyCart",
-JSON.stringify(cart)
-);
-
-updateCart();
-
-}
-
-
-function updateCart(){
-
-let count=0;
-
-cart.forEach(item=>{
-
-count+=item.quantity||1;
-
-});
-
-document.getElementById("cartCount")
-.innerText=count;
-
-}
-
-
-function openCart(){
-
-let html="<h2>🛒 Shopping Cart</h2>";
-
-if(cart.length===0){
-
-html+=`
-<p style="margin-top:15px">
-Your cart is empty.
-</p>`;
-
-showModal(html);
-
-return;
-}
-
-let total=0;
-
-cart.forEach((item,index)=>{
-
-const itemTotal=
-item.price*(item.quantity||1);
-
-total+=itemTotal;
-
-html+=`
-
-<div class="cart-item">
-
-<div>
-
-<strong>
-${item.name==="Photo Frame"?"🖼️ ":""}
-${item.name}
-</strong>
-
-<br>
-
-${
-item.size?
-item.size+" • "+item.type:
-""
-}
-
-<br>
-
-₹${item.price} × ${item.quantity||1}
-
-<br>
-
-<strong>
-₹${itemTotal}
-</strong>
-
-</div>
-
-<button
-class="remove-btn"
-onclick="removeCart(${index})">
-
-Remove
-
-</button>
-
-</div>
-
-`;
-
-});
-
-html+=`
-
-<div class="cart-total">
-Total: ₹${total}
-</div>
-
-<button class="add"
-onclick="checkout()">
-
-Continue to Checkout
-
-</button>
-
-`;
-
-showModal(html);
-
-}
-
-
-function removeCart(index){
-
-cart.splice(index,1);
-
-saveCart();
-
-openCart();
-
-}
-
-
-function checkout(){
-
-if(cart.length===0){
-
-alert("Your cart is empty.");
-
-return;
-
-}
-
-if(!currentUser){
-
-closeModal();
-
-openAuth();
-
-alert("Please login before checkout.");
-
-return;
-
-}
-
-showModal(`
-
-<h2>🛍️ Checkout</h2>
-
-<p style="margin-top:15px">
-
-Welcome,
-<strong>${getUserName()}</strong>
-
-</p>
-
-<p style="margin-top:10px">
-
-Your order is ready for checkout.
-
-</p>
-
-<button class="add"
-onclick="alert('Payment gateway will be connected here.')">
-
-Continue to Payment
-
-</button>
-
-`);
-
-}
-
-
-/* =====================================================
-   WISHLIST
-===================================================== */
-
-function toggleWishlist(name){
-
-if(wishlist.includes(name)){
-
-wishlist=
-wishlist.filter(x=>x!==name);
-
-}else{
-
-wishlist.push(name);
-
-}
-
-localStorage.setItem(
-"printzyWishlist",
-JSON.stringify(wishlist)
-);
-
-showProducts();
-
-}
-
-
-function openWishlist(){
-
-let html="<h2>❤️ My Wishlist</h2>";
-
-if(wishlist.length===0){
-
-html+=`
-<p style="margin-top:15px">
-Your wishlist is empty.
-</p>`;
-
-}else{
-
-wishlist.forEach(name=>{
-
-html+=`
-
-<div class="cart-item">
-
-<span>
-❤️ ${name}
-</span>
-
-<button
-class="remove-btn"
-onclick="removeWishlist('${name}')">
-
-Remove
-
-</button>
-
-</div>
-
-`;
-
-});
-
-}
-
-showModal(html);
-
-}
-
-
-function removeWishlist(name){
-
-wishlist=
-wishlist.filter(x=>x!==name);
-
-localStorage.setItem(
-"printzyWishlist",
-JSON.stringify(wishlist)
-);
-
-showProducts();
-
-openWishlist();
-
-}
-
-
-/* =====================================================
-   CATEGORY
-===================================================== */
-
-function filterCategory(category,button){
-
-document
-.querySelectorAll(".category")
-.forEach(b=>b.classList.remove("active"));
-
-button.classList.add("active");
-
-if(category==="All"){
-
-showProducts();
-
-}else{
-
-showProducts(
-products.filter(
-p=>p.category===category
-)
-);
-
-}
-
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-function searchProducts(){
-
-const text=
-document.getElementById("search")
-.value
-.toLowerCase();
-
-showProducts(
-
-products.filter(p=>
-p.name.toLowerCase().includes(text)||
-p.description.toLowerCase().includes(text)||
-p.category.toLowerCase().includes(text)
-)
-
-);
-
-}
-
-
-/* =====================================================
-   DARK MODE
-===================================================== */
-
-function toggleDark(){
-
-document.body.classList.toggle("dark");
-
-localStorage.setItem(
-"printzyDark",
-document.body.classList.contains("dark")
-);
-
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-function showModal(content){
-
-document.getElementById("modalContent")
-.innerHTML=content;
-
-document.getElementById("modal")
-.style.display="flex";
-
-}
-
-
-function closeModal(){
-
-document.getElementById("modal")
-.style.display="none";
-
-}
-
-
-function outsideModal(e){
-
-if(e.target.id==="modal")
-closeModal();
-
-}
-
-
-/* =====================================================
-   TERMS / PRIVACY / CONTACT
-===================================================== */
-
-function openTerms(){
-
-showModal(`
-
-<h2>Terms & Conditions</h2>
-
-<p style="margin-top:15px">
-
-By using Printzy, you agree to our
-terms and conditions.
-
-</p>
-
-<p style="margin-top:12px">
-
-Customized products may have different
-production and delivery times.
-
-</p>
-
-<p style="margin-top:12px">
-
-Customers are responsible for providing
-correct customization information.
-
-</p>
-
-`);
-
-}
-
-
-function openPrivacy(){
-
-showModal(`
-
-<h2>Privacy Policy</h2>
-
-<p style="margin-top:15px">
-
-Printzy respects your privacy.
-Customer information is used for
-account, order processing and support.
-
-</p>
-
-`);
-
-}
-
-
-function openContact(){
-
-showModal(`
-
-<h2>Contact Printzy</h2>
-
-<p style="margin-top:15px">
-📧 Email: support@printzy.com
-</p>
-
-<p style="margin-top:10px">
-📱 Customer Support
-</p>
-
-`);
-
-}
-
-
-/* =====================================================
-   AUTH MODAL
-===================================================== */
-
-function openAuth(){
-
-document.getElementById("authModal")
-.style.display="flex";
-
-if(currentUser){
-
-showAccount();
-
-}else{
-
-showLogin();
-
-}
-
-}
-
-
-function closeAuth(){
-
-document.getElementById("authModal")
-.style.display="none";
-
-}
-
-
-function authOutside(e){
-
-if(e.target.id==="authModal")
-closeAuth();
-
-}
-
-
-function showLogin(){
-
-document.getElementById("loginForm")
-.style.display="block";
-
-document.getElementById("signupForm")
-.style.display="none";
-
-document.getElementById("accountForm")
-.style.display="none";
-
-}
-
-
-function showSignup(){
-
-document.getElementById("loginForm")
-.style.display="none";
-
-document.getElementById("signupForm")
-.style.display="block";
-
-document.getElementById("accountForm")
-.style.display="none";
-
-}
-
-
-/* =====================================================
-   SUPABASE SIGNUP
-===================================================== */
-
-async function signupUser(){
-
-const name=
-document.getElementById("signupName")
-.value.trim();
-
-const email=
-document.getElementById("signupEmail")
-.value.trim()
-.toLowerCase();
-
-const mobile=
-document.getElementById("signupMobile")
-.value.trim();
-
-const password=
-document.getElementById("signupPassword")
-.value;
-
-const confirm=
-document.getElementById("signupConfirm")
-.value;
-
-
-if(!name||!email||!mobile||!password||!confirm){
-
-alert("Please fill all fields.");
-
-return;
-
-}
-
-
-if(!/^\S+@\S+\.\S+$/.test(email)){
-
-alert("Please enter a valid email.");
-
-return;
-
-}
-
-
-if(!/^[0-9]{10}$/.test(mobile)){
-
-alert("Please enter valid 10 digit mobile number.");
-
-return;
-
-}
-
-
-if(password.length<6){
-
-alert("Password must contain at least 6 characters.");
-
-return;
-
-}
-
-
-if(password!==confirm){
-
-alert("Passwords do not match.");
-
-return;
-
-}
-
-
-try{
-
-const {data,error}=
-
-await supabaseClient.auth.signUp({
-
-email:email,
-
-password:password,
-
-options:{
-
-data:{
-
-full_name:name,
-
-mobile:mobile
-
-},
-
-emailRedirectTo:
-window.location.origin+
-window.location.pathname
-
-}
-
-});
-
-
-if(error){
-
-alert("❌ "+error.message);
-
-return;
-
-}
-
-
-/*
-Email confirmation enabled होने पर
-session तुरंत नहीं मिलेगा.
-*/
-
-if(data.session){
-
-currentUser=data.user;
-
-updateLoginButton();
-
-showAccount();
-
-alert("🎉 Account created successfully!");
-
-}else{
-
-alert(
-"🎉 Account created!\n\n"+
-"📧 Please check your email and click "+
-"the verification link before login."
-);
-
-showLogin();
-
-}
-
-}catch(error){
-
-alert("❌ Signup failed: "+error.message);
-
-}
-
-}
-
-
-/* =====================================================
-   SUPABASE LOGIN
-===================================================== */
-
-async function loginUser(){
-
-const email=
-document.getElementById("loginEmail")
-.value.trim()
-.toLowerCase();
-
-const password=
-document.getElementById("loginPassword")
-.value;
-
-
-if(!email||!password){
-
-alert("Please enter email and password.");
-
-return;
-
-}
-
-
-try{
-
-const {data,error}=
-
-await supabaseClient.auth.signInWithPassword({
-
-email:email,
-
-password:password
-
-});
-
-
-if(error){
-
-alert("❌ "+error.message);
-
-return;
-
-}
-
-
-currentUser=data.user;
-
-updateLoginButton();
-
-showAccount();
-
-alert(
-"👋 Welcome back, "+
-getUserName()+"!"
-);
-
-}catch(error){
-
-alert("❌ Login failed: "+error.message);
-
-}
-
-}
-
-
-/* =====================================================
-   PASSWORD RESET
-===================================================== */
-
-async function resetPassword(){
-
-const email=
-prompt(
-"Enter your registered email address:"
-);
-
-if(!email)return;
-
-try{
-
-const {error}=
-
-await supabaseClient.auth.resetPasswordForEmail(
-email.trim().toLowerCase(),
-{
-
-redirectTo:
-window.location.origin+
-window.location.pathname
-
-}
-);
-
-if(error){
-
-alert("❌ "+error.message);
-
-return;
-
-}
-
-alert(
-"📧 Password reset link has been sent to your email."
-);
-
-}catch(error){
-
-alert("❌ "+error.message);
-
-}
-
-}
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-async function logoutUser(){
-
-try{
-
-const {error}=
-await supabaseClient.auth.signOut();
-
-if(error){
-
-alert("❌ "+error.message);
-
-return;
-
-}
-
-currentUser=null;
-
-updateLoginButton();
-
-closeAuth();
-
-alert("You have been logged out.");
-
-}catch(error){
-
-alert("❌ Logout failed.");
-
-}
-
-}
-
-
-/* =====================================================
-   ACCOUNT
-===================================================== */
-
-function getUserName(){
-
-if(!currentUser)return "User";
-
-return currentUser.user_metadata?.full_name ||
-currentUser.email?.split("@")[0] ||
-"User";
-
-}
-
-
-function showAccount(){
-
-if(!currentUser){
-
-showLogin();
-
-return;
-
-}
-
-document.getElementById("loginForm")
-.style.display="none";
-
-document.getElementById("signupForm")
-.style.display="none";
-
-document.getElementById("accountForm")
-.style.display="block";
-
-document.getElementById("accountName")
-.innerText=
-"Hello, "+getUserName()+"!";
-
-document.getElementById("accountEmail")
-.innerText=
-currentUser.email;
-
-}
-
-
-/* =====================================================
-   LOGIN BUTTON
-===================================================== */
-
-function updateLoginButton(){
-
-const text=
-document.getElementById("loginText");
-
-if(currentUser){
-
-const name=getUserName();
-
-text.innerText=
-name.split(" ")[0];
-
-}else{
-
-text.innerText="Login";
-
-}
-
-}
-
-
-/* =====================================================
-   PASSWORD SHOW/HIDE
-===================================================== */
-
-function showPassword(id,button){
-
-const input=
-document.getElementById(id);
-
-if(input.type==="password"){
-
-input.type="text";
-
-button.innerText="🙈";
-
-}else{
-
-input.type="password";
-
-button.innerText="👁️";
-
-}
-
-}
-
-
-/* =====================================================
-   SUPABASE SESSION
-===================================================== */
-
-async function loadUser(){
-
-try{
-
-const {data,error}=
-await supabaseClient.auth.getSession();
-
-if(error){
-
-console.log(error);
-
-return;
-
-}
-
-if(data.session){
-
-currentUser=data.session.user;
-
-}else{
-
-currentUser=null;
-
-}
-
-updateLoginButton();
-
-}catch(error){
-
-console.log("Session error:",error);
-
-}
-
-}
-
-
-/* =====================================================
-   AUTH STATE CHANGE
-===================================================== */
-
-supabaseClient.auth.onAuthStateChange(
-(event,session)=>{
-
-if(session){
-
-currentUser=session.user;
-
-}else{
-
-currentUser=null;
-
-}
-
-updateLoginButton();
-
-}
-);
-
-
-/* =====================================================
-   ESC
-===================================================== */
-
-document.addEventListener(
-"keydown",
-function(e){
-
-if(e.key==="Escape"){
-
-closeModal();
-closeAuth();
-
-}
-
-});
-
-
-/* =====================================================
-   DARK MODE LOAD
-===================================================== */
-
-if(
-localStorage.getItem("printzyDark")
-==="true"
-){
-
-document.body.classList.add("dark");
-
-}
-
-
-/* =====================================================
-   START APP
-===================================================== */
-
-showProducts();
-
-updateCart();
-
-loadUser();
-
-</script>
-
-</body>
-</html>
+note:option.note||""
