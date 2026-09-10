@@ -1891,162 +1891,418 @@ showModal(html);
 
 async function openAuth(){
 
-showModal(`
+  showModal(`
 
-<h2>👤 Login / Sign Up</h2>
+    <h2>👤 Login / Sign Up</h2>
 
-<input
-class="auth-input"
-id="authEmail"
-type="email"
-placeholder="Email address">
+    <!-- LOGIN FORM -->
+    <div id="loginForm">
 
-<div class="password-wrap">
+      <input
+        class="auth-input"
+        id="authEmail"
+        type="email"
+        autocomplete="email"
+        placeholder="Email address">
 
-<input
-class="auth-input"
-id="authPassword"
-type="password"
-placeholder="Password">
+      <div class="password-wrap">
 
-<button
-onclick="togglePassword()">
-👁️
-</button>
+        <input
+          class="auth-input"
+          id="authPassword"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Password">
 
-</div>
+        <button
+          type="button"
+          onclick="togglePassword()">
+          👁️
+        </button>
 
-<button
-class="auth-submit"
-onclick="loginUser()">
-Login
-</button>
+      </div>
 
-<button
-class="auth-submit"
-style="
-background:transparent;
-color:var(--pink);
-border:2px solid var(--pink)"
-onclick="signupUser()">
-Create New Account
-</button>
+      <button
+        class="auth-submit"
+        onclick="loginUser()">
+        Login
+      </button>
 
-<p style="
-margin-top:15px;
-color:var(--muted);
-font-size:12px;
-text-align:center">
+      <button
+        class="auth-submit"
+        style="
+          background:transparent;
+          color:var(--pink);
+          border:2px solid var(--pink)"
+        onclick="showSignup()">
+        Create New Account
+      </button>
 
-Signup के बाद email verification required हो सकती है।
+    </div>
 
-</p>
 
-`);
+    <!-- SIGNUP FORM -->
+    <div id="signupForm" style="display:none">
+
+      <input
+        class="auth-input"
+        id="signupName"
+        type="text"
+        autocomplete="name"
+        placeholder="Full Name">
+
+      <input
+        class="auth-input"
+        id="signupMobile"
+        type="tel"
+        autocomplete="tel"
+        placeholder="Mobile Number">
+
+      <input
+        class="auth-input"
+        id="signupEmail"
+        type="email"
+        autocomplete="email"
+        placeholder="Email address">
+
+      <div class="password-wrap">
+
+        <input
+          class="auth-input"
+          id="signupPassword"
+          type="password"
+          autocomplete="new-password"
+          placeholder="Password">
+
+        <button
+          type="button"
+          onclick="toggleSignupPassword()">
+          👁️
+        </button>
+
+      </div>
+
+      <input
+        class="auth-input"
+        id="signupConfirmPassword"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Confirm Password">
+
+      <button
+        class="auth-submit"
+        onclick="signupUser()">
+        Create Account
+      </button>
+
+      <button
+        class="auth-submit"
+        style="
+          background:transparent;
+          color:var(--pink);
+          border:2px solid var(--pink)"
+        onclick="showLogin()">
+        ← Back to Login
+      </button>
+
+    </div>
+
+    <p style="
+      margin-top:15px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center">
+
+      Signup के बाद email verification required हो सकती है।
+
+    </p>
+
+  `);
 
 }
 
+
+/* =====================================================
+   SHOW LOGIN
+===================================================== */
+
+function showLogin(){
+
+  const login = document.getElementById("loginForm");
+  const signup = document.getElementById("signupForm");
+
+  if(login) login.style.display = "block";
+  if(signup) signup.style.display = "none";
+
+}
+
+
+/* =====================================================
+   SHOW SIGNUP
+===================================================== */
+
+function showSignup(){
+
+  const login = document.getElementById("loginForm");
+  const signup = document.getElementById("signupForm");
+
+  if(login) login.style.display = "none";
+  if(signup) signup.style.display = "block";
+
+}
+
+
+/* =====================================================
+   LOGIN PASSWORD SHOW / HIDE
+===================================================== */
 
 function togglePassword(){
 
-const input=
-document.getElementById("authPassword");
+  const input = document.getElementById("authPassword");
 
-if(input)
-input.type=
-input.type==="password"
-?"text":"password";
+  if(!input) return;
+
+  input.type =
+    input.type === "password"
+      ? "text"
+      : "password";
 
 }
 
+
+/* =====================================================
+   SIGNUP PASSWORD SHOW / HIDE
+===================================================== */
+
+function toggleSignupPassword(){
+
+  const input =
+    document.getElementById("signupPassword");
+
+  if(!input) return;
+
+  input.type =
+    input.type === "password"
+      ? "text"
+      : "password";
+
+}
+
+
+/* =====================================================
+   CUSTOMER LOGIN
+===================================================== */
 
 async function loginUser(){
 
-const email=
-document.getElementById("authEmail")
-.value.trim();
+  const email =
+    document.getElementById("authEmail").value.trim();
 
-const password=
-document.getElementById("authPassword")
-.value;
+  const password =
+    document.getElementById("authPassword").value;
 
-if(!email||!password){
+  if(!email){
 
-alert("Email और password डालें।");
-return;
+    alert("Email address डालें।");
+    return;
+
+  }
+
+  if(!password){
+
+    alert("Password डालें।");
+    return;
+
+  }
+
+  try{
+
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+
+        email: email,
+        password: password
+
+      });
+
+    if(error) throw error;
+
+    alert("Login successful ✅");
+
+    closeModal();
+
+  }catch(error){
+
+    alert(
+      "Login failed ❌\n\n" +
+      error.message
+    );
+
+  }
 
 }
 
-try{
 
-const {data,error}=
-await supabaseClient.auth.signInWithPassword({
-email,
-password
-});
-
-if(error)throw error;
-
-alert("Login successful ✅");
-
-closeModal();
-
-}catch(error){
-
-alert(error.message);
-
-}
-
-}
-
+/* =====================================================
+   CREATE CUSTOMER ACCOUNT
+===================================================== */
 
 async function signupUser(){
 
-const email=
-document.getElementById("authEmail")
-.value.trim();
+  const name =
+    document.getElementById("signupName").value.trim();
 
-const password=
-document.getElementById("authPassword")
-.value;
+  const mobile =
+    document.getElementById("signupMobile").value.trim();
 
-if(!email||!password){
+  const email =
+    document.getElementById("signupEmail").value.trim();
 
-alert("Email और password डालें।");
-return;
+  const password =
+    document.getElementById("signupPassword").value;
+
+  const confirmPassword =
+    document.getElementById("signupConfirmPassword").value;
+
+
+  /* NAME */
+
+  if(!name){
+
+    alert("Full Name डालें।");
+    return;
+
+  }
+
+
+  /* MOBILE */
+
+  if(!mobile){
+
+    alert("Mobile Number डालें।");
+    return;
+
+  }
+
+  if(!/^[0-9]{10}$/.test(mobile)){
+
+    alert("Valid 10 digit Mobile Number डालें।");
+    return;
+
+  }
+
+
+  /* EMAIL */
+
+  if(!email){
+
+    alert("Email address डालें।");
+    return;
+
+  }
+
+
+  /* PASSWORD */
+
+  if(!password){
+
+    alert("Password डालें।");
+    return;
+
+  }
+
+  if(password.length < 6){
+
+    alert(
+      "Password कम से कम 6 characters का होना चाहिए।"
+    );
+
+    return;
+
+  }
+
+
+  /* CONFIRM PASSWORD */
+
+  if(password !== confirmPassword){
+
+    alert(
+      "Password और Confirm Password match नहीं कर रहे।"
+    );
+
+    return;
+
+  }
+
+
+  /* CREATE ACCOUNT */
+
+  try{
+
+    const { data, error } =
+      await supabaseClient.auth.signUp({
+
+        email: email,
+
+        password: password,
+
+        options: {
+
+          data: {
+
+            full_name: name,
+            mobile: mobile
+
+          }
+
+        }
+
+      });
+
+
+    if(error) throw error;
+
+
+    /* EMAIL VERIFICATION */
+
+    if(data.user && !data.session){
+
+      alert(
+        "Account created successfully ✅\n\n" +
+        "आपके email पर verification link भेजा गया है।\n\n" +
+        "Email verify करने के बाद Login करें।"
+      );
+
+      showLogin();
+
+      return;
+
+    }
+
+
+    /* DIRECT LOGIN */
+
+    if(data.session){
+
+      alert(
+        "Account created successfully ✅\n" +
+        "Login successful ✅"
+      );
+
+      closeModal();
+
+    }
+
+  }catch(error){
+
+    alert(
+      "Account creation failed ❌\n\n" +
+      error.message
+    );
+
+  }
 
 }
-
-if(password.length<6){
-
-alert("Password कम से कम 6 characters का होना चाहिए।");
-return;
-
-}
-
-try{
-
-const {data,error}=
-await supabaseClient.auth.signUp({
-email,
-password
-});
-
-if(error)throw error;
-
-alert(
-"Account created ✅\n\n" +
-"अगर email verification enabled है तो अपना email check करें।"
-);
-
-}catch(error){
-
-alert(error.message);
-
-}
-
-}
-
 
 /* =====================================================
    SESSION
