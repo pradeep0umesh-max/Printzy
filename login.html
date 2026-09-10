@@ -354,7 +354,7 @@
 
 
   <!-- ========================= -->
-  <!-- SUPABASE LIBRARY -->
+  <!-- SUPABASE -->
   <!-- ========================= -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -363,13 +363,14 @@
   <script>
 
     // ==========================================
-    // SUPABASE CONFIG
+    // PRINTZY SUPABASE CONFIG
     // ==========================================
 
-    const SUPABASE_URL = "YOUR_SUPABASE_URL";
+    const SUPABASE_URL =
+      "https://yxssyblhziyfbqxzjgxr.supabase.co";
 
     const SUPABASE_ANON_KEY =
-      "YOUR_SUPABASE_ANON_KEY";
+      "sb_publishable_RhoD2kI568-a7ddA8iGhdA_dwJo_m_p";
 
 
     const { createClient } = supabase;
@@ -381,7 +382,7 @@
 
 
     // ==========================================
-    // SECTION SWITCH
+    // SWITCH LOGIN / SIGNUP
     // ==========================================
 
     function showSignup() {
@@ -487,7 +488,7 @@
         } catch (error) {
 
           errorBox.textContent =
-            error.message || "Login failed.";
+            error.message || "Login failed. Please try again.";
 
           errorBox.style.display = "block";
 
@@ -631,10 +632,7 @@
           signupBtn.textContent = "Create Account";
 
 
-          /*
-           * If email confirmation is disabled,
-           * user can be logged in automatically.
-           */
+          // EMAIL VERIFICATION ENABLED
 
           if (data.session) {
 
