@@ -1,1 +1,674 @@
-login.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Printzy - Customer Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fff5f8, #f5f0ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 410px;
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 22px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.10);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #222;
+    }
+
+    .logo span {
+      color: #e91e63;
+    }
+
+    .logo p {
+      color: #777;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 22px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 11px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #e91e63;
+      box-shadow: 0 0 0 3px rgba(233,30,99,0.08);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 11px;
+      background: #e91e63;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background: #d81b60;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .switch a {
+      color: #e91e63;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .error {
+      background: #ffe8ec;
+      color: #c62828;
+    }
+
+    .success {
+      background: #e8f8ee;
+      color: #1b7a3a;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .back-home {
+      display: block;
+      text-align: center;
+      margin-top: 22px;
+      color: #e91e63;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      background: #eee;
+      flex: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- LOGO -->
+    <div class="logo">
+      <h1>PRINT<span>ZY</span></h1>
+      <p>Print Your Ideas</p>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- LOGIN SECTION -->
+    <!-- ========================= -->
+
+    <div id="loginSection">
+
+      <h2>Customer Login</h2>
+
+      <form id="loginForm">
+
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="Enter your email"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Enter your password"
+            required
+          >
+        </div>
+
+
+        <button type="submit" id="loginBtn">
+          Login
+        </button>
+
+      </form>
+
+
+      <div id="loginError" class="message error"></div>
+
+      <div id="loginSuccess" class="message success"></div>
+
+
+      <div class="divider">
+        OR
+      </div>
+
+
+      <div class="switch">
+        New to Printzy?
+        <a onclick="showSignup()">Create New Account</a>
+      </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- SIGNUP SECTION -->
+    <!-- ========================= -->
+
+    <div id="signupSection" class="hidden">
+
+      <h2>Create New Account</h2>
+
+      <form id="signupForm">
+
+
+        <div class="form-group">
+          <label for="signupName">Full Name</label>
+
+          <input
+            type="text"
+            id="signupName"
+            placeholder="Enter your full name"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="signupMobile">Mobile Number</label>
+
+          <input
+            type="tel"
+            id="signupMobile"
+            placeholder="Enter your mobile number"
+            maxlength="10"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+
+          <input
+            type="email"
+            id="signupEmail"
+            placeholder="Enter your email"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+
+          <input
+            type="password"
+            id="signupPassword"
+            placeholder="Create a password"
+            minlength="6"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="signupConfirmPassword">
+            Confirm Password
+          </label>
+
+          <input
+            type="password"
+            id="signupConfirmPassword"
+            placeholder="Confirm your password"
+            minlength="6"
+            required
+          >
+        </div>
+
+
+        <button type="submit" id="signupBtn">
+          Create Account
+        </button>
+
+      </form>
+
+
+      <div id="signupError" class="message error"></div>
+
+      <div id="signupSuccess" class="message success"></div>
+
+
+      <div class="divider">
+        OR
+      </div>
+
+
+      <div class="switch">
+        Already have an account?
+        <a onclick="showLogin()">Login</a>
+      </div>
+
+    </div>
+
+
+    <!-- BACK HOME -->
+
+    <a href="index.html" class="back-home">
+      ← Back to Home
+    </a>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- SUPABASE LIBRARY -->
+  <!-- ========================= -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+  <script>
+
+    // ==========================================
+    // SUPABASE CONFIG
+    // ==========================================
+
+    const SUPABASE_URL = "YOUR_SUPABASE_URL";
+
+    const SUPABASE_ANON_KEY =
+      "YOUR_SUPABASE_ANON_KEY";
+
+
+    const { createClient } = supabase;
+
+    const supabaseClient = createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
+
+    // ==========================================
+    // SECTION SWITCH
+    // ==========================================
+
+    function showSignup() {
+
+      document
+        .getElementById("loginSection")
+        .classList.add("hidden");
+
+      document
+        .getElementById("signupSection")
+        .classList.remove("hidden");
+
+    }
+
+
+    function showLogin() {
+
+      document
+        .getElementById("signupSection")
+        .classList.add("hidden");
+
+      document
+        .getElementById("loginSection")
+        .classList.remove("hidden");
+
+    }
+
+
+    // ==========================================
+    // CUSTOMER LOGIN
+    // ==========================================
+
+    document
+      .getElementById("loginForm")
+      .addEventListener("submit", async function(e) {
+
+        e.preventDefault();
+
+
+        const email =
+          document
+            .getElementById("loginEmail")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("loginPassword")
+            .value;
+
+
+        const loginBtn =
+          document.getElementById("loginBtn");
+
+
+        const errorBox =
+          document.getElementById("loginError");
+
+
+        const successBox =
+          document.getElementById("loginSuccess");
+
+
+        errorBox.style.display = "none";
+        successBox.style.display = "none";
+
+
+        loginBtn.disabled = true;
+        loginBtn.textContent = "Logging in...";
+
+
+        try {
+
+          const { data, error } =
+            await supabaseClient.auth.signInWithPassword({
+
+              email: email,
+
+              password: password
+
+            });
+
+
+          if (error) {
+            throw error;
+          }
+
+
+          successBox.textContent =
+            "Login successful! Redirecting...";
+
+          successBox.style.display = "block";
+
+
+          setTimeout(function() {
+
+            window.location.href = "index.html";
+
+          }, 1000);
+
+
+        } catch (error) {
+
+          errorBox.textContent =
+            error.message || "Login failed.";
+
+          errorBox.style.display = "block";
+
+
+          loginBtn.disabled = false;
+
+          loginBtn.textContent = "Login";
+
+        }
+
+      });
+
+
+    // ==========================================
+    // CREATE CUSTOMER ACCOUNT
+    // ==========================================
+
+    document
+      .getElementById("signupForm")
+      .addEventListener("submit", async function(e) {
+
+        e.preventDefault();
+
+
+        const name =
+          document
+            .getElementById("signupName")
+            .value
+            .trim();
+
+
+        const mobile =
+          document
+            .getElementById("signupMobile")
+            .value
+            .trim();
+
+
+        const email =
+          document
+            .getElementById("signupEmail")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("signupPassword")
+            .value;
+
+
+        const confirmPassword =
+          document
+            .getElementById("signupConfirmPassword")
+            .value;
+
+
+        const signupBtn =
+          document.getElementById("signupBtn");
+
+
+        const errorBox =
+          document.getElementById("signupError");
+
+
+        const successBox =
+          document.getElementById("signupSuccess");
+
+
+        errorBox.style.display = "none";
+        successBox.style.display = "none";
+
+
+        // PASSWORD CHECK
+
+        if (password !== confirmPassword) {
+
+          errorBox.textContent =
+            "Passwords do not match.";
+
+          errorBox.style.display = "block";
+
+          return;
+        }
+
+
+        // MOBILE CHECK
+
+        if (!/^[0-9]{10}$/.test(mobile)) {
+
+          errorBox.textContent =
+            "Please enter a valid 10-digit mobile number.";
+
+          errorBox.style.display = "block";
+
+          return;
+        }
+
+
+        signupBtn.disabled = true;
+        signupBtn.textContent = "Creating Account...";
+
+
+        try {
+
+          const { data, error } =
+            await supabaseClient.auth.signUp({
+
+              email: email,
+
+              password: password,
+
+              options: {
+
+                data: {
+
+                  full_name: name,
+
+                  mobile: mobile
+
+                }
+
+              }
+
+            });
+
+
+          if (error) {
+            throw error;
+          }
+
+
+          successBox.textContent =
+            "Account created successfully!";
+
+          successBox.style.display = "block";
+
+
+          signupBtn.disabled = false;
+
+          signupBtn.textContent = "Create Account";
+
+
+          /*
+           * If email confirmation is disabled,
+           * user can be logged in automatically.
+           */
+
+          if (data.session) {
+
+            setTimeout(function() {
+
+              window.location.href = "index.html";
+
+            }, 1000);
+
+          } else {
+
+            successBox.textContent =
+              "Account created! Please check your email to verify your account.";
+
+          }
+
+
+        } catch (error) {
+
+          errorBox.textContent =
+            error.message || "Account creation failed.";
+
+          errorBox.style.display = "block";
+
+
+          signupBtn.disabled = false;
+
+          signupBtn.textContent = "Create Account";
+
+        }
+
+      });
+
+  </script>
+
+</body>
+</html>
