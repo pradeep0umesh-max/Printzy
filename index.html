@@ -10,346 +10,461 @@
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 :root{
-  --pink:#f51663;
-  --pink2:#ff2b78;
-  --blue:#063b91;
-  --blue2:#075ee8;
-  --yellow:#ffd21c;
-  --text:#071b3a;
-  --muted:#68758a;
-  --bg:#ffffff;
-  --card:#ffffff;
-  --soft:#f5f8fd;
-  --border:#e3e9f2;
-  --green:#19a957;
+--pink:#f51663;
+--pink2:#ff2b78;
+--blue:#063b91;
+--blue2:#075ee8;
+--yellow:#ffd21c;
+--text:#071b3a;
+--muted:#68758a;
+--bg:#ffffff;
+--card:#ffffff;
+--soft:#f5f8fd;
+--border:#e3e9f2;
+--green:#19a957;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
+font-family:Arial,Helvetica,sans-serif;
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
 }
 
 body.dark{
-  --text:#f4f7ff;
-  --muted:#aab5c8;
-  --bg:#0b1220;
-  --card:#141e30;
-  --soft:#101a2b;
-  --border:#283650;
+--text:#f4f7ff;
+--muted:#aab5c8;
+--bg:#0b1220;
+--card:#141e30;
+--soft:#101a2b;
+--border:#283650;
 }
 
-button,input{
-  font-family:inherit;
+button,input,select{
+font-family:inherit;
 }
 
 button{
-  cursor:pointer;
+cursor:pointer;
 }
 
 /* HEADER */
 
 header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:var(--card);
-  border-bottom:1px solid var(--border);
+position:sticky;
+top:0;
+z-index:100;
+background:var(--card);
+border-bottom:1px solid var(--border);
 }
 
 .nav{
-  max-width:1200px;
-  margin:auto;
-  min-height:76px;
-  padding:12px 22px;
-  display:flex;
-  align-items:center;
-  gap:18px;
+max-width:1200px;
+margin:auto;
+min-height:76px;
+padding:12px 22px;
+display:flex;
+align-items:center;
+gap:18px;
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  min-width:185px;
-  cursor:pointer;
+display:flex;
+align-items:center;
+gap:8px;
+min-width:185px;
+cursor:pointer;
 }
 
 .logo-mark{
-  width:45px;
-  height:45px;
-  border-radius:12px;
-  background:linear-gradient(135deg,#ffcc00,#f51663,#1264e8);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#fff;
-  font-size:25px;
-  font-weight:900;
+width:45px;
+height:45px;
+border-radius:12px;
+background:linear-gradient(135deg,#ffcc00,#f51663,#1264e8);
+display:flex;
+justify-content:center;
+align-items:center;
+color:#fff;
+font-size:25px;
+font-weight:900;
 }
 
 .logo-text{
-  font-size:25px;
-  font-weight:900;
-  color:#102c61;
+font-size:25px;
+font-weight:900;
+color:#102c61;
 }
 
 body.dark .logo-text{
-  color:#fff;
+color:#fff;
 }
 
 .logo-sub{
-  font-size:11px;
-  margin-top:2px;
-  color:var(--muted);
+font-size:11px;
+margin-top:2px;
+color:var(--muted);
 }
 
 .search-wrap{
-  flex:1;
-  position:relative;
+flex:1;
+position:relative;
 }
 
 .search-icon{
-  position:absolute;
-  left:17px;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:22px;
+position:absolute;
+left:17px;
+top:50%;
+transform:translateY(-50%);
+font-size:22px;
 }
 
 .search{
-  width:100%;
-  padding:15px 20px 15px 50px;
-  border:1px solid var(--border);
-  border-radius:30px;
-  background:var(--soft);
-  color:var(--text);
-  outline:none;
-  font-size:15px;
+width:100%;
+padding:15px 20px 15px 50px;
+border:1px solid var(--border);
+border-radius:30px;
+background:var(--soft);
+color:var(--text);
+outline:none;
+font-size:15px;
 }
 
 .search:focus{
-  border-color:var(--pink);
+border-color:var(--pink);
 }
 
 .nav-actions{
-  display:flex;
-  gap:9px;
-  align-items:center;
+display:flex;
+gap:9px;
+align-items:center;
 }
 
 .icon-btn{
-  width:43px;
-  height:43px;
-  border:0;
-  border-radius:50%;
-  background:var(--soft);
-  font-size:20px;
-  color:var(--text);
+width:43px;
+height:43px;
+border:0;
+border-radius:50%;
+background:var(--soft);
+font-size:20px;
+color:var(--text);
 }
 
 .icon-btn:hover{
-  background:#ffe5ef;
+background:#ffe5ef;
 }
 
 .cart-btn{
-  border:0;
-  border-radius:24px;
-  padding:12px 17px;
-  background:var(--pink);
-  color:white;
-  font-weight:bold;
+border:0;
+border-radius:24px;
+padding:12px 17px;
+background:var(--pink);
+color:white;
+font-weight:bold;
+}
+
+/* MENU BUTTON */
+
+.menu-btn{
+width:43px;
+height:43px;
+border:0;
+border-radius:50%;
+background:var(--soft);
+color:var(--text);
+font-size:24px;
+font-weight:bold;
+}
+
+.menu-btn:hover{
+background:#ffe5ef;
+}
+
+/* MENU DRAWER */
+
+.menu-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.55);
+z-index:800;
+display:none;
+}
+
+.menu-panel{
+position:absolute;
+right:0;
+top:0;
+width:350px;
+max-width:92%;
+height:100%;
+background:var(--card);
+color:var(--text);
+box-shadow:-10px 0 35px rgba(0,0,0,.2);
+overflow-y:auto;
+}
+
+.menu-head{
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid var(--border);
+}
+
+.menu-head h2{
+color:var(--pink);
+}
+
+.menu-close{
+border:0;
+background:none;
+font-size:30px;
+color:var(--text);
+}
+
+.menu-user{
+padding:18px;
+background:linear-gradient(135deg,#ffe8ef,#e8f3ff);
+margin:15px;
+border-radius:16px;
+}
+
+.menu-user strong{
+font-size:18px;
+}
+
+.menu-item{
+width:100%;
+border:0;
+background:none;
+color:var(--text);
+padding:15px 20px;
+display:flex;
+align-items:center;
+gap:14px;
+font-size:15px;
+text-align:left;
+border-bottom:1px solid var(--border);
+}
+
+.menu-item:hover{
+background:var(--soft);
+}
+
+.menu-icon{
+width:28px;
+font-size:21px;
+text-align:center;
+}
+
+.menu-section{
+padding:15px 20px 8px;
+font-size:12px;
+font-weight:bold;
+color:var(--muted);
+text-transform:uppercase;
+}
+
+.language-box{
+padding:15px 20px;
+}
+
+.language-select{
+width:100%;
+padding:13px;
+border:1px solid var(--border);
+border-radius:10px;
+background:var(--soft);
+color:var(--text);
+outline:none;
+font-size:14px;
 }
 
 /* HERO */
 
 .hero{
-  max-width:1200px;
-  min-height:300px;
-  margin:22px auto;
-  padding:38px 48px;
-  border-radius:24px;
-  overflow:hidden;
-  position:relative;
-  color:white;
-  background:
-  radial-gradient(circle at 88% 15%,#ffe800 0 18%,transparent 18.5%),
-  linear-gradient(110deg,#062c73,#074ab5 62%,#ffd400 62%);
+max-width:1200px;
+min-height:300px;
+margin:22px auto;
+padding:38px 48px;
+border-radius:24px;
+overflow:hidden;
+position:relative;
+color:white;
+background:
+radial-gradient(circle at 88% 15%,#ffe800 0 18%,transparent 18.5%),
+linear-gradient(110deg,#062c73,#074ab5 62%,#ffd400 62%);
 }
 
 .hero-content{
-  position:relative;
-  z-index:2;
-  max-width:570px;
+position:relative;
+z-index:2;
+max-width:570px;
 }
 
 .hero h1{
-  font-size:43px;
-  line-height:1.15;
-  margin-bottom:14px;
+font-size:43px;
+line-height:1.15;
+margin-bottom:14px;
 }
 
 .hero h1 span{
-  color:#ffe000;
+color:#ffe000;
 }
 
 .hero p{
-  font-size:17px;
-  line-height:1.6;
-  max-width:520px;
+font-size:17px;
+line-height:1.6;
+max-width:520px;
 }
 
 .hero-features{
-  display:flex;
-  gap:28px;
-  margin-top:25px;
-  flex-wrap:wrap;
+display:flex;
+gap:28px;
+margin-top:25px;
+flex-wrap:wrap;
 }
 
 .hero-feature{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:14px;
-  font-weight:bold;
+display:flex;
+align-items:center;
+gap:8px;
+font-size:14px;
+font-weight:bold;
 }
 
 .hero-feature b{
-  font-size:22px;
+font-size:22px;
 }
 
 .hero-btn{
-  margin-top:25px;
-  border:0;
-  border-radius:25px;
-  padding:14px 28px;
-  background:var(--pink);
-  color:white;
-  font-size:16px;
-  font-weight:bold;
+margin-top:25px;
+border:0;
+border-radius:25px;
+padding:14px 28px;
+background:var(--pink);
+color:white;
+font-size:16px;
+font-weight:bold;
 }
 
 .hero-products{
-  position:absolute;
-  right:25px;
-  bottom:18px;
-  width:390px;
-  height:245px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+position:absolute;
+right:25px;
+bottom:18px;
+width:390px;
+height:245px;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 .print-stack{
-  background:white;
-  color:#123;
-  width:230px;
-  height:135px;
-  border-radius:8px;
-  transform:rotate(-8deg);
-  box-shadow:0 18px 35px rgba(0,0,0,.25);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-weight:900;
-  font-size:24px;
+background:white;
+color:#123;
+width:230px;
+height:135px;
+border-radius:8px;
+transform:rotate(-8deg);
+box-shadow:0 18px 35px rgba(0,0,0,.25);
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:900;
+font-size:24px;
 }
 
 .mug{
-  position:absolute;
-  right:20px;
-  bottom:15px;
-  width:90px;
-  height:85px;
-  background:white;
-  color:#123;
-  border-radius:8px 8px 22px 22px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:35px;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
+position:absolute;
+right:20px;
+bottom:15px;
+width:90px;
+height:85px;
+background:white;
+color:#123;
+border-radius:8px 8px 22px 22px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:35px;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
 .mug:after{
-  content:"";
-  position:absolute;
-  right:-23px;
-  top:20px;
-  width:28px;
-  height:38px;
-  border:8px solid white;
-  border-left:0;
-  border-radius:0 20px 20px 0;
+content:"";
+position:absolute;
+right:-23px;
+top:20px;
+width:28px;
+height:38px;
+border:8px solid white;
+border-left:0;
+border-radius:0 20px 20px 0;
 }
 
 /* MAIN */
 
 .container{
-  max-width:1200px;
-  margin:auto;
-  padding:0 22px 90px;
+max-width:1200px;
+margin:auto;
+padding:0 22px 90px;
 }
 
 .section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:30px 0 17px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:30px 0 17px;
 }
 
 .section-head h2{
-  font-size:28px;
+font-size:28px;
 }
 
 .view-all{
-  color:var(--pink);
-  font-weight:bold;
-  border:0;
-  background:none;
-  font-size:15px;
+color:var(--pink);
+font-weight:bold;
+border:0;
+background:none;
+font-size:15px;
 }
 
 /* CATEGORIES */
 
 .categories{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
 }
 
 .category{
-  min-height:150px;
-  border:0;
-  border-radius:18px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
-  font-size:16px;
-  font-weight:bold;
-  color:var(--text);
-  transition:.2s;
+min-height:150px;
+border:0;
+border-radius:18px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:12px;
+font-size:16px;
+font-weight:bold;
+color:var(--text);
+transition:.2s;
 }
 
 .category:hover{
-  transform:translateY(-4px);
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
+transform:translateY(-4px);
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .cat-icon{
-  font-size:60px;
+font-size:60px;
 }
-
-/* CATEGORY COLORS */
 
 .c1{background:#e8f3ff}
 .c2{background:#ffe8ef}
@@ -363,590 +478,581 @@ body.dark .logo-text{
 /* PRODUCTS */
 
 .products{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
 }
 
 .product{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:17px;
-  overflow:hidden;
-  position:relative;
-  box-shadow:0 4px 15px rgba(10,40,90,.06);
-  transition:.25s;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:17px;
+overflow:hidden;
+position:relative;
+box-shadow:0 4px 15px rgba(10,40,90,.06);
+transition:.25s;
 }
 
 .product:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 28px rgba(10,40,90,.12);
+transform:translateY(-5px);
+box-shadow:0 12px 28px rgba(10,40,90,.12);
 }
 
 .product-img{
-  height:175px;
-  background:#f2f5f9;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:90px;
-  position:relative;
+height:175px;
+background:#f2f5f9;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:90px;
+position:relative;
 }
 
 .product-img.tshirt{
-  background:linear-gradient(135deg,#e8f3ff,#fff);
+background:linear-gradient(135deg,#e8f3ff,#fff);
 }
 
 .product-img.mugimg{
-  background:linear-gradient(135deg,#fff2e8,#fff);
+background:linear-gradient(135deg,#fff2e8,#fff);
 }
 
 .product-img.frameimg{
-  background:linear-gradient(135deg,#eef8ff,#fff);
+background:linear-gradient(135deg,#eef8ff,#fff);
 }
 
 .product-img.hoodie{
-  background:linear-gradient(135deg,#eeeaff,#fff);
+background:linear-gradient(135deg,#eeeaff,#fff);
 }
 
 .product-img.cap{
-  background:linear-gradient(135deg,#e7fff3,#fff);
+background:linear-gradient(135deg,#e7fff3,#fff);
 }
 
 .product-img.gift{
-  background:linear-gradient(135deg,#ffe8ef,#fff);
+background:linear-gradient(135deg,#ffe8ef,#fff);
 }
 
 .wishlist{
-  position:absolute;
-  top:10px;
-  right:10px;
-  width:38px;
-  height:38px;
-  border:0;
-  border-radius:50%;
-  background:white;
-  color:#6b7280;
-  font-size:21px;
-  z-index:5;
-  box-shadow:0 4px 12px rgba(0,0,0,.1);
+position:absolute;
+top:10px;
+right:10px;
+width:38px;
+height:38px;
+border:0;
+border-radius:50%;
+background:white;
+color:#6b7280;
+font-size:21px;
+z-index:5;
+box-shadow:0 4px 12px rgba(0,0,0,.1);
 }
 
 .wishlist.active{
-  color:var(--pink);
-  background:#ffe8ef;
+color:var(--pink);
+background:#ffe8ef;
 }
 
 .product-info{
-  padding:15px;
+padding:15px;
 }
 
 .product-info h3{
-  font-size:17px;
-  margin-bottom:6px;
+font-size:17px;
+margin-bottom:6px;
 }
 
 .price{
-  font-size:18px;
-  font-weight:bold;
-  color:var(--text);
+font-size:18px;
+font-weight:bold;
+color:var(--text);
 }
 
 .starting{
-  color:var(--muted);
-  font-size:12px;
+color:var(--muted);
+font-size:12px;
 }
 
 .product-desc{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.5;
-  margin-top:7px;
-  min-height:36px;
+color:var(--muted);
+font-size:12px;
+line-height:1.5;
+margin-top:7px;
+min-height:36px;
 }
 
 .product-buttons{
-  display:flex;
-  gap:7px;
-  margin-top:13px;
+display:flex;
+gap:7px;
+margin-top:13px;
 }
 
 .customize{
-  flex:1;
-  border:1.5px solid var(--pink);
-  color:var(--pink);
-  background:white;
-  padding:10px 5px;
-  border-radius:20px;
-  font-weight:bold;
-  font-size:12px;
+flex:1;
+border:1.5px solid var(--pink);
+color:var(--pink);
+background:white;
+padding:10px 5px;
+border-radius:20px;
+font-weight:bold;
+font-size:12px;
 }
 
 .order{
-  flex:1;
-  border:0;
-  background:var(--pink);
-  color:white;
-  padding:10px 5px;
-  border-radius:20px;
-  font-weight:bold;
-  font-size:12px;
+flex:1;
+border:0;
+background:var(--pink);
+color:white;
+padding:10px 5px;
+border-radius:20px;
+font-weight:bold;
+font-size:12px;
 }
 
 /* DELIVERY */
 
 .delivery{
-  margin-top:28px;
-  padding:20px 25px;
-  border-radius:17px;
-  background:linear-gradient(90deg,#ffe1eb,#ffeef4);
-  display:grid;
-  grid-template-columns:1.5fr 1fr 1fr 1fr;
-  gap:15px;
-  align-items:center;
+margin-top:28px;
+padding:20px 25px;
+border-radius:17px;
+background:linear-gradient(90deg,#ffe1eb,#ffeef4);
+display:grid;
+grid-template-columns:1.5fr 1fr 1fr 1fr;
+gap:15px;
+align-items:center;
 }
 
 .delivery-main{
-  display:flex;
-  align-items:center;
-  gap:14px;
+display:flex;
+align-items:center;
+gap:14px;
 }
 
 .delivery-icon{
-  font-size:42px;
+font-size:42px;
 }
 
 .delivery h3{
-  font-size:20px;
-  color:#091e42;
+font-size:20px;
+color:#091e42;
 }
 
 .delivery p{
-  margin-top:5px;
-  color:#475569;
-  font-size:13px;
+margin-top:5px;
+color:#475569;
+font-size:13px;
 }
 
 .delivery-item{
-  text-align:center;
+text-align:center;
 }
 
 .delivery-item div{
-  font-size:26px;
+font-size:26px;
 }
 
 .delivery-item span{
-  display:block;
-  font-size:12px;
-  margin-top:5px;
-  color:#26364e;
+display:block;
+font-size:12px;
+margin-top:5px;
+color:#26364e;
 }
 
 /* FOOTER */
 
 footer{
-  background:#071f4d;
-  color:white;
-  padding:38px 20px 90px;
-  text-align:center;
+background:#071f4d;
+color:white;
+padding:38px 20px 90px;
+text-align:center;
 }
 
 footer h2{
-  font-size:26px;
+font-size:26px;
 }
 
 footer p{
-  margin-top:7px;
-  color:#c9d6ee;
+margin-top:7px;
+color:#c9d6ee;
 }
 
 .footer-links{
-  margin-top:18px;
+margin-top:18px;
 }
 
 .footer-links button{
-  background:none;
-  border:0;
-  color:white;
-  margin:5px 12px;
+background:none;
+border:0;
+color:white;
+margin:5px 12px;
 }
 
 /* BOTTOM NAV */
 
 .bottom-nav{
-  display:none;
+display:none;
 }
 
 /* MODAL */
 
 .modal{
-  position:fixed;
-  inset:0;
-  z-index:500;
-  background:rgba(0,0,0,.65);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
+position:fixed;
+inset:0;
+z-index:500;
+background:rgba(0,0,0,.65);
+display:none;
+align-items:center;
+justify-content:center;
+padding:15px;
 }
 
 .modal-box{
-  width:100%;
-  max-width:650px;
-  max-height:90vh;
-  overflow:auto;
-  background:var(--card);
-  color:var(--text);
-  border-radius:22px;
-  padding:25px;
-  position:relative;
+width:100%;
+max-width:650px;
+max-height:90vh;
+overflow:auto;
+background:var(--card);
+color:var(--text);
+border-radius:22px;
+padding:25px;
+position:relative;
 }
 
 .close{
-  position:absolute;
-  right:15px;
-  top:10px;
-  border:0;
-  background:none;
-  color:var(--text);
-  font-size:30px;
+position:absolute;
+right:15px;
+top:10px;
+border:0;
+background:none;
+color:var(--text);
+font-size:30px;
 }
 
 .modal-box h2{
-  color:var(--blue2);
-  margin-bottom:10px;
+color:var(--blue2);
+margin-bottom:10px;
 }
 
 /* CART */
 
 .cart-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  padding:14px 0;
-  border-bottom:1px solid var(--border);
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+padding:14px 0;
+border-bottom:1px solid var(--border);
 }
 
 .remove{
-  border:0;
-  background:#ffe6eb;
-  color:#e21d4d;
-  padding:7px 10px;
-  border-radius:8px;
+border:0;
+background:#ffe6eb;
+color:#e21d4d;
+padding:7px 10px;
+border-radius:8px;
 }
 
 .cart-total{
-  margin:20px 0;
-  font-size:21px;
-  font-weight:bold;
-  color:var(--pink);
+margin:20px 0;
+font-size:21px;
+font-weight:bold;
+color:var(--pink);
 }
 
 .checkout{
-  width:100%;
-  border:0;
-  padding:14px;
-  background:var(--pink);
-  color:white;
-  border-radius:12px;
-  font-weight:bold;
+width:100%;
+border:0;
+padding:14px;
+background:var(--pink);
+color:white;
+border-radius:12px;
+font-weight:bold;
 }
 
 /* AUTH */
 
 .auth-input{
-  width:100%;
-  padding:13px;
-  margin:6px 0;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:var(--soft);
-  color:var(--text);
-  outline:none;
+width:100%;
+padding:13px;
+margin:6px 0;
+border:1px solid var(--border);
+border-radius:10px;
+background:var(--soft);
+color:var(--text);
+outline:none;
 }
 
 .auth-submit{
-  width:100%;
-  padding:13px;
-  margin-top:10px;
-  border:0;
-  border-radius:10px;
-  background:var(--pink);
-  color:white;
-  font-weight:bold;
-}
-
-.auth-switch{
-  text-align:center;
-  margin-top:15px;
-  color:var(--muted);
-}
-
-.auth-switch button{
-  border:0;
-  background:none;
-  color:var(--pink);
-  font-weight:bold;
+width:100%;
+padding:13px;
+margin-top:10px;
+border:0;
+border-radius:10px;
+background:var(--pink);
+color:white;
+font-weight:bold;
 }
 
 .password-wrap{
-  position:relative;
+position:relative;
 }
 
 .password-wrap button{
-  position:absolute;
-  right:5px;
-  top:8px;
-  border:0;
-  background:none;
+position:absolute;
+right:5px;
+top:8px;
+border:0;
+background:none;
 }
 
 /* FRAME */
 
 .frame-option{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px;
-  margin:9px 0;
-  border:2px solid var(--border);
-  border-radius:12px;
-  background:var(--soft);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+margin:9px 0;
+border:2px solid var(--border);
+border-radius:12px;
+background:var(--soft);
 }
 
 .frame-option.selected{
-  border-color:var(--pink);
-  background:#fff0f5;
+border-color:var(--pink);
+background:#fff0f5;
 }
 
 .frame-option strong:last-child{
-  color:var(--pink);
+color:var(--pink);
 }
 
 .upload{
-  padding:18px;
-  margin-top:15px;
-  border:2px dashed var(--pink);
-  border-radius:12px;
-  text-align:center;
+padding:18px;
+margin-top:15px;
+border:2px dashed var(--pink);
+border-radius:12px;
+text-align:center;
 }
 
 .upload input{
-  margin-top:12px;
-  width:100%;
+margin-top:12px;
+width:100%;
 }
 
 /* MOBILE */
 
 @media(max-width:900px){
 
-  .nav{
-    padding:10px 15px;
-    flex-wrap:wrap;
-  }
+.nav{
+padding:10px 15px;
+flex-wrap:wrap;
+}
 
-  .logo{
-    min-width:auto;
-  }
+.logo{
+min-width:auto;
+}
 
-  .search-wrap{
-    order:5;
-    flex-basis:100%;
-  }
+.search-wrap{
+order:5;
+flex-basis:100%;
+}
 
-  .cart-btn{
-    padding:10px 12px;
-  }
+.cart-btn{
+padding:10px 12px;
+}
 
-  .hero{
-    margin:15px;
-    padding:32px 25px;
-    min-height:360px;
-    background:
-      radial-gradient(circle at 90% 12%,#ffe800 0 20%,transparent 20.5%),
-      linear-gradient(110deg,#062c73,#0751c3);
-  }
+.hero{
+margin:15px;
+padding:32px 25px;
+min-height:360px;
+background:
+radial-gradient(circle at 90% 12%,#ffe800 0 20%,transparent 20.5%),
+linear-gradient(110deg,#062c73,#0751c3);
+}
 
-  .hero h1{
-    font-size:34px;
-  }
+.hero h1{
+font-size:34px;
+}
 
-  .hero-products{
-    opacity:.35;
-    right:-70px;
-    bottom:-15px;
-  }
+.hero-products{
+opacity:.35;
+right:-70px;
+bottom:-15px;
+}
 
-  .categories{
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-  }
+.categories{
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+}
 
-  .category{
-    min-height:125px;
-  }
+.category{
+min-height:125px;
+}
 
-  .cat-icon{
-    font-size:45px;
-  }
+.cat-icon{
+font-size:45px;
+}
 
-  .products{
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-  }
+.products{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
 
-  .product-img{
-    height:145px;
-    font-size:65px;
-  }
+.product-img{
+height:145px;
+font-size:65px;
+}
 
-  .delivery{
-    grid-template-columns:1fr 1fr 1fr;
-  }
+.delivery{
+grid-template-columns:1fr 1fr 1fr;
+}
 
-  .delivery-main{
-    grid-column:1/-1;
-  }
+.delivery-main{
+grid-column:1/-1;
+}
 
-  .bottom-nav{
-    position:fixed;
-    display:flex;
-    z-index:300;
-    bottom:0;
-    left:0;
-    right:0;
-    height:68px;
-    background:var(--card);
-    border-top:1px solid var(--border);
-    justify-content:space-around;
-    align-items:center;
-    box-shadow:0 -5px 20px rgba(0,0,0,.08);
-  }
+.bottom-nav{
+position:fixed;
+display:flex;
+z-index:300;
+bottom:0;
+left:0;
+right:0;
+height:68px;
+background:var(--card);
+border-top:1px solid var(--border);
+justify-content:space-around;
+align-items:center;
+box-shadow:0 -5px 20px rgba(0,0,0,.08);
+}
 
-  .bottom-nav button{
-    border:0;
-    background:none;
-    color:var(--muted);
-    font-size:11px;
-  }
+.bottom-nav button{
+border:0;
+background:none;
+color:var(--muted);
+font-size:11px;
+}
 
-  .bottom-nav button div{
-    font-size:23px;
-    margin-bottom:3px;
-  }
+.bottom-nav button div{
+font-size:23px;
+margin-bottom:3px;
+}
 
-  .bottom-nav .active{
-    color:var(--pink);
-  }
+.bottom-nav .active{
+color:var(--pink);
+}
 
 }
 
 @media(max-width:550px){
 
-  .logo-mark{
-    width:38px;
-    height:38px;
-  }
+.logo-mark{
+width:38px;
+height:38px;
+}
 
-  .logo-text{
-    font-size:20px;
-  }
+.logo-text{
+font-size:20px;
+}
 
-  .logo-sub{
-    font-size:9px;
-  }
+.logo-sub{
+font-size:9px;
+}
 
-  .nav-actions .icon-btn{
-    width:38px;
-    height:38px;
-  }
+.nav-actions .icon-btn,
+.menu-btn{
+width:38px;
+height:38px;
+}
 
-  .cart-btn{
-    font-size:12px;
-  }
+.cart-btn{
+font-size:12px;
+}
 
-  .hero{
-    border-radius:18px;
-    margin:12px;
-  }
+.hero{
+border-radius:18px;
+margin:12px;
+}
 
-  .hero h1{
-    font-size:30px;
-  }
+.hero h1{
+font-size:30px;
+}
 
-  .hero p{
-    font-size:14px;
-  }
+.hero p{
+font-size:14px;
+}
 
-  .hero-features{
-    gap:12px;
-  }
+.hero-features{
+gap:12px;
+}
 
-  .hero-feature{
-    font-size:11px;
-  }
+.hero-feature{
+font-size:11px;
+}
 
-  .container{
-    padding:0 12px 85px;
-  }
+.container{
+padding:0 12px 85px;
+}
 
-  .section-head h2{
-    font-size:23px;
-  }
+.section-head h2{
+font-size:23px;
+}
 
-  .categories{
-    grid-template-columns:repeat(2,1fr);
-  }
+.categories{
+grid-template-columns:repeat(2,1fr);
+}
 
-  .category{
-    min-height:115px;
-  }
+.category{
+min-height:115px;
+}
 
-  .cat-icon{
-    font-size:45px;
-  }
+.cat-icon{
+font-size:45px;
+}
 
-  .product-info h3{
-    font-size:14px;
-  }
+.product-info h3{
+font-size:14px;
+}
 
-  .price{
-    font-size:16px;
-  }
+.price{
+font-size:16px;
+}
 
-  .product-desc{
-    display:none;
-  }
+.product-desc{
+display:none;
+}
 
-  .customize,
-  .order{
-    font-size:10px;
-  }
+.customize,
+.order{
+font-size:10px;
+}
 
-  .delivery{
-    padding:18px 12px;
-    grid-template-columns:repeat(3,1fr);
-  }
+.delivery{
+padding:18px 12px;
+grid-template-columns:repeat(3,1fr);
+}
 
-  .delivery h3{
-    font-size:16px;
-  }
+.delivery h3{
+font-size:16px;
+}
 
-  .delivery-icon{
-    font-size:34px;
-  }
+.delivery-icon{
+font-size:34px;
+}
 
-  .delivery-item span{
-    font-size:10px;
-  }
+.delivery-item span{
+font-size:10px;
+}
+
+.menu-panel{
+width:330px;
+}
+
 }
 </style>
 </head>
 
 <body>
-
-<!-- HEADER -->
 
 <header>
 
@@ -959,7 +1065,7 @@ onclick="window.scrollTo({top:0,behavior:'smooth'})">
 
 <div>
 <div class="logo-text">PRINTZY</div>
-<div class="logo-sub">Print Your Ideas</div>
+<div class="logo-sub" data-i18n="subtitle">Print Your Ideas</div>
 </div>
 
 </div>
@@ -972,12 +1078,19 @@ onclick="window.scrollTo({top:0,behavior:'smooth'})">
 class="search"
 id="search"
 type="search"
+data-placeholder="search"
 placeholder="Search for products like Visiting Card, Banner, etc..."
 oninput="searchProducts()">
 
 </div>
 
 <div class="nav-actions">
+
+<button class="menu-btn"
+onclick="openMenu()"
+title="Menu">
+☰
+</button>
 
 <button class="icon-btn"
 onclick="toggleDark()">
@@ -999,6 +1112,172 @@ onclick="openCart()">
 </div>
 
 </header>
+
+
+<!-- MENU -->
+
+<div class="menu-overlay"
+id="menuOverlay"
+onclick="closeMenuOutside(event)">
+
+<div class="menu-panel"
+onclick="event.stopPropagation()">
+
+<div class="menu-head">
+
+<h2>PRINTZY</h2>
+
+<button class="menu-close"
+onclick="closeMenu()">
+×
+</button>
+
+</div>
+
+<div class="menu-user">
+
+<div style="font-size:30px">👤</div>
+
+<strong id="menuUserName">
+Customer
+</strong>
+
+<p id="menuUserEmail"
+style="font-size:12px;color:var(--muted);margin-top:4px">
+Login to your account
+</p>
+
+</div>
+
+
+<div class="menu-section">
+Account
+</div>
+
+<button class="menu-item"
+onclick="openAuth();closeMenu()">
+<span class="menu-icon">👤</span>
+<span data-i18n="profile">My Profile / Login</span>
+</button>
+
+<button class="menu-item"
+onclick="openOrders();closeMenu()">
+<span class="menu-icon">📦</span>
+<span data-i18n="orders">My Orders</span>
+</button>
+
+<button class="menu-item"
+onclick="openWishlist();closeMenu()">
+<span class="menu-icon">❤️</span>
+<span data-i18n="wishlist">Wishlist</span>
+</button>
+
+<button class="menu-item"
+onclick="openCart();closeMenu()">
+<span class="menu-icon">🛒</span>
+<span data-i18n="cart">My Cart</span>
+</button>
+
+
+<div class="menu-section">
+Settings
+</div>
+
+<div class="language-box">
+
+<div style="
+font-weight:bold;
+margin-bottom:8px">
+🌐 <span data-i18n="language">Language</span>
+</div>
+
+<select
+class="language-select"
+id="languageSelect"
+onchange="changeLanguage(this.value)">
+
+<option value="hi">हिन्दी</option>
+<option value="en">English</option>
+<option value="mr">मराठी</option>
+<option value="gu">ગુજરાતી</option>
+<option value="bn">বাংলা</option>
+<option value="pa">ਪੰਜਾਬੀ</option>
+<option value="ta">தமிழ்</option>
+<option value="te">తెలుగు</option>
+<option value="kn">ಕನ್ನಡ</option>
+<option value="ml">മലയാളം</option>
+<option value="ur">اردو</option>
+<option value="or">ଓଡ଼ିଆ</option>
+<option value="as">অসমীয়া</option>
+<option value="ne">नेपाली</option>
+<option value="sa">संस्कृत</option>
+<option value="kok">कोंकणी</option>
+<option value="mai">मैथिली</option>
+<option value="mni">মৈতৈলোন</option>
+<option value="bho">भोजपुरी</option>
+<option value="ks">कॉशुर</option>
+<option value="sd">سنڌي</option>
+<option value="dogri">डोगरी</option>
+
+</select>
+
+</div>
+
+
+<button class="menu-item"
+onclick="toggleDark();closeMenu()">
+<span class="menu-icon">🌙</span>
+<span data-i18n="theme">Dark / Light Mode</span>
+</button>
+
+
+<div class="menu-section">
+Services
+</div>
+
+<button class="menu-item"
+onclick="showAddress();closeMenu()">
+<span class="menu-icon">📍</span>
+<span data-i18n="address">Delivery Address</span>
+</button>
+
+<button class="menu-item"
+onclick="showNotifications();closeMenu()">
+<span class="menu-icon">🔔</span>
+<span data-i18n="notifications">Notifications</span>
+</button>
+
+<button class="menu-item"
+onclick="showInfo('Contact Us');closeMenu()">
+<span class="menu-icon">🎧</span>
+<span data-i18n="support">Help & Support</span>
+</button>
+
+
+<div class="menu-section">
+Printzy
+</div>
+
+<button class="menu-item"
+onclick="showInfo('About Printzy');closeMenu()">
+<span class="menu-icon">ℹ️</span>
+<span data-i18n="about">About Printzy</span>
+</button>
+
+<button class="menu-item"
+onclick="showInfo('Terms & Conditions');closeMenu()">
+<span class="menu-icon">📄</span>
+<span data-i18n="terms">Terms & Conditions</span>
+</button>
+
+<button class="menu-item"
+onclick="showInfo('Privacy Policy');closeMenu()">
+<span class="menu-icon">🔐</span>
+<span data-i18n="privacy">Privacy Policy</span>
+</button>
+
+</div>
+</div>
 
 
 <!-- HERO -->
@@ -1054,12 +1333,7 @@ PRINTZY
 </section>
 
 
-<!-- MAIN -->
-
 <div class="container">
-
-
-<!-- CATEGORIES -->
 
 <div class="section-head">
 
@@ -1125,8 +1399,6 @@ Other Printing
 </div>
 
 
-<!-- PRODUCTS -->
-
 <div class="section-head">
 
 <h2>Popular Products</h2>
@@ -1142,8 +1414,6 @@ View All →
 id="productList">
 </div>
 
-
-<!-- DELIVERY -->
 
 <div class="delivery">
 
@@ -1178,8 +1448,6 @@ id="productList">
 </div>
 
 
-<!-- FOOTER -->
-
 <footer>
 
 <h2>PRINTZY</h2>
@@ -1208,8 +1476,6 @@ Contact
 
 </footer>
 
-
-<!-- BOTTOM NAV -->
 
 <div class="bottom-nav">
 
@@ -1242,8 +1508,6 @@ Profile
 </div>
 
 
-<!-- MODAL -->
-
 <div class="modal"
 id="modal"
 onclick="outsideModal(event)">
@@ -1266,7 +1530,7 @@ onclick="closeModal()">
 <script>
 
 /* =====================================================
-   SUPABASE
+SUPABASE
 ===================================================== */
 
 const SUPABASE_URL =
@@ -1283,7 +1547,7 @@ SUPABASE_KEY
 
 
 /* =====================================================
-   PRODUCTS
+PRODUCTS
 ===================================================== */
 
 const products=[
@@ -1363,10 +1627,6 @@ description:"Other customized printing services."
 ];
 
 
-/* =====================================================
-   LOCAL STORAGE
-===================================================== */
-
 let cart=
 JSON.parse(localStorage.getItem("printzyCart")||"[]");
 
@@ -1375,13 +1635,12 @@ JSON.parse(localStorage.getItem("printzyWishlist")||"[]");
 
 
 /* =====================================================
-   SHOW PRODUCTS
+SHOW PRODUCTS
 ===================================================== */
 
 function showProducts(list=products){
 
-const box=
-document.getElementById("productList");
+const box=document.getElementById("productList");
 
 box.innerHTML="";
 
@@ -1405,11 +1664,9 @@ Try another search.
 return;
 }
 
+list.forEach(p=>{
 
-list.forEach((p,index)=>{
-
-const liked=
-wishlist.includes(p.name);
+const liked=wishlist.includes(p.name);
 
 box.innerHTML+=`
 
@@ -1475,13 +1732,13 @@ updateCartCount();
 
 
 /* =====================================================
-   SEARCH
+SEARCH
 ===================================================== */
 
 function searchProducts(){
 
-const q=
-document.getElementById("search")
+const q=document
+.getElementById("search")
 .value
 .toLowerCase()
 .trim();
@@ -1492,8 +1749,7 @@ showProducts(products);
 return;
 }
 
-const result=
-products.filter(p=>
+const result=products.filter(p=>
 p.name.toLowerCase().includes(q) ||
 p.category.toLowerCase().includes(q) ||
 p.description.toLowerCase().includes(q)
@@ -1526,13 +1782,12 @@ behavior:"smooth"
 
 
 /* =====================================================
-   PRODUCT DETAILS
+PRODUCT DETAILS
 ===================================================== */
 
 function openProduct(name){
 
-const p=
-products.find(x=>x.name===name);
+const p=products.find(x=>x.name===name);
 
 if(!p)return;
 
@@ -1572,18 +1827,16 @@ onclick="addToCart('${p.name}')">
 
 
 /* =====================================================
-   CART
+CART
 ===================================================== */
 
 function addToCart(name){
 
-const p=
-products.find(x=>x.name===name);
+const p=products.find(x=>x.name===name);
 
 if(!p)return;
 
-const item=
-cart.find(x=>x.name===name);
+const item=cart.find(x=>x.name===name);
 
 if(item){
 item.qty++;
@@ -1616,12 +1869,10 @@ updateCartCount();
 
 function updateCartCount(){
 
-const count=
-cart.reduce((sum,item)=>
-sum+item.qty,0);
+const count=cart.reduce(
+(sum,item)=>sum+item.qty,0);
 
-const el=
-document.getElementById("cartCount");
+const el=document.getElementById("cartCount");
 
 if(el)el.innerText=count;
 
@@ -1630,10 +1881,7 @@ if(el)el.innerText=count;
 
 function openCart(){
 
-let html=`
-
-<h2>🛒 Your Cart</h2>
-`;
+let html=`<h2>🛒 Your Cart</h2>`;
 
 if(!cart.length){
 
@@ -1657,13 +1905,11 @@ showModal(html);
 return;
 }
 
-
 let total=0;
 
 cart.forEach((item,index)=>{
 
-const amount=
-item.price*item.qty;
+const amount=item.price*item.qty;
 
 total+=amount;
 
@@ -1703,7 +1949,6 @@ Remove
 `;
 
 });
-
 
 html+=`
 
@@ -1781,15 +2026,14 @@ openAuth();
 
 
 /* =====================================================
-   WISHLIST
+WISHLIST
 ===================================================== */
 
 function toggleWishlist(name){
 
 if(wishlist.includes(name)){
 
-wishlist=
-wishlist.filter(x=>x!==name);
+wishlist=wishlist.filter(x=>x!==name);
 
 showToast("Removed from wishlist");
 
@@ -1822,15 +2066,11 @@ document.getElementById("search").value.toLowerCase()
 
 function openWishlist(){
 
-const items=
-products.filter(p=>
+const items=products.filter(p=>
 wishlist.includes(p.name)
 );
 
-let html=`
-
-<h2>❤️ Wishlist</h2>
-`;
+let html=`<h2>❤️ Wishlist</h2>`;
 
 if(!items.length){
 
@@ -1860,6 +2100,7 @@ html+=`
 
 <div>
 <strong>${p.icon} ${p.name}</strong>
+
 <div style="color:var(--pink)">
 ₹${p.price}
 </div>
@@ -1886,426 +2127,377 @@ showModal(html);
 
 
 /* =====================================================
-   AUTH
+AUTH
 ===================================================== */
 
 async function openAuth(){
 
-  showModal(`
+showModal(`
 
-    <h2>👤 Login / Sign Up</h2>
+<h2>👤 Login / Sign Up</h2>
 
-    <!-- LOGIN FORM -->
-    <div id="loginForm">
+<div id="loginForm">
 
-      <input
-        class="auth-input"
-        id="authEmail"
-        type="email"
-        autocomplete="email"
-        placeholder="Email address">
+<input
+class="auth-input"
+id="authEmail"
+type="email"
+autocomplete="email"
+placeholder="Email address">
 
-      <div class="password-wrap">
+<div class="password-wrap">
 
-        <input
-          class="auth-input"
-          id="authPassword"
-          type="password"
-          autocomplete="current-password"
-          placeholder="Password">
+<input
+class="auth-input"
+id="authPassword"
+type="password"
+autocomplete="current-password"
+placeholder="Password">
 
-        <button
-          type="button"
-          onclick="togglePassword()">
-          👁️
-        </button>
+<button
+type="button"
+onclick="togglePassword()">
+👁️
+</button>
 
-      </div>
+</div>
 
-      <button
-        class="auth-submit"
-        onclick="loginUser()">
-        Login
-      </button>
+<button
+class="auth-submit"
+onclick="loginUser()">
+Login
+</button>
 
-      <button
-        class="auth-submit"
-        style="
-          background:transparent;
-          color:var(--pink);
-          border:2px solid var(--pink)"
-        onclick="showSignup()">
-        Create New Account
-      </button>
+<button
+class="auth-submit"
+style="
+background:transparent;
+color:var(--pink);
+border:2px solid var(--pink)"
+onclick="showSignup()">
+Create New Account
+</button>
 
-    </div>
+</div>
 
 
-    <!-- SIGNUP FORM -->
-    <div id="signupForm" style="display:none">
+<div id="signupForm" style="display:none">
 
-      <input
-        class="auth-input"
-        id="signupName"
-        type="text"
-        autocomplete="name"
-        placeholder="Full Name">
+<input
+class="auth-input"
+id="signupName"
+type="text"
+autocomplete="name"
+placeholder="Full Name">
 
-      <input
-        class="auth-input"
-        id="signupMobile"
-        type="tel"
-        autocomplete="tel"
-        placeholder="Mobile Number">
+<input
+class="auth-input"
+id="signupMobile"
+type="tel"
+autocomplete="tel"
+placeholder="Mobile Number">
 
-      <input
-        class="auth-input"
-        id="signupEmail"
-        type="email"
-        autocomplete="email"
-        placeholder="Email address">
+<input
+class="auth-input"
+id="signupEmail"
+type="email"
+autocomplete="email"
+placeholder="Email address">
 
-      <div class="password-wrap">
+<div class="password-wrap">
 
-        <input
-          class="auth-input"
-          id="signupPassword"
-          type="password"
-          autocomplete="new-password"
-          placeholder="Password">
+<input
+class="auth-input"
+id="signupPassword"
+type="password"
+autocomplete="new-password"
+placeholder="Password">
 
-        <button
-          type="button"
-          onclick="toggleSignupPassword()">
-          👁️
-        </button>
+<button
+type="button"
+onclick="toggleSignupPassword()">
+👁️
+</button>
 
-      </div>
+</div>
 
-      <input
-        class="auth-input"
-        id="signupConfirmPassword"
-        type="password"
-        autocomplete="new-password"
-        placeholder="Confirm Password">
+<input
+class="auth-input"
+id="signupConfirmPassword"
+type="password"
+autocomplete="new-password"
+placeholder="Confirm Password">
 
-      <button
-        class="auth-submit"
-        onclick="signupUser()">
-        Create Account
-      </button>
+<button
+class="auth-submit"
+onclick="signupUser()">
+Create Account
+</button>
 
-      <button
-        class="auth-submit"
-        style="
-          background:transparent;
-          color:var(--pink);
-          border:2px solid var(--pink)"
-        onclick="showLogin()">
-        ← Back to Login
-      </button>
+<button
+class="auth-submit"
+style="
+background:transparent;
+color:var(--pink);
+border:2px solid var(--pink)"
+onclick="showLogin()">
+← Back to Login
+</button>
 
-    </div>
+</div>
 
-    <p style="
-      margin-top:15px;
-      color:var(--muted);
-      font-size:12px;
-      text-align:center">
+<p style="
+margin-top:15px;
+color:var(--muted);
+font-size:12px;
+text-align:center">
 
-      Signup के बाद email verification required हो सकती है।
+Signup के बाद email verification required हो सकती है।
 
-    </p>
+</p>
 
-  `);
+`);
 
 }
 
-
-/* =====================================================
-   SHOW LOGIN
-===================================================== */
 
 function showLogin(){
 
-  const login = document.getElementById("loginForm");
-  const signup = document.getElementById("signupForm");
+const login=document.getElementById("loginForm");
+const signup=document.getElementById("signupForm");
 
-  if(login) login.style.display = "block";
-  if(signup) signup.style.display = "none";
+if(login)login.style.display="block";
+if(signup)signup.style.display="none";
 
 }
 
-
-/* =====================================================
-   SHOW SIGNUP
-===================================================== */
 
 function showSignup(){
 
-  const login = document.getElementById("loginForm");
-  const signup = document.getElementById("signupForm");
+const login=document.getElementById("loginForm");
+const signup=document.getElementById("signupForm");
 
-  if(login) login.style.display = "none";
-  if(signup) signup.style.display = "block";
+if(login)login.style.display="none";
+if(signup)signup.style.display="block";
 
 }
 
-
-/* =====================================================
-   LOGIN PASSWORD SHOW / HIDE
-===================================================== */
 
 function togglePassword(){
 
-  const input = document.getElementById("authPassword");
+const input=document.getElementById("authPassword");
 
-  if(!input) return;
+if(!input)return;
 
-  input.type =
-    input.type === "password"
-      ? "text"
-      : "password";
+input.type=
+input.type==="password"
+?"text"
+:"password";
 
 }
 
-
-/* =====================================================
-   SIGNUP PASSWORD SHOW / HIDE
-===================================================== */
 
 function toggleSignupPassword(){
 
-  const input =
-    document.getElementById("signupPassword");
+const input=
+document.getElementById("signupPassword");
 
-  if(!input) return;
+if(!input)return;
 
-  input.type =
-    input.type === "password"
-      ? "text"
-      : "password";
+input.type=
+input.type==="password"
+?"text"
+:"password";
 
 }
 
 
 /* =====================================================
-   CUSTOMER LOGIN
+LOGIN
 ===================================================== */
 
 async function loginUser(){
 
-  const email =
-    document.getElementById("authEmail").value.trim();
+const email=
+document.getElementById("authEmail").value.trim();
 
-  const password =
-    document.getElementById("authPassword").value;
+const password=
+document.getElementById("authPassword").value;
 
-  if(!email){
+if(!email){
 
-    alert("Email address डालें।");
-    return;
+alert("Email address डालें।");
+return;
 
-  }
+}
 
-  if(!password){
+if(!password){
 
-    alert("Password डालें।");
-    return;
+alert("Password डालें।");
+return;
 
-  }
+}
 
-  try{
+try{
 
-    const { data, error } =
-      await supabaseClient.auth.signInWithPassword({
+const {data,error}=
+await supabaseClient.auth.signInWithPassword({
 
-        email: email,
-        password: password
+email:email,
+password:password
 
-      });
+});
 
-    if(error) throw error;
+if(error)throw error;
 
-    alert("Login successful ✅");
+alert("Login successful ✅");
 
-    closeModal();
+closeModal();
 
-  }catch(error){
+updateMenuUser(data.user);
 
-    alert(
-      "Login failed ❌\n\n" +
-      error.message
-    );
+}catch(error){
 
-  }
+alert(
+"Login failed ❌\n\n"+
+error.message
+);
+
+}
 
 }
 
 
 /* =====================================================
-   CREATE CUSTOMER ACCOUNT
+SIGNUP
 ===================================================== */
 
 async function signupUser(){
 
-  const name =
-    document.getElementById("signupName").value.trim();
+const name=
+document.getElementById("signupName").value.trim();
 
-  const mobile =
-    document.getElementById("signupMobile").value.trim();
+const mobile=
+document.getElementById("signupMobile").value.trim();
 
-  const email =
-    document.getElementById("signupEmail").value.trim();
+const email=
+document.getElementById("signupEmail").value.trim();
 
-  const password =
-    document.getElementById("signupPassword").value;
+const password=
+document.getElementById("signupPassword").value;
 
-  const confirmPassword =
-    document.getElementById("signupConfirmPassword").value;
+const confirmPassword=
+document.getElementById("signupConfirmPassword").value;
 
+if(!name){
 
-  /* NAME */
-
-  if(!name){
-
-    alert("Full Name डालें।");
-    return;
-
-  }
-
-
-  /* MOBILE */
-
-  if(!mobile){
-
-    alert("Mobile Number डालें।");
-    return;
-
-  }
-
-  if(!/^[0-9]{10}$/.test(mobile)){
-
-    alert("Valid 10 digit Mobile Number डालें।");
-    return;
-
-  }
-
-
-  /* EMAIL */
-
-  if(!email){
-
-    alert("Email address डालें।");
-    return;
-
-  }
-
-
-  /* PASSWORD */
-
-  if(!password){
-
-    alert("Password डालें।");
-    return;
-
-  }
-
-  if(password.length < 6){
-
-    alert(
-      "Password कम से कम 6 characters का होना चाहिए।"
-    );
-
-    return;
-
-  }
-
-
-  /* CONFIRM PASSWORD */
-
-  if(password !== confirmPassword){
-
-    alert(
-      "Password और Confirm Password match नहीं कर रहे।"
-    );
-
-    return;
-
-  }
-
-
-  /* CREATE ACCOUNT */
-
-  try{
-
-    const { data, error } =
-      await supabaseClient.auth.signUp({
-
-        email: email,
-
-        password: password,
-
-        options: {
-
-          data: {
-
-            full_name: name,
-            mobile: mobile
-
-          }
-
-        }
-
-      });
-
-
-    if(error) throw error;
-
-
-    /* EMAIL VERIFICATION */
-
-    if(data.user && !data.session){
-
-      alert(
-        "Account created successfully ✅\n\n" +
-        "आपके email पर verification link भेजा गया है।\n\n" +
-        "Email verify करने के बाद Login करें।"
-      );
-
-      showLogin();
-
-      return;
-
-    }
-
-
-    /* DIRECT LOGIN */
-
-    if(data.session){
-
-      alert(
-        "Account created successfully ✅\n" +
-        "Login successful ✅"
-      );
-
-      closeModal();
-
-    }
-
-  }catch(error){
-
-    alert(
-      "Account creation failed ❌\n\n" +
-      error.message
-    );
-
-  }
+alert("Full Name डालें।");
+return;
 
 }
 
+if(!mobile){
+
+alert("Mobile Number डालें।");
+return;
+
+}
+
+if(!/^[0-9]{10}$/.test(mobile)){
+
+alert("Valid 10 digit Mobile Number डालें।");
+return;
+
+}
+
+if(!email){
+
+alert("Email address डालें।");
+return;
+
+}
+
+if(!password){
+
+alert("Password डालें।");
+return;
+
+}
+
+if(password.length<6){
+
+alert("Password कम से कम 6 characters का होना चाहिए।");
+return;
+
+}
+
+if(password!==confirmPassword){
+
+alert("Password और Confirm Password match नहीं कर रहे।");
+return;
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.signUp({
+
+email:email,
+password:password,
+
+options:{
+data:{
+full_name:name,
+mobile:mobile
+}
+}
+
+});
+
+if(error)throw error;
+
+if(data.user&&!data.session){
+
+alert(
+"Account created successfully ✅\n\n"+
+"आपके email पर verification link भेजा गया है।\n\n"+
+"Email verify करने के बाद Login करें।"
+);
+
+showLogin();
+
+return;
+
+}
+
+if(data.session){
+
+alert(
+"Account created successfully ✅\n"+
+"Login successful ✅"
+);
+
+closeModal();
+
+updateMenuUser(data.user);
+
+}
+
+}catch(error){
+
+alert(
+"Account creation failed ❌\n\n"+
+error.message
+);
+
+}
+
+}
+
+
 /* =====================================================
-   SESSION
+SESSION
 ===================================================== */
 
 async function checkUser(){
@@ -2317,10 +2509,11 @@ await supabaseClient.auth.getSession();
 
 if(data.session){
 
-console.log(
-"Logged in:",
-data.session.user.email
-);
+updateMenuUser(data.session.user);
+
+}else{
+
+updateMenuUser(null);
 
 }
 
@@ -2333,8 +2526,148 @@ console.log(error);
 }
 
 
+function updateMenuUser(user){
+
+const nameEl=
+document.getElementById("menuUserName");
+
+const emailEl=
+document.getElementById("menuUserEmail");
+
+if(!nameEl||!emailEl)return;
+
+if(user){
+
+const name=
+user.user_metadata?.full_name ||
+"Customer";
+
+nameEl.innerText=name;
+
+emailEl.innerText=user.email||"";
+
+}else{
+
+nameEl.innerText="Customer";
+
+emailEl.innerText="Login to your account";
+
+}
+
+}
+
+
 /* =====================================================
-   FRAME PRODUCT
+MENU
+===================================================== */
+
+function openMenu(){
+
+document.getElementById("menuOverlay")
+.style.display="block";
+
+checkUser();
+
+}
+
+
+function closeMenu(){
+
+document.getElementById("menuOverlay")
+.style.display="none";
+
+}
+
+
+function closeMenuOutside(event){
+
+if(event.target.id==="menuOverlay"){
+closeMenu();
+}
+
+}
+
+
+/* =====================================================
+ADDRESS
+===================================================== */
+
+function showAddress(){
+
+showModal(`
+
+<h2>📍 Delivery Address</h2>
+
+<p style="
+color:var(--muted);
+line-height:1.7">
+
+आपका delivery address यहाँ manage किया जाएगा।
+
+</p>
+
+<input
+class="auth-input"
+placeholder="Full Name">
+
+<input
+class="auth-input"
+placeholder="Mobile Number">
+
+<textarea
+class="auth-input"
+rows="4"
+placeholder="Complete Delivery Address"></textarea>
+
+<button
+class="checkout"
+style="margin-top:10px"
+onclick="alert('Address saved successfully ✅');closeModal()">
+
+Save Address
+
+</button>
+
+`);
+
+}
+
+
+/* =====================================================
+NOTIFICATIONS
+===================================================== */
+
+function showNotifications(){
+
+showModal(`
+
+<h2>🔔 Notifications</h2>
+
+<div style="
+text-align:center;
+padding:30px">
+
+<div style="font-size:55px">🔔</div>
+
+<h3>No new notifications</h3>
+
+<p style="
+color:var(--muted);
+margin-top:8px">
+
+आपके latest updates यहाँ दिखाई देंगे।
+
+</p>
+
+</div>
+
+`);
+
+}
+
+
+/* =====================================================
+FRAME
 ===================================================== */
 
 function openFrame(){
@@ -2479,7 +2812,7 @@ showToast("Frame added to cart 🖼️");
 
 
 /* =====================================================
-   MODAL
+MODAL
 ===================================================== */
 
 function showModal(content){
@@ -2510,7 +2843,7 @@ closeModal();
 
 
 /* =====================================================
-   INFO
+INFO
 ===================================================== */
 
 function showInfo(title){
@@ -2572,13 +2905,32 @@ Phone: +91 XXXXX XXXXX
 
 }
 
+if(title==="About Printzy"){
+
+content=`
+
+<h2>ℹ️ About Printzy</h2>
+
+<p style="line-height:1.8;color:var(--muted)">
+
+Printzy आपका online printing platform है जहाँ
+Visiting Card, Wedding Card, Poster, Banner,
+Pamphlet, Sticker और Photo Print जैसे products
+एक ही जगह से order किए जा सकते हैं।
+
+</p>
+
+`;
+
+}
+
 showModal(content);
 
 }
 
 
 /* =====================================================
-   ORDERS
+ORDERS
 ===================================================== */
 
 function openOrders(){
@@ -2611,7 +2963,250 @@ margin-top:8px">
 
 
 /* =====================================================
-   THEME
+LANGUAGE
+===================================================== */
+
+const translations={
+
+hi:{
+subtitle:"अपने विचारों को प्रिंट करें",
+profile:"मेरी प्रोफाइल / लॉगिन",
+orders:"मेरे ऑर्डर",
+wishlist:"विशलिस्ट",
+cart:"मेरी कार्ट",
+language:"भाषा",
+theme:"डार्क / लाइट मोड",
+address:"डिलीवरी पता",
+notifications:"सूचनाएँ",
+support:"मदद और सहायता",
+about:"प्रिंटज़ी के बारे में",
+terms:"नियम और शर्तें",
+privacy:"गोपनीयता नीति",
+search:"Visiting Card, Banner आदि खोजें..."
+},
+
+en:{
+subtitle:"Print Your Ideas",
+profile:"My Profile / Login",
+orders:"My Orders",
+wishlist:"Wishlist",
+cart:"My Cart",
+language:"Language",
+theme:"Dark / Light Mode",
+address:"Delivery Address",
+notifications:"Notifications",
+support:"Help & Support",
+about:"About Printzy",
+terms:"Terms & Conditions",
+privacy:"Privacy Policy",
+search:"Search for products like Visiting Card, Banner, etc..."
+},
+
+mr:{
+subtitle:"तुमच्या कल्पना प्रिंट करा",
+profile:"माझी प्रोफाइल / लॉगिन",
+orders:"माझे ऑर्डर",
+wishlist:"विशलिस्ट",
+cart:"माझी कार्ट",
+language:"भाषा",
+theme:"डार्क / लाइट मोड",
+address:"डिलिव्हरी पत्ता",
+notifications:"सूचना",
+support:"मदत आणि सहाय्य",
+about:"Printzy बद्दल",
+terms:"अटी व शर्ती",
+privacy:"गोपनीयता धोरण"
+},
+
+gu:{
+subtitle:"તમારા વિચારો પ્રિન્ટ કરો",
+profile:"મારી પ્રોફાઇલ / લોગિન",
+orders:"મારા ઓર્ડર",
+wishlist:"વિશલિસ્ટ",
+cart:"મારી કાર્ટ",
+language:"ભાષા",
+theme:"ડાર્ક / લાઇટ મોડ",
+address:"ડિલિવરી સરનામું",
+notifications:"સૂચનાઓ",
+support:"મદદ અને સહાય",
+about:"Printzy વિશે",
+terms:"નિયમો અને શરતો",
+privacy:"ગોપનીયતા નીતિ"
+},
+
+bn:{
+subtitle:"আপনার ধারণা প্রিন্ট করুন",
+profile:"আমার প্রোফাইল / লগইন",
+orders:"আমার অর্ডার",
+wishlist:"উইশলিস্ট",
+cart:"আমার কার্ট",
+language:"ভাষা",
+theme:"ডার্ক / লাইট মোড",
+address:"ডেলিভারি ঠিকানা",
+notifications:"বিজ্ঞপ্তি",
+support:"সহায়তা",
+about:"Printzy সম্পর্কে",
+terms:"শর্তাবলী",
+privacy:"গোপনীয়তা নীতি"
+},
+
+pa:{
+subtitle:"ਆਪਣੇ ਵਿਚਾਰ ਪ੍ਰਿੰਟ ਕਰੋ",
+profile:"ਮੇਰੀ ਪ੍ਰੋਫਾਈਲ / ਲਾਗਇਨ",
+orders:"ਮੇਰੇ ਆਰਡਰ",
+wishlist:"ਵਿਸ਼ਲਿਸਟ",
+cart:"ਮੇਰੀ ਕਾਰਟ",
+language:"ਭਾਸ਼ਾ",
+theme:"ਡਾਰਕ / ਲਾਈਟ ਮੋਡ",
+address:"ਡਿਲਿਵਰੀ ਪਤਾ",
+notifications:"ਸੂਚਨਾਵਾਂ",
+support:"ਮਦਦ ਅਤੇ ਸਹਾਇਤਾ",
+about:"Printzy ਬਾਰੇ",
+terms:"ਨਿਯਮ ਅਤੇ ਸ਼ਰਤਾਂ",
+privacy:"ਪਰਾਈਵੇਸੀ ਨੀਤੀ"
+},
+
+ta:{
+subtitle:"உங்கள் யோசனைகளை அச்சிடுங்கள்",
+profile:"எனது சுயவிவரம் / உள்நுழைவு",
+orders:"எனது ஆர்டர்கள்",
+wishlist:"விருப்பப்பட்டியல்",
+cart:"எனது கார்ட்",
+language:"மொழி",
+theme:"டார்க் / லைட் மோட்",
+address:"டெலிவரி முகவரி",
+notifications:"அறிவிப்புகள்",
+support:"உதவி மற்றும் ஆதரவு",
+about:"Printzy பற்றி",
+terms:"விதிமுறைகள்",
+privacy:"தனியுரிமைக் கொள்கை"
+},
+
+te:{
+subtitle:"మీ ఆలోచనలను ప్రింట్ చేయండి",
+profile:"నా ప్రొఫైల్ / లాగిన్",
+orders:"నా ఆర్డర్లు",
+wishlist:"విష్‌లిస్ట్",
+cart:"నా కార్ట్",
+language:"భాష",
+theme:"డార్క్ / లైట్ మోడ్",
+address:"డెలివరీ చిరునామా",
+notifications:"నోటిఫికేషన్లు",
+support:"సహాయం",
+about:"Printzy గురించి",
+terms:"నిబంధనలు",
+privacy:"గోప్యతా విధానం"
+},
+
+kn:{
+subtitle:"ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಮುದ್ರಿಸಿ",
+profile:"ನನ್ನ ಪ್ರೊಫೈಲ್ / ಲಾಗಿನ್",
+orders:"ನನ್ನ ಆರ್ಡರ್‌ಗಳು",
+wishlist:"ವಿಶ್‌ಲಿಸ್ಟ್",
+cart:"ನನ್ನ ಕಾರ್ಟ್",
+language:"ಭಾಷೆ",
+theme:"ಡಾರ್ಕ್ / ಲೈಟ್ ಮೋಡ್",
+address:"ವಿತರಣಾ ವಿಳಾಸ",
+notifications:"ಅಧಿಸೂಚನೆಗಳು",
+support:"ಸಹಾಯ ಮತ್ತು ಬೆಂಬಲ",
+about:"Printzy ಬಗ್ಗೆ",
+terms:"ನಿಯಮಗಳು",
+privacy:"ಗೌಪ್ಯತಾ ನೀತಿ"
+},
+
+ml:{
+subtitle:"നിങ്ങളുടെ ആശയങ്ങൾ പ്രിന്റ് ചെയ്യൂ",
+profile:"എന്റെ പ്രൊഫൈൽ / ലോഗിൻ",
+orders:"എന്റെ ഓർഡറുകൾ",
+wishlist:"വിഷ്‌ലിസ്റ്റ്",
+cart:"എന്റെ കാർട്ട്",
+language:"ഭാഷ",
+theme:"ഡാർക്ക് / ലൈറ്റ് മോഡ്",
+address:"ഡെലിവറി വിലാസം",
+notifications:"അറിയിപ്പുകൾ",
+support:"സഹായം",
+about:"Printzyയെ കുറിച്ച്",
+terms:"നിബന്ധനകൾ",
+privacy:"സ്വകാര്യതാ നയം"
+},
+
+ur:{
+subtitle:"اپنے خیالات پرنٹ کریں",
+profile:"میری پروفائل / لاگ ان",
+orders:"میرے آرڈرز",
+wishlist:"پسندیدہ",
+cart:"میری کارٹ",
+language:"زبان",
+theme:"ڈارک / لائٹ موڈ",
+address:"ڈیلیوری پتہ",
+notifications:"اطلاعات",
+support:"مدد اور معاونت",
+about:"Printzy کے بارے میں",
+terms:"شرائط و ضوابط",
+privacy:"رازداری کی پالیسی"
+}
+
+};
+
+
+function changeLanguage(lang){
+
+localStorage.setItem("printzyLanguage",lang);
+
+const data=
+translations[lang]||
+translations.en;
+
+document
+.querySelectorAll("[data-i18n]")
+.forEach(el=>{
+
+const key=el.getAttribute("data-i18n");
+
+if(data[key]){
+el.innerText=data[key];
+}
+
+});
+
+const search=
+document.getElementById("search");
+
+if(search){
+
+search.placeholder=
+data.search||
+translations.en.search;
+
+}
+
+showToast(
+"Language changed 🌐"
+);
+
+}
+
+
+function loadLanguage(){
+
+const saved=
+localStorage.getItem("printzyLanguage")||
+"hi";
+
+const select=
+document.getElementById("languageSelect");
+
+if(select){
+select.value=saved;
+}
+
+changeLanguage(saved);
+
+}
+
+
+/* =====================================================
+THEME
 ===================================================== */
 
 function toggleDark(){
@@ -2634,7 +3229,7 @@ document.body.classList.add("dark");
 
 
 /* =====================================================
-   TOAST
+TOAST
 ===================================================== */
 
 function showToast(message){
@@ -2676,7 +3271,7 @@ toast.remove();
 
 
 /* =====================================================
-   SCROLL
+SCROLL
 ===================================================== */
 
 function scrollProducts(){
@@ -2692,7 +3287,7 @@ block:"start"
 
 
 /* =====================================================
-   INITIALIZE
+INITIALIZE
 ===================================================== */
 
 showProducts();
@@ -2700,6 +3295,8 @@ showProducts();
 updateCartCount();
 
 checkUser();
+
+loadLanguage();
 
 </script>
 
