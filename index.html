@@ -46,7 +46,7 @@ body.dark{
 --border:#283650;
 }
 
-button,input,select{
+button,input,select,textarea{
 font-family:inherit;
 }
 
@@ -749,6 +749,7 @@ background:#ffe6eb;
 color:#e21d4d;
 padding:7px 10px;
 border-radius:8px;
+margin-left:8px;
 }
 
 .cart-total{
@@ -766,6 +767,7 @@ background:var(--pink);
 color:white;
 border-radius:12px;
 font-weight:bold;
+font-size:14px;
 }
 
 /* AUTH */
@@ -779,6 +781,10 @@ border-radius:10px;
 background:var(--soft);
 color:var(--text);
 outline:none;
+}
+
+.auth-input:focus{
+border-color:var(--pink);
 }
 
 .auth-submit{
@@ -802,6 +808,50 @@ right:5px;
 top:8px;
 border:0;
 background:none;
+}
+
+/* CHECKOUT */
+
+.checkout-title{
+margin-top:10px;
+font-size:18px;
+}
+
+.checkout-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.checkout-summary{
+background:var(--soft);
+padding:12px;
+border-radius:12px;
+margin-top:8px;
+}
+
+.checkout-summary-item{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:12px 0;
+border-bottom:1px solid var(--border);
+}
+
+.checkout-summary-item:last-child{
+border-bottom:0;
+}
+
+.checkout-total{
+display:flex;
+justify-content:space-between;
+padding-top:15px;
+font-size:20px;
+font-weight:bold;
+}
+
+.checkout-total span:last-child{
+color:var(--pink);
 }
 
 /* FRAME */
@@ -1046,6 +1096,22 @@ font-size:10px;
 
 .menu-panel{
 width:330px;
+}
+
+.modal-box{
+padding:20px 16px;
+}
+
+.auth-input{
+font-size:14px;
+}
+
+.checkout{
+font-size:14px;
+}
+
+.checkout-grid{
+grid-template-columns:1fr;
 }
 
 }
@@ -1477,6 +1543,8 @@ Contact
 </footer>
 
 
+<!-- BOTTOM NAV -->
+
 <div class="bottom-nav">
 
 <button class="active"
@@ -1507,6 +1575,8 @@ Profile
 
 </div>
 
+
+<!-- MODAL -->
 
 <div class="modal"
 id="modal"
@@ -1980,13 +2050,57 @@ openCart();
 }
 
 
+/* =====================================================
+CHECKOUT FORM
+===================================================== */
+
 function checkout(){
 
 if(!cart.length){
 
 alert("Your cart is empty.");
 return;
+
 }
+
+let total=0;
+
+let orderItems="";
+
+cart.forEach(item=>{
+
+const amount=item.price*item.qty;
+
+total+=amount;
+
+orderItems+=`
+
+<div class="checkout-summary-item">
+
+<div>
+
+<strong>${item.name}</strong>
+
+<div style="
+font-size:12px;
+color:var(--muted);
+margin-top:4px">
+
+₹${item.price} × ${item.qty}
+
+</div>
+
+</div>
+
+<strong style="color:var(--pink)">
+₹${amount}
+</strong>
+
+</div>
+
+`;
+
+});
 
 showModal(`
 
@@ -1994,18 +2108,96 @@ showModal(`
 
 <p style="
 color:var(--muted);
-line-height:1.6">
+line-height:1.6;
+margin-bottom:15px">
 
-Your products are ready for checkout.
+कृपया अपनी delivery details भरें।
 
 </p>
+
+
+<h3 class="checkout-title">
+👤 Customer Details
+</h3>
+
+<input
+class="auth-input"
+id="checkoutName"
+type="text"
+autocomplete="name"
+placeholder="Full Name">
+
+
+<input
+class="auth-input"
+id="checkoutMobile"
+type="tel"
+maxlength="10"
+autocomplete="tel"
+placeholder="Mobile Number">
+
+
+<h3 class="checkout-title">
+📍 Delivery Address
+</h3>
+
+<textarea
+class="auth-input"
+id="checkoutAddress"
+rows="4"
+placeholder="Complete Delivery Address"></textarea>
+
+
+<div class="checkout-grid">
+
+<input
+class="auth-input"
+id="checkoutCity"
+type="text"
+placeholder="City">
+
+<input
+class="auth-input"
+id="checkoutState"
+type="text"
+placeholder="State">
+
+</div>
+
+
+<input
+class="auth-input"
+id="checkoutPincode"
+type="tel"
+maxlength="6"
+placeholder="Pincode">
+
+
+<h3 class="checkout-title">
+🛒 Order Summary
+</h3>
+
+<div class="checkout-summary">
+
+${orderItems}
+
+<div class="checkout-total">
+
+<span>Total</span>
+
+<span>₹${total}</span>
+
+</div>
+
+</div>
+
 
 <button
 class="checkout"
 style="margin-top:20px"
 onclick="placeOrder()">
 
-Place Order
+Place Order →
 
 </button>
 
@@ -2016,11 +2208,85 @@ Place Order
 
 function placeOrder(){
 
+const name=
+document.getElementById("checkoutName")?.value.trim();
+
+const mobile=
+document.getElementById("checkoutMobile")?.value.trim();
+
+const address=
+document.getElementById("checkoutAddress")?.value.trim();
+
+const city=
+document.getElementById("checkoutCity")?.value.trim();
+
+const state=
+document.getElementById("checkoutState")?.value.trim();
+
+const pincode=
+document.getElementById("checkoutPincode")?.value.trim();
+
+
+if(!name){
+
+alert("Full Name डालें।");
+return;
+
+}
+
+if(!mobile){
+
+alert("Mobile Number डालें।");
+return;
+
+}
+
+if(!/^[0-9]{10}$/.test(mobile)){
+
+alert("Valid 10 digit Mobile Number डालें।");
+return;
+
+}
+
+if(!address){
+
+alert("Complete Delivery Address डालें।");
+return;
+
+}
+
+if(!city){
+
+alert("City डालें।");
+return;
+
+}
+
+if(!state){
+
+alert("State डालें।");
+return;
+
+}
+
+if(!/^[0-9]{6}$/.test(pincode)){
+
+alert("Valid 6 digit Pincode डालें।");
+return;
+
+}
+
 alert(
-"Order process started. Please login to continue."
+"Checkout details submitted successfully ✅\n\n"+
+"Customer: "+name+"\n"+
+"Mobile: "+mobile+"\n"+
+"City: "+city+"\n"+
+"State: "+state+"\n"+
+"Pincode: "+pincode+"\n\n"+
+"Next Step में order database और payment जोड़ा जाएगा।"
 );
 
-openAuth();
+closeModal();
 
 }
 
@@ -2050,15 +2316,20 @@ localStorage.setItem(
 JSON.stringify(wishlist)
 );
 
-showProducts(
-products.filter(p=>
+const q=
 document.getElementById("search").value
+.toLowerCase()
+.trim();
+
+showProducts(
+q
 ?
-p.name.toLowerCase().includes(
-document.getElementById("search").value.toLowerCase()
+products.filter(p=>
+p.name.toLowerCase().includes(q) ||
+p.category.toLowerCase().includes(q) ||
+p.description.toLowerCase().includes(q)
 )
-:true
-)
+:products
 );
 
 }
