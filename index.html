@@ -168,7 +168,7 @@ color:white;
 font-weight:bold;
 }
 
-/* MENU BUTTON */
+/* MENU */
 
 .menu-btn{
 width:43px;
@@ -184,8 +184,6 @@ font-weight:bold;
 .menu-btn:hover{
 background:#ffe5ef;
 }
-
-/* MENU DRAWER */
 
 .menu-overlay{
 position:fixed;
@@ -889,6 +887,47 @@ margin-top:12px;
 width:100%;
 }
 
+/* PROFILE */
+
+.profile-box{
+background:var(--soft);
+padding:20px;
+border-radius:16px;
+margin-top:15px;
+}
+
+.profile-avatar{
+width:80px;
+height:80px;
+border-radius:50%;
+background:linear-gradient(135deg,#ffe8ef,#e8f3ff);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+margin:0 auto 15px;
+}
+
+.profile-row{
+padding:12px 0;
+border-bottom:1px solid var(--border);
+}
+
+.profile-row:last-child{
+border-bottom:0;
+}
+
+.profile-label{
+font-size:12px;
+color:var(--muted);
+margin-bottom:4px;
+}
+
+.profile-value{
+font-size:15px;
+font-weight:bold;
+}
+
 /* MOBILE */
 
 @media(max-width:900px){
@@ -1220,28 +1259,53 @@ Login to your account
 Account
 </div>
 
+<!-- FIXED PROFILE BUTTON -->
+
 <button class="menu-item"
-onclick="openAuth();closeMenu()">
+onclick="openProfile();closeMenu()">
+
 <span class="menu-icon">👤</span>
-<span data-i18n="profile">My Profile / Login</span>
+
+<span data-i18n="profile">
+My Profile / Login
+</span>
+
 </button>
+
 
 <button class="menu-item"
 onclick="openOrders();closeMenu()">
+
 <span class="menu-icon">📦</span>
-<span data-i18n="orders">My Orders</span>
+
+<span data-i18n="orders">
+My Orders
+</span>
+
 </button>
+
 
 <button class="menu-item"
 onclick="openWishlist();closeMenu()">
+
 <span class="menu-icon">❤️</span>
-<span data-i18n="wishlist">Wishlist</span>
+
+<span data-i18n="wishlist">
+Wishlist
+</span>
+
 </button>
+
 
 <button class="menu-item"
 onclick="openCart();closeMenu()">
+
 <span class="menu-icon">🛒</span>
-<span data-i18n="cart">My Cart</span>
+
+<span data-i18n="cart">
+My Cart
+</span>
+
 </button>
 
 
@@ -1254,7 +1318,11 @@ Settings
 <div style="
 font-weight:bold;
 margin-bottom:8px">
-🌐 <span data-i18n="language">Language</span>
+
+🌐 <span data-i18n="language">
+Language
+</span>
+
 </div>
 
 <select
@@ -1282,7 +1350,7 @@ onchange="changeLanguage(this.value)">
 <option value="mni">মৈতৈলোন</option>
 <option value="bho">भोजपुरी</option>
 <option value="ks">कॉशुर</option>
-<option value="sd">سنڌي</option>
+<option value="sd">سنڌी</option>
 <option value="dogri">डोगरी</option>
 
 </select>
@@ -1292,8 +1360,13 @@ onchange="changeLanguage(this.value)">
 
 <button class="menu-item"
 onclick="toggleDark();closeMenu()">
+
 <span class="menu-icon">🌙</span>
-<span data-i18n="theme">Dark / Light Mode</span>
+
+<span data-i18n="theme">
+Dark / Light Mode
+</span>
+
 </button>
 
 
@@ -1301,22 +1374,40 @@ onclick="toggleDark();closeMenu()">
 Services
 </div>
 
+
 <button class="menu-item"
 onclick="showAddress();closeMenu()">
+
 <span class="menu-icon">📍</span>
-<span data-i18n="address">Delivery Address</span>
+
+<span data-i18n="address">
+Delivery Address
+</span>
+
 </button>
+
 
 <button class="menu-item"
 onclick="showNotifications();closeMenu()">
+
 <span class="menu-icon">🔔</span>
-<span data-i18n="notifications">Notifications</span>
+
+<span data-i18n="notifications">
+Notifications
+</span>
+
 </button>
+
 
 <button class="menu-item"
 onclick="showInfo('Contact Us');closeMenu()">
+
 <span class="menu-icon">🎧</span>
-<span data-i18n="support">Help & Support</span>
+
+<span data-i18n="support">
+Help & Support
+</span>
+
 </button>
 
 
@@ -1324,25 +1415,44 @@ onclick="showInfo('Contact Us');closeMenu()">
 Printzy
 </div>
 
+
 <button class="menu-item"
 onclick="showInfo('About Printzy');closeMenu()">
+
 <span class="menu-icon">ℹ️</span>
-<span data-i18n="about">About Printzy</span>
+
+<span data-i18n="about">
+About Printzy
+</span>
+
 </button>
+
 
 <button class="menu-item"
 onclick="showInfo('Terms & Conditions');closeMenu()">
+
 <span class="menu-icon">📄</span>
-<span data-i18n="terms">Terms & Conditions</span>
+
+<span data-i18n="terms">
+Terms & Conditions
+</span>
+
 </button>
+
 
 <button class="menu-item"
 onclick="showInfo('Privacy Policy');closeMenu()">
+
 <span class="menu-icon">🔐</span>
-<span data-i18n="privacy">Privacy Policy</span>
+
+<span data-i18n="privacy">
+Privacy Policy
+</span>
+
 </button>
 
 </div>
+
 </div>
 
 
@@ -1392,7 +1502,9 @@ Order Now →
 PRINTZY
 </div>
 
-<div class="mug">☕</div>
+<div class="mug">
+☕
+</div>
 
 </div>
 
@@ -1412,54 +1524,102 @@ View All →
 
 </div>
 
+
 <div class="categories">
 
 <button class="category c1"
 onclick="categorySearch('Visiting Card')">
-<div class="cat-icon">💳</div>
+
+<div class="cat-icon">
+💳
+</div>
+
 Visiting Card
+
 </button>
+
 
 <button class="category c2"
 onclick="categorySearch('Wedding Card')">
-<div class="cat-icon">💌</div>
+
+<div class="cat-icon">
+💌
+</div>
+
 Wedding Card
+
 </button>
+
 
 <button class="category c3"
 onclick="categorySearch('Poster')">
-<div class="cat-icon">🖼️</div>
+
+<div class="cat-icon">
+🖼️
+</div>
+
 Poster
+
 </button>
+
 
 <button class="category c4"
 onclick="categorySearch('Banner')">
-<div class="cat-icon">🪧</div>
+
+<div class="cat-icon">
+🪧
+</div>
+
 Banner
+
 </button>
+
 
 <button class="category c5"
 onclick="categorySearch('Pamphlet')">
-<div class="cat-icon">📖</div>
+
+<div class="cat-icon">
+📖
+</div>
+
 Pamphlet
+
 </button>
+
 
 <button class="category c6"
 onclick="categorySearch('Sticker')">
-<div class="cat-icon">🏷️</div>
+
+<div class="cat-icon">
+🏷️
+</div>
+
 Sticker
+
 </button>
+
 
 <button class="category c7"
 onclick="categorySearch('Photo Print')">
-<div class="cat-icon">📸</div>
+
+<div class="cat-icon">
+📸
+</div>
+
 Photo Print
+
 </button>
+
 
 <button class="category c8"
 onclick="categorySearch('Other Printing')">
-<div class="cat-icon">🖨️</div>
+
+<div class="cat-icon">
+🖨️
+</div>
+
 Other Printing
+
 </button>
 
 </div>
@@ -1467,7 +1627,9 @@ Other Printing
 
 <div class="section-head">
 
-<h2>Popular Products</h2>
+<h2>
+Popular Products
+</h2>
 
 <button class="view-all"
 onclick="showProducts(products)">
@@ -1475,6 +1637,7 @@ View All →
 </button>
 
 </div>
+
 
 <div class="products"
 id="productList">
@@ -1485,28 +1648,58 @@ id="productList">
 
 <div class="delivery-main">
 
-<div class="delivery-icon">🚚</div>
+<div class="delivery-icon">
+🚚
+</div>
 
 <div>
-<h3>Fast & Safe Delivery</h3>
-<p>Your prints, our priority!</p>
+
+<h3>
+Fast & Safe Delivery
+</h3>
+
+<p>
+Your prints, our priority!
+</p>
+
 </div>
 
 </div>
+
 
 <div class="delivery-item">
+
 <div>🛡️</div>
-<span>Secure<br>Payment</span>
+
+<span>
+Secure<br>
+Payment
+</span>
+
 </div>
 
+
 <div class="delivery-item">
+
 <div>🕐</div>
-<span>On-Time<br>Delivery</span>
+
+<span>
+On-Time<br>
+Delivery
+</span>
+
 </div>
 
+
 <div class="delivery-item">
+
 <div>🎧</div>
-<span>24/7<br>Support</span>
+
+<span>
+24/7<br>
+Support
+</span>
+
 </div>
 
 </div>
@@ -1516,9 +1709,13 @@ id="productList">
 
 <footer>
 
-<h2>PRINTZY</h2>
+<h2>
+PRINTZY
+</h2>
 
-<p>Print Your Ideas</p>
+<p>
+Print Your Ideas
+</p>
 
 <div class="footer-links">
 
@@ -1549,28 +1746,49 @@ Contact
 
 <button class="active"
 onclick="window.scrollTo({top:0,behavior:'smooth'})">
+
 <div>⌂</div>
+
 Home
+
 </button>
+
 
 <button onclick="showAllCategories()">
+
 <div>▦</div>
+
 Categories
+
 </button>
+
 
 <button onclick="openCart()">
+
 <div>🛒</div>
+
 Cart
+
 </button>
+
 
 <button onclick="openOrders()">
+
 <div>▤</div>
+
 My Orders
+
 </button>
 
-<button onclick="openAuth()">
+
+<!-- FIXED PROFILE -->
+
+<button onclick="openProfile()">
+
 <div>♙</div>
+
 Profile
+
 </button>
 
 </div>
@@ -1698,10 +1916,14 @@ description:"Other customized printing services."
 
 
 let cart=
-JSON.parse(localStorage.getItem("printzyCart")||"[]");
+JSON.parse(
+localStorage.getItem("printzyCart")||"[]"
+);
 
 let wishlist=
-JSON.parse(localStorage.getItem("printzyWishlist")||"[]");
+JSON.parse(
+localStorage.getItem("printzyWishlist")||"[]"
+);
 
 
 /* =====================================================
@@ -1710,7 +1932,8 @@ SHOW PRODUCTS
 
 function showProducts(list=products){
 
-const box=document.getElementById("productList");
+const box=
+document.getElementById("productList");
 
 box.innerHTML="";
 
@@ -1723,20 +1946,28 @@ grid-column:1/-1;
 text-align:center;
 padding:50px">
 
-<h2>😕 Product Not Found</h2>
+<h2>
+😕 Product Not Found
+</h2>
 
-<p style="margin-top:10px;color:var(--muted)">
+<p style="
+margin-top:10px;
+color:var(--muted)">
+
 Try another search.
+
 </p>
 
 </div>`;
 
 return;
+
 }
 
 list.forEach(p=>{
 
-const liked=wishlist.includes(p.name);
+const liked=
+wishlist.includes(p.name);
 
 box.innerHTML+=`
 
@@ -1756,9 +1987,12 @@ ${p.icon}
 
 </div>
 
+
 <div class="product-info">
 
-<h3>${p.name}</h3>
+<h3>
+${p.name}
+</h3>
 
 <div class="starting">
 Starting from
@@ -1772,18 +2006,24 @@ Starting from
 ${p.description}
 </p>
 
+
 <div class="product-buttons">
 
 <button
 class="customize"
 onclick="openProduct('${p.name}')">
+
 Customize
+
 </button>
+
 
 <button
 class="order"
 onclick="addToCart('${p.name}')">
+
 Order Now
+
 </button>
 
 </div>
@@ -1807,7 +2047,8 @@ SEARCH
 
 function searchProducts(){
 
-const q=document
+const q=
+document
 .getElementById("search")
 .value
 .toLowerCase()
@@ -1817,9 +2058,11 @@ if(!q){
 
 showProducts(products);
 return;
+
 }
 
-const result=products.filter(p=>
+const result=
+products.filter(p=>
 p.name.toLowerCase().includes(q) ||
 p.category.toLowerCase().includes(q) ||
 p.description.toLowerCase().includes(q)
@@ -1844,7 +2087,8 @@ scrollProducts();
 function showAllCategories(){
 
 window.scrollTo({
-top:document.querySelector(".categories").offsetTop-100,
+top:
+document.querySelector(".categories").offsetTop-100,
 behavior:"smooth"
 });
 
@@ -1857,38 +2101,49 @@ PRODUCT DETAILS
 
 function openProduct(name){
 
-const p=products.find(x=>x.name===name);
+const p=
+products.find(x=>x.name===name);
 
 if(!p)return;
 
 showModal(`
 
-<h2>${p.icon} ${p.name}</h2>
+<h2>
+${p.icon} ${p.name}
+</h2>
 
 <div style="
 font-size:100px;
 text-align:center;
 padding:25px">
+
 ${p.icon}
+
 </div>
 
 <p style="
 color:var(--muted);
 line-height:1.6">
+
 ${p.description}
+
 </p>
 
 <h2 style="
 margin-top:18px;
 color:var(--pink)">
+
 ₹${p.price}
+
 </h2>
 
 <button
 class="checkout"
 style="margin-top:15px"
 onclick="addToCart('${p.name}')">
+
 🛒 Add to Cart
+
 </button>
 
 `);
@@ -1902,25 +2157,33 @@ CART
 
 function addToCart(name){
 
-const p=products.find(x=>x.name===name);
+const p=
+products.find(x=>x.name===name);
 
 if(!p)return;
 
-const item=cart.find(x=>x.name===name);
+const item=
+cart.find(x=>x.name===name);
 
 if(item){
+
 item.qty++;
+
 }else{
+
 cart.push({
 name:p.name,
 price:p.price,
 qty:1
 });
+
 }
 
 saveCart();
 
-showToast("Product added to cart 🛒");
+showToast(
+"Product added to cart 🛒"
+);
 
 }
 
@@ -1939,19 +2202,26 @@ updateCartCount();
 
 function updateCartCount(){
 
-const count=cart.reduce(
-(sum,item)=>sum+item.qty,0);
+const count=
+cart.reduce(
+(sum,item)=>sum+item.qty,
+0
+);
 
-const el=document.getElementById("cartCount");
+const el=
+document.getElementById("cartCount");
 
-if(el)el.innerText=count;
+if(el){
+el.innerText=count;
+}
 
 }
 
 
 function openCart(){
 
-let html=`<h2>🛒 Your Cart</h2>`;
+let html=
+`<h2>🛒 Your Cart</h2>`;
 
 if(!cart.length){
 
@@ -1961,25 +2231,36 @@ html+=`
 text-align:center;
 padding:35px">
 
-<div style="font-size:60px">🛒</div>
+<div style="font-size:60px">
+🛒
+</div>
 
-<h3>Your cart is empty</h3>
+<h3>
+Your cart is empty
+</h3>
 
-<p style="color:var(--muted);margin-top:8px">
+<p style="
+color:var(--muted);
+margin-top:8px">
+
 Add some products to continue.
+
 </p>
 
 </div>`;
 
 showModal(html);
+
 return;
+
 }
 
 let total=0;
 
 cart.forEach((item,index)=>{
 
-const amount=item.price*item.qty;
+const amount=
+item.price*item.qty;
 
 total+=amount;
 
@@ -1989,7 +2270,9 @@ html+=`
 
 <div>
 
-<strong>${item.name}</strong>
+<strong>
+${item.name}
+</strong>
 
 <div style="
 color:var(--muted);
@@ -2002,14 +2285,19 @@ margin-top:4px">
 
 </div>
 
+
 <div>
 
-<strong>₹${amount}</strong>
+<strong>
+₹${amount}
+</strong>
 
 <button
 class="remove"
 onclick="removeCart(${index})">
+
 Remove
+
 </button>
 
 </div>
@@ -2029,7 +2317,9 @@ Total: ₹${total}
 <button
 class="checkout"
 onclick="checkout()">
+
 Proceed to Checkout →
+
 </button>
 
 `;
@@ -2051,14 +2341,17 @@ openCart();
 
 
 /* =====================================================
-CHECKOUT FORM
+CHECKOUT
 ===================================================== */
 
 function checkout(){
 
 if(!cart.length){
 
-alert("Your cart is empty.");
+alert(
+"Your cart is empty."
+);
+
 return;
 
 }
@@ -2069,7 +2362,8 @@ let orderItems="";
 
 cart.forEach(item=>{
 
-const amount=item.price*item.qty;
+const amount=
+item.price*item.qty;
 
 total+=amount;
 
@@ -2079,7 +2373,9 @@ orderItems+=`
 
 <div>
 
-<strong>${item.name}</strong>
+<strong>
+${item.name}
+</strong>
 
 <div style="
 font-size:12px;
@@ -2104,7 +2400,9 @@ margin-top:4px">
 
 showModal(`
 
-<h2>📦 Checkout</h2>
+<h2>
+📦 Checkout
+</h2>
 
 <p style="
 color:var(--muted);
@@ -2119,6 +2417,7 @@ margin-bottom:15px">
 <h3 class="checkout-title">
 👤 Customer Details
 </h3>
+
 
 <input
 class="auth-input"
@@ -2141,6 +2440,7 @@ placeholder="Mobile Number">
 📍 Delivery Address
 </h3>
 
+
 <textarea
 class="auth-input"
 id="checkoutAddress"
@@ -2155,6 +2455,7 @@ class="auth-input"
 id="checkoutCity"
 type="text"
 placeholder="City">
+
 
 <input
 class="auth-input"
@@ -2177,15 +2478,20 @@ placeholder="Pincode">
 🛒 Order Summary
 </h3>
 
+
 <div class="checkout-summary">
 
 ${orderItems}
 
 <div class="checkout-total">
 
-<span>Total</span>
+<span>
+Total
+</span>
 
-<span>₹${total}</span>
+<span>
+₹${total}
+</span>
 
 </div>
 
@@ -2209,22 +2515,40 @@ Place Order →
 function placeOrder(){
 
 const name=
-document.getElementById("checkoutName")?.value.trim();
+document
+.getElementById("checkoutName")
+?.value
+.trim();
 
 const mobile=
-document.getElementById("checkoutMobile")?.value.trim();
+document
+.getElementById("checkoutMobile")
+?.value
+.trim();
 
 const address=
-document.getElementById("checkoutAddress")?.value.trim();
+document
+.getElementById("checkoutAddress")
+?.value
+.trim();
 
 const city=
-document.getElementById("checkoutCity")?.value.trim();
+document
+.getElementById("checkoutCity")
+?.value
+.trim();
 
 const state=
-document.getElementById("checkoutState")?.value.trim();
+document
+.getElementById("checkoutState")
+?.value
+.trim();
 
 const pincode=
-document.getElementById("checkoutPincode")?.value.trim();
+document
+.getElementById("checkoutPincode")
+?.value
+.trim();
 
 
 if(!name){
@@ -2243,14 +2567,20 @@ return;
 
 if(!/^[0-9]{10}$/.test(mobile)){
 
-alert("Valid 10 digit Mobile Number डालें।");
+alert(
+"Valid 10 digit Mobile Number डालें।"
+);
+
 return;
 
 }
 
 if(!address){
 
-alert("Complete Delivery Address डालें।");
+alert(
+"Complete Delivery Address डालें।"
+);
+
 return;
 
 }
@@ -2271,7 +2601,10 @@ return;
 
 if(!/^[0-9]{6}$/.test(pincode)){
 
-alert("Valid 6 digit Pincode डालें।");
+alert(
+"Valid 6 digit Pincode डालें।"
+);
+
 return;
 
 }
@@ -2299,15 +2632,20 @@ function toggleWishlist(name){
 
 if(wishlist.includes(name)){
 
-wishlist=wishlist.filter(x=>x!==name);
+wishlist=
+wishlist.filter(x=>x!==name);
 
-showToast("Removed from wishlist");
+showToast(
+"Removed from wishlist"
+);
 
 }else{
 
 wishlist.push(name);
 
-showToast("Added to wishlist ❤️");
+showToast(
+"Added to wishlist ❤️"
+);
 
 }
 
@@ -2317,7 +2655,9 @@ JSON.stringify(wishlist)
 );
 
 const q=
-document.getElementById("search").value
+document
+.getElementById("search")
+.value
 .toLowerCase()
 .trim();
 
@@ -2329,7 +2669,8 @@ p.name.toLowerCase().includes(q) ||
 p.category.toLowerCase().includes(q) ||
 p.description.toLowerCase().includes(q)
 )
-:products
+:
+products
 );
 
 }
@@ -2337,11 +2678,13 @@ p.description.toLowerCase().includes(q)
 
 function openWishlist(){
 
-const items=products.filter(p=>
+const items=
+products.filter(p=>
 wishlist.includes(p.name)
 );
 
-let html=`<h2>❤️ Wishlist</h2>`;
+let html=
+`<h2>❤️ Wishlist</h2>`;
 
 if(!items.length){
 
@@ -2351,12 +2694,20 @@ html+=`
 text-align:center;
 padding:35px">
 
-<div style="font-size:60px">♡</div>
+<div style="font-size:60px">
+♡
+</div>
 
-<h3>No wishlist products</h3>
+<h3>
+No wishlist products
+</h3>
 
-<p style="color:var(--muted);margin-top:8px">
+<p style="
+color:var(--muted);
+margin-top:8px">
+
 Tap ♡ on products to save them.
+
 </p>
 
 </div>`;
@@ -2370,18 +2721,24 @@ html+=`
 <div class="cart-item">
 
 <div>
-<strong>${p.icon} ${p.name}</strong>
+
+<strong>
+${p.icon} ${p.name}
+</strong>
 
 <div style="color:var(--pink)">
 ₹${p.price}
 </div>
+
 </div>
 
 <button
 class="order"
 style="padding:8px 14px"
 onclick="addToCart('${p.name}')">
+
 Add
+
 </button>
 
 </div>
@@ -2405,7 +2762,10 @@ async function openAuth(){
 
 showModal(`
 
-<h2>👤 Login / Sign Up</h2>
+<h2>
+👤 Login / Sign Up
+</h2>
+
 
 <div id="loginForm">
 
@@ -2416,6 +2776,7 @@ type="email"
 autocomplete="email"
 placeholder="Email address">
 
+
 <div class="password-wrap">
 
 <input
@@ -2425,19 +2786,26 @@ type="password"
 autocomplete="current-password"
 placeholder="Password">
 
+
 <button
 type="button"
 onclick="togglePassword()">
+
 👁️
+
 </button>
 
 </div>
 
+
 <button
 class="auth-submit"
 onclick="loginUser()">
+
 Login
+
 </button>
+
 
 <button
 class="auth-submit"
@@ -2446,13 +2814,16 @@ background:transparent;
 color:var(--pink);
 border:2px solid var(--pink)"
 onclick="showSignup()">
+
 Create New Account
+
 </button>
 
 </div>
 
 
-<div id="signupForm" style="display:none">
+<div id="signupForm"
+style="display:none">
 
 <input
 class="auth-input"
@@ -2461,12 +2832,15 @@ type="text"
 autocomplete="name"
 placeholder="Full Name">
 
+
 <input
 class="auth-input"
 id="signupMobile"
 type="tel"
 autocomplete="tel"
+maxlength="10"
 placeholder="Mobile Number">
+
 
 <input
 class="auth-input"
@@ -2474,6 +2848,7 @@ id="signupEmail"
 type="email"
 autocomplete="email"
 placeholder="Email address">
+
 
 <div class="password-wrap">
 
@@ -2484,13 +2859,17 @@ type="password"
 autocomplete="new-password"
 placeholder="Password">
 
+
 <button
 type="button"
 onclick="toggleSignupPassword()">
+
 👁️
+
 </button>
 
 </div>
+
 
 <input
 class="auth-input"
@@ -2499,11 +2878,15 @@ type="password"
 autocomplete="new-password"
 placeholder="Confirm Password">
 
+
 <button
 class="auth-submit"
 onclick="signupUser()">
+
 Create Account
+
 </button>
+
 
 <button
 class="auth-submit"
@@ -2512,10 +2895,13 @@ background:transparent;
 color:var(--pink);
 border:2px solid var(--pink)"
 onclick="showLogin()">
+
 ← Back to Login
+
 </button>
 
 </div>
+
 
 <p style="
 margin-top:15px;
@@ -2534,36 +2920,51 @@ Signup के बाद email verification required हो सकती है�
 
 function showLogin(){
 
-const login=document.getElementById("loginForm");
-const signup=document.getElementById("signupForm");
+const login=
+document.getElementById("loginForm");
 
-if(login)login.style.display="block";
-if(signup)signup.style.display="none";
+const signup=
+document.getElementById("signupForm");
+
+if(login)
+login.style.display="block";
+
+if(signup)
+signup.style.display="none";
 
 }
 
 
 function showSignup(){
 
-const login=document.getElementById("loginForm");
-const signup=document.getElementById("signupForm");
+const login=
+document.getElementById("loginForm");
 
-if(login)login.style.display="none";
-if(signup)signup.style.display="block";
+const signup=
+document.getElementById("signupForm");
+
+if(login)
+login.style.display="none";
+
+if(signup)
+signup.style.display="block";
 
 }
 
 
 function togglePassword(){
 
-const input=document.getElementById("authPassword");
+const input=
+document.getElementById("authPassword");
 
 if(!input)return;
 
 input.type=
 input.type==="password"
-?"text"
-:"password";
+?
+"text"
+:
+"password";
 
 }
 
@@ -2577,8 +2978,10 @@ if(!input)return;
 
 input.type=
 input.type==="password"
-?"text"
-:"password";
+?
+"text"
+:
+"password";
 
 }
 
@@ -2590,24 +2993,37 @@ LOGIN
 async function loginUser(){
 
 const email=
-document.getElementById("authEmail").value.trim();
+document
+.getElementById("authEmail")
+.value
+.trim();
 
 const password=
-document.getElementById("authPassword").value;
+document
+.getElementById("authPassword")
+.value;
+
 
 if(!email){
 
-alert("Email address डालें।");
+alert(
+"Email address डालें।"
+);
+
 return;
 
 }
 
 if(!password){
 
-alert("Password डालें।");
+alert(
+"Password डालें।"
+);
+
 return;
 
 }
+
 
 try{
 
@@ -2615,17 +3031,24 @@ const {data,error}=
 await supabaseClient.auth.signInWithPassword({
 
 email:email,
+
 password:password
 
 });
 
-if(error)throw error;
 
-alert("Login successful ✅");
+if(error)
+throw error;
+
+
+alert(
+"Login successful ✅"
+);
 
 closeModal();
 
 updateMenuUser(data.user);
+
 
 }catch(error){
 
@@ -2646,68 +3069,104 @@ SIGNUP
 async function signupUser(){
 
 const name=
-document.getElementById("signupName").value.trim();
+document
+.getElementById("signupName")
+.value
+.trim();
 
 const mobile=
-document.getElementById("signupMobile").value.trim();
+document
+.getElementById("signupMobile")
+.value
+.trim();
 
 const email=
-document.getElementById("signupEmail").value.trim();
+document
+.getElementById("signupEmail")
+.value
+.trim();
 
 const password=
-document.getElementById("signupPassword").value;
+document
+.getElementById("signupPassword")
+.value;
 
 const confirmPassword=
-document.getElementById("signupConfirmPassword").value;
+document
+.getElementById("signupConfirmPassword")
+.value;
+
 
 if(!name){
 
-alert("Full Name डालें।");
+alert(
+"Full Name डालें।"
+);
+
 return;
 
 }
 
 if(!mobile){
 
-alert("Mobile Number डालें।");
+alert(
+"Mobile Number डालें।"
+);
+
 return;
 
 }
 
 if(!/^[0-9]{10}$/.test(mobile)){
 
-alert("Valid 10 digit Mobile Number डालें।");
+alert(
+"Valid 10 digit Mobile Number डालें।"
+);
+
 return;
 
 }
 
 if(!email){
 
-alert("Email address डालें।");
+alert(
+"Email address डालें।"
+);
+
 return;
 
 }
 
 if(!password){
 
-alert("Password डालें।");
+alert(
+"Password डालें।"
+);
+
 return;
 
 }
 
 if(password.length<6){
 
-alert("Password कम से कम 6 characters का होना चाहिए।");
+alert(
+"Password कम से कम 6 characters का होना चाहिए।"
+);
+
 return;
 
 }
 
 if(password!==confirmPassword){
 
-alert("Password और Confirm Password match नहीं कर रहे।");
+alert(
+"Password और Confirm Password match नहीं कर रहे।"
+);
+
 return;
 
 }
+
 
 try{
 
@@ -2715,18 +3174,27 @@ const {data,error}=
 await supabaseClient.auth.signUp({
 
 email:email,
+
 password:password,
 
 options:{
+
 data:{
+
 full_name:name,
+
 mobile:mobile
+
 }
+
 }
 
 });
 
-if(error)throw error;
+
+if(error)
+throw error;
+
 
 if(data.user&&!data.session){
 
@@ -2741,6 +3209,7 @@ showLogin();
 return;
 
 }
+
 
 if(data.session){
 
@@ -2778,9 +3247,12 @@ try{
 const {data}=
 await supabaseClient.auth.getSession();
 
+
 if(data.session){
 
-updateMenuUser(data.session.user);
+updateMenuUser(
+data.session.user
+);
 
 }else{
 
@@ -2797,6 +3269,10 @@ console.log(error);
 }
 
 
+/* =====================================================
+UPDATE MENU USER
+===================================================== */
+
 function updateMenuUser(user){
 
 const nameEl=
@@ -2805,7 +3281,10 @@ document.getElementById("menuUserName");
 const emailEl=
 document.getElementById("menuUserEmail");
 
-if(!nameEl||!emailEl)return;
+
+if(!nameEl||!emailEl)
+return;
+
 
 if(user){
 
@@ -2813,15 +3292,191 @@ const name=
 user.user_metadata?.full_name ||
 "Customer";
 
+
 nameEl.innerText=name;
 
-emailEl.innerText=user.email||"";
+emailEl.innerText=
+user.email||"";
 
 }else{
 
-nameEl.innerText="Customer";
+nameEl.innerText=
+"Customer";
 
-emailEl.innerText="Login to your account";
+emailEl.innerText=
+"Login to your account";
+
+}
+
+}
+
+
+/* =====================================================
+PROFILE
+===================================================== */
+
+async function openProfile(){
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.getUser();
+
+
+/*
+If no logged-in user,
+open login popup.
+*/
+
+if(error||!data.user){
+
+openAuth();
+
+return;
+
+}
+
+
+const user=
+data.user;
+
+
+const name=
+user.user_metadata?.full_name ||
+"Customer";
+
+
+const mobile=
+user.user_metadata?.mobile ||
+"Not added";
+
+
+showModal(`
+
+<h2>
+👤 My Profile
+</h2>
+
+
+<div class="profile-box">
+
+<div class="profile-avatar">
+👤
+</div>
+
+
+<h3 style="
+text-align:center;
+margin-bottom:15px">
+
+${name}
+
+</h3>
+
+
+<div class="profile-row">
+
+<div class="profile-label">
+FULL NAME
+</div>
+
+<div class="profile-value">
+${name}
+</div>
+
+</div>
+
+
+<div class="profile-row">
+
+<div class="profile-label">
+EMAIL
+</div>
+
+<div class="profile-value"
+style="word-break:break-word">
+
+${user.email||"Not available"}
+
+</div>
+
+</div>
+
+
+<div class="profile-row">
+
+<div class="profile-label">
+MOBILE NUMBER
+</div>
+
+<div class="profile-value">
+
+${mobile}
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<button
+class="checkout"
+style="
+margin-top:18px;
+background:#e21d4d"
+onclick="logoutUser()">
+
+Logout
+
+</button>
+
+`);
+
+}catch(error){
+
+console.log(error);
+
+openAuth();
+
+}
+
+}
+
+
+/* =====================================================
+LOGOUT
+===================================================== */
+
+async function logoutUser(){
+
+try{
+
+const {error}=
+await supabaseClient.auth.signOut();
+
+
+if(error)
+throw error;
+
+
+closeModal();
+
+updateMenuUser(null);
+
+
+alert(
+"Logout successful ✅"
+);
+
+
+}catch(error){
+
+alert(
+"Logout failed ❌\n\n"+
+error.message
+);
 
 }
 
@@ -2834,7 +3489,8 @@ MENU
 
 function openMenu(){
 
-document.getElementById("menuOverlay")
+document
+.getElementById("menuOverlay")
 .style.display="block";
 
 checkUser();
@@ -2844,7 +3500,8 @@ checkUser();
 
 function closeMenu(){
 
-document.getElementById("menuOverlay")
+document
+.getElementById("menuOverlay")
 .style.display="none";
 
 }
@@ -2852,8 +3509,12 @@ document.getElementById("menuOverlay")
 
 function closeMenuOutside(event){
 
-if(event.target.id==="menuOverlay"){
+if(
+event.target.id==="menuOverlay"
+){
+
 closeMenu();
+
 }
 
 }
@@ -2867,7 +3528,9 @@ function showAddress(){
 
 showModal(`
 
-<h2>📍 Delivery Address</h2>
+<h2>
+📍 Delivery Address
+</h2>
 
 <p style="
 color:var(--muted);
@@ -2877,23 +3540,30 @@ line-height:1.7">
 
 </p>
 
+
 <input
 class="auth-input"
 placeholder="Full Name">
 
+
 <input
 class="auth-input"
 placeholder="Mobile Number">
+
 
 <textarea
 class="auth-input"
 rows="4"
 placeholder="Complete Delivery Address"></textarea>
 
+
 <button
 class="checkout"
 style="margin-top:10px"
-onclick="alert('Address saved successfully ✅');closeModal()">
+onclick="
+alert('Address saved successfully ✅');
+closeModal()
+">
 
 Save Address
 
@@ -2912,15 +3582,21 @@ function showNotifications(){
 
 showModal(`
 
-<h2>🔔 Notifications</h2>
+<h2>
+🔔 Notifications
+</h2>
 
 <div style="
 text-align:center;
 padding:30px">
 
-<div style="font-size:55px">🔔</div>
+<div style="font-size:55px">
+🔔
+</div>
 
-<h3>No new notifications</h3>
+<h3>
+No new notifications
+</h3>
 
 <p style="
 color:var(--muted);
@@ -2945,7 +3621,9 @@ function openFrame(){
 
 showModal(`
 
-<h2>🖼️ Photo Frame</h2>
+<h2>
+🖼️ Photo Frame
+</h2>
 
 <p style="
 color:var(--muted);
@@ -2955,84 +3633,139 @@ margin-bottom:15px">
 
 </p>
 
+
 <div
 class="frame-option"
 onclick="selectFrame('8x12','General Print',149,this)">
 
 <div>
-<strong>8×12</strong><br>
+
+<strong>
+8×12
+</strong>
+
+<br>
+
 General Print
-</div>
-
-<strong>₹149</strong>
 
 </div>
+
+<strong>
+₹149
+</strong>
+
+</div>
+
 
 <div
 class="frame-option"
 onclick="selectFrame('8x12','Your Photo',199,this)">
 
 <div>
-<strong>8×12</strong><br>
+
+<strong>
+8×12
+</strong>
+
+<br>
+
 Your Photo
-</div>
-
-<strong>₹199</strong>
 
 </div>
+
+<strong>
+₹199
+</strong>
+
+</div>
+
 
 <div
 class="frame-option"
 onclick="selectFrame('12x18','General Print',399,this)">
 
 <div>
-<strong>12×18</strong><br>
+
+<strong>
+12×18
+</strong>
+
+<br>
+
 General Print
-</div>
-
-<strong>₹399</strong>
 
 </div>
+
+<strong>
+₹399
+</strong>
+
+</div>
+
 
 <div
 class="frame-option"
 onclick="selectFrame('12x18','Your Photo',499,this)">
 
 <div>
-<strong>12×18</strong><br>
+
+<strong>
+12×18
+</strong>
+
+<br>
+
 Your Photo
-</div>
-
-<strong>₹499</strong>
 
 </div>
 
-<div id="frameUpload"></div>
+<strong>
+₹499
+</strong>
 
-<div id="frameButton"></div>
+</div>
+
+
+<div id="frameUpload">
+</div>
+
+
+<div id="frameButton">
+</div>
 
 `);
 
 }
 
 
-function selectFrame(size,type,price,element){
+function selectFrame(
+size,
+type,
+price,
+element
+){
 
 document
 .querySelectorAll(".frame-option")
-.forEach(x=>
+.forEach(
+x=>
 x.classList.remove("selected")
 );
 
 element.classList.add("selected");
 
+
 if(type==="Your Photo"){
 
-document.getElementById("frameUpload").innerHTML=`
+document.getElementById(
+"frameUpload"
+).innerHTML=`
 
 <div class="upload">
 
-<h3>📤 Upload Your Photo</h3>
+<h3>
+📤 Upload Your Photo
+</h3>
 
 <input
 type="file"
@@ -3045,18 +3778,26 @@ id="framePhoto">
 
 }else{
 
-document.getElementById("frameUpload")
-.innerHTML="";
+document.getElementById(
+"frameUpload"
+).innerHTML="";
 
 }
 
-document.getElementById("frameButton")
-.innerHTML=`
+
+document.getElementById(
+"frameButton"
+).innerHTML=`
 
 <button
 class="checkout"
 style="margin-top:15px"
-onclick="addFrame('${size}','${type}',${price})">
+onclick="
+addFrame(
+'${size}',
+'${type}',
+${price}
+)">
 
 🛒 Add Frame to Cart
 
@@ -3067,17 +3808,28 @@ onclick="addFrame('${size}','${type}',${price})">
 }
 
 
-function addFrame(size,type,price){
+function addFrame(
+size,
+type,
+price
+){
 
 cart.push({
-name:`Photo Frame ${size} - ${type}`,
+
+name:
+`Photo Frame ${size} - ${type}`,
+
 price:price,
+
 qty:1
+
 });
 
 saveCart();
 
-showToast("Frame added to cart 🖼️");
+showToast(
+"Frame added to cart 🖼️"
+);
 
 }
 
@@ -3088,27 +3840,35 @@ MODAL
 
 function showModal(content){
 
-document.getElementById("modalContent")
-.innerHTML=content;
+document.getElementById(
+"modalContent"
+).innerHTML=content;
 
-document.getElementById("modal")
-.style.display="flex";
+document.getElementById(
+"modal"
+).style.display="flex";
 
 }
 
 
 function closeModal(){
 
-document.getElementById("modal")
-.style.display="none";
+document.getElementById(
+"modal"
+).style.display="none";
 
 }
 
 
 function outsideModal(event){
 
-if(event.target.id==="modal")
+if(
+event.target.id==="modal"
+){
+
 closeModal();
+
+}
 
 }
 
@@ -3121,13 +3881,18 @@ function showInfo(title){
 
 let content="";
 
+
 if(title==="Terms & Conditions"){
 
 content=`
 
-<h2>Terms & Conditions</h2>
+<h2>
+Terms & Conditions
+</h2>
 
-<p style="line-height:1.7;color:var(--muted)">
+<p style="
+line-height:1.7;
+color:var(--muted)">
 
 Printzy पर order करने से पहले product details,
 price और customization information ध्यान से check करें।
@@ -3140,13 +3905,18 @@ Customized products की cancellation policy product
 
 }
 
+
 if(title==="Privacy Policy"){
 
 content=`
 
-<h2>Privacy Policy</h2>
+<h2>
+Privacy Policy
+</h2>
 
-<p style="line-height:1.7;color:var(--muted)">
+<p style="
+line-height:1.7;
+color:var(--muted)">
 
 आपकी personal information को order processing,
 account management और customer support के लिए उपयोग
@@ -3158,13 +3928,18 @@ account management और customer support के लिए उपयोग
 
 }
 
+
 if(title==="Contact Us"){
 
 content=`
 
-<h2>📞 Contact Printzy</h2>
+<h2>
+📞 Contact Printzy
+</h2>
 
-<p style="line-height:1.8;color:var(--muted)">
+<p style="
+line-height:1.8;
+color:var(--muted)">
 
 Customer Support<br>
 Email: support@printzy.in<br>
@@ -3176,13 +3951,18 @@ Phone: +91 XXXXX XXXXX
 
 }
 
+
 if(title==="About Printzy"){
 
 content=`
 
-<h2>ℹ️ About Printzy</h2>
+<h2>
+ℹ️ About Printzy
+</h2>
 
-<p style="line-height:1.8;color:var(--muted)">
+<p style="
+line-height:1.8;
+color:var(--muted)">
 
 Printzy आपका online printing platform है जहाँ
 Visiting Card, Wedding Card, Poster, Banner,
@@ -3194,6 +3974,7 @@ Pamphlet, Sticker और Photo Print जैसे products
 `;
 
 }
+
 
 showModal(content);
 
@@ -3208,15 +3989,21 @@ function openOrders(){
 
 showModal(`
 
-<h2>📦 My Orders</h2>
+<h2>
+📦 My Orders
+</h2>
 
 <div style="
 text-align:center;
 padding:30px">
 
-<div style="font-size:55px">📦</div>
+<div style="font-size:55px">
+📦
+</div>
 
-<h3>No orders yet</h3>
+<h3>
+No orders yet
+</h3>
 
 <p style="
 color:var(--muted);
@@ -3422,26 +4209,35 @@ privacy:"رازداری کی پالیسی"
 
 function changeLanguage(lang){
 
-localStorage.setItem("printzyLanguage",lang);
+localStorage.setItem(
+"printzyLanguage",
+lang
+);
 
 const data=
 translations[lang]||
 translations.en;
 
+
 document
 .querySelectorAll("[data-i18n]")
 .forEach(el=>{
 
-const key=el.getAttribute("data-i18n");
+const key=
+el.getAttribute("data-i18n");
 
 if(data[key]){
+
 el.innerText=data[key];
+
 }
 
 });
 
+
 const search=
 document.getElementById("search");
+
 
 if(search){
 
@@ -3450,6 +4246,7 @@ data.search||
 translations.en.search;
 
 }
+
 
 showToast(
 "Language changed 🌐"
@@ -3461,15 +4258,24 @@ showToast(
 function loadLanguage(){
 
 const saved=
-localStorage.getItem("printzyLanguage")||
+localStorage.getItem(
+"printzyLanguage"
+)||
 "hi";
 
+
 const select=
-document.getElementById("languageSelect");
+document.getElementById(
+"languageSelect"
+);
+
 
 if(select){
+
 select.value=saved;
+
 }
+
 
 changeLanguage(saved);
 
@@ -3482,7 +4288,10 @@ THEME
 
 function toggleDark(){
 
-document.body.classList.toggle("dark");
+document.body
+.classList
+.toggle("dark");
+
 
 localStorage.setItem(
 "printzyDark",
@@ -3492,9 +4301,14 @@ document.body.classList.contains("dark")
 }
 
 
-if(localStorage.getItem("printzyDark")==="true"){
+if(
+localStorage.getItem("printzyDark")
+==="true"
+){
 
-document.body.classList.add("dark");
+document.body
+.classList
+.add("dark");
 
 }
 
@@ -3506,16 +4320,25 @@ TOAST
 function showToast(message){
 
 const old=
-document.getElementById("printzyToast");
+document.getElementById(
+"printzyToast"
+);
 
-if(old)old.remove();
+if(old)
+old.remove();
+
 
 const toast=
 document.createElement("div");
 
-toast.id="printzyToast";
 
-toast.innerText=message;
+toast.id=
+"printzyToast";
+
+
+toast.innerText=
+message;
+
 
 toast.style=`
 
@@ -3530,12 +4353,17 @@ border-radius:25px;
 z-index:1000;
 font-size:14px;
 box-shadow:0 8px 25px rgba(0,0,0,.25);
+
 `;
+
 
 document.body.appendChild(toast);
 
+
 setTimeout(()=>{
+
 toast.remove();
+
 },2200);
 
 }
@@ -3550,8 +4378,11 @@ function scrollProducts(){
 document
 .getElementById("productList")
 .scrollIntoView({
+
 behavior:"smooth",
+
 block:"start"
+
 });
 
 }
