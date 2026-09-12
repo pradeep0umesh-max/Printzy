@@ -908,6 +908,75 @@ font-size:42px;
 margin:0 auto 15px;
 }
 
+.profile-required{
+background:#fff4e5;
+color:#9a5b00;
+padding:12px;
+border-radius:10px;
+font-size:13px;
+line-height:1.5;
+margin:12px 0;
+}
+
+body.dark .profile-required{
+background:#302611;
+color:#ffd98a;
+}
+
+.profile-section-title{
+font-size:15px;
+font-weight:bold;
+margin-top:17px;
+margin-bottom:5px;
+color:var(--blue2);
+}
+
+.profile-label{
+display:block;
+font-size:12px;
+font-weight:bold;
+color:var(--muted);
+margin:8px 0 3px;
+}
+
+.location-btn{
+width:100%;
+padding:13px;
+border:2px dashed var(--pink);
+border-radius:10px;
+background:#fff0f5;
+color:var(--pink);
+font-weight:bold;
+margin-top:8px;
+}
+
+body.dark .location-btn{
+background:#2c1620;
+}
+
+.location-status{
+font-size:12px;
+color:var(--muted);
+margin-top:8px;
+text-align:center;
+line-height:1.5;
+}
+
+.profile-complete{
+background:#e8fff2;
+color:#08783c;
+padding:11px;
+border-radius:10px;
+font-size:13px;
+font-weight:bold;
+margin-top:12px;
+}
+
+body.dark .profile-complete{
+background:#102d20;
+color:#6ee7a5;
+}
+
 .profile-row{
 padding:12px 0;
 border-bottom:1px solid var(--border);
@@ -917,15 +986,10 @@ border-bottom:1px solid var(--border);
 border-bottom:0;
 }
 
-.profile-label{
-font-size:12px;
-color:var(--muted);
-margin-bottom:4px;
-}
-
 .profile-value{
 font-size:15px;
 font-weight:bold;
+word-break:break-word;
 }
 
 /* MOBILE */
@@ -1259,8 +1323,6 @@ Login to your account
 Account
 </div>
 
-<!-- FIXED PROFILE BUTTON -->
-
 <button class="menu-item"
 onclick="openProfile();closeMenu()">
 
@@ -1376,7 +1438,7 @@ Services
 
 
 <button class="menu-item"
-onclick="showAddress();closeMenu()">
+onclick="openProfile();closeMenu()">
 
 <span class="menu-icon">📍</span>
 
@@ -1781,8 +1843,6 @@ My Orders
 </button>
 
 
-<!-- FIXED PROFILE -->
-
 <button onclick="openProfile()">
 
 <div>♙</div>
@@ -1924,6 +1984,48 @@ let wishlist=
 JSON.parse(
 localStorage.getItem("printzyWishlist")||"[]"
 );
+
+
+/* =====================================================
+HELPERS
+===================================================== */
+
+function escapeHtml(value){
+
+return String(value||"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+async function getCurrentUser(){
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.getUser();
+
+if(error){
+
+return null;
+
+}
+
+return data.user||null;
+
+}catch(error){
+
+console.log(error);
+
+return null;
+
+}
+
+}
 
 
 /* =====================================================
@@ -2109,7 +2211,7 @@ if(!p)return;
 showModal(`
 
 <h2>
-${p.icon} ${p.name}
+${p.icon} ${escapeHtml(p.name)}
 </h2>
 
 <div style="
@@ -2125,7 +2227,7 @@ ${p.icon}
 color:var(--muted);
 line-height:1.6">
 
-${p.description}
+${escapeHtml(p.description)}
 
 </p>
 
@@ -2218,7 +2320,7 @@ el.innerText=count;
 }
 
 
-function openCart(){
+async function openCart(){
 
 let html=
 `<h2>🛒 Your Cart</h2>`;
@@ -2271,7 +2373,7 @@ html+=`
 <div>
 
 <strong>
-${item.name}
+${escapeHtml(item.name)}
 </strong>
 
 <div style="
@@ -2341,10 +2443,86 @@ openCart();
 
 
 /* =====================================================
+PROFILE COMPLETENESS
+===================================================== */
+
+function getProfileData(user){
+
+const m=
+user?.user_metadata||{};
+
+return {
+
+name:(m.name||"").trim(),
+
+middle_name:(m.middle_name||"").trim(),
+
+last_name:(m.last_name||"").trim(),
+
+mobile:(m.mobile||"").trim(),
+
+house:(m.house||"").trim(),
+
+road:(m.road||"").trim(),
+
+city:(m.city||"").trim(),
+
+state:(m.state||"").trim(),
+
+pincode:(m.pincode||"").trim()
+
+};
+
+}
+
+
+function isProfileComplete(user){
+
+const p=
+getProfileData(user);
+
+return !!(
+p.name &&
+p.middle_name &&
+p.last_name &&
+/^[0-9]{10}$/.test(p.mobile) &&
+p.house &&
+p.road &&
+p.city &&
+p.state &&
+/^[0-9]{6}$/.test(p.pincode)
+);
+
+}
+
+
+function profileMissingFields(user){
+
+const p=
+getProfileData(user);
+
+const missing=[];
+
+if(!p.name)missing.push("Name");
+if(!p.middle_name)missing.push("Middle Name");
+if(!p.last_name)missing.push("Last Name");
+if(!/^[0-9]{10}$/.test(p.mobile))missing.push("Mobile Number");
+if(!p.house)missing.push("House No. / Building Name");
+if(!p.road)missing.push("Road / Area / Colony Name");
+if(!p.city)missing.push("City");
+if(!p.state)missing.push("State");
+if(!/^[0-9]{6}$/.test(p.pincode))missing.push("Pincode");
+
+return missing;
+
+}
+
+
+/* =====================================================
 CHECKOUT
 ===================================================== */
 
-function checkout(){
+async function checkout(){
 
 if(!cart.length){
 
@@ -2355,6 +2533,51 @@ alert(
 return;
 
 }
+
+
+const user=
+await getCurrentUser();
+
+
+/*
+LOGIN REQUIRED
+*/
+
+if(!user){
+
+alert(
+"पहले Customer Login करें।"
+);
+
+openAuth();
+
+return;
+
+}
+
+
+/*
+PROFILE REQUIRED
+*/
+
+if(!isProfileComplete(user)){
+
+const missing=
+profileMissingFields(user);
+
+alert(
+"Profile पूरी करें।\n\n"+
+"इन details की जरूरत है:\n"+
+missing.map(x=>"• "+x).join("\n")+
+"\n\nProfile save करने के बाद ही Checkout आगे बढ़ेगा।"
+);
+
+openProfile(true);
+
+return;
+
+}
+
 
 let total=0;
 
@@ -2374,7 +2597,7 @@ orderItems+=`
 <div>
 
 <strong>
-${item.name}
+${escapeHtml(item.name)}
 </strong>
 
 <div style="
@@ -2398,54 +2621,68 @@ margin-top:4px">
 
 });
 
+
+const profile=
+getProfileData(user);
+
+const fullName=
+[
+profile.name,
+profile.middle_name,
+profile.last_name
+]
+.filter(Boolean)
+.join(" ");
+
+
+const fullAddress=
+[
+profile.house,
+profile.road
+]
+.filter(Boolean)
+.join(", ");
+
+
 showModal(`
 
 <h2>
 📦 Checkout
 </h2>
 
-<p style="
-color:var(--muted);
-line-height:1.6;
-margin-bottom:15px">
-
-कृपया अपनी delivery details भरें।
-
-</p>
-
+<div class="profile-complete">
+✓ Profile Complete — Delivery details loaded automatically.
+</div>
 
 <h3 class="checkout-title">
 👤 Customer Details
 </h3>
 
-
 <input
 class="auth-input"
 id="checkoutName"
 type="text"
-autocomplete="name"
-placeholder="Full Name">
+value="${escapeHtml(fullName)}"
+readonly>
 
 
 <input
 class="auth-input"
 id="checkoutMobile"
 type="tel"
-maxlength="10"
-autocomplete="tel"
-placeholder="Mobile Number">
+value="${escapeHtml(profile.mobile)}"
+readonly>
 
 
 <h3 class="checkout-title">
 📍 Delivery Address
 </h3>
 
-
 <textarea
 class="auth-input"
 id="checkoutAddress"
 rows="4"
-placeholder="Complete Delivery Address"></textarea>
+readonly>${escapeHtml(fullAddress)}</textarea>
 
 
 <div class="checkout-grid">
@@ -2454,14 +2691,16 @@ placeholder="Complete Delivery Address"></textarea>
 class="auth-input"
 id="checkoutCity"
 type="text"
-placeholder="City">
+value="${escapeHtml(profile.city)}"
+readonly>
 
 
 <input
 class="auth-input"
 id="checkoutState"
 type="text"
-placeholder="State">
+value="${escapeHtml(profile.state)}"
+readonly>
 
 </div>
 
@@ -2470,8 +2709,8 @@ placeholder="State">
 class="auth-input"
 id="checkoutPincode"
 type="tel"
-maxlength="6"
-placeholder="Pincode">
+value="${escapeHtml(profile.pincode)}"
+readonly>
 
 
 <h3 class="checkout-title">
@@ -2512,110 +2751,40 @@ Place Order →
 }
 
 
-function placeOrder(){
+async function placeOrder(){
 
-const name=
-document
-.getElementById("checkoutName")
-?.value
-.trim();
-
-const mobile=
-document
-.getElementById("checkoutMobile")
-?.value
-.trim();
-
-const address=
-document
-.getElementById("checkoutAddress")
-?.value
-.trim();
-
-const city=
-document
-.getElementById("checkoutCity")
-?.value
-.trim();
-
-const state=
-document
-.getElementById("checkoutState")
-?.value
-.trim();
-
-const pincode=
-document
-.getElementById("checkoutPincode")
-?.value
-.trim();
+const user=
+await getCurrentUser();
 
 
-if(!name){
-
-alert("Full Name डालें।");
-return;
-
-}
-
-if(!mobile){
-
-alert("Mobile Number डालें।");
-return;
-
-}
-
-if(!/^[0-9]{10}$/.test(mobile)){
+if(!user){
 
 alert(
-"Valid 10 digit Mobile Number डालें।"
+"पहले Login करें।"
 );
+
+openAuth();
 
 return;
 
 }
 
-if(!address){
+
+if(!isProfileComplete(user)){
 
 alert(
-"Complete Delivery Address डालें।"
+"Profile पूरी करना जरूरी है।"
 );
 
-return;
-
-}
-
-if(!city){
-
-alert("City डालें।");
-return;
-
-}
-
-if(!state){
-
-alert("State डालें।");
-return;
-
-}
-
-if(!/^[0-9]{6}$/.test(pincode)){
-
-alert(
-"Valid 6 digit Pincode डालें।"
-);
+openProfile(true);
 
 return;
 
 }
+
 
 alert(
 "Checkout details submitted successfully ✅\n\n"+
-"Customer: "+name+"\n"+
-"Mobile: "+mobile+"\n"+
-"City: "+city+"\n"+
-"State: "+state+"\n"+
-"Pincode: "+pincode+"\n\n"+
 "Next Step में order database और payment जोड़ा जाएगा।"
 );
 
@@ -2723,7 +2892,7 @@ html+=`
 <div>
 
 <strong>
-${p.icon} ${p.name}
+${p.icon} ${escapeHtml(p.name)}
 </strong>
 
 <div style="color:var(--pink)">
@@ -2759,6 +2928,18 @@ AUTH
 ===================================================== */
 
 async function openAuth(){
+
+const user=
+await getCurrentUser();
+
+if(user){
+
+openProfile();
+
+return;
+
+}
+
 
 showModal(`
 
@@ -2829,8 +3010,23 @@ style="display:none">
 class="auth-input"
 id="signupName"
 type="text"
-autocomplete="name"
-placeholder="Full Name">
+autocomplete="given-name"
+placeholder="Name">
+
+
+<input
+class="auth-input"
+id="signupMiddleName"
+type="text"
+placeholder="Middle Name">
+
+
+<input
+class="auth-input"
+id="signupLastName"
+type="text"
+autocomplete="family-name"
+placeholder="Last Name">
 
 
 <input
@@ -2909,7 +3105,7 @@ color:var(--muted);
 font-size:12px;
 text-align:center">
 
-Signup के बाद email verification required हो सकती है।
+Account बनाने के बाद Profile में बाकी delivery details भरना जरूरी होगा।
 
 </p>
 
@@ -3041,13 +3237,13 @@ if(error)
 throw error;
 
 
-alert(
-"Login successful ✅"
-);
-
 closeModal();
 
 updateMenuUser(data.user);
+
+showToast(
+"Login successful ✅"
+);
 
 
 }catch(error){
@@ -3071,6 +3267,18 @@ async function signupUser(){
 const name=
 document
 .getElementById("signupName")
+.value
+.trim();
+
+const middleName=
+document
+.getElementById("signupMiddleName")
+.value
+.trim();
+
+const lastName=
+document
+.getElementById("signupLastName")
 .value
 .trim();
 
@@ -3100,7 +3308,27 @@ document
 if(!name){
 
 alert(
-"Full Name डालें।"
+"Name डालें।"
+);
+
+return;
+
+}
+
+if(!middleName){
+
+alert(
+"Middle Name डालें।"
+);
+
+return;
+
+}
+
+if(!lastName){
+
+alert(
+"Last Name डालें।"
 );
 
 return;
@@ -3181,7 +3409,11 @@ options:{
 
 data:{
 
-full_name:name,
+name:name,
+
+middle_name:middleName,
+
+last_name:lastName,
 
 mobile:mobile
 
@@ -3213,14 +3445,25 @@ return;
 
 if(data.session){
 
-alert(
-"Account created successfully ✅\n"+
-"Login successful ✅"
-);
-
 closeModal();
 
 updateMenuUser(data.user);
+
+showToast(
+"Account created successfully ✅"
+);
+
+
+/*
+Immediately open profile so customer
+can complete mandatory details.
+*/
+
+setTimeout(()=>{
+
+openProfile(true);
+
+},400);
 
 }
 
@@ -3270,6 +3513,21 @@ console.log(error);
 
 
 /* =====================================================
+AUTH STATE
+===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+(event,session)=>{
+
+updateMenuUser(
+session?.user||null
+);
+
+}
+);
+
+
+/* =====================================================
 UPDATE MENU USER
 ===================================================== */
 
@@ -3288,8 +3546,17 @@ return;
 
 if(user){
 
+const p=
+getProfileData(user);
+
 const name=
-user.user_metadata?.full_name ||
+[
+p.name,
+p.middle_name,
+p.last_name
+]
+.filter(Boolean)
+.join(" ") ||
 "Customer";
 
 
@@ -3315,20 +3582,13 @@ emailEl.innerText=
 PROFILE
 ===================================================== */
 
-async function openProfile(){
+async function openProfile(forceEdit=false){
 
-try{
-
-const {data,error}=
-await supabaseClient.auth.getUser();
+const user=
+await getCurrentUser();
 
 
-/*
-If no logged-in user,
-open login popup.
-*/
-
-if(error||!data.user){
+if(!user){
 
 openAuth();
 
@@ -3337,18 +3597,14 @@ return;
 }
 
 
-const user=
-data.user;
+const p=
+getProfileData(user);
 
+const complete=
+isProfileComplete(user);
 
-const name=
-user.user_metadata?.full_name ||
-"Customer";
-
-
-const mobile=
-user.user_metadata?.mobile ||
-"Not added";
+const missing=
+profileMissingFields(user);
 
 
 showModal(`
@@ -3365,58 +3621,265 @@ showModal(`
 </div>
 
 
-<h3 style="
+<div style="
 text-align:center;
+font-size:13px;
+color:var(--muted);
 margin-bottom:15px">
 
-${name}
+${escapeHtml(user.email||"")}
 
-</h3>
+</div>
 
+
+${complete && !forceEdit ? `
+
+<div class="profile-complete">
+✓ Profile Complete
+</div>
+
+<div class="profile-section-title">
+Personal Details
+</div>
 
 <div class="profile-row">
-
-<div class="profile-label">
-FULL NAME
+<div class="profile-label">NAME</div>
+<div class="profile-value">${escapeHtml(p.name)}</div>
 </div>
-
-<div class="profile-value">
-${name}
-</div>
-
-</div>
-
 
 <div class="profile-row">
-
-<div class="profile-label">
-EMAIL
+<div class="profile-label">MIDDLE NAME</div>
+<div class="profile-value">${escapeHtml(p.middle_name)}</div>
 </div>
-
-<div class="profile-value"
-style="word-break:break-word">
-
-${user.email||"Not available"}
-
-</div>
-
-</div>
-
 
 <div class="profile-row">
-
-<div class="profile-label">
-MOBILE NUMBER
+<div class="profile-label">LAST NAME</div>
+<div class="profile-value">${escapeHtml(p.last_name)}</div>
 </div>
 
-<div class="profile-value">
+<div class="profile-row">
+<div class="profile-label">MOBILE NUMBER</div>
+<div class="profile-value">${escapeHtml(p.mobile)}</div>
+</div>
 
-${mobile}
+
+<div class="profile-section-title">
+Delivery Address
+</div>
+
+<div class="profile-row">
+<div class="profile-label">HOUSE NO. / BUILDING NAME</div>
+<div class="profile-value">${escapeHtml(p.house)}</div>
+</div>
+
+<div class="profile-row">
+<div class="profile-label">ROAD / AREA / COLONY NAME</div>
+<div class="profile-value">${escapeHtml(p.road)}</div>
+</div>
+
+<div class="profile-row">
+<div class="profile-label">CITY</div>
+<div class="profile-value">${escapeHtml(p.city)}</div>
+</div>
+
+<div class="profile-row">
+<div class="profile-label">STATE</div>
+<div class="profile-value">${escapeHtml(p.state)}</div>
+</div>
+
+<div class="profile-row">
+<div class="profile-label">PINCODE</div>
+<div class="profile-value">${escapeHtml(p.pincode)}</div>
+</div>
+
+<button
+class="checkout"
+style="margin-top:18px"
+onclick="openProfile(true)">
+
+✏️ Edit Profile
+
+</button>
+
+` : `
+
+<div class="profile-required">
+
+<strong>⚠️ Profile Complete करना जरूरी है</strong>
+
+<br><br>
+
+${missing.length
+? "बाकी details: "+missing.join(", ")
+: "सभी delivery details भरें।"}
+
+<br><br>
+
+Profile complete होने तक Checkout / Order आगे नहीं बढ़ेगा।
+
+</div>
+
+
+<div class="profile-section-title">
+Personal Details
+</div>
+
+
+<label class="profile-label">
+Name *
+</label>
+
+<input
+class="auth-input"
+id="profileName"
+type="text"
+value="${escapeHtml(p.name)}"
+placeholder="Name">
+
+
+<label class="profile-label">
+Middle Name *
+</label>
+
+<input
+class="auth-input"
+id="profileMiddleName"
+type="text"
+value="${escapeHtml(p.middle_name)}"
+placeholder="Middle Name">
+
+
+<label class="profile-label">
+Last Name *
+</label>
+
+<input
+class="auth-input"
+id="profileLastName"
+type="text"
+value="${escapeHtml(p.last_name)}"
+placeholder="Last Name">
+
+
+<label class="profile-label">
+Mobile Number *
+</label>
+
+<input
+class="auth-input"
+id="profileMobile"
+type="tel"
+maxlength="10"
+value="${escapeHtml(p.mobile)}"
+placeholder="10 digit Mobile Number">
+
+
+<div class="profile-section-title">
+Delivery Address
+</div>
+
+
+<button
+type="button"
+class="location-btn"
+onclick="useCurrentLocation()">
+
+📍 Use Current Location
+
+</button>
+
+<div
+id="locationStatus"
+class="location-status">
+
+Current location से address automatically fill करने के लिए ऊपर button दबाएँ।
+
+</div>
+
+
+<label class="profile-label">
+House No. / Building Name *
+</label>
+
+<input
+class="auth-input"
+id="profileHouse"
+type="text"
+value="${escapeHtml(p.house)}"
+placeholder="House No. / Building Name">
+
+
+<label class="profile-label">
+Road Name / Area Name / Colony Name *
+</label>
+
+<input
+class="auth-input"
+id="profileRoad"
+type="text"
+value="${escapeHtml(p.road)}"
+placeholder="Road / Area / Colony Name">
+
+
+<div class="checkout-grid">
+
+<div>
+
+<label class="profile-label">
+City *
+</label>
+
+<input
+class="auth-input"
+id="profileCity"
+type="text"
+value="${escapeHtml(p.city)}"
+placeholder="City">
+
+</div>
+
+
+<div>
+
+<label class="profile-label">
+State *
+</label>
+
+<input
+class="auth-input"
+id="profileState"
+type="text"
+value="${escapeHtml(p.state)}"
+placeholder="State">
 
 </div>
 
 </div>
 
+
+<label class="profile-label">
+Pincode *
+</label>
+
+<input
+class="auth-input"
+id="profilePincode"
+type="tel"
+maxlength="6"
+value="${escapeHtml(p.pincode)}"
+placeholder="6 digit Pincode">
+
+
+<button
+class="checkout"
+style="margin-top:18px"
+onclick="saveProfile()">
+
+💾 Save Profile
+
+</button>
+
+`}
 
 </div>
 
@@ -3434,13 +3897,452 @@ Logout
 
 `);
 
+}
+
+
+/* =====================================================
+SAVE PROFILE
+===================================================== */
+
+async function saveProfile(){
+
+const user=
+await getCurrentUser();
+
+
+if(!user){
+
+alert(
+"Session expired. Please login again."
+);
+
+openAuth();
+
+return;
+
+}
+
+
+const name=
+document
+.getElementById("profileName")
+?.value
+.trim();
+
+const middleName=
+document
+.getElementById("profileMiddleName")
+?.value
+.trim();
+
+const lastName=
+document
+.getElementById("profileLastName")
+?.value
+.trim();
+
+const mobile=
+document
+.getElementById("profileMobile")
+?.value
+.trim();
+
+const house=
+document
+.getElementById("profileHouse")
+?.value
+.trim();
+
+const road=
+document
+.getElementById("profileRoad")
+?.value
+.trim();
+
+const city=
+document
+.getElementById("profileCity")
+?.value
+.trim();
+
+const state=
+document
+.getElementById("profileState")
+?.value
+.trim();
+
+const pincode=
+document
+.getElementById("profilePincode")
+?.value
+.trim();
+
+
+if(!name){
+
+alert("Name डालें।");
+return;
+
+}
+
+if(!middleName){
+
+alert("Middle Name डालें।");
+return;
+
+}
+
+if(!lastName){
+
+alert("Last Name डालें।");
+return;
+
+}
+
+if(!/^[0-9]{10}$/.test(mobile)){
+
+alert(
+"Valid 10 digit Mobile Number डालें।"
+);
+
+return;
+
+}
+
+if(!house){
+
+alert(
+"House No. / Building Name डालें।"
+);
+
+return;
+
+}
+
+if(!road){
+
+alert(
+"Road / Area / Colony Name डालें।"
+);
+
+return;
+
+}
+
+if(!city){
+
+alert("City डालें।");
+return;
+
+}
+
+if(!state){
+
+alert("State डालें।");
+return;
+
+}
+
+if(!/^[0-9]{6}$/.test(pincode)){
+
+alert(
+"Valid 6 digit Pincode डालें।"
+);
+
+return;
+
+}
+
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.updateUser({
+
+data:{
+
+name:name,
+
+middle_name:middleName,
+
+last_name:lastName,
+
+mobile:mobile,
+
+house:house,
+
+road:road,
+
+city:city,
+
+state:state,
+
+pincode:pincode
+
+}
+
+});
+
+
+if(error)
+throw error;
+
+
+updateMenuUser(data.user);
+
+showToast(
+"Profile saved successfully ✅"
+);
+
+
+setTimeout(()=>{
+
+openProfile();
+
+},400);
+
+
+}catch(error){
+
+alert(
+"Profile save failed ❌\n\n"+
+error.message
+);
+
+}
+
+}
+
+
+/* =====================================================
+CURRENT LOCATION
+===================================================== */
+
+function useCurrentLocation(){
+
+const status=
+document.getElementById("locationStatus");
+
+if(!navigator.geolocation){
+
+if(status){
+
+status.innerText=
+"इस device/browser में location service उपलब्ध नहीं है।";
+
+}
+
+return;
+
+}
+
+
+if(status){
+
+status.innerText=
+"📍 Location प्राप्त की जा रही है... कृपया थोड़ा इंतजार करें।";
+
+}
+
+
+navigator.geolocation.getCurrentPosition(
+
+async(position)=>{
+
+const lat=
+position.coords.latitude;
+
+const lon=
+position.coords.longitude;
+
+
+if(status){
+
+status.innerText=
+"📍 Location मिल गई। Address पता किया जा रहा है...";
+
+}
+
+
+try{
+
+/*
+OpenStreetMap Nominatim reverse geocoding.
+The user's browser location is used only for
+this current address lookup.
+*/
+
+const url=
+"https://nominatim.openstreetmap.org/reverse"+
+"?format=jsonv2"+
+"&lat="+encodeURIComponent(lat)+
+"&lon="+encodeURIComponent(lon)+
+"&addressdetails=1";
+
+
+const response=
+await fetch(url,{
+headers:{
+"Accept":"application/json"
+}
+});
+
+
+if(!response.ok){
+
+throw new Error(
+"Address service unavailable"
+);
+
+}
+
+
+const result=
+await response.json();
+
+const a=
+result.address||{};
+
+
+const house=
+[
+a.house_number,
+a.building
+]
+.filter(Boolean)
+.join(" / ");
+
+
+const road=
+[
+a.road,
+a.neighbourhood,
+a.suburb,
+a.residential
+]
+.filter(Boolean)
+.join(", ");
+
+
+const city=
+a.city ||
+a.town ||
+a.village ||
+a.municipality ||
+"";
+
+
+const state=
+a.state||"";
+
+
+const pincode=
+a.postcode||"";
+
+
+if(document.getElementById("profileHouse") && house){
+
+document.getElementById("profileHouse").value=
+house;
+
+}
+
+
+if(document.getElementById("profileRoad") && road){
+
+document.getElementById("profileRoad").value=
+road;
+
+}
+
+
+if(document.getElementById("profileCity") && city){
+
+document.getElementById("profileCity").value=
+city;
+
+}
+
+
+if(document.getElementById("profileState") && state){
+
+document.getElementById("profileState").value=
+state;
+
+}
+
+
+if(document.getElementById("profilePincode") && pincode){
+
+document.getElementById("profilePincode").value=
+pincode.replace(/\D/g,"").slice(0,6);
+
+}
+
+
+if(status){
+
+status.innerText=
+"✓ Location से available address details fill हो गई हैं। नीचे details check करके Save Profile दबाएँ।";
+
+}
+
 }catch(error){
 
 console.log(error);
 
-openAuth();
+if(status){
+
+status.innerText=
+"Location मिल गई, लेकिन automatic address नहीं मिल पाया। कृपया address details manually भरें।";
 
 }
+
+}
+
+},
+
+(error)=>{
+
+console.log(error);
+
+const status=
+document.getElementById("locationStatus");
+
+if(!status)return;
+
+
+if(error.code===1){
+
+status.innerText=
+"Location permission denied. Browser में location permission allow करके फिर कोशिश करें.";
+
+}else if(error.code===2){
+
+status.innerText=
+"Location उपलब्ध नहीं है. GPS/Location ON करके फिर कोशिश करें.";
+
+}else if(error.code===3){
+
+status.innerText=
+"Location मिलने में ज्यादा समय लगा. फिर से कोशिश करें.";
+
+}else{
+
+status.innerText=
+"Location प्राप्त नहीं हो सकी. कृपया manually address भरें.";
+
+}
+
+},
+
+{
+enableHighAccuracy:true,
+timeout:15000,
+maximumAge:0
+}
+
+);
 
 }
 
@@ -3466,8 +4368,8 @@ closeModal();
 updateMenuUser(null);
 
 
-alert(
-"Logout successful ✅"
+showToast(
+"Logout successful 👋"
 );
 
 
@@ -3524,52 +4426,20 @@ closeMenu();
 ADDRESS
 ===================================================== */
 
-function showAddress(){
+async function showAddress(){
 
-showModal(`
+const user=
+await getCurrentUser();
 
-<h2>
-📍 Delivery Address
-</h2>
+if(!user){
 
-<p style="
-color:var(--muted);
-line-height:1.7">
+openAuth();
 
-आपका delivery address यहाँ manage किया जाएगा।
+return;
 
-</p>
+}
 
-
-<input
-class="auth-input"
-placeholder="Full Name">
-
-
-<input
-class="auth-input"
-placeholder="Mobile Number">
-
-
-<textarea
-class="auth-input"
-rows="4"
-placeholder="Complete Delivery Address"></textarea>
-
-
-<button
-class="checkout"
-style="margin-top:10px"
-onclick="
-alert('Address saved successfully ✅');
-closeModal()
-">
-
-Save Address
-
-</button>
-
-`);
+openProfile();
 
 }
 
@@ -3985,7 +4855,32 @@ showModal(content);
 ORDERS
 ===================================================== */
 
-function openOrders(){
+async function openOrders(){
+
+const user=
+await getCurrentUser();
+
+if(!user){
+
+openAuth();
+
+return;
+
+}
+
+
+if(!isProfileComplete(user)){
+
+alert(
+"Orders देखने/आगे बढ़ने से पहले Profile complete करें।"
+);
+
+openProfile(true);
+
+return;
+
+}
+
 
 showModal(`
 
