@@ -5074,60 +5074,154 @@ ORDERS
 
 async function openOrders(){
 
-const user=
-await getCurrentUser();
+  const user = await getCurrentUser();
 
-if(!user){
+  if(!user){
 
-openAuth();
+    alert("Please login first.");
+    return;
 
-return;
+  }
 
-}
+  showModal(`
+    <div style="padding:20px">
 
+      <h2 style="margin-bottom:18px">
+        📦 My Orders
+      </h2>
 
-if(!isProfileComplete(user)){
+      <div id="myOrdersList">
+        <p style="text-align:center;color:var(--muted)">
+          Loading orders...
+        </p>
+      </div>
 
-alert(
-"Orders देखने/आगे बढ़ने से पहले Profile complete करें।"
-);
+    </div>
+  `);
 
-openProfile(true);
+  try{
 
-return;
+    const { data, error } =
+      await supabaseClient
+      .from("orders")
+      .select("*")
+      .eq("customer_email", user.email)
+      .order("created_at", {
+        ascending:false
+      });
 
-}
+    if(error){
+      throw error;
+    }
 
+    const box =
+      document.getElementById("myOrdersList");
 
-showModal(`
+    if(!data || data.length === 0){
 
-<h2>
-📦 My Orders
-</h2>
+      box.innerHTML = `
+        <div style="
+          text-align:center;
+          padding:30px 10px;
+          color:var(--muted);
+        ">
+          <div style="font-size:50px">
+            📦
+          </div>
 
-<div style="
-text-align:center;
-padding:30px">
+          <p style="margin-top:10px">
+            अभी कोई order नहीं है।
+          </p>
+        </div>
+      `;
 
-<div style="font-size:55px">
-📦
-</div>
+      return;
+    }
 
-<h3>
-No orders yet
-</h3>
+    box.innerHTML =
+      data.map(order => `
 
-<p style="
-color:var(--muted);
-margin-top:8px">
+        <div style="
+          border:1px solid var(--border);
+          border-radius:14px;
+          padding:16px;
+          margin-bottom:14px;
+          background:var(--soft);
+        ">
 
-आपके orders यहाँ दिखाई देंगे।
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            gap:10px;
+            margin-bottom:10px;
+          ">
 
-</p>
+            <strong>
+              ${escapeHtml(order.order_number || "")}
+            </strong>
 
-</div>
+            <span style="
+              font-weight:800;
+              color:var(--pink);
+              text-transform:capitalize;
+            ">
+              ${escapeHtml(order.order_status || "pending")}
+            </span>
 
-`);
+          </div>
+
+          <div style="
+            font-size:14px;
+            color:var(--muted);
+            line-height:1.7;
+          ">
+
+            <div>
+              Total:
+              <strong>
+                ₹${Number(order.total_amount || 0)}
+              </strong>
+            </div>
+
+            <div>
+              Payment:
+              ${escapeHtml(order.payment_method || "COD")}
+            </div>
+
+            <div>
+              Date:
+              ${order.created_at
+                ? new Date(order.created_at).toLocaleString("en-IN")
+                : "-"
+              }
+            </div>
+
+          </div>
+
+        </div>
+
+      `).join("");
+
+  }catch(error){
+
+    console.error(
+      "My Orders Error:",
+      error
+    );
+
+    document.getElementById("myOrdersList").innerHTML = `
+      <div style="
+        text-align:center;
+        padding:20px;
+        color:red;
+      ">
+        Orders load नहीं हो पाए ❌
+        <br><br>
+        ${escapeHtml(error.message)}
+      </div>
+    `;
+
+  }
 
 }
 
