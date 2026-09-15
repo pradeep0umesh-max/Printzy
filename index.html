@@ -10,3511 +10,5290 @@
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 :root{
-  --pink:#f51663;
-  --pink2:#ff2b78;
-  --blue:#063b91;
-  --blue2:#075ee8;
-  --yellow:#ffd21c;
-  --green:#16a34a;
-  --red:#dc2626;
-  --bg:#f6f8fc;
-  --card:#fff;
-  --text:#151515;
-  --muted:#707070;
-  --border:#e5e7eb;
-  --shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-body.dark{
-  --bg:#111827;
-  --card:#1f2937;
-  --text:#f9fafb;
-  --muted:#c0c0c0;
-  --border:#374151;
-  background:#111827;
-}
-
-html{
-  scroll-behavior:smooth;
+--pink:#f51663;
+--pink2:#ff2b78;
+--blue:#063b91;
+--blue2:#075ee8;
+--yellow:#ffd21c;
+--text:#071b3a;
+--muted:#68758a;
+--bg:#ffffff;
+--card:#ffffff;
+--soft:#f5f8fd;
+--border:#e3e9f2;
+--green:#19a957;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.5;
+font-family:Arial,Helvetica,sans-serif;
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
 }
 
-button,
-input,
-select,
-textarea{
-  font-family:inherit;
+body.dark{
+--text:#f4f7ff;
+--muted:#aab5c8;
+--bg:#0b1220;
+--card:#141e30;
+--soft:#101a2b;
+--border:#283650;
+}
+
+button,input,select,textarea{
+font-family:inherit;
 }
 
 button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none!important;
+cursor:pointer;
 }
 
 /* HEADER */
+
 header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:var(--card);
-  border-bottom:1px solid var(--border);
+position:sticky;
+top:0;
+z-index:100;
+background:var(--card);
+border-bottom:1px solid var(--border);
 }
 
-.header-inner{
-  max-width:1200px;
-  margin:auto;
-  padding:12px 16px;
-  display:flex;
-  align-items:center;
-  gap:12px;
+.nav{
+max-width:1200px;
+margin:auto;
+min-height:76px;
+padding:12px 22px;
+display:flex;
+align-items:center;
+gap:18px;
 }
 
 .logo{
-  font-size:26px;
-  font-weight:900;
-  color:var(--pink);
-  white-space:nowrap;
+display:flex;
+align-items:center;
+gap:8px;
+min-width:185px;
+cursor:pointer;
 }
 
-.logo span{
-  color:var(--blue2);
+.logo-mark{
+width:45px;
+height:45px;
+border-radius:12px;
+background:linear-gradient(135deg,#ffcc00,#f51663,#1264e8);
+display:flex;
+justify-content:center;
+align-items:center;
+color:#fff;
+font-size:25px;
+font-weight:900;
 }
 
-.search-box{
-  flex:1;
-  position:relative;
+.logo-text{
+font-size:25px;
+font-weight:900;
+color:#102c61;
 }
 
-.search-box input{
-  width:100%;
-  padding:12px 15px;
-  border:1px solid var(--border);
-  border-radius:25px;
-  outline:none;
-  background:var(--bg);
-  color:var(--text);
+body.dark .logo-text{
+color:#fff;
 }
 
-.header-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
+.logo-sub{
+font-size:11px;
+margin-top:2px;
+color:var(--muted);
+}
+
+.search-wrap{
+flex:1;
+position:relative;
+}
+
+.search-icon{
+position:absolute;
+left:17px;
+top:50%;
+transform:translateY(-50%);
+font-size:22px;
+}
+
+.search{
+width:100%;
+padding:15px 20px 15px 50px;
+border:1px solid var(--border);
+border-radius:30px;
+background:var(--soft);
+color:var(--text);
+outline:none;
+font-size:15px;
+}
+
+.search:focus{
+border-color:var(--pink);
+}
+
+.nav-actions{
+display:flex;
+gap:9px;
+align-items:center;
 }
 
 .icon-btn{
-  width:42px;
-  height:42px;
-  border:none;
-  border-radius:50%;
-  background:var(--bg);
-  color:var(--text);
-  font-size:19px;
-  position:relative;
+width:43px;
+height:43px;
+border:0;
+border-radius:50%;
+background:var(--soft);
+font-size:20px;
+color:var(--text);
 }
 
-.badge{
-  position:absolute;
-  top:-4px;
-  right:-2px;
-  min-width:18px;
-  height:18px;
-  border-radius:20px;
-  background:var(--pink);
-  color:white;
-  font-size:11px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:0 4px;
+.icon-btn:hover{
+background:#ffe5ef;
 }
 
-.menu-btn{
-  display:none;
-}
-
-/* HERO */
-.hero{
-  max-width:1200px;
-  margin:18px auto;
-  padding:45px 25px;
-  border-radius:22px;
-  background:linear-gradient(135deg,var(--blue),var(--blue2),var(--pink));
-  color:white;
-  overflow:hidden;
-}
-
-.hero h1{
-  font-size:42px;
-  max-width:700px;
-  margin-bottom:10px;
-}
-
-.hero p{
-  font-size:18px;
-  max-width:650px;
-  opacity:.95;
-}
-
-.hero-btn{
-  margin-top:20px;
-  padding:13px 24px;
-  border:none;
-  border-radius:25px;
-  background:var(--yellow);
-  color:#111;
-  font-weight:800;
-  font-size:16px;
-}
-
-.hero-features{
-  display:flex;
-  gap:15px;
-  flex-wrap:wrap;
-  margin-top:25px;
-}
-
-.hero-feature{
-  padding:9px 14px;
-  border-radius:20px;
-  background:rgba(255,255,255,.15);
-}
-
-/* SECTION */
-.section{
-  max-width:1200px;
-  margin:25px auto;
-  padding:0 16px;
-}
-
-.section-title{
-  font-size:25px;
-  margin-bottom:15px;
-}
-
-/* CATEGORIES */
-.categories{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:12px;
-}
-
-.category{
-  border:none;
-  background:var(--card);
-  color:var(--text);
-  padding:17px 8px;
-  border-radius:15px;
-  box-shadow:var(--shadow);
-  text-align:center;
-  font-weight:700;
-}
-
-.category-icon{
-  display:block;
-  font-size:27px;
-  margin-bottom:5px;
-}
-
-/* PRODUCTS */
-.products{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-
-.product-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  position:relative;
-}
-
-.product-img{
-  height:180px;
-  background:linear-gradient(135deg,#eef4ff,#fff0f5);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:65px;
-}
-
-.product-info{
-  padding:15px;
-}
-
-.product-name{
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:5px;
-}
-
-.product-desc{
-  font-size:13px;
-  color:var(--muted);
-  min-height:38px;
-}
-
-.price{
-  font-size:20px;
-  font-weight:900;
-  color:var(--pink);
-  margin:10px 0;
-}
-
-.product-actions{
-  display:flex;
-  gap:7px;
-}
-
-.btn{
-  border:none;
-  border-radius:9px;
-  padding:10px 12px;
-  font-weight:700;
-}
-
-.btn-primary{
-  background:var(--pink);
-  color:white;
-  flex:1;
-}
-
-.btn-blue{
-  background:var(--blue2);
-  color:white;
-  flex:1;
-}
-
-.wishlist-btn{
-  position:absolute;
-  top:10px;
-  right:10px;
-  width:38px;
-  height:38px;
-  border:none;
-  border-radius:50%;
-  background:white;
-  font-size:19px;
-}
-
-/* DELIVERY */
-.delivery-banner{
-  max-width:1200px;
-  margin:20px auto;
-  padding:16px;
-  background:var(--card);
-  border-radius:15px;
-  border:1px solid var(--border);
-  text-align:center;
-  font-weight:700;
-}
-
-/* MODAL */
-.modal-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  z-index:3000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-}
-
-.modal-card{
-  width:100%;
-  max-width:480px;
-  max-height:90vh;
-  overflow:auto;
-  background:var(--card);
-  color:var(--text);
-  border-radius:20px;
-  padding:22px;
-  position:relative;
-}
-
-.close-btn{
-  position:absolute;
-  top:10px;
-  right:12px;
-  border:none;
-  background:none;
-  color:var(--text);
-  font-size:25px;
-}
-
-/* AUTH OTP */
-.auth-input{
-  width:100%;
-  padding:14px 15px;
-  margin:8px 0;
-  border:1px solid var(--border);
-  border-radius:10px;
-  font-size:15px;
-  outline:none;
-  background:var(--bg);
-  color:var(--text);
-}
-
-.auth-input:focus{
-  border-color:var(--blue2);
-}
-
-.auth-submit{
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(135deg,var(--pink),var(--pink2));
-  color:#fff;
-  font-size:16px;
-  font-weight:700;
-}
-
-.auth-submit:disabled{
-  opacity:.6;
-}
-
-.phone-row{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-.phone-prefix{
-  min-width:58px;
-  padding:14px 10px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:var(--bg);
-  font-weight:700;
-  text-align:center;
-}
-
-.phone-row .auth-input{
-  margin:8px 0;
-}
-
-.otp-box{
-  letter-spacing:8px;
-  text-align:center;
-  font-size:22px;
-  font-weight:700;
-}
-
-.auth-note{
-  margin:10px 0;
-  color:var(--muted);
-  font-size:13px;
-  text-align:center;
-}
-
-.auth-link{
-  border:none;
-  background:none;
-  color:var(--blue2);
-  font-weight:700;
-  padding:8px;
-}
-
-.auth-center{
-  text-align:center;
-  margin-top:10px;
-}
-
-/* FORMS */
-.form-group{
-  margin-bottom:13px;
-}
-
-.form-group label{
-  display:block;
-  font-size:14px;
-  font-weight:700;
-  margin-bottom:5px;
-}
-
-.form-control{
-  width:100%;
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  outline:none;
-  background:var(--bg);
-  color:var(--text);
-}
-
-textarea.form-control{
-  min-height:80px;
-  resize:vertical;
-}
-
-/* PROFILE */
-.profile-head{
-  text-align:center;
-  margin-bottom:20px;
-}
-
-.avatar{
-  width:75px;
-  height:75px;
-  border-radius:50%;
-  background:linear-gradient(135deg,var(--pink),var(--blue2));
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:32px;
-  font-weight:900;
-  margin:0 auto 10px;
-}
-
-.profile-phone{
-  color:var(--muted);
-  font-size:14px;
-}
-
-.required-box{
-  background:#fff7d6;
-  color:#694f00;
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:15px;
-  font-size:13px;
-}
-
-body.dark .required-box{
-  background:#493e0b;
-  color:#ffe78a;
-}
-
-/* CART */
-.cart-item{
-  display:flex;
-  gap:12px;
-  padding:13px 0;
-  border-bottom:1px solid var(--border);
-}
-
-.cart-item-icon{
-  width:65px;
-  height:65px;
-  border-radius:10px;
-  background:var(--bg);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-}
-
-.cart-item-info{
-  flex:1;
-}
-
-.qty{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin-top:6px;
-}
-
-.qty button{
-  width:28px;
-  height:28px;
-  border:none;
-  border-radius:6px;
-  background:var(--bg);
-  color:var(--text);
-}
-
-.cart-total{
-  margin-top:15px;
-  padding-top:15px;
-  border-top:2px solid var(--border);
-  display:flex;
-  justify-content:space-between;
-  font-size:19px;
-  font-weight:900;
+.cart-btn{
+border:0;
+border-radius:24px;
+padding:12px 17px;
+background:var(--pink);
+color:white;
+font-weight:bold;
 }
 
 /* MENU */
-.side-menu{
-  position:fixed;
-  inset:0;
-  z-index:2500;
-  background:rgba(0,0,0,.55);
+
+.menu-btn{
+width:43px;
+height:43px;
+border:0;
+border-radius:50%;
+background:var(--soft);
+color:var(--text);
+font-size:24px;
+font-weight:bold;
 }
 
-.side-menu-inner{
-  width:320px;
-  max-width:88%;
-  height:100%;
-  background:var(--card);
-  color:var(--text);
-  padding:20px;
-  overflow:auto;
+.menu-btn:hover{
+background:#ffe5ef;
 }
 
-.menu-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
+.menu-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.55);
+z-index:800;
+display:none;
+}
+
+.menu-panel{
+position:absolute;
+right:0;
+top:0;
+width:350px;
+max-width:92%;
+height:100%;
+background:var(--card);
+color:var(--text);
+box-shadow:-10px 0 35px rgba(0,0,0,.2);
+overflow-y:auto;
+}
+
+.menu-head{
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid var(--border);
+}
+
+.menu-head h2{
+color:var(--pink);
+}
+
+.menu-close{
+border:0;
+background:none;
+font-size:30px;
+color:var(--text);
 }
 
 .menu-user{
-  padding:15px;
-  border-radius:12px;
-  background:var(--bg);
-  margin-bottom:15px;
+padding:18px;
+background:linear-gradient(135deg,#ffe8ef,#e8f3ff);
+margin:15px;
+border-radius:16px;
 }
 
-.menu-user-name{
-  font-size:18px;
-  font-weight:800;
-}
-
-.menu-user-phone{
-  font-size:13px;
-  color:var(--muted);
+.menu-user strong{
+font-size:18px;
 }
 
 .menu-item{
-  width:100%;
-  padding:13px;
-  border:none;
-  background:none;
-  color:var(--text);
-  text-align:left;
-  border-bottom:1px solid var(--border);
-  font-size:15px;
+width:100%;
+border:0;
+background:none;
+color:var(--text);
+padding:15px 20px;
+display:flex;
+align-items:center;
+gap:14px;
+font-size:15px;
+text-align:left;
+border-bottom:1px solid var(--border);
 }
 
-/* CHECKOUT */
-.summary-row{
-  display:flex;
-  justify-content:space-between;
-  padding:8px 0;
+.menu-item:hover{
+background:var(--soft);
 }
 
-.summary-total{
-  border-top:1px solid var(--border);
-  margin-top:10px;
-  padding-top:12px;
-  font-size:20px;
-  font-weight:900;
+.menu-icon{
+width:28px;
+font-size:21px;
+text-align:center;
 }
 
-/* EMPTY */
-.empty{
-  text-align:center;
-  padding:35px 10px;
-  color:var(--muted);
+.menu-section{
+padding:15px 20px 8px;
+font-size:12px;
+font-weight:bold;
+color:var(--muted);
+text-transform:uppercase;
 }
 
-.empty-icon{
-  font-size:50px;
-  margin-bottom:8px;
+.language-box{
+padding:15px 20px;
+}
+
+.language-select{
+width:100%;
+padding:13px;
+border:1px solid var(--border);
+border-radius:10px;
+background:var(--soft);
+color:var(--text);
+outline:none;
+font-size:14px;
+}
+
+/* HERO */
+
+.hero{
+max-width:1200px;
+min-height:300px;
+margin:22px auto;
+padding:38px 48px;
+border-radius:24px;
+overflow:hidden;
+position:relative;
+color:white;
+background:
+radial-gradient(circle at 88% 15%,#ffe800 0 18%,transparent 18.5%),
+linear-gradient(110deg,#062c73,#074ab5 62%,#ffd400 62%);
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+max-width:570px;
+}
+
+.hero h1{
+font-size:43px;
+line-height:1.15;
+margin-bottom:14px;
+}
+
+.hero h1 span{
+color:#ffe000;
+}
+
+.hero p{
+font-size:17px;
+line-height:1.6;
+max-width:520px;
+}
+
+.hero-features{
+display:flex;
+gap:28px;
+margin-top:25px;
+flex-wrap:wrap;
+}
+
+.hero-feature{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:14px;
+font-weight:bold;
+}
+
+.hero-feature b{
+font-size:22px;
+}
+
+.hero-btn{
+margin-top:25px;
+border:0;
+border-radius:25px;
+padding:14px 28px;
+background:var(--pink);
+color:white;
+font-size:16px;
+font-weight:bold;
+}
+
+.hero-products{
+position:absolute;
+right:25px;
+bottom:18px;
+width:390px;
+height:245px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.print-stack{
+background:white;
+color:#123;
+width:230px;
+height:135px;
+border-radius:8px;
+transform:rotate(-8deg);
+box-shadow:0 18px 35px rgba(0,0,0,.25);
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:900;
+font-size:24px;
+}
+
+.mug{
+position:absolute;
+right:20px;
+bottom:15px;
+width:90px;
+height:85px;
+background:white;
+color:#123;
+border-radius:8px 8px 22px 22px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:35px;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+.mug:after{
+content:"";
+position:absolute;
+right:-23px;
+top:20px;
+width:28px;
+height:38px;
+border:8px solid white;
+border-left:0;
+border-radius:0 20px 20px 0;
+}
+
+/* MAIN */
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:0 22px 90px;
+}
+
+.section-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin:30px 0 17px;
+}
+
+.section-head h2{
+font-size:28px;
+}
+
+.view-all{
+color:var(--pink);
+font-weight:bold;
+border:0;
+background:none;
+font-size:15px;
+}
+
+/* CATEGORIES */
+
+.categories{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
+}
+
+.category{
+min-height:150px;
+border:0;
+border-radius:18px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:12px;
+font-size:16px;
+font-weight:bold;
+color:var(--text);
+transition:.2s;
+}
+
+.category:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.cat-icon{
+font-size:60px;
+}
+
+.c1{background:#e8f3ff}
+.c2{background:#ffe8ef}
+.c3{background:#fff7dc}
+.c4{background:#e2f8f1}
+.c5{background:#eeeaff}
+.c6{background:#fff0df}
+.c7{background:#e5f4ff}
+.c8{background:#f0eaff}
+
+/* PRODUCTS */
+
+.products{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+
+.product{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:17px;
+overflow:hidden;
+position:relative;
+box-shadow:0 4px 15px rgba(10,40,90,.06);
+transition:.25s;
+}
+
+.product:hover{
+transform:translateY(-5px);
+box-shadow:0 12px 28px rgba(10,40,90,.12);
+}
+
+.product-img{
+height:175px;
+background:#f2f5f9;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:90px;
+position:relative;
+}
+
+.product-img.tshirt{
+background:linear-gradient(135deg,#e8f3ff,#fff);
+}
+
+.product-img.mugimg{
+background:linear-gradient(135deg,#fff2e8,#fff);
+}
+
+.product-img.frameimg{
+background:linear-gradient(135deg,#eef8ff,#fff);
+}
+
+.product-img.hoodie{
+background:linear-gradient(135deg,#eeeaff,#fff);
+}
+
+.product-img.cap{
+background:linear-gradient(135deg,#e7fff3,#fff);
+}
+
+.product-img.gift{
+background:linear-gradient(135deg,#ffe8ef,#fff);
+}
+
+.wishlist{
+position:absolute;
+top:10px;
+right:10px;
+width:38px;
+height:38px;
+border:0;
+border-radius:50%;
+background:white;
+color:#6b7280;
+font-size:21px;
+z-index:5;
+box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+
+.wishlist.active{
+color:var(--pink);
+background:#ffe8ef;
+}
+
+.product-info{
+padding:15px;
+}
+
+.product-info h3{
+font-size:17px;
+margin-bottom:6px;
+}
+
+.price{
+font-size:18px;
+font-weight:bold;
+color:var(--text);
+}
+
+.starting{
+color:var(--muted);
+font-size:12px;
+}
+
+.product-desc{
+color:var(--muted);
+font-size:12px;
+line-height:1.5;
+margin-top:7px;
+min-height:36px;
+}
+
+.product-buttons{
+display:flex;
+gap:7px;
+margin-top:13px;
+}
+
+.customize{
+flex:1;
+border:1.5px solid var(--pink);
+color:var(--pink);
+background:white;
+padding:10px 5px;
+border-radius:20px;
+font-weight:bold;
+font-size:12px;
+}
+
+.order{
+flex:1;
+border:0;
+background:var(--pink);
+color:white;
+padding:10px 5px;
+border-radius:20px;
+font-weight:bold;
+font-size:12px;
+}
+
+/* DELIVERY */
+
+.delivery{
+margin-top:28px;
+padding:20px 25px;
+border-radius:17px;
+background:linear-gradient(90deg,#ffe1eb,#ffeef4);
+display:grid;
+grid-template-columns:1.5fr 1fr 1fr 1fr;
+gap:15px;
+align-items:center;
+}
+
+.delivery-main{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.delivery-icon{
+font-size:42px;
+}
+
+.delivery h3{
+font-size:20px;
+color:#091e42;
+}
+
+.delivery p{
+margin-top:5px;
+color:#475569;
+font-size:13px;
+}
+
+.delivery-item{
+text-align:center;
+}
+
+.delivery-item div{
+font-size:26px;
+}
+
+.delivery-item span{
+display:block;
+font-size:12px;
+margin-top:5px;
+color:#26364e;
+}
+
+/* FOOTER */
+
+footer{
+background:#071f4d;
+color:white;
+padding:38px 20px 90px;
+text-align:center;
+}
+
+footer h2{
+font-size:26px;
+}
+
+footer p{
+margin-top:7px;
+color:#c9d6ee;
+}
+
+.footer-links{
+margin-top:18px;
+}
+
+.footer-links button{
+background:none;
+border:0;
+color:white;
+margin:5px 12px;
 }
 
 /* BOTTOM NAV */
+
 .bottom-nav{
-  display:none;
+display:none;
 }
 
-/* TOAST */
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:25px;
-  transform:translateX(-50%);
-  z-index:5000;
-  background:#111;
-  color:white;
-  padding:12px 18px;
-  border-radius:25px;
-  font-size:14px;
-  box-shadow:0 8px 25px rgba(0,0,0,.3);
+/* MODAL */
+
+.modal{
+position:fixed;
+inset:0;
+z-index:500;
+background:rgba(0,0,0,.65);
+display:none;
+align-items:center;
+justify-content:center;
+padding:15px;
 }
 
-/* RESPONSIVE */
+.modal-box{
+width:100%;
+max-width:650px;
+max-height:90vh;
+overflow:auto;
+background:var(--card);
+color:var(--text);
+border-radius:22px;
+padding:25px;
+position:relative;
+}
+
+.close{
+position:absolute;
+right:15px;
+top:10px;
+border:0;
+background:none;
+color:var(--text);
+font-size:30px;
+}
+
+.modal-box h2{
+color:var(--blue2);
+margin-bottom:10px;
+}
+
+/* CART */
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+padding:14px 0;
+border-bottom:1px solid var(--border);
+}
+
+.remove{
+border:0;
+background:#ffe6eb;
+color:#e21d4d;
+padding:7px 10px;
+border-radius:8px;
+margin-left:8px;
+}
+
+.cart-total{
+margin:20px 0;
+font-size:21px;
+font-weight:bold;
+color:var(--pink);
+}
+
+.checkout{
+width:100%;
+border:0;
+padding:14px;
+background:var(--pink);
+color:white;
+border-radius:12px;
+font-weight:bold;
+font-size:14px;
+}
+
+/* AUTH */
+
+.auth-input{
+width:100%;
+padding:13px;
+margin:6px 0;
+border:1px solid var(--border);
+border-radius:10px;
+background:var(--soft);
+color:var(--text);
+outline:none;
+}
+
+.auth-input:focus{
+border-color:var(--pink);
+}
+
+.auth-submit{
+width:100%;
+padding:13px;
+margin-top:10px;
+border:0;
+border-radius:10px;
+background:var(--pink);
+color:white;
+font-weight:bold;
+}
+
+.password-wrap{
+position:relative;
+}
+
+.password-wrap button{
+position:absolute;
+right:5px;
+top:8px;
+border:0;
+background:none;
+}
+
+/* CHECKOUT */
+
+.checkout-title{
+margin-top:10px;
+font-size:18px;
+}
+
+.checkout-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.checkout-summary{
+background:var(--soft);
+padding:12px;
+border-radius:12px;
+margin-top:8px;
+}
+
+.checkout-summary-item{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:12px 0;
+border-bottom:1px solid var(--border);
+}
+
+.checkout-summary-item:last-child{
+border-bottom:0;
+}
+
+.checkout-total{
+display:flex;
+justify-content:space-between;
+padding-top:15px;
+font-size:20px;
+font-weight:bold;
+}
+
+.checkout-total span:last-child{
+color:var(--pink);
+}
+
+/* FRAME */
+
+.frame-option{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+margin:9px 0;
+border:2px solid var(--border);
+border-radius:12px;
+background:var(--soft);
+}
+
+.frame-option.selected{
+border-color:var(--pink);
+background:#fff0f5;
+}
+
+.frame-option strong:last-child{
+color:var(--pink);
+}
+
+.upload{
+padding:18px;
+margin-top:15px;
+border:2px dashed var(--pink);
+border-radius:12px;
+text-align:center;
+}
+
+.upload input{
+margin-top:12px;
+width:100%;
+}
+
+/* PROFILE */
+
+.profile-box{
+background:var(--soft);
+padding:20px;
+border-radius:16px;
+margin-top:15px;
+}
+
+.profile-avatar{
+width:80px;
+height:80px;
+border-radius:50%;
+background:linear-gradient(135deg,#ffe8ef,#e8f3ff);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+margin:0 auto 15px;
+}
+
+.profile-required{
+background:#fff4e5;
+color:#9a5b00;
+padding:12px;
+border-radius:10px;
+font-size:13px;
+line-height:1.5;
+margin:12px 0;
+}
+
+body.dark .profile-required{
+background:#302611;
+color:#ffd98a;
+}
+
+.profile-section-title{
+font-size:15px;
+font-weight:bold;
+margin-top:17px;
+margin-bottom:5px;
+color:var(--blue2);
+}
+
+.profile-label{
+display:block;
+font-size:12px;
+font-weight:bold;
+color:var(--muted);
+margin:8px 0 3px;
+}
+
+.location-btn{
+width:100%;
+padding:13px;
+border:2px dashed var(--pink);
+border-radius:10px;
+background:#fff0f5;
+color:var(--pink);
+font-weight:bold;
+margin-top:8px;
+}
+
+body.dark .location-btn{
+background:#2c1620;
+}
+
+.location-status{
+font-size:12px;
+color:var(--muted);
+margin-top:8px;
+text-align:center;
+line-height:1.5;
+}
+
+.profile-complete{
+background:#e8fff2;
+color:#08783c;
+padding:11px;
+border-radius:10px;
+font-size:13px;
+font-weight:bold;
+margin-top:12px;
+}
+
+body.dark .profile-complete{
+background:#102d20;
+color:#6ee7a5;
+}
+
+.profile-row{
+padding:12px 0;
+border-bottom:1px solid var(--border);
+}
+
+.profile-row:last-child{
+border-bottom:0;
+}
+
+.profile-value{
+font-size:15px;
+font-weight:bold;
+word-break:break-word;
+}
+
+/* MOBILE */
+
 @media(max-width:900px){
-  .categories{
-    grid-template-columns:repeat(4,1fr);
-  }
 
-  .products{
-    grid-template-columns:repeat(2,1fr);
-  }
+.nav{
+padding:10px 15px;
+flex-wrap:wrap;
 }
 
-@media(max-width:650px){
-  .header-inner{
-    flex-wrap:wrap;
-  }
+.logo{
+min-width:auto;
+}
 
-  .logo{
-    font-size:23px;
-  }
+.search-wrap{
+order:5;
+flex-basis:100%;
+}
 
-  .search-box{
-    order:3;
-    flex-basis:100%;
-  }
+.cart-btn{
+padding:10px 12px;
+}
 
-  .menu-btn{
-    display:block;
-  }
+.hero{
+margin:15px;
+padding:32px 25px;
+min-height:360px;
+background:
+radial-gradient(circle at 90% 12%,#ffe800 0 20%,transparent 20.5%),
+linear-gradient(110deg,#062c73,#0751c3);
+}
 
-  .hero{
-    margin:10px;
-    padding:30px 20px;
-  }
+.hero h1{
+font-size:34px;
+}
 
-  .hero h1{
-    font-size:30px;
-  }
+.hero-products{
+opacity:.35;
+right:-70px;
+bottom:-15px;
+}
 
-  .categories{
-    grid-template-columns:repeat(4,1fr);
-    gap:8px;
-  }
+.categories{
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+}
 
-  .category{
-    font-size:12px;
-    padding:12px 5px;
-  }
+.category{
+min-height:125px;
+}
 
-  .category-icon{
-    font-size:23px;
-  }
+.cat-icon{
+font-size:45px;
+}
 
-  .products{
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-  }
+.products{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
 
-  .product-img{
-    height:130px;
-    font-size:50px;
-  }
+.product-img{
+height:145px;
+font-size:65px;
+}
 
-  .product-info{
-    padding:11px;
-  }
+.delivery{
+grid-template-columns:1fr 1fr 1fr;
+}
 
-  .product-name{
-    font-size:15px;
-  }
+.delivery-main{
+grid-column:1/-1;
+}
 
-  .product-desc{
-    font-size:11px;
-  }
+.bottom-nav{
+position:fixed;
+display:flex;
+z-index:300;
+bottom:0;
+left:0;
+right:0;
+height:68px;
+background:var(--card);
+border-top:1px solid var(--border);
+justify-content:space-around;
+align-items:center;
+box-shadow:0 -5px 20px rgba(0,0,0,.08);
+}
 
-  .price{
-    font-size:17px;
-  }
+.bottom-nav button{
+border:0;
+background:none;
+color:var(--muted);
+font-size:11px;
+}
 
-  .btn{
-    font-size:12px;
-    padding:9px 6px;
-  }
+.bottom-nav button div{
+font-size:23px;
+margin-bottom:3px;
+}
 
-  .bottom-nav{
-    position:fixed;
-    display:flex;
-    bottom:0;
-    left:0;
-    right:0;
-    height:60px;
-    background:var(--card);
-    border-top:1px solid var(--border);
-    z-index:1200;
-    justify-content:space-around;
-  }
+.bottom-nav .active{
+color:var(--pink);
+}
 
-  .bottom-nav button{
-    flex:1;
-    border:none;
-    background:none;
-    color:var(--text);
-    font-size:11px;
-  }
+}
 
-  .bottom-nav span{
-    display:block;
-    font-size:21px;
-  }
+@media(max-width:550px){
 
-  body{
-    padding-bottom:65px;
-  }
+.logo-mark{
+width:38px;
+height:38px;
+}
+
+.logo-text{
+font-size:20px;
+}
+
+.logo-sub{
+font-size:9px;
+}
+
+.nav-actions .icon-btn,
+.menu-btn{
+width:38px;
+height:38px;
+}
+
+.cart-btn{
+font-size:12px;
+}
+
+.hero{
+border-radius:18px;
+margin:12px;
+}
+
+.hero h1{
+font-size:30px;
+}
+
+.hero p{
+font-size:14px;
+}
+
+.hero-features{
+gap:12px;
+}
+
+.hero-feature{
+font-size:11px;
+}
+
+.container{
+padding:0 12px 85px;
+}
+
+.section-head h2{
+font-size:23px;
+}
+
+.categories{
+grid-template-columns:repeat(2,1fr);
+}
+
+.category{
+min-height:115px;
+}
+
+.cat-icon{
+font-size:45px;
+}
+
+.product-info h3{
+font-size:14px;
+}
+
+.price{
+font-size:16px;
+}
+
+.product-desc{
+display:none;
+}
+
+.customize,
+.order{
+font-size:10px;
+}
+
+.delivery{
+padding:18px 12px;
+grid-template-columns:repeat(3,1fr);
+}
+
+.delivery h3{
+font-size:16px;
+}
+
+.delivery-icon{
+font-size:34px;
+}
+
+.delivery-item span{
+font-size:10px;
+}
+
+.menu-panel{
+width:330px;
+}
+
+.modal-box{
+padding:20px 16px;
+}
+
+.auth-input{
+font-size:14px;
+}
+
+.checkout{
+font-size:14px;
+}
+
+.checkout-grid{
+grid-template-columns:1fr;
+}
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
-  <div class="header-inner">
 
-    <button class="icon-btn menu-btn" onclick="openMenu()">☰</button>
+<div class="nav">
 
-    <div class="logo">
-      PRINT<span>ZY</span>
-    </div>
+<div class="logo"
+onclick="window.scrollTo({top:0,behavior:'smooth'})">
 
-    <div class="search-box">
-      <input
-        id="searchInput"
-        type="search"
-        placeholder="Search for products like Visiting Card, Banner, etc..."
-        oninput="searchProducts()"
-      >
-    </div>
+<div class="logo-mark">P</div>
 
-    <div class="header-actions">
+<div>
+<div class="logo-text">PRINTZY</div>
+<div class="logo-sub" data-i18n="subtitle">Print Your Ideas</div>
+</div>
 
-      <button class="icon-btn" onclick="toggleTheme()" title="Dark Mode">
-        🌙
-      </button>
+</div>
 
-      <button class="icon-btn" onclick="openWishlist()" title="Wishlist">
-        ♡
-        <span class="badge" id="wishlistBadge">0</span>
-      </button>
+<div class="search-wrap">
 
-      <button class="icon-btn" onclick="openCart()" title="Cart">
-        🛒
-        <span class="badge" id="cartBadge">0</span>
-      </button>
+<span class="search-icon">⌕</span>
 
-    </div>
+<input
+class="search"
+id="search"
+type="search"
+data-placeholder="search"
+placeholder="Search for products like Visiting Card, Banner, etc..."
+oninput="searchProducts()">
 
-  </div>
+</div>
+
+<div class="nav-actions">
+
+<button class="menu-btn"
+onclick="openMenu()"
+title="Menu">
+☰
+</button>
+
+<button class="icon-btn"
+onclick="toggleDark()">
+🌙
+</button>
+
+<button class="icon-btn"
+onclick="openWishlist()">
+♡
+</button>
+
+<button class="cart-btn"
+onclick="openCart()">
+🛒 <span id="cartCount">0</span>
+</button>
+
+</div>
+
+</div>
+
 </header>
 
 
-<!-- HERO -->
-<section class="hero">
+<!-- MENU -->
 
-  <h1>आपका हर प्रिंट, एक ही जगह</h1>
+<div class="menu-overlay"
+id="menuOverlay"
+onclick="closeMenuOutside(event)">
 
-  <p>
-    Visiting Card, Wedding Card, Poster, Banner, Pamphlet,
-    Sticker, Photo Print और भी बहुत कुछ।
-  </p>
+<div class="menu-panel"
+onclick="event.stopPropagation()">
 
-  <button class="hero-btn" onclick="scrollToProducts()">
-    Order Now →
-  </button>
+<div class="menu-head">
 
-  <div class="hero-features">
-    <div class="hero-feature">✓ Quality Printing</div>
-    <div class="hero-feature">✓ Fast Delivery</div>
-    <div class="hero-feature">✓ Easy Ordering</div>
-  </div>
+<h2>PRINTZY</h2>
 
-</section>
+<button class="menu-close"
+onclick="closeMenu()">
+×
+</button>
 
+</div>
 
-<!-- DELIVERY -->
-<div class="delivery-banner">
-  🚚 Fast Delivery &nbsp; | &nbsp;
-  🖨️ Quality Printing &nbsp; | &nbsp;
-  ❤️ Trusted Service
+<div class="menu-user">
+
+<div style="font-size:30px">👤</div>
+
+<strong id="menuUserName">
+Customer
+</strong>
+
+<p id="menuUserEmail"
+style="font-size:12px;color:var(--muted);margin-top:4px">
+Login to your account
+</p>
+
 </div>
 
 
-<!-- CATEGORIES -->
-<section class="section">
+<div class="menu-section">
+Account
+</div>
 
-  <h2 class="section-title">Categories</h2>
+<button class="menu-item"
+onclick="openProfile();closeMenu()">
 
-  <div class="categories">
+<span class="menu-icon">👤</span>
 
-    <button class="category" onclick="filterCategory('Visiting Card')">
-      <span class="category-icon">💳</span>
-      Visiting Card
-    </button>
+<span data-i18n="profile">
+My Profile / Login
+</span>
 
-    <button class="category" onclick="filterCategory('Wedding Card')">
-      <span class="category-icon">💌</span>
-      Wedding Card
-    </button>
+</button>
 
-    <button class="category" onclick="filterCategory('Poster')">
-      <span class="category-icon">🖼️</span>
-      Poster
-    </button>
 
-    <button class="category" onclick="filterCategory('Banner')">
-      <span class="category-icon">🏳️</span>
-      Banner
-    </button>
+<button class="menu-item"
+onclick="openOrders();closeMenu()">
 
-    <button class="category" onclick="filterCategory('Pamphlet')">
-      <span class="category-icon">📄</span>
-      Pamphlet
-    </button>
+<span class="menu-icon">📦</span>
 
-    <button class="category" onclick="filterCategory('Sticker')">
-      <span class="category-icon">🏷️</span>
-      Sticker
-    </button>
+<span data-i18n="orders">
+My Orders
+</span>
 
-    <button class="category" onclick="filterCategory('Photo Print')">
-      <span class="category-icon">📸</span>
-      Photo Print
-    </button>
+</button>
 
-  </div>
+
+<button class="menu-item"
+onclick="openWishlist();closeMenu()">
+
+<span class="menu-icon">❤️</span>
+
+<span data-i18n="wishlist">
+Wishlist
+</span>
+
+</button>
+
+
+<button class="menu-item"
+onclick="openCart();closeMenu()">
+
+<span class="menu-icon">🛒</span>
+
+<span data-i18n="cart">
+My Cart
+</span>
+
+</button>
+
+
+<div class="menu-section">
+Settings
+</div>
+
+<div class="language-box">
+
+<div style="
+font-weight:bold;
+margin-bottom:8px">
+
+🌐 <span data-i18n="language">
+Language
+</span>
+
+</div>
+
+<select
+class="language-select"
+id="languageSelect"
+onchange="changeLanguage(this.value)">
+
+<option value="hi">हिन्दी</option>
+<option value="en">English</option>
+<option value="mr">मराठी</option>
+<option value="gu">ગુજરાતી</option>
+<option value="bn">বাংলা</option>
+<option value="pa">ਪੰਜਾਬੀ</option>
+<option value="ta">தமிழ்</option>
+<option value="te">తెలుగు</option>
+<option value="kn">ಕನ್ನಡ</option>
+<option value="ml">മലയാളം</option>
+<option value="ur">اردو</option>
+<option value="or">ଓଡ଼ିଆ</option>
+<option value="as">অসমীয়া</option>
+<option value="ne">नेपाली</option>
+<option value="sa">संस्कृत</option>
+<option value="kok">कोंकणी</option>
+<option value="mai">मैथिली</option>
+<option value="mni">মৈতৈলোন</option>
+<option value="bho">भोजपुरी</option>
+<option value="ks">कॉशुर</option>
+<option value="sd">سنڌी</option>
+<option value="dogri">डोगरी</option>
+
+</select>
+
+</div>
+
+
+<button class="menu-item"
+onclick="toggleDark();closeMenu()">
+
+<span class="menu-icon">🌙</span>
+
+<span data-i18n="theme">
+Dark / Light Mode
+</span>
+
+</button>
+
+
+<div class="menu-section">
+Services
+</div>
+
+
+<button class="menu-item"
+onclick="openProfile();closeMenu()">
+
+<span class="menu-icon">📍</span>
+
+<span data-i18n="address">
+Delivery Address
+</span>
+
+</button>
+
+
+<button class="menu-item"
+onclick="showNotifications();closeMenu()">
+
+<span class="menu-icon">🔔</span>
+
+<span data-i18n="notifications">
+Notifications
+</span>
+
+</button>
+
+
+<button class="menu-item"
+onclick="showInfo('Contact Us');closeMenu()">
+
+<span class="menu-icon">🎧</span>
+
+<span data-i18n="support">
+Help & Support
+</span>
+
+</button>
+
+
+<div class="menu-section">
+Printzy
+</div>
+
+
+<button class="menu-item"
+onclick="showInfo('About Printzy');closeMenu()">
+
+<span class="menu-icon">ℹ️</span>
+
+<span data-i18n="about">
+About Printzy
+</span>
+
+</button>
+
+
+<button class="menu-item"
+onclick="showInfo('Terms & Conditions');closeMenu()">
+
+<span class="menu-icon">📄</span>
+
+<span data-i18n="terms">
+Terms & Conditions
+</span>
+
+</button>
+
+
+<button class="menu-item"
+onclick="showInfo('Privacy Policy');closeMenu()">
+
+<span class="menu-icon">🔐</span>
+
+<span data-i18n="privacy">
+Privacy Policy
+</span>
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+आपका हर प्रिंट,<br>
+<span>एक ही जगह</span>
+</h1>
+
+<p>
+Visiting Card, Wedding Card, Poster, Banner,
+Pamphlet, Sticker और Photo Print —
+सभी printing products आसानी से order करें।
+</p>
+
+<div class="hero-features">
+
+<div class="hero-feature">
+<b>✓</b> Quality Printing
+</div>
+
+<div class="hero-feature">
+<b>🚚</b> Fast Delivery
+</div>
+
+<div class="hero-feature">
+<b>🛡</b> Easy Ordering
+</div>
+
+</div>
+
+<button class="hero-btn"
+onclick="scrollProducts()">
+Order Now →
+</button>
+
+</div>
+
+<div class="hero-products">
+
+<div class="print-stack">
+PRINTZY
+</div>
+
+<div class="mug">
+☕
+</div>
+
+</div>
 
 </section>
 
 
-<!-- PRODUCTS -->
-<section class="section" id="productsSection">
+<div class="container">
 
-  <h2 class="section-title">Popular Products</h2>
+<div class="section-head">
 
-  <div class="products" id="productsGrid"></div>
+<h2>Our Categories</h2>
 
-</section>
+<button class="view-all"
+onclick="showAllCategories()">
+View All →
+</button>
+
+</div>
 
 
-<!-- SIDE MENU -->
-<div id="menuOverlay" class="side-menu hidden" onclick="closeMenu(event)">
+<div class="categories">
 
-  <div class="side-menu-inner" onclick="event.stopPropagation()">
+<button class="category c1"
+onclick="categorySearch('Visiting Card')">
 
-    <div class="menu-top">
-      <h2>PRINTZY</h2>
-      <button class="close-btn" onclick="closeMenu()">×</button>
-    </div>
+<div class="cat-icon">
+💳
+</div>
 
-    <div class="menu-user">
+Visiting Card
 
-      <div class="menu-user-name" id="menuUserName">
-        Customer
-      </div>
+</button>
 
-      <div class="menu-user-phone" id="menuUserPhone">
-        Login to your account
-      </div>
 
-    </div>
+<button class="category c2"
+onclick="categorySearch('Wedding Card')">
 
-    <button class="menu-item" onclick="openProfile();closeMenu()">
-      👤 My Profile / Login
-    </button>
+<div class="cat-icon">
+💌
+</div>
 
-    <button class="menu-item" onclick="openOrders();closeMenu()">
-      📦 My Orders
-    </button>
+Wedding Card
 
-    <button class="menu-item" onclick="openWishlist();closeMenu()">
-      ❤️ Wishlist
-    </button>
+</button>
 
-    <button class="menu-item" onclick="openCart();closeMenu()">
-      🛒 My Cart
-    </button>
 
-    <button class="menu-item" onclick="showLanguage();closeMenu()">
-      🌐 Language
-    </button>
+<button class="category c3"
+onclick="categorySearch('Poster')">
 
-    <button class="menu-item" onclick="toggleTheme();closeMenu()">
-      🌙 Dark Mode
-    </button>
+<div class="cat-icon">
+🖼️
+</div>
 
-    <button
-      id="logoutMenuBtn"
-      class="menu-item hidden"
-      onclick="logoutUser();closeMenu()"
-    >
-      🚪 Logout
-    </button>
+Poster
 
-  </div>
+</button>
+
+
+<button class="category c4"
+onclick="categorySearch('Banner')">
+
+<div class="cat-icon">
+🪧
+</div>
+
+Banner
+
+</button>
+
+
+<button class="category c5"
+onclick="categorySearch('Pamphlet')">
+
+<div class="cat-icon">
+📖
+</div>
+
+Pamphlet
+
+</button>
+
+
+<button class="category c6"
+onclick="categorySearch('Sticker')">
+
+<div class="cat-icon">
+🏷️
+</div>
+
+Sticker
+
+</button>
+
+
+<button class="category c7"
+onclick="categorySearch('Photo Print')">
+
+<div class="cat-icon">
+📸
+</div>
+
+Photo Print
+
+</button>
+
+
+<button class="category c8"
+onclick="categorySearch('Other Printing')">
+
+<div class="cat-icon">
+🖨️
+</div>
+
+Other Printing
+
+</button>
+
+</div>
+
+
+<div class="section-head">
+
+<h2>
+Popular Products
+</h2>
+
+<button class="view-all"
+onclick="showProducts(products)">
+View All →
+</button>
+
+</div>
+
+
+<div class="products"
+id="productList">
+</div>
+
+
+<div class="delivery">
+
+<div class="delivery-main">
+
+<div class="delivery-icon">
+🚚
+</div>
+
+<div>
+
+<h3>
+Fast & Safe Delivery
+</h3>
+
+<p>
+Your prints, our priority!
+</p>
+
+</div>
+
+</div>
+
+
+<div class="delivery-item">
+
+<div>🛡️</div>
+
+<span>
+Secure<br>
+Payment
+</span>
+
+</div>
+
+
+<div class="delivery-item">
+
+<div>🕐</div>
+
+<span>
+On-Time<br>
+Delivery
+</span>
+
+</div>
+
+
+<div class="delivery-item">
+
+<div>🎧</div>
+
+<span>
+24/7<br>
+Support
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<h2>
+PRINTZY
+</h2>
+
+<p>
+Print Your Ideas
+</p>
+
+<div class="footer-links">
+
+<button onclick="showInfo('Terms & Conditions')">
+Terms & Conditions
+</button>
+
+<button onclick="showInfo('Privacy Policy')">
+Privacy Policy
+</button>
+
+<button onclick="showInfo('Contact Us')">
+Contact
+</button>
+
+</div>
+
+<p style="margin-top:20px">
+© 2026 Printzy. All rights reserved.
+</p>
+
+</footer>
+
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+<button class="active"
+onclick="window.scrollTo({top:0,behavior:'smooth'})">
+
+<div>⌂</div>
+
+Home
+
+</button>
+
+
+<button onclick="showAllCategories()">
+
+<div>▦</div>
+
+Categories
+
+</button>
+
+
+<button onclick="openCart()">
+
+<div>🛒</div>
+
+Cart
+
+</button>
+
+
+<button onclick="openOrders()">
+
+<div>▤</div>
+
+My Orders
+
+</button>
+
+
+<button onclick="openProfile()">
+
+<div>♙</div>
+
+Profile
+
+</button>
 
 </div>
 
 
 <!-- MODAL -->
-<div id="modalOverlay" class="modal-overlay hidden">
 
-  <div id="modalContent" class="modal-card">
-  </div>
+<div class="modal"
+id="modal"
+onclick="outsideModal(event)">
+
+<div class="modal-box"
+onclick="event.stopPropagation()">
+
+<button class="close"
+onclick="closeModal()">
+×
+</button>
+
+<div id="modalContent"></div>
+
+</div>
 
 </div>
 
 
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
-
-  <button onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <span>🏠</span>
-    Home
-  </button>
-
-  <button onclick="openWishlist()">
-    <span>❤️</span>
-    Wishlist
-  </button>
-
-  <button onclick="openCart()">
-    <span>🛒</span>
-    Cart
-  </button>
-
-  <button onclick="openProfile()">
-    <span>👤</span>
-    Account
-  </button>
-
-</nav>
-
-
 <script>
 
-/* =========================================
-   SUPABASE
-========================================= */
+/* =====================================================
+SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
-  "https://yxssyblhziyfbqxzjgxr.supabase.co";
+"https://yxssyblhziyfbqxzjgxr.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_RhoD2kI568-a7ddA8iGhdA_dwJo_m_p";
+"sb_publishable_RhoD2kI568-a7ddA8iGhdA_dwJo_m_p";
 
 const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
 
-/* =========================================
-   GLOBAL VARIABLES
-========================================= */
+/* =====================================================
+PRODUCTS
+===================================================== */
 
-let currentUser = null;
+const products=[
 
-let otpPhone = "";
-let otpSending = false;
-let otpVerifying = false;
+{
+name:"Visiting Card",
+price:99,
+category:"Visiting Card",
+icon:"💳",
+className:"tshirt",
+description:"Professional visiting card printing."
+},
 
-let products = [
-  {
-    id:1,
-    name:"Visiting Card",
-    category:"Visiting Card",
-    price:199,
-    icon:"💳",
-    description:"Professional quality visiting cards."
-  },
-  {
-    id:2,
-    name:"Wedding Card",
-    category:"Wedding Card",
-    price:299,
-    icon:"💌",
-    description:"Beautiful wedding invitation cards."
-  },
-  {
-    id:3,
-    name:"Poster",
-    category:"Poster",
-    price:149,
-    icon:"🖼️",
-    description:"High quality poster printing."
-  },
-  {
-    id:4,
-    name:"Banner",
-    category:"Banner",
-    price:399,
-    icon:"🏳️",
-    description:"Strong and attractive banner printing."
-  },
-  {
-    id:5,
-    name:"Pamphlet",
-    category:"Pamphlet",
-    price:249,
-    icon:"📄",
-    description:"Promote your business with pamphlets."
-  },
-  {
-    id:6,
-    name:"Sticker",
-    category:"Sticker",
-    price:99,
-    icon:"🏷️",
-    description:"Custom printed stickers."
-  },
-  {
-    id:7,
-    name:"Photo Print",
-    category:"Photo Print",
-    price:49,
-    icon:"📸",
-    description:"High quality photo prints."
-  },
-  {
-    id:8,
-    name:"Custom T-Shirt",
-    category:"Custom T-Shirt",
-    price:499,
-    icon:"👕",
-    description:"Print your own design on a T-Shirt."
-  },
-  {
-    id:9,
-    name:"Personalized Mug",
-    category:"Personalized Mug",
-    price:399,
-    icon:"☕",
-    description:"Personalized photo mug printing."
-  },
-  {
-    id:10,
-    name:"Photo Frame",
-    category:"Photo Frame",
-    price:99,
-    icon:"🖼️",
-    description:"Beautiful customized photo frames."
-  },
-  {
-    id:11,
-    name:"Custom Hoodie",
-    category:"Custom Hoodie",
-    price:699,
-    icon:"🧥",
-    description:"Premium custom printed hoodie."
-  },
-  {
-    id:12,
-    name:"Custom Cap",
-    category:"Custom Cap",
-    price:349,
-    icon:"🧢",
-    description:"Custom printed caps."
-  }
+{
+name:"Wedding Card",
+price:149,
+category:"Wedding Card",
+icon:"💌",
+className:"mugimg",
+description:"Beautiful wedding invitation cards."
+},
+
+{
+name:"Poster",
+price:79,
+category:"Poster",
+icon:"🖼️",
+className:"frameimg",
+description:"High quality poster printing."
+},
+
+{
+name:"Banner",
+price:199,
+category:"Banner",
+icon:"🪧",
+className:"hoodie",
+description:"Premium flex and banner printing."
+},
+
+{
+name:"Pamphlet",
+price:99,
+category:"Pamphlet",
+icon:"📖",
+className:"cap",
+description:"Professional pamphlet printing."
+},
+
+{
+name:"Sticker",
+price:49,
+category:"Sticker",
+icon:"🏷️",
+className:"gift",
+description:"Custom sticker printing."
+},
+
+{
+name:"Photo Print",
+price:199,
+category:"Photo Print",
+icon:"📸",
+className:"frameimg",
+description:"High quality photo prints."
+},
+
+{
+name:"Other Printing",
+price:99,
+category:"Other Printing",
+icon:"🖨️",
+className:"tshirt",
+description:"Other customized printing services."
+}
+
 ];
 
-let cart =
-  JSON.parse(localStorage.getItem("printzyCart") || "[]");
 
-let wishlist =
-  JSON.parse(localStorage.getItem("printzyWishlist") || "[]");
+let cart=
+JSON.parse(
+localStorage.getItem("printzyCart")||"[]"
+);
+
+let wishlist=
+JSON.parse(
+localStorage.getItem("printzyWishlist")||"[]"
+);
 
 
-/* =========================================
-   BASIC HELPERS
-========================================= */
+/* =====================================================
+HELPERS
+===================================================== */
 
 function escapeHtml(value){
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
 
-function showToast(message){
+return String(value||"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
-  const old =
-    document.querySelector(".toast");
-
-  if(old) old.remove();
-
-  const toast =
-    document.createElement("div");
-
-  toast.className = "toast";
-  toast.innerText = message;
-
-  document.body.appendChild(toast);
-
-  setTimeout(() => {
-    toast.remove();
-  },2500);
-}
-
-function saveCart(){
-  localStorage.setItem(
-    "printzyCart",
-    JSON.stringify(cart)
-  );
-  updateBadges();
-}
-
-function saveWishlist(){
-  localStorage.setItem(
-    "printzyWishlist",
-    JSON.stringify(wishlist)
-  );
-  updateBadges();
-}
-
-function updateBadges(){
-
-  const cartCount =
-    cart.reduce(
-      (sum,item) => sum + Number(item.qty || 1),
-      0
-    );
-
-  document.getElementById("cartBadge").innerText =
-    cartCount;
-
-  document.getElementById("wishlistBadge").innerText =
-    wishlist.length;
-}
-
-
-/* =========================================
-   PRODUCTS
-========================================= */
-
-function renderProducts(list = products){
-
-  const grid =
-    document.getElementById("productsGrid");
-
-  if(!list.length){
-
-    grid.innerHTML = `
-      <div class="empty" style="grid-column:1/-1;">
-        <div class="empty-icon">🔍</div>
-        <p>No products found.</p>
-      </div>
-    `;
-
-    return;
-  }
-
-  grid.innerHTML =
-    list.map(product => {
-
-      const liked =
-        wishlist.includes(product.id);
-
-      return `
-        <div class="product-card">
-
-          <button
-            class="wishlist-btn"
-            onclick="toggleWishlist(${product.id})"
-          >
-            ${liked ? "❤️" : "♡"}
-          </button>
-
-          <div class="product-img">
-            ${product.icon}
-          </div>
-
-          <div class="product-info">
-
-            <div class="product-name">
-              ${escapeHtml(product.name)}
-            </div>
-
-            <div class="product-desc">
-              ${escapeHtml(product.description)}
-            </div>
-
-            <div class="price">
-              ₹${product.price}
-            </div>
-
-            <div class="product-actions">
-
-              <button
-                class="btn btn-blue"
-                onclick="customizeProduct(${product.id})"
-              >
-                Customize
-              </button>
-
-              <button
-                class="btn btn-primary"
-                onclick="addToCart(${product.id})"
-              >
-                Order
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-      `;
-    }).join("");
-}
-
-
-function searchProducts(){
-
-  const value =
-    document.getElementById("searchInput")
-      .value
-      .trim()
-      .toLowerCase();
-
-  if(!value){
-
-    renderProducts(products);
-    return;
-  }
-
-  const result =
-    products.filter(product =>
-      product.name.toLowerCase().includes(value) ||
-      product.category.toLowerCase().includes(value) ||
-      product.description.toLowerCase().includes(value)
-    );
-
-  renderProducts(result);
-}
-
-
-function filterCategory(category){
-
-  const result =
-    products.filter(
-      p => p.category === category
-    );
-
-  renderProducts(result);
-
-  document.getElementById("productsSection")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-}
-
-
-function scrollToProducts(){
-
-  document.getElementById("productsSection")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-}
-
-
-function customizeProduct(id){
-
-  const product =
-    products.find(p => p.id === id);
-
-  if(!product) return;
-
-  showModal(`
-    <h2>${escapeHtml(product.name)}</h2>
-
-    <p style="color:var(--muted);margin:8px 0 15px;">
-      अपना design / requirement बताएं।
-    </p>
-
-    <div class="form-group">
-      <label>Quantity</label>
-      <input
-        id="customQty"
-        class="form-control"
-        type="number"
-        min="1"
-        value="1"
-      >
-    </div>
-
-    <div class="form-group">
-      <label>Design / Requirement</label>
-      <textarea
-        id="customRequirement"
-        class="form-control"
-        placeholder="जैसे size, color, text आदि..."
-      ></textarea>
-    </div>
-
-    <button
-      class="auth-submit"
-      onclick="addCustomizedProduct(${product.id})"
-    >
-      Add to Cart
-    </button>
-  `);
-}
-
-
-function addCustomizedProduct(id){
-
-  const product =
-    products.find(p => p.id === id);
-
-  if(!product) return;
-
-  const qty =
-    Math.max(
-      1,
-      Number(
-        document.getElementById("customQty").value || 1
-      )
-    );
-
-  const requirement =
-    document.getElementById("customRequirement").value
-      .trim();
-
-  const existing =
-    cart.find(
-      item =>
-        item.id === id &&
-        item.requirement === requirement
-    );
-
-  if(existing){
-
-    existing.qty += qty;
-
-  }else{
-
-    cart.push({
-      id:product.id,
-      name:product.name,
-      price:product.price,
-      icon:product.icon,
-      qty:qty,
-      requirement:requirement
-    });
-
-  }
-
-  saveCart();
-
-  closeModal();
-
-  showToast("Product cart में add हो गया ✅");
-}
-
-
-/* =========================================
-   CART
-========================================= */
-
-function addToCart(id){
-
-  const product =
-    products.find(p => p.id === id);
-
-  if(!product) return;
-
-  const existing =
-    cart.find(
-      item =>
-        item.id === id &&
-        !item.requirement
-    );
-
-  if(existing){
-
-    existing.qty++;
-
-  }else{
-
-    cart.push({
-      id:product.id,
-      name:product.name,
-      price:product.price,
-      icon:product.icon,
-      qty:1,
-      requirement:""
-    });
-
-  }
-
-  saveCart();
-
-  showToast("Cart में add हो गया 🛒");
-}
-
-
-function changeQty(index,amount){
-
-  if(!cart[index]) return;
-
-  cart[index].qty += amount;
-
-  if(cart[index].qty <= 0){
-    cart.splice(index,1);
-  }
-
-  saveCart();
-
-  openCart();
-}
-
-
-function removeCartItem(index){
-
-  cart.splice(index,1);
-
-  saveCart();
-
-  openCart();
-}
-
-
-function getCartTotal(){
-
-  return cart.reduce(
-    (total,item) =>
-      total +
-      Number(item.price) *
-      Number(item.qty || 1),
-    0
-  );
-}
-
-
-function openCart(){
-
-  let html = `
-    <h2>🛒 My Cart</h2>
-  `;
-
-  if(!cart.length){
-
-    html += `
-      <div class="empty">
-        <div class="empty-icon">🛒</div>
-        <p>Your cart is empty.</p>
-      </div>
-    `;
-
-    showModal(html);
-    return;
-  }
-
-  html += cart.map((item,index) => `
-
-    <div class="cart-item">
-
-      <div class="cart-item-icon">
-        ${item.icon || "📦"}
-      </div>
-
-      <div class="cart-item-info">
-
-        <strong>
-          ${escapeHtml(item.name)}
-        </strong>
-
-        <div>
-          ₹${Number(item.price)}
-        </div>
-
-        ${
-          item.requirement
-          ?
-          `<small style="color:var(--muted);">
-            ${escapeHtml(item.requirement)}
-          </small>`
-          :
-          ""
-        }
-
-        <div class="qty">
-
-          <button
-            onclick="changeQty(${index},-1)"
-          >
-            −
-          </button>
-
-          <strong>
-            ${item.qty}
-          </strong>
-
-          <button
-            onclick="changeQty(${index},1)"
-          >
-            +
-          </button>
-
-          <button
-            onclick="removeCartItem(${index})"
-            style="margin-left:8px;color:var(--red);"
-          >
-            🗑️
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  `).join("");
-
-  html += `
-
-    <div class="cart-total">
-      <span>Total</span>
-      <span>₹${getCartTotal()}</span>
-    </div>
-
-    <button
-      class="auth-submit"
-      onclick="checkout()"
-    >
-      Proceed to Checkout
-    </button>
-  `;
-
-  showModal(html);
-}
-
-
-/* =========================================
-   WISHLIST
-========================================= */
-
-function toggleWishlist(id){
-
-  const index =
-    wishlist.indexOf(id);
-
-  if(index >= 0){
-
-    wishlist.splice(index,1);
-
-    showToast("Wishlist से हटाया गया");
-
-  }else{
-
-    wishlist.push(id);
-
-    showToast("Wishlist में add हो गया ❤️");
-
-  }
-
-  saveWishlist();
-
-  renderProducts(
-    document.getElementById("searchInput").value
-      ? products.filter(p =>
-          p.name.toLowerCase().includes(
-            document.getElementById("searchInput").value
-              .toLowerCase()
-          )
-        )
-      : products
-  );
-}
-
-
-function openWishlist(){
-
-  let items =
-    products.filter(
-      p => wishlist.includes(p.id)
-    );
-
-  let html = `
-    <h2>❤️ My Wishlist</h2>
-  `;
-
-  if(!items.length){
-
-    html += `
-      <div class="empty">
-        <div class="empty-icon">❤️</div>
-        <p>Your wishlist is empty.</p>
-      </div>
-    `;
-
-    showModal(html);
-    return;
-  }
-
-  html += `
-    <div class="products">
-      ${
-        items.map(p => `
-          <div class="product-card">
-
-            <div class="product-img">
-              ${p.icon}
-            </div>
-
-            <div class="product-info">
-
-              <div class="product-name">
-                ${escapeHtml(p.name)}
-              </div>
-
-              <div class="price">
-                ₹${p.price}
-              </div>
-
-              <button
-                class="btn btn-primary"
-                style="width:100%;"
-                onclick="addToCart(${p.id});closeModal();"
-              >
-                Add to Cart
-              </button>
-
-            </div>
-
-          </div>
-        `).join("")
-      }
-    </div>
-  `;
-
-  showModal(html);
-}
-
-
-/* =========================================
-   AUTH - PHONE OTP
-========================================= */
-
-function normalizeIndianPhone(value){
-
-  const digits =
-    String(value || "")
-      .replace(/\D/g,"");
-
-  if(!/^[6-9][0-9]{9}$/.test(digits)){
-    return null;
-  }
-
-  return "+91" + digits;
 }
 
 
 async function getCurrentUser(){
 
-  try{
+try{
 
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.getUser();
+const {data,error}=
+await supabaseClient.auth.getUser();
 
-    if(error) return null;
+if(error){
 
-    return data.user || null;
+return null;
 
-  }catch(error){
+}
 
-    console.log(error);
+return data.user||null;
 
-    return null;
-  }
+}catch(error){
+
+console.log(error);
+
+return null;
+
+}
+
 }
 
 
-async function openAuth(){
+/* =====================================================
+SHOW PRODUCTS
+===================================================== */
 
-  const user =
-    await getCurrentUser();
+function showProducts(list=products){
 
-  if(user){
+const box=
+document.getElementById("productList");
 
-    openProfile();
+box.innerHTML="";
 
-    return;
-  }
+if(!list.length){
 
-  otpPhone = "";
+box.innerHTML=`
 
-  showModal(`
+<div style="
+grid-column:1/-1;
+text-align:center;
+padding:50px">
 
-    <h2>📱 Customer Login</h2>
+<h2>
+😕 Product Not Found
+</h2>
 
-    <p class="auth-note">
-      अपने मोबाइल नंबर से Login करें।<br>
-      OTP आपके मोबाइल नंबर पर भेजा जाएगा।
-    </p>
+<p style="
+margin-top:10px;
+color:var(--muted)">
 
-    <div id="phoneLoginBox">
+Try another search.
 
-      <div class="phone-row">
+</p>
 
-        <div class="phone-prefix">
-          +91
-        </div>
+</div>`;
 
-        <input
-          id="authMobile"
-          class="auth-input"
-          type="tel"
-          inputmode="numeric"
-          maxlength="10"
-          placeholder="Enter 10 digit mobile number"
-          oninput="this.value=this.value.replace(/\\D/g,'').slice(0,10)"
-        >
+return;
 
-      </div>
+}
 
-      <button
-        id="sendOtpBtn"
-        class="auth-submit"
-        onclick="sendOtp()"
-      >
-        Send OTP
-      </button>
+list.forEach(p=>{
 
-    </div>
+const liked=
+wishlist.includes(p.name);
+
+box.innerHTML+=`
+
+<div class="product">
+
+<div class="product-img ${p.className}">
+
+<button
+class="wishlist ${liked?"active":""}"
+onclick="toggleWishlist('${p.name}')">
+
+${liked?"♥":"♡"}
+
+</button>
+
+${p.icon}
+
+</div>
 
 
-    <div
-      id="otpLoginBox"
-      style="display:none;"
-    >
+<div class="product-info">
 
-      <p class="auth-note">
-        OTP भेजा गया है:
-        <strong id="otpPhoneText"></strong>
-      </p>
+<h3>
+${p.name}
+</h3>
 
-      <input
-        id="authOtp"
-        class="auth-input otp-box"
-        type="tel"
-        inputmode="numeric"
-        maxlength="6"
-        placeholder="••••••"
-        oninput="this.value=this.value.replace(/\\D/g,'').slice(0,6)"
-      >
+<div class="starting">
+Starting from
+</div>
 
-      <button
-        id="verifyOtpBtn"
-        class="auth-submit"
-        onclick="verifyLoginOtp()"
-      >
-        Verify OTP & Login
-      </button>
+<div class="price">
+₹${p.price}
+</div>
 
-      <div class="auth-center">
+<p class="product-desc">
+${p.description}
+</p>
 
-        <button
-          class="auth-link"
-          onclick="resendOtp()"
-        >
-          Resend OTP
-        </button>
 
-        <button
-          class="auth-link"
-          onclick="changePhoneNumber()"
-        >
-          Change Number
-        </button>
+<div class="product-buttons">
 
-      </div>
+<button
+class="customize"
+onclick="openProduct('${p.name}')">
 
-    </div>
+Customize
 
-    <p class="auth-note">
-      नया customer है तो OTP verify होने के बाद
-      account automatically create हो जाएगा।
-    </p>
+</button>
 
-  `);
+
+<button
+class="order"
+onclick="addToCart('${p.name}')">
+
+Order Now
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+updateCartCount();
+
 }
 
 
-async function sendOtp(){
+/* =====================================================
+SEARCH
+===================================================== */
 
-  if(otpSending) return;
+function searchProducts(){
 
-  const input =
-    document.getElementById("authMobile");
+const q=
+document
+.getElementById("search")
+.value
+.toLowerCase()
+.trim();
 
-  if(!input) return;
+if(!q){
 
-  const mobile =
-    input.value.trim();
+showProducts(products);
+return;
 
-  const phone =
-    normalizeIndianPhone(mobile);
+}
 
-  if(!phone){
+const result=
+products.filter(p=>
+p.name.toLowerCase().includes(q) ||
+p.category.toLowerCase().includes(q) ||
+p.description.toLowerCase().includes(q)
+);
 
-    alert(
-      "कृपया सही 10 digit mobile number डालें।"
-    );
+showProducts(result);
 
-    input.focus();
-
-    return;
-  }
-
-  const button =
-    document.getElementById("sendOtpBtn");
-
-  otpSending = true;
-
-  if(button){
-
-    button.disabled = true;
-
-    button.innerText =
-      "Sending OTP...";
-
-  }
-
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient.auth.signInWithOtp({
-
-        phone:phone,
-
-        options:{
-          shouldCreateUser:true,
-          channel:"sms"
-        }
-
-      });
-
-    if(error){
-
-      console.error(
-        "OTP Send Error:",
-        error
-      );
-
-      alert(
-        "OTP भेजने में समस्या हुई:\n" +
-        error.message
-      );
-
-      return;
-    }
-
-    otpPhone = phone;
-
-    const phoneLoginBox =
-      document.getElementById(
-        "phoneLoginBox"
-      );
-
-    const otpLoginBox =
-      document.getElementById(
-        "otpLoginBox"
-      );
-
-    const otpPhoneText =
-      document.getElementById(
-        "otpPhoneText"
-      );
-
-    if(phoneLoginBox){
-      phoneLoginBox.style.display =
-        "none";
-    }
-
-    if(otpLoginBox){
-      otpLoginBox.style.display =
-        "block";
-    }
-
-    if(otpPhoneText){
-
-      otpPhoneText.innerText =
-        phone.replace("+91","+91 ");
-
-    }
-
-    const otpInput =
-      document.getElementById(
-        "authOtp"
-      );
-
-    if(otpInput){
-
-      setTimeout(
-        () => otpInput.focus(),
-        200
-      );
-
-    }
-
-    showToast(
-      "OTP भेज दिया गया है 📱"
-    );
-
-  }catch(error){
-
-    console.error(
-      "OTP Error:",
-      error
-    );
-
-    alert(
-      "OTP भेजने में समस्या हुई:\n" +
-      (error?.message ||
-      "Please try again.")
-    );
-
-  }finally{
-
-    otpSending = false;
-
-    if(button){
-
-      button.disabled = false;
-
-      button.innerText =
-        "Send OTP";
-
-    }
-
-  }
 }
 
 
-async function verifyLoginOtp(){
+function categorySearch(name){
 
-  if(otpVerifying) return;
+document.getElementById("search").value=name;
 
-  const otpInput =
-    document.getElementById(
-      "authOtp"
-    );
+searchProducts();
 
-  if(!otpInput) return;
+scrollProducts();
 
-  const otp =
-    otpInput.value.trim();
-
-  if(!otpPhone){
-
-    alert(
-      "पहले mobile number डालकर OTP भेजें।"
-    );
-
-    return;
-  }
-
-  if(!/^[0-9]{6}$/.test(otp)){
-
-    alert(
-      "कृपया 6 digit OTP डालें।"
-    );
-
-    otpInput.focus();
-
-    return;
-  }
-
-  const button =
-    document.getElementById(
-      "verifyOtpBtn"
-    );
-
-  otpVerifying = true;
-
-  if(button){
-
-    button.disabled = true;
-
-    button.innerText =
-      "Verifying...";
-
-  }
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.verifyOtp({
-
-        phone:otpPhone,
-
-        token:otp,
-
-        type:"sms"
-
-      });
-
-    if(error){
-
-      console.error(
-        "OTP Verify Error:",
-        error
-      );
-
-      alert(
-        "OTP verify नहीं हुआ:\n" +
-        error.message
-      );
-
-      return;
-    }
-
-    if(!data || !data.user){
-
-      alert(
-        "Login नहीं हो पाया। कृपया फिर से कोशिश करें।"
-      );
-
-      return;
-    }
-
-    currentUser =
-      data.user;
-
-    closeModal();
-
-    updateMenuUser(
-      data.user
-    );
-
-    showToast(
-      "Login successful ✅"
-    );
-
-    if(!isProfileComplete(data.user)){
-
-      setTimeout(() => {
-
-        openProfile();
-
-      },500);
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "Verify Error:",
-      error
-    );
-
-    alert(
-      "Login में समस्या हुई:\n" +
-      (error?.message ||
-      "Please try again.")
-    );
-
-  }finally{
-
-    otpVerifying = false;
-
-    if(button){
-
-      button.disabled = false;
-
-      button.innerText =
-        "Verify OTP & Login";
-
-    }
-
-  }
 }
 
 
-async function resendOtp(){
+function showAllCategories(){
 
-  if(!otpPhone){
+window.scrollTo({
+top:
+document.querySelector(".categories").offsetTop-100,
+behavior:"smooth"
+});
 
-    changePhoneNumber();
-
-    return;
-  }
-
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient.auth.signInWithOtp({
-
-        phone:otpPhone,
-
-        options:{
-          shouldCreateUser:true,
-          channel:"sms"
-        }
-
-      });
-
-    if(error){
-
-      alert(
-        "OTP resend नहीं हुआ:\n" +
-        error.message
-      );
-
-      return;
-    }
-
-    showToast(
-      "नया OTP भेज दिया गया है 📱"
-    );
-
-  }catch(error){
-
-    alert(
-      "OTP resend में समस्या हुई:\n" +
-      (error?.message ||
-      "Please try again.")
-    );
-
-  }
 }
 
 
-function changePhoneNumber(){
+/* =====================================================
+PRODUCT DETAILS
+===================================================== */
 
-  otpPhone = "";
+function openProduct(name){
 
-  const phoneLoginBox =
-    document.getElementById(
-      "phoneLoginBox"
-    );
+const p=
+products.find(x=>x.name===name);
 
-  const otpLoginBox =
-    document.getElementById(
-      "otpLoginBox"
-    );
+if(!p)return;
 
-  const otpInput =
-    document.getElementById(
-      "authOtp"
-    );
+showModal(`
 
-  if(phoneLoginBox){
+<h2>
+${p.icon} ${escapeHtml(p.name)}
+</h2>
 
-    phoneLoginBox.style.display =
-      "block";
+<div style="
+font-size:100px;
+text-align:center;
+padding:25px">
 
-  }
+${p.icon}
 
-  if(otpLoginBox){
+</div>
 
-    otpLoginBox.style.display =
-      "none";
+<p style="
+color:var(--muted);
+line-height:1.6">
 
-  }
+${escapeHtml(p.description)}
 
-  if(otpInput){
+</p>
 
-    otpInput.value = "";
+<h2 style="
+margin-top:18px;
+color:var(--pink)">
 
-  }
+₹${p.price}
 
-  const mobileInput =
-    document.getElementById(
-      "authMobile"
-    );
+</h2>
 
-  if(mobileInput){
+<button
+class="checkout"
+style="margin-top:15px"
+onclick="addToCart('${p.name}')">
 
-    mobileInput.focus();
+🛒 Add to Cart
 
-  }
+</button>
+
+`);
+
 }
 
 
-/* =========================================
-   MENU USER
-========================================= */
+/* =====================================================
+CART
+===================================================== */
 
-function updateMenuUser(user){
+function addToCart(name){
 
-  const nameEl =
-    document.getElementById(
-      "menuUserName"
-    );
+const p=
+products.find(x=>x.name===name);
 
-  const phoneEl =
-    document.getElementById(
-      "menuUserPhone"
-    );
+if(!p)return;
 
-  const logoutBtn =
-    document.getElementById(
-      "logoutMenuBtn"
-    );
+const item=
+cart.find(x=>x.name===name);
 
-  if(!user){
+if(item){
 
-    nameEl.innerText =
-      "Customer";
+item.qty++;
 
-    phoneEl.innerText =
-      "Login to your account";
+}else{
 
-    logoutBtn.classList.add(
-      "hidden"
-    );
+cart.push({
+name:p.name,
+price:p.price,
+qty:1
+});
 
-    return;
-  }
+}
 
-  const metadata =
-    user.user_metadata || {};
+saveCart();
 
-  const name =
-    metadata.name ||
-    metadata.full_name ||
-    "Customer";
+showToast(
+"Product added to cart 🛒"
+);
 
-  const phone =
-    user.phone ||
-    metadata.mobile ||
-    "";
-
-  nameEl.innerText =
-    name;
-
-  phoneEl.innerText =
-    phone ||
-    "Phone verified";
-
-  logoutBtn.classList.remove(
-    "hidden"
-  );
 }
 
 
-/* =========================================
-   PROFILE
-========================================= */
+function saveCart(){
+
+localStorage.setItem(
+"printzyCart",
+JSON.stringify(cart)
+);
+
+updateCartCount();
+
+}
+
+
+function updateCartCount(){
+
+const count=
+cart.reduce(
+(sum,item)=>sum+item.qty,
+0
+);
+
+const el=
+document.getElementById("cartCount");
+
+if(el){
+el.innerText=count;
+}
+
+}
+
+
+async function openCart(){
+
+let html=
+`<h2>🛒 Your Cart</h2>`;
+
+if(!cart.length){
+
+html+=`
+
+<div style="
+text-align:center;
+padding:35px">
+
+<div style="font-size:60px">
+🛒
+</div>
+
+<h3>
+Your cart is empty
+</h3>
+
+<p style="
+color:var(--muted);
+margin-top:8px">
+
+Add some products to continue.
+
+</p>
+
+</div>`;
+
+showModal(html);
+
+return;
+
+}
+
+let total=0;
+
+cart.forEach((item,index)=>{
+
+const amount=
+item.price*item.qty;
+
+total+=amount;
+
+html+=`
+
+<div class="cart-item">
+
+<div>
+
+<strong>
+${escapeHtml(item.name)}
+</strong>
+
+<div style="
+color:var(--muted);
+font-size:13px;
+margin-top:4px">
+
+₹${item.price} × ${item.qty}
+
+</div>
+
+</div>
+
+
+<div>
+
+<strong>
+₹${amount}
+</strong>
+
+<button
+class="remove"
+onclick="removeCart(${index})">
+
+Remove
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+html+=`
+
+<div class="cart-total">
+Total: ₹${total}
+</div>
+
+<button
+class="checkout"
+onclick="checkout()">
+
+Proceed to Checkout →
+
+</button>
+
+`;
+
+showModal(html);
+
+}
+
+
+function removeCart(index){
+
+cart.splice(index,1);
+
+saveCart();
+
+openCart();
+
+}
+
+
+/* =====================================================
+PROFILE COMPLETENESS
+===================================================== */
 
 function getProfileData(user){
 
-  const metadata =
-    user?.user_metadata || {};
+const m=
+user?.user_metadata||{};
 
-  let phone =
-    metadata.mobile || "";
+return {
 
-  if(!phone && user?.phone){
+name:(m.name||"").trim(),
 
-    phone =
-      user.phone.replace(
-        /^\+91/,
-        ""
-      );
+middle_name:(m.middle_name||"").trim(),
 
-  }
+last_name:(m.last_name||"").trim(),
 
-  return {
+mobile:(m.mobile||"").trim(),
 
-    name:
-      metadata.name || "",
+house:(m.house||"").trim(),
 
-    middle_name:
-      metadata.middle_name || "",
+road:(m.road||"").trim(),
 
-    last_name:
-      metadata.last_name || "",
+city:(m.city||"").trim(),
 
-    mobile:
-      phone,
+state:(m.state||"").trim(),
 
-    house:
-      metadata.house || "",
+pincode:(m.pincode||"").trim()
 
-    road:
-      metadata.road || "",
+};
 
-    city:
-      metadata.city || "",
-
-    state:
-      metadata.state || "",
-
-    pincode:
-      metadata.pincode || ""
-
-  };
 }
 
 
 function isProfileComplete(user){
 
-  const p =
-    getProfileData(user);
+const p=
+getProfileData(user);
 
-  return !!(
-    p.name &&
-    p.mobile &&
-    p.house &&
-    p.road &&
-    p.city &&
-    p.state &&
-    p.pincode
-  );
+return !!(
+p.name &&
+p.middle_name &&
+p.last_name &&
+/^[0-9]{10}$/.test(p.mobile) &&
+p.house &&
+p.road &&
+p.city &&
+p.state &&
+/^[0-9]{6}$/.test(p.pincode)
+);
+
 }
 
 
-async function openProfile(){
+function profileMissingFields(user){
 
-  const user =
-    await getCurrentUser();
+const p=
+getProfileData(user);
 
-  if(!user){
+const missing=[];
 
-    openAuth();
+if(!p.name)missing.push("Name");
+if(!p.middle_name)missing.push("Middle Name");
+if(!p.last_name)missing.push("Last Name");
+if(!/^[0-9]{10}$/.test(p.mobile))missing.push("Mobile Number");
+if(!p.house)missing.push("House No. / Building Name");
+if(!p.road)missing.push("Road / Area / Colony Name");
+if(!p.city)missing.push("City");
+if(!p.state)missing.push("State");
+if(!/^[0-9]{6}$/.test(p.pincode))missing.push("Pincode");
 
-    return;
-  }
+return missing;
 
-  currentUser =
-    user;
-
-  const p =
-    getProfileData(user);
-
-  const complete =
-    isProfileComplete(user);
-
-  showModal(`
-
-    <div class="profile-head">
-
-      <div class="avatar">
-        ${
-          escapeHtml(
-            (p.name || "C")
-              .charAt(0)
-              .toUpperCase()
-          )
-        }
-      </div>
-
-      <h2>
-        ${escapeHtml(
-          p.name || "Customer"
-        )}
-      </h2>
-
-      <div class="profile-phone">
-        📱 ${
-          escapeHtml(
-            user.phone ||
-            p.mobile ||
-            ""
-          )
-        }
-      </div>
-
-    </div>
-
-
-    ${
-      !complete
-      ?
-      `
-        <div class="required-box">
-          ⚠️ Checkout और order करने के लिए
-          अपना पूरा profile और delivery address
-          complete करें।
-        </div>
-      `
-      :
-      `
-        <div class="required-box"
-             style="background:#e8f8ed;color:#166534;">
-          ✓ आपका profile complete है।
-        </div>
-      `
-    }
-
-
-    <div class="form-group">
-      <label>First Name *</label>
-      <input
-        id="profileName"
-        class="form-control"
-        value="${escapeHtml(p.name)}"
-        placeholder="First name"
-      >
-    </div>
-
-
-    <div class="form-group">
-      <label>Middle Name</label>
-      <input
-        id="profileMiddle"
-        class="form-control"
-        value="${escapeHtml(p.middle_name)}"
-        placeholder="Middle name"
-      >
-    </div>
-
-
-    <div class="form-group">
-      <label>Last Name</label>
-      <input
-        id="profileLast"
-        class="form-control"
-        value="${escapeHtml(p.last_name)}"
-        placeholder="Last name"
-      >
-    </div>
-
-
-    <div class="form-group">
-      <label>Verified Mobile Number *</label>
-
-      <input
-        id="profileMobile"
-        class="form-control"
-        value="${escapeHtml(
-          user.phone ||
-          p.mobile ||
-          ""
-        )}"
-        readonly
-      >
-
-      <small style="color:var(--muted);">
-        यह वही mobile number है जिससे आपने OTP login किया है।
-      </small>
-
-    </div>
-
-
-    <div class="form-group">
-      <label>House / Shop / Flat *</label>
-
-      <input
-        id="profileHouse"
-        class="form-control"
-        value="${escapeHtml(p.house)}"
-        placeholder="House / Shop / Flat"
-      >
-    </div>
-
-
-    <div class="form-group">
-      <label>Road / Area *</label>
-
-      <input
-        id="profileRoad"
-        class="form-control"
-        value="${escapeHtml(p.road)}"
-        placeholder="Road / Area"
-      >
-    </div>
-
-
-    <div class="form-group">
-      <label>City *</label>
-
-      <input
-        id="profileCity"
-        class="form-control"
-        value="${escapeHtml(p.city)}"
-        placeholder="City"
-      >
-    </div>
-
-
-    <div class="form-group">
-      <label>State *</label>
-
-      <input
-        id="profileState"
-        class="form-control"
-        value="${escapeHtml(p.state)}"
-        placeholder="State"
-      >
-    </div>
-
-
-    <div class="form-group">
-      <label>PIN Code *</label>
-
-      <input
-        id="profilePincode"
-        class="form-control"
-        type="tel"
-        maxlength="6"
-        value="${escapeHtml(p.pincode)}"
-        placeholder="6 digit PIN code"
-      >
-    </div>
-
-
-    <button
-      class="auth-submit"
-      onclick="saveProfile()"
-    >
-      Save Profile
-    </button>
-
-
-    <button
-      class="auth-link"
-      style="width:100%;margin-top:8px;"
-      onclick="logoutUser()"
-    >
-      Logout
-    </button>
-
-  `);
 }
 
 
-async function saveProfile(){
-
-  const user =
-    await getCurrentUser();
-
-  if(!user){
-
-    closeModal();
-
-    openAuth();
-
-    return;
-  }
-
-  const name =
-    document.getElementById(
-      "profileName"
-    ).value.trim();
-
-  const middle =
-    document.getElementById(
-      "profileMiddle"
-    ).value.trim();
-
-  const last =
-    document.getElementById(
-      "profileLast"
-    ).value.trim();
-
-  const mobile =
-    user.phone
-      ? user.phone.replace(
-          /^\+91/,
-          ""
-        )
-      :
-      document.getElementById(
-        "profileMobile"
-      ).value
-      .replace(/\D/g,"");
-
-  const house =
-    document.getElementById(
-      "profileHouse"
-    ).value.trim();
-
-  const road =
-    document.getElementById(
-      "profileRoad"
-    ).value.trim();
-
-  const city =
-    document.getElementById(
-      "profileCity"
-    ).value.trim();
-
-  const state =
-    document.getElementById(
-      "profileState"
-    ).value.trim();
-
-  const pincode =
-    document.getElementById(
-      "profilePincode"
-    ).value.trim();
-
-
-  if(!name){
-
-    alert(
-      "First Name डालना जरूरी है।"
-    );
-
-    return;
-  }
-
-  if(!mobile){
-
-    alert(
-      "Mobile number missing है।"
-    );
-
-    return;
-  }
-
-  if(!house ||
-     !road ||
-     !city ||
-     !state ||
-     !pincode){
-
-    alert(
-      "कृपया पूरा delivery address भरें।"
-    );
-
-    return;
-  }
-
-  if(!/^[0-9]{6}$/.test(pincode)){
-
-    alert(
-      "PIN Code 6 digit होना चाहिए।"
-    );
-
-    return;
-  }
-
-
-  const {
-    error
-  } =
-    await supabaseClient.auth.updateUser({
-
-      data:{
-        name:name,
-        middle_name:middle,
-        last_name:last,
-        mobile:mobile,
-        house:house,
-        road:road,
-        city:city,
-        state:state,
-        pincode:pincode
-      }
-
-    });
-
-
-  if(error){
-
-    console.error(
-      "Profile Error:",
-      error
-    );
-
-    alert(
-      "Profile save नहीं हुआ:\n" +
-      error.message
-    );
-
-    return;
-  }
-
-
-  const updatedUser =
-    await getCurrentUser();
-
-  currentUser =
-    updatedUser;
-
-  updateMenuUser(
-    updatedUser
-  );
-
-  showToast(
-    "Profile saved successfully ✅"
-  );
-
-  setTimeout(
-    () => openProfile(),
-    400
-  );
-}
-
-
-/* =========================================
-   CHECKOUT
-========================================= */
+/* =====================================================
+CHECKOUT
+===================================================== */
 
 async function checkout(){
 
-  if(!cart.length){
+if(!cart.length){
 
-    alert(
-      "Cart empty है।"
-    );
+alert(
+"Your cart is empty."
+);
 
-    return;
-  }
+return;
 
-  const user =
-    await getCurrentUser();
-
-  if(!user){
-
-    closeModal();
-
-    openAuth();
-
-    return;
-  }
-
-  if(!isProfileComplete(user)){
-
-    closeModal();
-
-    alert(
-      "Order करने से पहले अपना profile complete करें।"
-    );
-
-    setTimeout(
-      () => openProfile(),
-      300
-    );
-
-    return;
-  }
-
-  const total =
-    getCartTotal();
-
-  showModal(`
-
-    <h2>🧾 Checkout</h2>
-
-    <div style="margin-top:15px;">
-
-      ${
-        cart.map(item => `
-
-          <div class="summary-row">
-
-            <span>
-              ${escapeHtml(item.name)}
-              × ${item.qty}
-            </span>
-
-            <strong>
-              ₹${Number(item.price) *
-                  Number(item.qty)}
-            </strong>
-
-          </div>
-
-        `).join("")
-      }
-
-      <div class="summary-total">
-
-        <div class="summary-row">
-          <span>Total</span>
-          <span>₹${total}</span>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div style="
-      margin-top:15px;
-      padding:12px;
-      background:var(--bg);
-      border-radius:10px;
-    ">
-
-      <strong>Delivery Address</strong>
-
-      <p style="margin-top:5px;color:var(--muted);">
-
-        ${escapeHtml(
-          getProfileData(user).name
-        )}
-
-        <br>
-
-        ${escapeHtml(
-          getProfileData(user).house
-        )},
-        ${escapeHtml(
-          getProfileData(user).road
-        )}
-
-        <br>
-
-        ${escapeHtml(
-          getProfileData(user).city
-        )},
-        ${escapeHtml(
-          getProfileData(user).state
-        )}
-        -
-        ${escapeHtml(
-          getProfileData(user).pincode
-        )}
-
-        <br>
-
-        📱 ${escapeHtml(
-          user.phone ||
-          getProfileData(user).mobile
-        )}
-
-      </p>
-
-    </div>
-
-
-    <button
-      class="auth-submit"
-      onclick="placeOrder()"
-    >
-      Place Order
-    </button>
-
-  `);
 }
 
 
-/* =========================================
-   PLACE ORDER
-========================================= */
+const user=
+await getCurrentUser();
+
+
+/*
+LOGIN REQUIRED
+*/
+
+if(!user){
+
+alert(
+"पहले Customer Login करें।"
+);
+
+openAuth();
+
+return;
+
+}
+
+
+/*
+PROFILE REQUIRED
+*/
+
+if(!isProfileComplete(user)){
+
+const missing=
+profileMissingFields(user);
+
+alert(
+"Profile पूरी करें।\n\n"+
+"इन details की जरूरत है:\n"+
+missing.map(x=>"• "+x).join("\n")+
+"\n\nProfile save करने के बाद ही Checkout आगे बढ़ेगा।"
+);
+
+openProfile(true);
+
+return;
+
+}
+
+
+let total=0;
+
+let orderItems="";
+
+cart.forEach(item=>{
+
+const amount=
+item.price*item.qty;
+
+total+=amount;
+
+orderItems+=`
+
+<div class="checkout-summary-item">
+
+<div>
+
+<strong>
+${escapeHtml(item.name)}
+</strong>
+
+<div style="
+font-size:12px;
+color:var(--muted);
+margin-top:4px">
+
+₹${item.price} × ${item.qty}
+
+</div>
+
+</div>
+
+<strong style="color:var(--pink)">
+₹${amount}
+</strong>
+
+</div>
+
+`;
+
+});
+
+
+const profile=
+getProfileData(user);
+
+const fullName=
+[
+profile.name,
+profile.middle_name,
+profile.last_name
+]
+.filter(Boolean)
+.join(" ");
+
+
+const fullAddress=
+[
+profile.house,
+profile.road
+]
+.filter(Boolean)
+.join(", ");
+
+
+showModal(`
+
+<h2>
+📦 Checkout
+</h2>
+
+<div class="profile-complete">
+✓ Profile Complete — Delivery details loaded automatically.
+</div>
+
+<h3 class="checkout-title">
+👤 Customer Details
+</h3>
+
+<input
+class="auth-input"
+id="checkoutName"
+type="text"
+value="${escapeHtml(fullName)}"
+readonly>
+
+
+<input
+class="auth-input"
+id="checkoutMobile"
+type="tel"
+value="${escapeHtml(profile.mobile)}"
+readonly>
+
+
+<h3 class="checkout-title">
+📍 Delivery Address
+</h3>
+
+<textarea
+class="auth-input"
+id="checkoutAddress"
+rows="4"
+readonly>${escapeHtml(fullAddress)}</textarea>
+
+
+<div class="checkout-grid">
+
+<input
+class="auth-input"
+id="checkoutCity"
+type="text"
+value="${escapeHtml(profile.city)}"
+readonly>
+
+
+<input
+class="auth-input"
+id="checkoutState"
+type="text"
+value="${escapeHtml(profile.state)}"
+readonly>
+
+</div>
+
+
+<input
+class="auth-input"
+id="checkoutPincode"
+type="tel"
+value="${escapeHtml(profile.pincode)}"
+readonly>
+
+
+<h3 class="checkout-title">
+🛒 Order Summary
+</h3>
+
+
+<div class="checkout-summary">
+
+${orderItems}
+
+<div class="checkout-total">
+
+<span>
+Total
+</span>
+
+<span>
+₹${total}
+</span>
+
+</div>
+
+</div>
+
+
+<button
+class="checkout"
+style="margin-top:20px"
+onclick="placeOrder()">
+
+Place Order →
+
+</button>
+
+`);
+
+}
+
 
 async function placeOrder(){
 
-  const user =
-    await getCurrentUser();
-
-  if(!user){
-
-    closeModal();
-
-    openAuth();
-
-    return;
-  }
-
-  if(!cart.length){
-
-    alert(
-      "Cart empty है।"
-    );
-
-    return;
-  }
-
-  if(!isProfileComplete(user)){
-
-    alert(
-      "Profile complete करें।"
-    );
-
-    return;
-  }
-
-  /*
-    IMPORTANT:
-    यह order object local browser storage में
-    भी save होता है ताकि frontend तुरंत काम करे।
-  */
-
-  const orders =
-    JSON.parse(
-      localStorage.getItem(
-        "printzyOrders"
-      ) || "[]"
-    );
-
-  const profile =
-    getProfileData(user);
-
-  const order = {
-
-    id:
-      "PZ" +
-      Date.now(),
-
-    user_id:
-      user.id,
-
-    phone:
-      user.phone ||
-      profile.mobile,
-
-    customer_name:
-      profile.name +
-      " " +
-      profile.last_name,
-
-    items:
-      JSON.parse(
-        JSON.stringify(cart)
-      ),
-
-    total:
-      getCartTotal(),
-
-    address:{
-      house:profile.house,
-      road:profile.road,
-      city:profile.city,
-      state:profile.state,
-      pincode:profile.pincode
-    },
-
-    status:
-      "Pending",
-
-    created_at:
-      new Date().toISOString()
-
-  };
+const user=
+await getCurrentUser();
 
 
-  orders.unshift(order);
+if(!user){
 
-  localStorage.setItem(
-    "printzyOrders",
-    JSON.stringify(orders)
-  );
+alert(
+"पहले Login करें।"
+);
 
+openAuth();
 
-  /*
-    Supabase orders table मौजूद होने पर
-    order insert करने की कोशिश।
-    Error होने पर local order फिर भी रहेगा।
-  */
+return;
 
-  try{
-
-    await supabaseClient
-      .from("orders")
-      .insert({
-
-        user_id:user.id,
-
-        customer_name:
-          order.customer_name,
-
-        mobile:
-          order.phone,
-
-        items:
-          order.items,
-
-        total:
-          order.total,
-
-        status:
-          "Pending",
-
-        address:
-          order.address
-
-      });
-
-  }catch(error){
-
-    console.log(
-      "Supabase order insert:",
-      error
-    );
-
-  }
-
-
-  cart = [];
-
-  saveCart();
-
-  showModal(`
-
-    <div style="text-align:center;">
-
-      <div style="font-size:65px;">
-        ✅
-      </div>
-
-      <h2>
-        Order Placed Successfully!
-      </h2>
-
-      <p style="
-        color:var(--muted);
-        margin:10px 0;
-      ">
-        आपका order successfully place हो गया है।
-      </p>
-
-      <div style="
-        background:var(--bg);
-        padding:12px;
-        border-radius:10px;
-        margin:15px 0;
-      ">
-
-        <strong>
-          Order ID
-        </strong>
-
-        <div style="
-          font-size:20px;
-          color:var(--pink);
-          margin-top:4px;
-        ">
-          ${order.id}
-        </div>
-
-      </div>
-
-      <button
-        class="auth-submit"
-        onclick="openOrders()"
-      >
-        View My Orders
-      </button>
-
-    </div>
-
-  `);
-
-  showToast(
-    "Order placed successfully 🎉"
-  );
 }
 
 
-/* =========================================
-   ORDERS
-========================================= */
+if(!isProfileComplete(user)){
 
-async function openOrders(){
+alert(
+"Profile पूरी करना जरूरी है।"
+);
 
-  const user =
-    await getCurrentUser();
+openProfile(true);
 
-  if(!user){
+return;
 
-    openAuth();
-
-    return;
-  }
-
-  const orders =
-    JSON.parse(
-      localStorage.getItem(
-        "printzyOrders"
-      ) || "[]"
-    );
-
-  const myOrders =
-    orders.filter(
-      order =>
-        order.user_id === user.id
-    );
-
-
-  let html = `
-    <h2>📦 My Orders</h2>
-  `;
-
-
-  if(!myOrders.length){
-
-    html += `
-
-      <div class="empty">
-
-        <div class="empty-icon">
-          📦
-        </div>
-
-        <p>
-          अभी कोई order नहीं है।
-        </p>
-
-      </div>
-
-    `;
-
-    showModal(html);
-
-    return;
-  }
-
-
-  html += myOrders.map(order => `
-
-    <div style="
-      background:var(--bg);
-      border:1px solid var(--border);
-      padding:15px;
-      border-radius:12px;
-      margin-top:12px;
-    ">
-
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        gap:10px;
-      ">
-
-        <strong>
-          ${escapeHtml(order.id)}
-        </strong>
-
-        <span style="
-          color:var(--green);
-          font-weight:700;
-        ">
-          ${escapeHtml(order.status)}
-        </span>
-
-      </div>
-
-      <div style="
-        margin-top:8px;
-        color:var(--muted);
-      ">
-
-        ${order.items.map(
-          item =>
-            `${escapeHtml(item.name)}
-             × ${item.qty}`
-        ).join("<br>")}
-
-      </div>
-
-      <div style="
-        margin-top:10px;
-        font-weight:900;
-      ">
-        Total: ₹${order.total}
-      </div>
-
-    </div>
-
-  `).join("");
-
-
-  showModal(html);
 }
 
 
-/* =========================================
-   THEME
-========================================= */
+alert(
+"Checkout details submitted successfully ✅\n\n"+
+"Next Step में order database और payment जोड़ा जाएगा।"
+);
 
-function toggleTheme(){
+closeModal();
 
-  document.body.classList.toggle(
-    "dark"
-  );
-
-  localStorage.setItem(
-    "printzyTheme",
-    document.body.classList.contains("dark")
-      ? "dark"
-      : "light"
-  );
 }
 
 
-function loadTheme(){
+/* =====================================================
+WISHLIST
+===================================================== */
 
-  const theme =
-    localStorage.getItem(
-      "printzyTheme"
-    );
+function toggleWishlist(name){
 
-  if(theme === "dark"){
+if(wishlist.includes(name)){
 
-    document.body.classList.add(
-      "dark"
-    );
+wishlist=
+wishlist.filter(x=>x!==name);
 
-  }
+showToast(
+"Removed from wishlist"
+);
+
+}else{
+
+wishlist.push(name);
+
+showToast(
+"Added to wishlist ❤️"
+);
+
+}
+
+localStorage.setItem(
+"printzyWishlist",
+JSON.stringify(wishlist)
+);
+
+const q=
+document
+.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+showProducts(
+q
+?
+products.filter(p=>
+p.name.toLowerCase().includes(q) ||
+p.category.toLowerCase().includes(q) ||
+p.description.toLowerCase().includes(q)
+)
+:
+products
+);
+
 }
 
 
-/* =========================================
-   MENU
-========================================= */
+function openWishlist(){
+
+const items=
+products.filter(p=>
+wishlist.includes(p.name)
+);
+
+let html=
+`<h2>❤️ Wishlist</h2>`;
+
+if(!items.length){
+
+html+=`
+
+<div style="
+text-align:center;
+padding:35px">
+
+<div style="font-size:60px">
+♡
+</div>
+
+<h3>
+No wishlist products
+</h3>
+
+<p style="
+color:var(--muted);
+margin-top:8px">
+
+Tap ♡ on products to save them.
+
+</p>
+
+</div>`;
+
+}else{
+
+items.forEach(p=>{
+
+html+=`
+
+<div class="cart-item">
+
+<div>
+
+<strong>
+${p.icon} ${escapeHtml(p.name)}
+</strong>
+
+<div style="color:var(--pink)">
+₹${p.price}
+</div>
+
+</div>
+
+<button
+class="order"
+style="padding:8px 14px"
+onclick="addToCart('${p.name}')">
+
+Add
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+showModal(html);
+
+}
+
+
+/* =====================================================
+AUTH
+===================================================== */
+
+async function openAuth(){
+
+const user=
+await getCurrentUser();
+
+if(user){
+
+openProfile();
+
+return;
+
+}
+
+
+showModal(`
+
+<h2>
+👤 Login / Sign Up
+</h2>
+
+
+<div id="loginForm">
+
+<input
+class="auth-input"
+id="authEmail"
+type="email"
+autocomplete="email"
+placeholder="Email address">
+
+
+<div class="password-wrap">
+
+<input
+class="auth-input"
+id="authPassword"
+type="password"
+autocomplete="current-password"
+placeholder="Password">
+
+
+<button
+type="button"
+onclick="togglePassword()">
+
+👁️
+
+</button>
+
+</div>
+
+
+<button
+class="auth-submit"
+onclick="loginUser()">
+
+Login
+
+</button>
+
+
+<button
+class="auth-submit"
+style="
+background:transparent;
+color:var(--pink);
+border:2px solid var(--pink)"
+onclick="showSignup()">
+
+Create New Account
+
+</button>
+
+</div>
+
+
+<div id="signupForm"
+style="display:none">
+
+<input
+class="auth-input"
+id="signupName"
+type="text"
+autocomplete="given-name"
+placeholder="Name">
+
+
+<input
+class="auth-input"
+id="signupMiddleName"
+type="text"
+placeholder="Middle Name">
+
+
+<input
+class="auth-input"
+id="signupLastName"
+type="text"
+autocomplete="family-name"
+placeholder="Last Name">
+
+
+<input
+class="auth-input"
+id="signupMobile"
+type="tel"
+autocomplete="tel"
+maxlength="10"
+placeholder="Mobile Number">
+
+
+<input
+class="auth-input"
+id="signupEmail"
+type="email"
+autocomplete="email"
+placeholder="Email address">
+
+
+<div class="password-wrap">
+
+<input
+class="auth-input"
+id="signupPassword"
+type="password"
+autocomplete="new-password"
+placeholder="Password">
+
+
+<button
+type="button"
+onclick="toggleSignupPassword()">
+
+👁️
+
+</button>
+
+</div>
+
+
+<input
+class="auth-input"
+id="signupConfirmPassword"
+type="password"
+autocomplete="new-password"
+placeholder="Confirm Password">
+
+
+<button
+class="auth-submit"
+onclick="signupUser()">
+
+Create Account
+
+</button>
+
+
+<button
+class="auth-submit"
+style="
+background:transparent;
+color:var(--pink);
+border:2px solid var(--pink)"
+onclick="showLogin()">
+
+← Back to Login
+
+</button>
+
+</div>
+
+
+<p style="
+margin-top:15px;
+color:var(--muted);
+font-size:12px;
+text-align:center">
+
+Account बनाने के बाद Profile में बाकी delivery details भरना जरूरी होगा।
+
+</p>
+
+`);
+
+}
+
+
+function showLogin(){
+
+const login=
+document.getElementById("loginForm");
+
+const signup=
+document.getElementById("signupForm");
+
+if(login)
+login.style.display="block";
+
+if(signup)
+signup.style.display="none";
+
+}
+
+
+function showSignup(){
+
+const login=
+document.getElementById("loginForm");
+
+const signup=
+document.getElementById("signupForm");
+
+if(login)
+login.style.display="none";
+
+if(signup)
+signup.style.display="block";
+
+}
+
+
+function togglePassword(){
+
+const input=
+document.getElementById("authPassword");
+
+if(!input)return;
+
+input.type=
+input.type==="password"
+?
+"text"
+:
+"password";
+
+}
+
+
+function toggleSignupPassword(){
+
+const input=
+document.getElementById("signupPassword");
+
+if(!input)return;
+
+input.type=
+input.type==="password"
+?
+"text"
+:
+"password";
+
+}
+
+
+/* =====================================================
+LOGIN
+===================================================== */
+
+async function loginUser(){
+
+const email=
+document
+.getElementById("authEmail")
+.value
+.trim();
+
+const password=
+document
+.getElementById("authPassword")
+.value;
+
+
+if(!email){
+
+alert(
+"Email address डालें।"
+);
+
+return;
+
+}
+
+if(!password){
+
+alert(
+"Password डालें।"
+);
+
+return;
+
+}
+
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+
+if(error)
+throw error;
+
+
+closeModal();
+
+updateMenuUser(data.user);
+
+showToast(
+"Login successful ✅"
+);
+
+
+}catch(error){
+
+alert(
+"Login failed ❌\n\n"+
+error.message
+);
+
+}
+
+}
+
+
+/* =====================================================
+SIGNUP
+===================================================== */
+
+async function signupUser(){
+
+const name=
+document
+.getElementById("signupName")
+.value
+.trim();
+
+const middleName=
+document
+.getElementById("signupMiddleName")
+.value
+.trim();
+
+const lastName=
+document
+.getElementById("signupLastName")
+.value
+.trim();
+
+const mobile=
+document
+.getElementById("signupMobile")
+.value
+.trim();
+
+const email=
+document
+.getElementById("signupEmail")
+.value
+.trim();
+
+const password=
+document
+.getElementById("signupPassword")
+.value;
+
+const confirmPassword=
+document
+.getElementById("signupConfirmPassword")
+.value;
+
+
+if(!name){
+
+alert(
+"Name डालें।"
+);
+
+return;
+
+}
+
+if(!middleName){
+
+alert(
+"Middle Name डालें।"
+);
+
+return;
+
+}
+
+if(!lastName){
+
+alert(
+"Last Name डालें।"
+);
+
+return;
+
+}
+
+if(!mobile){
+
+alert(
+"Mobile Number डालें।"
+);
+
+return;
+
+}
+
+if(!/^[0-9]{10}$/.test(mobile)){
+
+alert(
+"Valid 10 digit Mobile Number डालें।"
+);
+
+return;
+
+}
+
+if(!email){
+
+alert(
+"Email address डालें।"
+);
+
+return;
+
+}
+
+if(!password){
+
+alert(
+"Password डालें।"
+);
+
+return;
+
+}
+
+if(password.length<6){
+
+alert(
+"Password कम से कम 6 characters का होना चाहिए।"
+);
+
+return;
+
+}
+
+if(password!==confirmPassword){
+
+alert(
+"Password और Confirm Password match नहीं कर रहे।"
+);
+
+return;
+
+}
+
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+
+data:{
+
+name:name,
+
+middle_name:middleName,
+
+last_name:lastName,
+
+mobile:mobile
+
+}
+
+}
+
+});
+
+
+if(error)
+throw error;
+
+
+if(data.user&&!data.session){
+
+alert(
+"Account created successfully ✅\n\n"+
+"आपके email पर verification link भेजा गया है।\n\n"+
+"Email verify करने के बाद Login करें।"
+);
+
+showLogin();
+
+return;
+
+}
+
+
+if(data.session){
+
+closeModal();
+
+updateMenuUser(data.user);
+
+showToast(
+"Account created successfully ✅"
+);
+
+
+/*
+Immediately open profile so customer
+can complete mandatory details.
+*/
+
+setTimeout(()=>{
+
+openProfile(true);
+
+},400);
+
+}
+
+}catch(error){
+
+alert(
+"Account creation failed ❌\n\n"+
+error.message
+);
+
+}
+
+}
+
+
+/* =====================================================
+SESSION
+===================================================== */
+
+async function checkUser(){
+
+try{
+
+const {data}=
+await supabaseClient.auth.getSession();
+
+
+if(data.session){
+
+updateMenuUser(
+data.session.user
+);
+
+}else{
+
+updateMenuUser(null);
+
+}
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+
+/* =====================================================
+AUTH STATE
+===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+(event,session)=>{
+
+updateMenuUser(
+session?.user||null
+);
+
+}
+);
+
+
+/* =====================================================
+UPDATE MENU USER
+===================================================== */
+
+function updateMenuUser(user){
+
+const nameEl=
+document.getElementById("menuUserName");
+
+const emailEl=
+document.getElementById("menuUserEmail");
+
+
+if(!nameEl||!emailEl)
+return;
+
+
+if(user){
+
+const p=
+getProfileData(user);
+
+const name=
+[
+p.name,
+p.middle_name,
+p.last_name
+]
+.filter(Boolean)
+.join(" ") ||
+"Customer";
+
+
+nameEl.innerText=name;
+
+emailEl.innerText=
+user.email||"";
+
+}else{
+
+nameEl.innerText=
+"Customer";
+
+emailEl.innerText=
+"Login to your account";
+
+}
+
+}
+
+
+/* =====================================================
+PROFILE
+===================================================== */
+
+async function openProfile(forceEdit=false){
+
+const user=
+await getCurrentUser();
+
+
+if(!user){
+
+openAuth();
+
+return;
+
+}
+
+
+const p=
+getProfileData(user);
+
+const complete=
+isProfileComplete(user);
+
+const missing=
+profileMissingFields(user);
+
+
+showModal(`
+
+<h2>
+👤 My Profile
+</h2>
+
+
+<div class="profile-box">
+
+<div class="profile-avatar">
+👤
+</div>
+
+
+<div style="
+text-align:center;
+font-size:13px;
+color:var(--muted);
+margin-bottom:15px">
+
+${escapeHtml(user.email||"")}
+
+</div>
+
+
+${complete && !forceEdit ? `
+
+<div class="profile-complete">
+✓ Profile Complete
+</div>
+
+<div class="profile-section-title">
+Personal Details
+</div>
+
+<div class="profile-row">
+<div class="profile-label">NAME</div>
+<div class="profile-value">${escapeHtml(p.name)}</div>
+</div>
+
+<div class="profile-row">
+<div class="profile-label">MIDDLE NAME</div>
+<div class="profile-value">${escapeHtml(p.middle_name)}</div>
+</div>
+
+<div class="profile-row">
+<div class="profile-label">LAST NAME</div>
+<div class="profile-value">${escapeHtml(p.last_name)}</div>
+</div>
+
+<div class="profile-row">
+<div class="profile-label">MOBILE NUMBER</div>
+<div class="profile-value">${escapeHtml(p.mobile)}</div>
+</div>
+
+
+<div class="profile-section-title">
+Delivery Address
+</div>
+
+<div class="profile-row">
+<div class="profile-label">HOUSE NO. / BUILDING NAME</div>
+<div class="profile-value">${escapeHtml(p.house)}</div>
+</div>
+
+<div class="profile-row">
+<div class="profile-label">ROAD / AREA / COLONY NAME</div>
+<div class="profile-value">${escapeHtml(p.road)}</div>
+</div>
+
+<div class="profile-row">
+<div class="profile-label">CITY</div>
+<div class="profile-value">${escapeHtml(p.city)}</div>
+</div>
+
+<div class="profile-row">
+<div class="profile-label">STATE</div>
+<div class="profile-value">${escapeHtml(p.state)}</div>
+</div>
+
+<div class="profile-row">
+<div class="profile-label">PINCODE</div>
+<div class="profile-value">${escapeHtml(p.pincode)}</div>
+</div>
+
+<button
+class="checkout"
+style="margin-top:18px"
+onclick="openProfile(true)">
+
+✏️ Edit Profile
+
+</button>
+
+` : `
+
+<div class="profile-required">
+
+<strong>⚠️ Profile Complete करना जरूरी है</strong>
+
+<br><br>
+
+${missing.length
+? "बाकी details: "+missing.join(", ")
+: "सभी delivery details भरें।"}
+
+<br><br>
+
+Profile complete होने तक Checkout / Order आगे नहीं बढ़ेगा।
+
+</div>
+
+
+<div class="profile-section-title">
+Personal Details
+</div>
+
+
+<label class="profile-label">
+Name *
+</label>
+
+<input
+class="auth-input"
+id="profileName"
+type="text"
+value="${escapeHtml(p.name)}"
+placeholder="Name">
+
+
+<label class="profile-label">
+Middle Name *
+</label>
+
+<input
+class="auth-input"
+id="profileMiddleName"
+type="text"
+value="${escapeHtml(p.middle_name)}"
+placeholder="Middle Name">
+
+
+<label class="profile-label">
+Last Name *
+</label>
+
+<input
+class="auth-input"
+id="profileLastName"
+type="text"
+value="${escapeHtml(p.last_name)}"
+placeholder="Last Name">
+
+
+<label class="profile-label">
+Mobile Number *
+</label>
+
+<input
+class="auth-input"
+id="profileMobile"
+type="tel"
+maxlength="10"
+value="${escapeHtml(p.mobile)}"
+placeholder="10 digit Mobile Number">
+
+
+<div class="profile-section-title">
+Delivery Address
+</div>
+
+
+<button
+type="button"
+class="location-btn"
+onclick="useCurrentLocation()">
+
+📍 Use Current Location
+
+</button>
+
+<div
+id="locationStatus"
+class="location-status">
+
+Current location से address automatically fill करने के लिए ऊपर button दबाएँ।
+
+</div>
+
+
+<label class="profile-label">
+House No. / Building Name *
+</label>
+
+<input
+class="auth-input"
+id="profileHouse"
+type="text"
+value="${escapeHtml(p.house)}"
+placeholder="House No. / Building Name">
+
+
+<label class="profile-label">
+Road Name / Area Name / Colony Name *
+</label>
+
+<input
+class="auth-input"
+id="profileRoad"
+type="text"
+value="${escapeHtml(p.road)}"
+placeholder="Road / Area / Colony Name">
+
+
+<div class="checkout-grid">
+
+<div>
+
+<label class="profile-label">
+City *
+</label>
+
+<input
+class="auth-input"
+id="profileCity"
+type="text"
+value="${escapeHtml(p.city)}"
+placeholder="City">
+
+</div>
+
+
+<div>
+
+<label class="profile-label">
+State *
+</label>
+
+<input
+class="auth-input"
+id="profileState"
+type="text"
+value="${escapeHtml(p.state)}"
+placeholder="State">
+
+</div>
+
+</div>
+
+
+<label class="profile-label">
+Pincode *
+</label>
+
+<input
+class="auth-input"
+id="profilePincode"
+type="tel"
+maxlength="6"
+value="${escapeHtml(p.pincode)}"
+placeholder="6 digit Pincode">
+
+
+<button
+class="checkout"
+style="margin-top:18px"
+onclick="saveProfile()">
+
+💾 Save Profile
+
+</button>
+
+`}
+
+</div>
+
+
+<button
+class="checkout"
+style="
+margin-top:18px;
+background:#e21d4d"
+onclick="logoutUser()">
+
+Logout
+
+</button>
+
+`);
+
+}
+
+
+/* =====================================================
+SAVE PROFILE
+===================================================== */
+
+async function saveProfile(){
+
+const user=
+await getCurrentUser();
+
+
+if(!user){
+
+alert(
+"Session expired. Please login again."
+);
+
+openAuth();
+
+return;
+
+}
+
+
+const name=
+document
+.getElementById("profileName")
+?.value
+.trim();
+
+const middleName=
+document
+.getElementById("profileMiddleName")
+?.value
+.trim();
+
+const lastName=
+document
+.getElementById("profileLastName")
+?.value
+.trim();
+
+const mobile=
+document
+.getElementById("profileMobile")
+?.value
+.trim();
+
+const house=
+document
+.getElementById("profileHouse")
+?.value
+.trim();
+
+const road=
+document
+.getElementById("profileRoad")
+?.value
+.trim();
+
+const city=
+document
+.getElementById("profileCity")
+?.value
+.trim();
+
+const state=
+document
+.getElementById("profileState")
+?.value
+.trim();
+
+const pincode=
+document
+.getElementById("profilePincode")
+?.value
+.trim();
+
+
+if(!name){
+
+alert("Name डालें।");
+return;
+
+}
+
+if(!middleName){
+
+alert("Middle Name डालें।");
+return;
+
+}
+
+if(!lastName){
+
+alert("Last Name डालें।");
+return;
+
+}
+
+if(!/^[0-9]{10}$/.test(mobile)){
+
+alert(
+"Valid 10 digit Mobile Number डालें।"
+);
+
+return;
+
+}
+
+if(!house){
+
+alert(
+"House No. / Building Name डालें।"
+);
+
+return;
+
+}
+
+if(!road){
+
+alert(
+"Road / Area / Colony Name डालें।"
+);
+
+return;
+
+}
+
+if(!city){
+
+alert("City डालें।");
+return;
+
+}
+
+if(!state){
+
+alert("State डालें।");
+return;
+
+}
+
+if(!/^[0-9]{6}$/.test(pincode)){
+
+alert(
+"Valid 6 digit Pincode डालें।"
+);
+
+return;
+
+}
+
+
+try{
+
+const {data,error}=
+await supabaseClient.auth.updateUser({
+
+data:{
+
+name:name,
+
+middle_name:middleName,
+
+last_name:lastName,
+
+mobile:mobile,
+
+house:house,
+
+road:road,
+
+city:city,
+
+state:state,
+
+pincode:pincode
+
+}
+
+});
+
+
+if(error)
+throw error;
+
+
+updateMenuUser(data.user);
+
+showToast(
+"Profile saved successfully ✅"
+);
+
+
+setTimeout(()=>{
+
+openProfile();
+
+},400);
+
+
+}catch(error){
+
+alert(
+"Profile save failed ❌\n\n"+
+error.message
+);
+
+}
+
+}
+
+
+/* =====================================================
+CURRENT LOCATION
+===================================================== */
+
+function useCurrentLocation(){
+
+const status=
+document.getElementById("locationStatus");
+
+if(!navigator.geolocation){
+
+if(status){
+
+status.innerText=
+"इस device/browser में location service उपलब्ध नहीं है।";
+
+}
+
+return;
+
+}
+
+
+if(status){
+
+status.innerText=
+"📍 Location प्राप्त की जा रही है... कृपया थोड़ा इंतजार करें।";
+
+}
+
+
+navigator.geolocation.getCurrentPosition(
+
+async(position)=>{
+
+const lat=
+position.coords.latitude;
+
+const lon=
+position.coords.longitude;
+
+
+if(status){
+
+status.innerText=
+"📍 Location मिल गई। Address पता किया जा रहा है...";
+
+}
+
+
+try{
+
+/*
+OpenStreetMap Nominatim reverse geocoding.
+The user's browser location is used only for
+this current address lookup.
+*/
+
+const url=
+"https://nominatim.openstreetmap.org/reverse"+
+"?format=jsonv2"+
+"&lat="+encodeURIComponent(lat)+
+"&lon="+encodeURIComponent(lon)+
+"&addressdetails=1";
+
+
+const response=
+await fetch(url,{
+headers:{
+"Accept":"application/json"
+}
+});
+
+
+if(!response.ok){
+
+throw new Error(
+"Address service unavailable"
+);
+
+}
+
+
+const result=
+await response.json();
+
+const a=
+result.address||{};
+
+
+const house=
+[
+a.house_number,
+a.building
+]
+.filter(Boolean)
+.join(" / ");
+
+
+const road=
+[
+a.road,
+a.neighbourhood,
+a.suburb,
+a.residential
+]
+.filter(Boolean)
+.join(", ");
+
+
+const city=
+a.city ||
+a.town ||
+a.village ||
+a.municipality ||
+"";
+
+
+const state=
+a.state||"";
+
+
+const pincode=
+a.postcode||"";
+
+
+if(document.getElementById("profileHouse") && house){
+
+document.getElementById("profileHouse").value=
+house;
+
+}
+
+
+if(document.getElementById("profileRoad") && road){
+
+document.getElementById("profileRoad").value=
+road;
+
+}
+
+
+if(document.getElementById("profileCity") && city){
+
+document.getElementById("profileCity").value=
+city;
+
+}
+
+
+if(document.getElementById("profileState") && state){
+
+document.getElementById("profileState").value=
+state;
+
+}
+
+
+if(document.getElementById("profilePincode") && pincode){
+
+document.getElementById("profilePincode").value=
+pincode.replace(/\D/g,"").slice(0,6);
+
+}
+
+
+if(status){
+
+status.innerText=
+"✓ Location से available address details fill हो गई हैं। नीचे details check करके Save Profile दबाएँ।";
+
+}
+
+}catch(error){
+
+console.log(error);
+
+if(status){
+
+status.innerText=
+"Location मिल गई, लेकिन automatic address नहीं मिल पाया। कृपया address details manually भरें।";
+
+}
+
+}
+
+},
+
+(error)=>{
+
+console.log(error);
+
+const status=
+document.getElementById("locationStatus");
+
+if(!status)return;
+
+
+if(error.code===1){
+
+status.innerText=
+"Location permission denied. Browser में location permission allow करके फिर कोशिश करें.";
+
+}else if(error.code===2){
+
+status.innerText=
+"Location उपलब्ध नहीं है. GPS/Location ON करके फिर कोशिश करें.";
+
+}else if(error.code===3){
+
+status.innerText=
+"Location मिलने में ज्यादा समय लगा. फिर से कोशिश करें.";
+
+}else{
+
+status.innerText=
+"Location प्राप्त नहीं हो सकी. कृपया manually address भरें.";
+
+}
+
+},
+
+{
+enableHighAccuracy:true,
+timeout:15000,
+maximumAge:0
+}
+
+);
+
+}
+
+
+/* =====================================================
+LOGOUT
+===================================================== */
+
+async function logoutUser(){
+
+try{
+
+const {error}=
+await supabaseClient.auth.signOut();
+
+
+if(error)
+throw error;
+
+
+closeModal();
+
+updateMenuUser(null);
+
+
+showToast(
+"Logout successful 👋"
+);
+
+
+}catch(error){
+
+alert(
+"Logout failed ❌\n\n"+
+error.message
+);
+
+}
+
+}
+
+
+/* =====================================================
+MENU
+===================================================== */
 
 function openMenu(){
 
-  document
-    .getElementById("menuOverlay")
-    .classList.remove("hidden");
+document
+.getElementById("menuOverlay")
+.style.display="block";
+
+checkUser();
 
 }
 
 
-function closeMenu(event){
+function closeMenu(){
 
-  if(
-    event &&
-    event.target !==
-    document.getElementById(
-      "menuOverlay"
-    )
-  ){
+document
+.getElementById("menuOverlay")
+.style.display="none";
 
-    return;
-  }
-
-  document
-    .getElementById("menuOverlay")
-    .classList.add("hidden");
 }
 
 
-/* =========================================
-   MODAL
-========================================= */
+function closeMenuOutside(event){
+
+if(
+event.target.id==="menuOverlay"
+){
+
+closeMenu();
+
+}
+
+}
+
+
+/* =====================================================
+ADDRESS
+===================================================== */
+
+async function showAddress(){
+
+const user=
+await getCurrentUser();
+
+if(!user){
+
+openAuth();
+
+return;
+
+}
+
+openProfile();
+
+}
+
+
+/* =====================================================
+NOTIFICATIONS
+===================================================== */
+
+function showNotifications(){
+
+showModal(`
+
+<h2>
+🔔 Notifications
+</h2>
+
+<div style="
+text-align:center;
+padding:30px">
+
+<div style="font-size:55px">
+🔔
+</div>
+
+<h3>
+No new notifications
+</h3>
+
+<p style="
+color:var(--muted);
+margin-top:8px">
+
+आपके latest updates यहाँ दिखाई देंगे।
+
+</p>
+
+</div>
+
+`);
+
+}
+
+
+/* =====================================================
+FRAME
+===================================================== */
+
+function openFrame(){
+
+showModal(`
+
+<h2>
+🖼️ Photo Frame
+</h2>
+
+<p style="
+color:var(--muted);
+margin-bottom:15px">
+
+अपना frame size और printing option चुनें।
+
+</p>
+
+
+<div
+class="frame-option"
+onclick="selectFrame('8x12','General Print',149,this)">
+
+<div>
+
+<strong>
+8×12
+</strong>
+
+<br>
+
+General Print
+
+</div>
+
+<strong>
+₹149
+</strong>
+
+</div>
+
+
+<div
+class="frame-option"
+onclick="selectFrame('8x12','Your Photo',199,this)">
+
+<div>
+
+<strong>
+8×12
+</strong>
+
+<br>
+
+Your Photo
+
+</div>
+
+<strong>
+₹199
+</strong>
+
+</div>
+
+
+<div
+class="frame-option"
+onclick="selectFrame('12x18','General Print',399,this)">
+
+<div>
+
+<strong>
+12×18
+</strong>
+
+<br>
+
+General Print
+
+</div>
+
+<strong>
+₹399
+</strong>
+
+</div>
+
+
+<div
+class="frame-option"
+onclick="selectFrame('12x18','Your Photo',499,this)">
+
+<div>
+
+<strong>
+12×18
+</strong>
+
+<br>
+
+Your Photo
+
+</div>
+
+<strong>
+₹499
+</strong>
+
+</div>
+
+
+<div id="frameUpload">
+</div>
+
+
+<div id="frameButton">
+</div>
+
+`);
+
+}
+
+
+function selectFrame(
+size,
+type,
+price,
+element
+){
+
+document
+.querySelectorAll(".frame-option")
+.forEach(
+x=>
+x.classList.remove("selected")
+);
+
+element.classList.add("selected");
+
+
+if(type==="Your Photo"){
+
+document.getElementById(
+"frameUpload"
+).innerHTML=`
+
+<div class="upload">
+
+<h3>
+📤 Upload Your Photo
+</h3>
+
+<input
+type="file"
+accept="image/*"
+id="framePhoto">
+
+</div>
+
+`;
+
+}else{
+
+document.getElementById(
+"frameUpload"
+).innerHTML="";
+
+}
+
+
+document.getElementById(
+"frameButton"
+).innerHTML=`
+
+<button
+class="checkout"
+style="margin-top:15px"
+onclick="
+addFrame(
+'${size}',
+'${type}',
+${price}
+)">
+
+🛒 Add Frame to Cart
+
+</button>
+
+`;
+
+}
+
+
+function addFrame(
+size,
+type,
+price
+){
+
+cart.push({
+
+name:
+`Photo Frame ${size} - ${type}`,
+
+price:price,
+
+qty:1
+
+});
+
+saveCart();
+
+showToast(
+"Frame added to cart 🖼️"
+);
+
+}
+
+
+/* =====================================================
+MODAL
+===================================================== */
 
 function showModal(content){
 
-  const overlay =
-    document.getElementById(
-      "modalOverlay"
-    );
+document.getElementById(
+"modalContent"
+).innerHTML=content;
 
-  const modal =
-    document.getElementById(
-      "modalContent"
-    );
+document.getElementById(
+"modal"
+).style.display="flex";
 
-  modal.innerHTML = `
-
-    <button
-      class="close-btn"
-      onclick="closeModal()"
-    >
-      ×
-    </button>
-
-    ${content}
-
-  `;
-
-  overlay.classList.remove(
-    "hidden"
-  );
 }
 
 
 function closeModal(){
 
-  document
-    .getElementById(
-      "modalOverlay"
-    )
-    .classList.add("hidden");
+document.getElementById(
+"modal"
+).style.display="none";
 
 }
 
 
-/* =========================================
-   LANGUAGE
-========================================= */
+function outsideModal(event){
 
-function showLanguage(){
+if(
+event.target.id==="modal"
+){
 
-  showModal(`
+closeModal();
 
-    <h2>🌐 Language</h2>
+}
 
-    <p style="
-      margin:15px 0;
-      color:var(--muted);
-    ">
-      Language option आगे customize किया जा सकता है।
-    </p>
-
-    <select
-      class="form-control"
-      onchange="changeLanguage(this.value)"
-    >
-
-      <option value="hi">
-        हिंदी
-      </option>
-
-      <option value="en">
-        English
-      </option>
-
-    </select>
-
-  `);
 }
 
 
-function changeLanguage(language){
+/* =====================================================
+INFO
+===================================================== */
 
-  localStorage.setItem(
-    "printzyLanguage",
-    language
-  );
+function showInfo(title){
 
-  showToast(
-    language === "hi"
-      ? "हिंदी selected"
-      : "English selected"
-  );
+let content="";
+
+
+if(title==="Terms & Conditions"){
+
+content=`
+
+<h2>
+Terms & Conditions
+</h2>
+
+<p style="
+line-height:1.7;
+color:var(--muted)">
+
+Printzy पर order करने से पहले product details,
+price और customization information ध्यान से check करें।
+Customized products की cancellation policy product
+के अनुसार अलग हो सकती है।
+
+</p>
+
+`;
+
 }
 
 
-/* =========================================
-   LOGOUT
-========================================= */
+if(title==="Privacy Policy"){
 
-async function logoutUser(){
+content=`
 
-  const {
-    error
-  } =
-    await supabaseClient.auth.signOut();
+<h2>
+Privacy Policy
+</h2>
 
-  if(error){
+<p style="
+line-height:1.7;
+color:var(--muted)">
 
-    alert(
-      "Logout नहीं हुआ:\n" +
-      error.message
-    );
+आपकी personal information को order processing,
+account management और customer support के लिए उपयोग
+किया जा सकता है।
 
-    return;
-  }
+</p>
 
-  currentUser = null;
+`;
 
-  updateMenuUser(null);
-
-  closeModal();
-
-  showToast(
-    "Logout successful"
-  );
 }
 
 
-/* =========================================
-   AUTH SESSION CHECK
-========================================= */
+if(title==="Contact Us"){
 
-async function checkUser(){
+content=`
 
-  try{
+<h2>
+📞 Contact Printzy
+</h2>
 
-    const {
-      data
-    } =
-      await supabaseClient.auth.getSession();
+<p style="
+line-height:1.8;
+color:var(--muted)">
 
-    currentUser =
-      data?.session?.user || null;
+Customer Support<br>
+Email: support@printzy.in<br>
+Phone: +91 XXXXX XXXXX
 
-    updateMenuUser(
-      currentUser
-    );
+</p>
 
-  }catch(error){
+`;
 
-    console.log(
-      "Session error:",
-      error
-    );
-
-  }
 }
 
 
-supabaseClient.auth.onAuthStateChange(
-  (event,session) => {
+if(title==="About Printzy"){
 
-    currentUser =
-      session?.user || null;
+content=`
 
-    updateMenuUser(
-      currentUser
-    );
+<h2>
+ℹ️ About Printzy
+</h2>
 
-  }
+<p style="
+line-height:1.8;
+color:var(--muted)">
+
+Printzy आपका online printing platform है जहाँ
+Visiting Card, Wedding Card, Poster, Banner,
+Pamphlet, Sticker और Photo Print जैसे products
+एक ही जगह से order किए जा सकते हैं।
+
+</p>
+
+`;
+
+}
+
+
+showModal(content);
+
+}
+
+
+/* =====================================================
+ORDERS
+===================================================== */
+
+async function openOrders(){
+
+const user=
+await getCurrentUser();
+
+if(!user){
+
+openAuth();
+
+return;
+
+}
+
+
+if(!isProfileComplete(user)){
+
+alert(
+"Orders देखने/आगे बढ़ने से पहले Profile complete करें।"
 );
 
+openProfile(true);
 
-/* =========================================
-   START APP
-========================================= */
+return;
 
-document.addEventListener(
-  "DOMContentLoaded",
-  async () => {
+}
 
-    loadTheme();
 
-    renderProducts();
+showModal(`
 
-    updateBadges();
+<h2>
+📦 My Orders
+</h2>
 
-    await checkUser();
+<div style="
+text-align:center;
+padding:30px">
 
-  }
+<div style="font-size:55px">
+📦
+</div>
+
+<h3>
+No orders yet
+</h3>
+
+<p style="
+color:var(--muted);
+margin-top:8px">
+
+आपके orders यहाँ दिखाई देंगे।
+
+</p>
+
+</div>
+
+`);
+
+}
+
+
+/* =====================================================
+LANGUAGE
+===================================================== */
+
+const translations={
+
+hi:{
+subtitle:"अपने विचारों को प्रिंट करें",
+profile:"मेरी प्रोफाइल / लॉगिन",
+orders:"मेरे ऑर्डर",
+wishlist:"विशलिस्ट",
+cart:"मेरी कार्ट",
+language:"भाषा",
+theme:"डार्क / लाइट मोड",
+address:"डिलीवरी पता",
+notifications:"सूचनाएँ",
+support:"मदद और सहायता",
+about:"प्रिंटज़ी के बारे में",
+terms:"नियम और शर्तें",
+privacy:"गोपनीयता नीति",
+search:"Visiting Card, Banner आदि खोजें..."
+},
+
+en:{
+subtitle:"Print Your Ideas",
+profile:"My Profile / Login",
+orders:"My Orders",
+wishlist:"Wishlist",
+cart:"My Cart",
+language:"Language",
+theme:"Dark / Light Mode",
+address:"Delivery Address",
+notifications:"Notifications",
+support:"Help & Support",
+about:"About Printzy",
+terms:"Terms & Conditions",
+privacy:"Privacy Policy",
+search:"Search for products like Visiting Card, Banner, etc..."
+},
+
+mr:{
+subtitle:"तुमच्या कल्पना प्रिंट करा",
+profile:"माझी प्रोफाइल / लॉगिन",
+orders:"माझे ऑर्डर",
+wishlist:"विशलिस्ट",
+cart:"माझी कार्ट",
+language:"भाषा",
+theme:"डार्क / लाइट मोड",
+address:"डिलिव्हरी पत्ता",
+notifications:"सूचना",
+support:"मदत आणि सहाय्य",
+about:"Printzy बद्दल",
+terms:"अटी व शर्ती",
+privacy:"गोपनीयता धोरण"
+},
+
+gu:{
+subtitle:"તમારા વિચારો પ્રિન્ટ કરો",
+profile:"મારી પ્રોફાઇલ / લોગિન",
+orders:"મારા ઓર્ડર",
+wishlist:"વિશલિસ્ટ",
+cart:"મારી કાર્ટ",
+language:"ભાષા",
+theme:"ડાર્ક / લાઇટ મોડ",
+address:"ડિલિવરી સરનામું",
+notifications:"સૂચનાઓ",
+support:"મદદ અને સહાય",
+about:"Printzy વિશે",
+terms:"નિયમો અને શરતો",
+privacy:"ગોપનીયતા નીતિ"
+},
+
+bn:{
+subtitle:"আপনার ধারণা প্রিন্ট করুন",
+profile:"আমার প্রোফাইল / লগইন",
+orders:"আমার অর্ডার",
+wishlist:"উইশলিস্ট",
+cart:"আমার কার্ট",
+language:"ভাষা",
+theme:"ডার্ক / লাইট মোড",
+address:"ডেলিভারি ঠিকানা",
+notifications:"বিজ্ঞপ্তি",
+support:"সহায়তা",
+about:"Printzy সম্পর্কে",
+terms:"শর্তাবলী",
+privacy:"গোপনীয়তা নীতি"
+},
+
+pa:{
+subtitle:"ਆਪਣੇ ਵਿਚਾਰ ਪ੍ਰਿੰਟ ਕਰੋ",
+profile:"ਮੇਰੀ ਪ੍ਰੋਫਾਈਲ / ਲਾਗਇਨ",
+orders:"ਮੇਰੇ ਆਰਡਰ",
+wishlist:"ਵਿਸ਼ਲਿਸਟ",
+cart:"ਮੇਰੀ ਕਾਰਟ",
+language:"ਭਾਸ਼ਾ",
+theme:"ਡਾਰਕ / ਲਾਈਟ ਮੋਡ",
+address:"ਡਿਲਿਵਰੀ ਪਤਾ",
+notifications:"ਸੂਚਨਾਵਾਂ",
+support:"ਮਦਦ ਅਤੇ ਸਹਾਇਤਾ",
+about:"Printzy ਬਾਰੇ",
+terms:"ਨਿਯਮ ਅਤੇ ਸ਼ਰਤਾਂ",
+privacy:"ਪਰਾਈਵੇਸੀ ਨੀਤੀ"
+},
+
+ta:{
+subtitle:"உங்கள் யோசனைகளை அச்சிடுங்கள்",
+profile:"எனது சுயவிவரம் / உள்நுழைவு",
+orders:"எனது ஆர்டர்கள்",
+wishlist:"விருப்பப்பட்டியல்",
+cart:"எனது கார்ட்",
+language:"மொழி",
+theme:"டார்க் / லைட் மோட்",
+address:"டெலிவரி முகவரி",
+notifications:"அறிவிப்புகள்",
+support:"உதவி மற்றும் ஆதரவு",
+about:"Printzy பற்றி",
+terms:"விதிமுறைகள்",
+privacy:"தனியுரிமைக் கொள்கை"
+},
+
+te:{
+subtitle:"మీ ఆలోచనలను ప్రింట్ చేయండి",
+profile:"నా ప్రొఫైల్ / లాగిన్",
+orders:"నా ఆర్డర్లు",
+wishlist:"విష్‌లిస్ట్",
+cart:"నా కార్ట్",
+language:"భాష",
+theme:"డార్క్ / లైట్ మోడ్",
+address:"డెలివరీ చిరునామా",
+notifications:"నోటిఫికేషన్లు",
+support:"సహాయం",
+about:"Printzy గురించి",
+terms:"నిబంధనలు",
+privacy:"గోప్యతా విధానం"
+},
+
+kn:{
+subtitle:"ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಮುದ್ರಿಸಿ",
+profile:"ನನ್ನ ಪ್ರೊಫೈಲ್ / ಲಾಗಿನ್",
+orders:"ನನ್ನ ಆರ್ಡರ್‌ಗಳು",
+wishlist:"ವಿಶ್‌ಲಿಸ್ಟ್",
+cart:"ನನ್ನ ಕಾರ್ಟ್",
+language:"ಭಾಷೆ",
+theme:"ಡಾರ್ಕ್ / ಲೈಟ್ ಮೋಡ್",
+address:"ವಿತರಣಾ ವಿಳಾಸ",
+notifications:"ಅಧಿಸೂಚನೆಗಳು",
+support:"ಸಹಾಯ ಮತ್ತು ಬೆಂಬಲ",
+about:"Printzy ಬಗ್ಗೆ",
+terms:"ನಿಯಮಗಳು",
+privacy:"ಗೌಪ್ಯತಾ ನೀತಿ"
+},
+
+ml:{
+subtitle:"നിങ്ങളുടെ ആശയങ്ങൾ പ്രിന്റ് ചെയ്യൂ",
+profile:"എന്റെ പ്രൊഫൈൽ / ലോഗിൻ",
+orders:"എന്റെ ഓർഡറുകൾ",
+wishlist:"വിഷ്‌ലിസ്റ്റ്",
+cart:"എന്റെ കാർട്ട്",
+language:"ഭാഷ",
+theme:"ഡാർക്ക് / ലൈറ്റ് മോഡ്",
+address:"ഡെലിവറി വിലാസം",
+notifications:"അറിയിപ്പുകൾ",
+support:"സഹായം",
+about:"Printzyയെ കുറിച്ച്",
+terms:"നിബന്ധനകൾ",
+privacy:"സ്വകാര്യതാ നയം"
+},
+
+ur:{
+subtitle:"اپنے خیالات پرنٹ کریں",
+profile:"میری پروفائل / لاگ ان",
+orders:"میرے آرڈرز",
+wishlist:"پسندیدہ",
+cart:"میری کارٹ",
+language:"زبان",
+theme:"ڈارک / لائٹ موڈ",
+address:"ڈیلیوری پتہ",
+notifications:"اطلاعات",
+support:"مدد اور معاونت",
+about:"Printzy کے بارے میں",
+terms:"شرائط و ضوابط",
+privacy:"رازداری کی پالیسی"
+}
+
+};
+
+
+function changeLanguage(lang){
+
+localStorage.setItem(
+"printzyLanguage",
+lang
 );
 
+const data=
+translations[lang]||
+translations.en;
 
-/* =========================================
-   MODAL OUTSIDE CLICK
-========================================= */
 
 document
-  .getElementById("modalOverlay")
-  .addEventListener(
-    "click",
-    function(event){
+.querySelectorAll("[data-i18n]")
+.forEach(el=>{
 
-      if(
-        event.target === this
-      ){
+const key=
+el.getAttribute("data-i18n");
 
-        closeModal();
+if(data[key]){
 
-      }
+el.innerText=data[key];
 
-    }
-  );
+}
 
+});
+
+
+const search=
+document.getElementById("search");
+
+
+if(search){
+
+search.placeholder=
+data.search||
+translations.en.search;
+
+}
+
+
+showToast(
+"Language changed 🌐"
+);
+
+}
+
+
+function loadLanguage(){
+
+const saved=
+localStorage.getItem(
+"printzyLanguage"
+)||
+"hi";
+
+
+const select=
+document.getElementById(
+"languageSelect"
+);
+
+
+if(select){
+
+select.value=saved;
+
+}
+
+
+changeLanguage(saved);
+
+}
+
+
+/* =====================================================
+THEME
+===================================================== */
+
+function toggleDark(){
+
+document.body
+.classList
+.toggle("dark");
+
+
+localStorage.setItem(
+"printzyDark",
+document.body.classList.contains("dark")
+);
+
+}
+
+
+if(
+localStorage.getItem("printzyDark")
+==="true"
+){
+
+document.body
+.classList
+.add("dark");
+
+}
+
+
+/* =====================================================
+TOAST
+===================================================== */
+
+function showToast(message){
+
+const old=
+document.getElementById(
+"printzyToast"
+);
+
+if(old)
+old.remove();
+
+
+const toast=
+document.createElement("div");
+
+
+toast.id=
+"printzyToast";
+
+
+toast.innerText=
+message;
+
+
+toast.style=`
+
+position:fixed;
+left:50%;
+bottom:85px;
+transform:translateX(-50%);
+background:#071b3a;
+color:white;
+padding:12px 20px;
+border-radius:25px;
+z-index:1000;
+font-size:14px;
+box-shadow:0 8px 25px rgba(0,0,0,.25);
+
+`;
+
+
+document.body.appendChild(toast);
+
+
+setTimeout(()=>{
+
+toast.remove();
+
+},2200);
+
+}
+
+
+/* =====================================================
+SCROLL
+===================================================== */
+
+function scrollProducts(){
+
+document
+.getElementById("productList")
+.scrollIntoView({
+
+behavior:"smooth",
+
+block:"start"
+
+});
+
+}
+
+
+/* =====================================================
+INITIALIZE
+===================================================== */
+
+showProducts();
+
+updateCartCount();
+
+checkUser();
+
+loadLanguage();
 
 </script>
 
