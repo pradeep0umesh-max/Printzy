@@ -5084,16 +5084,25 @@ async function openOrders(){
   }
 
   showModal(`
-    <div style="padding:20px">
+    <div style="
+      padding:20px;
+    ">
 
-      <h2 style="margin-bottom:18px">
+      <h2 style="
+        margin-bottom:18px;
+      ">
         📦 My Orders
       </h2>
 
       <div id="myOrdersList">
-        <p style="text-align:center;color:var(--muted)">
+
+        <p style="
+          text-align:center;
+          color:var(--muted);
+        ">
           Loading orders...
         </p>
+
       </div>
 
     </div>
@@ -5120,22 +5129,31 @@ async function openOrders(){
     if(!data || data.length === 0){
 
       box.innerHTML = `
+
         <div style="
           text-align:center;
           padding:30px 10px;
           color:var(--muted);
         ">
-          <div style="font-size:50px">
+
+          <div style="
+            font-size:50px;
+          ">
             📦
           </div>
 
-          <p style="margin-top:10px">
+          <p style="
+            margin-top:10px;
+          ">
             अभी कोई order नहीं है।
           </p>
+
         </div>
+
       `;
 
       return;
+
     }
 
     box.innerHTML =
@@ -5152,6 +5170,7 @@ async function openOrders(){
           <div style="
             display:flex;
             justify-content:space-between;
+            align-items:center;
             gap:10px;
             margin-bottom:10px;
           ">
@@ -5165,10 +5184,13 @@ async function openOrders(){
               color:var(--pink);
               text-transform:capitalize;
             ">
-              ${escapeHtml(order.order_status || "pending")}
+              ${escapeHtml(
+                order.order_status || "pending"
+              )}
             </span>
 
           </div>
+
 
           <div style="
             font-size:14px;
@@ -5185,22 +5207,46 @@ async function openOrders(){
 
             <div>
               Payment:
-              ${escapeHtml(order.payment_method || "COD")}
+              ${escapeHtml(
+                order.payment_method || "COD"
+              )}
             </div>
 
             <div>
               Date:
-              ${order.created_at
-                ? new Date(order.created_at).toLocaleString("en-IN")
+              ${
+                order.created_at
+                ? new Date(
+                    order.created_at
+                  ).toLocaleString("en-IN")
                 : "-"
               }
             </div>
 
           </div>
 
+
+          <button
+            onclick='viewOrderDetails(${JSON.stringify(order).replace(/'/g,"&#039;")})'
+            style="
+              width:100%;
+              margin-top:14px;
+              padding:12px;
+              border:0;
+              border-radius:10px;
+              background:var(--blue2);
+              color:white;
+              font-weight:800;
+              cursor:pointer;
+            "
+          >
+            👁️ View Details
+          </button>
+
         </div>
 
       `).join("");
+
 
   }catch(error){
 
@@ -5209,19 +5255,186 @@ async function openOrders(){
       error
     );
 
-    document.getElementById("myOrdersList").innerHTML = `
-      <div style="
-        text-align:center;
-        padding:20px;
-        color:red;
-      ">
-        Orders load नहीं हो पाए ❌
-        <br><br>
-        ${escapeHtml(error.message)}
-      </div>
-    `;
+    const box =
+      document.getElementById(
+        "myOrdersList"
+      );
+
+    if(box){
+
+      box.innerHTML = `
+
+        <div style="
+          text-align:center;
+          padding:20px;
+          color:red;
+        ">
+
+          Orders load नहीं हो पाए ❌
+
+          <br><br>
+
+          ${escapeHtml(
+            error.message
+          )}
+
+        </div>
+
+      `;
+
+    }
 
   }
+
+}
+
+
+/* =====================================================
+ORDER DETAILS
+===================================================== */
+
+function viewOrderDetails(order){
+
+  showModal(`
+
+    <div style="
+      padding:20px;
+      max-height:80vh;
+      overflow-y:auto;
+    ">
+
+      <h2 style="
+        margin-bottom:18px;
+      ">
+        📦 Order Details
+      </h2>
+
+
+      <div style="
+        background:var(--soft);
+        border:1px solid var(--border);
+        border-radius:14px;
+        padding:16px;
+      ">
+
+        <div style="
+          font-size:19px;
+          font-weight:900;
+          margin-bottom:15px;
+          color:var(--pink);
+        ">
+          ${escapeHtml(
+            order.order_number || "-"
+          )}
+        </div>
+
+
+        <div style="
+          line-height:1.9;
+          font-size:14px;
+        ">
+
+          <div>
+            <strong>Status:</strong>
+            ${escapeHtml(
+              order.order_status || "pending"
+            )}
+          </div>
+
+
+          <div>
+            <strong>Payment Method:</strong>
+            ${escapeHtml(
+              order.payment_method || "COD"
+            )}
+          </div>
+
+
+          <div>
+            <strong>Payment Status:</strong>
+            ${escapeHtml(
+              order.payment_status || "pending"
+            )}
+          </div>
+
+
+          <div>
+            <strong>Total Amount:</strong>
+            ₹${Number(
+              order.total_amount || 0
+            )}
+          </div>
+
+
+          <div>
+            <strong>Customer Name:</strong>
+            ${escapeHtml(
+              order.customer_name || "-"
+            )}
+          </div>
+
+
+          <div>
+            <strong>Phone:</strong>
+            ${escapeHtml(
+              order.customer_phone || "-"
+            )}
+          </div>
+
+
+          <div style="
+            margin-top:8px;
+          ">
+
+            <strong>
+              Delivery Address:
+            </strong>
+
+            <br>
+
+            ${escapeHtml(
+              order.shipping_address || "-"
+            )}
+
+          </div>
+
+
+          <div style="
+            margin-top:8px;
+          ">
+
+            <strong>
+              Order Date:
+            </strong>
+
+            ${
+              order.created_at
+              ? new Date(
+                  order.created_at
+                ).toLocaleString("en-IN")
+              : "-"
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="checkout"
+        style="
+          margin-top:16px;
+        "
+        onclick="openOrders()"
+      >
+        ← Back to My Orders
+      </button>
+
+    </div>
+
+  `);
 
 }
 
