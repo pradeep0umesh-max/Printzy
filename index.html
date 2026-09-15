@@ -1412,7 +1412,7 @@ onchange="changeLanguage(this.value)">
 <option value="mni">মৈতৈলোন</option>
 <option value="bho">भोजपुरी</option>
 <option value="ks">कॉशुर</option>
-<option value="sd">سنڌी</option>
+<option value="sd">سنڌي</option>
 <option value="dogri">डोगरी</option>
 
 </select>
@@ -2539,10 +2539,6 @@ const user=
 await getCurrentUser();
 
 
-/*
-LOGIN REQUIRED
-*/
-
 if(!user){
 
 alert(
@@ -2555,10 +2551,6 @@ return;
 
 }
 
-
-/*
-PROFILE REQUIRED
-*/
 
 if(!isProfileComplete(user)){
 
@@ -2751,44 +2743,280 @@ Place Order →
 }
 
 
+/* =====================================================
+PLACE ORDER - FINAL
+===================================================== */
+
 async function placeOrder(){
 
-const user=
-await getCurrentUser();
+  if(!cart || cart.length === 0){
+
+    alert("Cart खाली है।");
+    return;
+
+  }
 
 
-if(!user){
-
-alert(
-"पहले Login करें।"
-);
-
-openAuth();
-
-return;
-
-}
+  const user =
+    await getCurrentUser();
 
 
-if(!isProfileComplete(user)){
+  if(!user){
 
-alert(
-"Profile पूरी करना जरूरी है।"
-);
+    alert("Account required.");
+    return;
 
-openProfile(true);
-
-return;
-
-}
+  }
 
 
-alert(
-"Checkout details submitted successfully ✅\n\n"+
-"Next Step में order database और payment जोड़ा जाएगा।"
-);
+  if(!isProfileComplete(user)){
 
-closeModal();
+    alert("Profile पूरी करना जरूरी है।");
+    openProfile(true);
+    return;
+
+  }
+
+
+  try{
+
+    const profile =
+      getProfileData(user);
+
+
+    const fullName =
+      [
+        profile.name,
+        profile.middle_name,
+        profile.last_name
+      ]
+      .filter(Boolean)
+      .join(" ");
+
+
+    const shippingAddress =
+      [
+        profile.house,
+        profile.road,
+        profile.city,
+        profile.state,
+        profile.pincode
+      ]
+      .filter(Boolean)
+      .join(", ");
+
+
+    let totalAmount = 0;
+
+
+    cart.forEach(item => {
+
+      totalAmount +=
+        Number(item.price) *
+        Number(item.qty);
+
+    });
+
+
+    const orderNumber =
+      "PZ-" +
+      Date.now().toString().slice(-10);
+
+
+    const orderItems =
+      cart
+      .map(item => {
+
+        const price =
+          Number(item.price);
+
+        const qty =
+          Number(item.qty);
+
+        const amount =
+          price * qty;
+
+        return (
+          item.name +
+          " × " +
+          qty +
+          " = ₹" +
+          amount
+        );
+
+      })
+      .join("\n");
+
+
+    const { data, error } =
+      await supabaseClient
+      .from("orders")
+      .insert({
+
+        order_number:
+          orderNumber,
+
+        customer_id:
+          null,
+
+        customer_name:
+          fullName,
+
+        customer_phone:
+          profile.mobile,
+
+        customer_email:
+          user.email || "",
+
+        shipping_address:
+          shippingAddress,
+
+        total_amount:
+          totalAmount,
+
+        payment_status:
+          "Pending",
+
+        order_status:
+          "Pending",
+
+        payment_method:
+          "COD",
+
+        notes:
+          "Order Items:\n" +
+          orderItems
+
+      })
+      .select()
+      .single();
+
+
+    if(error){
+
+      console.error(
+        "Place Order Error:",
+        error
+      );
+
+      alert(
+        "Order place nahi ho paya ❌\n\n" +
+        error.message
+      );
+
+      return;
+
+    }
+
+
+    cart = [];
+
+    saveCart();
+
+    updateCartCount();
+
+    closeModal();
+
+
+    showModal(`
+
+      <div style="
+        text-align:center;
+        padding:20px 10px;
+      ">
+
+        <div style="
+          font-size:65px;
+          margin-bottom:10px;
+        ">
+          ✅
+        </div>
+
+
+        <h2 style="
+          color:var(--green);
+          margin-bottom:10px;
+        ">
+          Order Placed Successfully!
+        </h2>
+
+
+        <p style="
+          color:var(--muted);
+          line-height:1.6;
+        ">
+          आपका order successfully place हो गया है।
+        </p>
+
+
+        <div style="
+          margin:20px 0;
+          padding:18px;
+          background:var(--soft);
+          border:1px solid var(--border);
+          border-radius:14px;
+        ">
+
+          <div style="
+            font-size:13px;
+            color:var(--muted);
+          ">
+            Order Number
+          </div>
+
+
+          <div style="
+            margin-top:7px;
+            font-size:22px;
+            font-weight:900;
+            color:var(--pink);
+          ">
+            ${escapeHtml(orderNumber)}
+          </div>
+
+        </div>
+
+
+        <div style="
+          font-size:18px;
+          font-weight:800;
+          margin-bottom:18px;
+        ">
+          Total: ₹${totalAmount}
+        </div>
+
+
+        <button
+          class="checkout"
+          onclick="closeModal()">
+
+          Continue Shopping
+
+        </button>
+
+      </div>
+
+    `);
+
+
+    showToast(
+      "Order placed successfully ✅"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Place Order Exception:",
+      error
+    );
+
+    alert(
+      "Order place karte waqt error aa gaya ❌\n\n" +
+      error.message
+    );
+
+  }
 
 }
 
@@ -3454,11 +3682,6 @@ showToast(
 );
 
 
-/*
-Immediately open profile so customer
-can complete mandatory details.
-*/
-
 setTimeout(()=>{
 
 openProfile(true);
@@ -3980,21 +4203,21 @@ document
 
 if(!name){
 
-alert("Name डालें।");
+alert("Name डालें.");
 return;
 
 }
 
 if(!middleName){
 
-alert("Middle Name डालें।");
+alert("Middle Name डालें.");
 return;
 
 }
 
 if(!lastName){
 
-alert("Last Name डालें।");
+alert("Last Name डालें.");
 return;
 
 }
@@ -4165,12 +4388,6 @@ status.innerText=
 
 
 try{
-
-/*
-OpenStreetMap Nominatim reverse geocoding.
-The user's browser location is used only for
-this current address lookup.
-*/
 
 const url=
 "https://nominatim.openstreetmap.org/reverse"+
