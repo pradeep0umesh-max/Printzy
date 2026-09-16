@@ -3492,212 +3492,171 @@ SIGNUP
 
 async function signupUser(){
 
-const name=
-document
-.getElementById("signupName")
-.value
-.trim();
+  const name =
+    document.getElementById("signupName")?.value.trim();
 
-const middleName=
-document
-.getElementById("signupMiddleName")
-.value
-.trim();
+  const middleName =
+    document.getElementById("signupMiddleName")?.value.trim();
 
-const lastName=
-document
-.getElementById("signupLastName")
-.value
-.trim();
+  const lastName =
+    document.getElementById("signupLastName")?.value.trim();
 
-const mobile=
-document
-.getElementById("signupMobile")
-.value
-.trim();
+  const mobile =
+    document.getElementById("signupMobile")?.value.trim();
 
-const email=
-document
-.getElementById("signupEmail")
-.value
-.trim();
+  const email =
+    document.getElementById("signupEmail")?.value.trim();
 
-const password=
-document
-.getElementById("signupPassword")
-.value;
+  const password =
+    document.getElementById("signupPassword")?.value;
 
-const confirmPassword=
-document
-.getElementById("signupConfirmPassword")
-.value;
+  const confirmPassword =
+    document.getElementById("signupConfirmPassword")?.value;
 
 
-if(!name){
+  if(!name){
+    alert("Name डालें।");
+    return;
+  }
 
-alert(
-"Name डालें।"
-);
+  if(!middleName){
+    alert("Middle Name डालें।");
+    return;
+  }
 
-return;
+  if(!lastName){
+    alert("Last Name डालें।");
+    return;
+  }
 
-}
+  if(!/^[0-9]{10}$/.test(mobile)){
+    alert("Valid 10 digit Mobile Number डालें।");
+    return;
+  }
 
-if(!middleName){
+  if(!email){
+    alert("Email address डालें।");
+    return;
+  }
 
-alert(
-"Middle Name डालें।"
-);
+  if(!password){
+    alert("Password डालें।");
+    return;
+  }
 
-return;
+  if(password.length < 6){
+    alert("Password कम से कम 6 characters का होना चाहिए।");
+    return;
+  }
 
-}
+  if(password !== confirmPassword){
+    alert("Password और Confirm Password match नहीं कर रहे।");
+    return;
+  }
 
-if(!lastName){
 
-alert(
-"Last Name डालें।"
-);
+  try{
 
-return;
+    const { data, error } =
+      await supabaseClient.auth.signUp({
 
-}
+        email: email,
 
-if(!mobile){
+        password: password,
 
-alert(
-"Mobile Number डालें।"
-);
+        options: {
+          data: {
+            name: name,
+            middle_name: middleName,
+            last_name: lastName,
+            mobile: mobile
+          }
+        }
 
-return;
+      });
 
-}
 
-if(!/^[0-9]{10}$/.test(mobile)){
+    console.log("SIGNUP RESPONSE:", data);
+    console.log("SIGNUP ERROR:", error);
 
-alert(
-"Valid 10 digit Mobile Number डालें।"
-);
 
-return;
+    if(error){
 
-}
+      console.error("Supabase Signup Error:", error);
 
-if(!email){
+      alert(
+        "Account creation failed ❌\n\n" +
+        error.message
+      );
 
-alert(
-"Email address डालें।"
-);
+      return;
+    }
 
-return;
 
-}
+    if(!data || !data.user){
 
-if(!password){
+      alert(
+        "Account create नहीं हुआ ❌\n\n" +
+        "Supabase ने user return नहीं किया।"
+      );
 
-alert(
-"Password डालें।"
-);
+      return;
+    }
 
-return;
 
-}
+    /*
+      Email confirmation OFF होने पर
+      session मिलना चाहिए.
+    */
 
-if(password.length<6){
+    if(data.session){
 
-alert(
-"Password कम से कम 6 characters का होना चाहिए।"
-);
+      closeModal();
 
-return;
+      updateMenuUser(data.user);
 
-}
+      showToast(
+        "Account created successfully ✅"
+      );
 
-if(password!==confirmPassword){
 
-alert(
-"Password और Confirm Password match नहीं कर रहे।"
-);
+      setTimeout(() => {
 
-return;
+        openProfile(true);
 
-}
+      }, 500);
 
+      return;
+    }
 
-try{
 
-const {data,error}=
-await supabaseClient.auth.signUp({
+    /*
+      अगर user बना लेकिन session नहीं मिला,
+      तो exact situation बताओ.
+    */
 
-email:email,
+    alert(
+      "Account create हो गया है ✅\n\n" +
+      "लेकिन login session नहीं मिला।\n\n" +
+      "Supabase Authentication settings check करनी होंगी."
+    );
 
-password:password,
+    showLogin();
 
-options:{
 
-data:{
+  }catch(error){
 
-name:name,
+    console.error(
+      "Signup Exception:",
+      error
+    );
 
-middle_name:middleName,
+    alert(
+      "Account creation failed ❌\n\n" +
+      (error?.message || "Unknown error")
+    );
 
-last_name:lastName,
-
-mobile:mobile
-
-}
-
-}
-
-});
-
-
-if(error)
-throw error;
-
-
-if(data.user&&!data.session){
-
-alert(
-"Account created successfully ✅\n\n"+
-"आपके email पर verification link भेजा गया है।\n\n"+
-"Email verify करने के बाद Login करें।"
-);
-
-showLogin();
-
-return;
-
-}
-
-
-if(data.session){
-
-closeModal();
-
-updateMenuUser(data.user);
-
-showToast(
-"Account created successfully ✅"
-);
-
-
-setTimeout(()=>{
-
-openProfile(true);
-
-},400);
-
-}
-
-}catch(error){
-
-alert(
-"Account creation failed ❌\n\n"+
-error.message
-);
-
-}
+  }
 
 }
 
